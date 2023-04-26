@@ -1,0 +1,18 @@
+$high_res_laptop_width: 1920px;
+$default_laptop_width: 1440px;
+$small_laptop_width: 1024px;
+
+$high_res_tablet_width: 834px;
+$default_tablet_width: 768px;
+$small_tablet_width: 600px;
+
+$high_res_smartphone_width: 480px;
+$default_smartphone_width: 375px;
+$small_smartphone_width: 320px;
+
+%main-text-16 {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0.35px;
+}

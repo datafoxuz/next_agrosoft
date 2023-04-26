@@ -1,0 +1,72 @@
+@use "../../../styles/variables" as variables;
+
+.ham {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  // shrinking element
+  scale: 0.6; // current: 48px, original has size: 80px
+  transform-origin: center;
+  margin: -16px;
+
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+
+  @media (width <= variables.$default_laptop_width) {
+    display: block;
+  }
+
+  @media (width <= variables.$small_laptop_width) {
+    scale: 0.5; // current: 40px, original has size: 80px
+    margin: -20px;
+  }
+
+  @media (width <= variables.$high_res_tablet_width) {
+    scale: 0.4; // current: 32px, original has size: 80px
+    margin: -24px;
+  }
+
+  .line {
+    fill: none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: #ffffff;
+    stroke-width: 5.5;
+    stroke-linecap: round;
+
+    &.top {
+      stroke-dasharray: 40 121;
+    }
+    &.bottom {
+      stroke-dasharray: 40 121;
+    }
+  }
+
+  &[data-light-theme="true"] {
+    border-color: #151515;
+
+    .line {
+      stroke: #151515;
+    }
+  }
+
+  &[data-open="true"] {
+    transform: rotate(45deg);
+    border-color: #ffffff;
+
+    .line {
+      stroke: #ffffff;
+
+      &.top {
+        stroke-dashoffset: -68px;
+      }
+      &.bottom {
+        stroke-dashoffset: -68px;
+      }
+    }
+  }
+}
