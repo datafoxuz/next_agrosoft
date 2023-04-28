@@ -1,4 +1,4 @@
-import { Navbar } from "@/components";
+import { Footer, Navbar } from "@/components";
 import React from "react";
 import { LayoutProps } from "./props";
 
@@ -9,6 +9,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className={styles.container}>
       <Navbar />
       <div>{children}</div>
+      <Footer />
     </div>
   );
 };

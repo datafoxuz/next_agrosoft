@@ -10,9 +10,59 @@ $high_res_smartphone_width: 480px;
 $default_smartphone_width: 375px;
 $small_smartphone_width: 320px;
 
+%container {
+  max-width: 1146px;
+  width: 100%;
+  margin-inline: auto;
+}
+
 %main-text-16 {
   font-weight: 600;
   font-size: 16px;
   line-height: 120%;
   letter-spacing: 0.35px;
+}
+
+%button {
+  padding: 20px 32px;
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 600;
+  border-radius: 120px;
+  border: none;
+  cursor: pointer;
+  background-color: #008842;
+  color: #e6f5ed;
+  position: relative;
+  z-index: 2;
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 42px;
+    height: 42px;
+    background: #b0dac4;
+    opacity: 0.1;
+    border-radius: 50%;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.2s all ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    border-radius: 120px;
+  }
+}
+
+%medium-title {
+  font-weight: 900;
+  font-size: 33px;
+  line-height: 140%;
+  font-family: Montserrat;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
 }

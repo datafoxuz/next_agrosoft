@@ -37,7 +37,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: #005b2c;
+  background-color: #fef2e8;
 }
 
 //burger icon stylies
@@ -108,5 +108,24 @@ body {
         stroke-dashoffset: -68px;
       }
     }
+  }
+}
+
+//swiper stylies
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #f27c1c;
+  color: #fff;
+  padding: 32px 32px;
+  border-radius: 50%;
+
+  &::after {
+    font-size: 22px;
+  }
+}
+
+@media only screen and (max-width: variables.$default_laptop_width) {
+  .swiper-button-prev {
+    right: 70%;
   }
 }

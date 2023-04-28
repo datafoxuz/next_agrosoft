@@ -16,7 +16,7 @@ const Navbar = ({ isStatic = false }: { isStatic?: boolean }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <div className={styles.navbar} aria-static={isStatic}>
+    <div className={styles.navbar} data-static={isStatic}>
       <div className={styles.section}>
         <div className={styles.temperature}>
           <img

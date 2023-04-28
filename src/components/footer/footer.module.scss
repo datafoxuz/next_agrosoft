@@ -1,0 +1,129 @@
+@use "../../styles/variables" as variables;
+
+%footer-small-text {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #627b6e;
+}
+
+.footer {
+  position: relative;
+  background-color: #00381b;
+
+  .to_top_button {
+    position: absolute;
+    padding: 34px 38px;
+    background-color: #627b6e;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    right: 8%;
+    top: -10%;
+  }
+
+  .footer_wrapper {
+    @extend %container;
+    padding-top: 88px;
+    padding-bottom: 49px;
+
+    .footer_top {
+      display: flex;
+      gap: 120px;
+      padding-bottom: 71px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #00522834;
+
+      .footer_section {
+        display: flex;
+        flex-direction: column;
+        gap: 27px;
+
+        .text {
+          @extend %main-text-16;
+          color: #627b6e;
+          font-weight: 400;
+        }
+
+        .input_section {
+          display: flex;
+          padding: 8px;
+          background: #e6f3ec;
+          border-radius: 144px;
+          width: 563px;
+
+          .footer_input {
+            flex: auto;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: 20px;
+            @extend %main-text-16;
+            color: #2f3330;
+
+            &::placeholder {
+              @extend %main-text-16;
+              color: #2f3330;
+            }
+          }
+
+          .footer_button {
+            @extend %button;
+          }
+        }
+
+        .contact {
+          .text {
+            font-weight: 700;
+            font-size: 26px;
+            line-height: 32px;
+            color: #f27c1c;
+            margin-bottom: 16px;
+          }
+        }
+      }
+    }
+
+    .footer_bottom {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+
+      .footer_section {
+        max-width: 555px;
+        margin-right: 145px;
+        z-index: 2;
+
+        .title {
+          font-size: 15px;
+          line-height: 20px;
+          color: #b0dac4;
+          font-weight: 600;
+          margin-bottom: 16px;
+        }
+
+        .text {
+          @extend %footer-small-text;
+          margin-bottom: 32px;
+        }
+
+        .footer_info {
+          @extend %footer-small-text;
+          opacity: 0.5;
+        }
+      }
+
+      .footer_links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 2;
+
+        .link {
+          text-decoration: none;
+          @extend %footer-small-text;
+        }
+      }
+    }
+  }
+}
