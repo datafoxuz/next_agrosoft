@@ -66,3 +66,73 @@ $small_smartphone_width: 320px;
   letter-spacing: 0.25px;
   text-transform: uppercase;
 }
+
+%input {
+  padding: 20px 32px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.35px;
+  color: #2f3330;
+  border: 1px solid #c5c5c5;
+  border-radius: 144px;
+  outline: none;
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.35px;
+    color: #2f3330;
+  }
+}
+
+// auth modal styles
+
+%auth {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 95;
+  padding: 64px;
+  background: #ffffff;
+  border-radius: 144px;
+  text-align: center;
+
+  h3 {
+    font-family: Montserrat;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 120%;
+    text-transform: uppercase;
+    color: #101211;
+    margin-bottom: 32px;
+  }
+
+  form {
+    width: 446px;
+    display: flex;
+    flex-direction: column;
+
+    a {
+      text-align: right;
+      padding-right: 15px;
+      @extend %main-text-16;
+      text-decoration: none;
+      color: #008842;
+      margin-bottom: 32px;
+    }
+  }
+
+  input {
+    @extend %input;
+    margin-bottom: 16px;
+  }
+
+  button {
+    @extend %button;
+    width: fit-content;
+    margin-inline: auto;
+  }
+}

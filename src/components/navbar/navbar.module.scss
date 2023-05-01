@@ -1,5 +1,14 @@
 @use "../../styles/variables" as variables;
 
+@keyframes logo-fall {
+  from {
+    top: -175%; /* Start position of the logo */
+  }
+  to {
+    top: -75%; /* End position of the logo */
+  }
+}
+
 .navbar {
   display: flex;
   position: relative;
@@ -7,6 +16,28 @@
   align-items: center;
   padding: 36px 30px;
   color: #fff;
+  z-index: 99;
+
+  &[data-static="true"] {
+    .main_logo {
+      position: absolute;
+      flex-direction: row;
+      align-items: center;
+      padding: 8px;
+      top: 20%;
+
+      .logo {
+        width: 46px;
+        height: 50px;
+      }
+    }
+
+    .r_section {
+      .burger_menu {
+        background-color: transparent;
+      }
+    }
+  }
 
   .section {
     display: flex;
@@ -23,17 +54,26 @@
         height: 32px;
       }
 
-      p {
+      div {
         font-size: 20px;
         font-family: Montserrat;
         font-weight: 900;
         display: flex;
+        align-items: center;
         margin-left: 4px;
+        gap: 8px;
 
-        span {
-          font-family: Inter;
-          font-size: 14px;
-          font-weight: 400;
+        p {
+          display: flex;
+          span {
+            font-family: Inter;
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+
+        .icon {
+          width: 14px;
         }
       }
     }
@@ -68,6 +108,8 @@
   }
 
   .main_logo {
+    animation: logo-fall 1s ease-out;
+    transition: 0.1s all ease;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -79,7 +121,6 @@
     background-color: #fff;
     border-radius: 2222px;
     color: #000;
-
     top: -75%;
     left: 50%;
     transform: translate(-50%);
@@ -94,6 +135,10 @@
     }
   }
 
+  .animated_logo {
+    animation: logo-fall 0.5s ease-out;
+  }
+
   .r_section {
     gap: 32px;
     @extend %main-text-16;
@@ -106,6 +151,8 @@
     .languages {
       display: flex;
       cursor: pointer;
+      align-items: center;
+      gap: 8px;
     }
 
     .burger_menu {

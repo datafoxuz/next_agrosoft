@@ -1,35 +1,54 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { BurgerMenu, WeatherModal } from "./components";
+import { openObjTypes } from "./data";
 
 //icons
 import HamburgerIcon from "@/assets/icons/HamburgerIcon/HamburgerIcon";
-import temperature from "@/assets/icons/sun_yellow.svg";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import app_store from "@/assets/icons/app_store.svg";
-import play_store from "@/assets/icons/play_store.svg";
+import temperature from "@/assets/icons/NavbarIcons/sun_yellow.svg";
+import ArrowIcon from "@/assets/icons/NavbarIcons/ArrowIcons/ArrowIcon";
+import app_store from "@/assets/icons/NavbarIcons/app_store.svg";
+import play_store from "@/assets/icons/NavbarIcons/play_store.svg";
 import logo from "@/assets/icons/logo.svg";
 
 //style
 import styles from "./navbar.module.scss";
 
 const Navbar = ({ isStatic = false }: { isStatic?: boolean }) => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<openObjTypes>({
+    weatherModal: false,
+    languagesModal: false,
+    burgerMenu: false,
+  });
 
   return (
     <div className={styles.navbar} data-static={isStatic}>
       <div className={styles.section}>
-        <div className={styles.temperature}>
+        <div
+          className={styles.temperature}
+          onClick={() =>
+            setOpen((prevState) => ({
+              ...prevState,
+              weatherModal: !prevState.weatherModal,
+            }))
+          }
+        >
           <img
             src={temperature.src}
             alt="sun icon for temperature button"
             className={styles.icon}
           />
-          <p>
-            12
-            <span>°C</span>
-            <ArrowBackIosIcon className={styles.arrow_icon} />
-          </p>
+          <div>
+            <p>
+              12
+              <span>°C</span>
+            </p>
+            <ArrowIcon active={open.weatherModal} />
+          </div>
         </div>
+
+        {open.weatherModal ? <WeatherModal active={open.weatherModal} /> : null}
+
         <div className={styles.downloads}>
           <img
             src={app_store.src}
@@ -48,7 +67,11 @@ const Navbar = ({ isStatic = false }: { isStatic?: boolean }) => {
         </div>
       </div>
 
-      <div className={styles.main_logo}>
+      <div
+        className={`${styles.main_logo} ${
+          isStatic ? styles.animated_logo : ""
+        }`}
+      >
         <img
           src={logo.src}
           alt="main logo icon in the navbar center"
@@ -58,16 +81,38 @@ const Navbar = ({ isStatic = false }: { isStatic?: boolean }) => {
       </div>
 
       <div className={`${styles.section} ${styles.r_section}`}>
-        <Link href="/">Login</Link>
-        <div className={styles.languages}>
+        <Link href="/login">Login</Link>
+        <div
+          className={styles.languages}
+          onClick={() =>
+            setOpen((prevState) => ({
+              ...prevState,
+              languagesModal: !prevState.languagesModal,
+              burgerMenu: false,
+            }))
+          }
+        >
           <p className={styles.text}>Uz</p>
-          <ArrowBackIosIcon className={styles.arrow_icon} />
+          <ArrowIcon active={open.languagesModal} />
+          {open.languagesModal ? (
+            <BurgerMenu active={open.languagesModal} language />
+          ) : null}
         </div>
 
-        <div className={styles.burger_menu} onClick={() => setOpen(!open)}>
-          <HamburgerIcon active={open} />
+        <div
+          className={styles.burger_menu}
+          onClick={() =>
+            setOpen((prevState) => ({
+              ...prevState,
+              burgerMenu: !prevState.burgerMenu,
+              languagesModal: false,
+            }))
+          }
+        >
+          <HamburgerIcon active={open.burgerMenu} />
           <p>Menyu</p>
         </div>
+        {open.burgerMenu ? <BurgerMenu active={open.burgerMenu} /> : null}
       </div>
     </div>
   );

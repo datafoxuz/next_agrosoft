@@ -1,0 +1,25 @@
+@use "../../../../styles/variables" as variables;
+
+.menu {
+  position: absolute;
+  padding: 24px;
+  top: 334%;
+  right: 1.6%;
+  background-color: #e6f3ec;
+  box-shadow: 2px 2px 4px rgba(45, 45, 45, 0.05);
+  border-radius: 8px;
+
+  .menu_item {
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 13px;
+    color: #232624 !important;
+  }
+}
+
+.language_menu {
+  right: 9%;
+  top: 215%;
+}
