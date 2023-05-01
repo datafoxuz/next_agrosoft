@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-import styles from "./login.module.scss";
+import styles from "../auth.module.scss";
 
 import passwordOn from "@/assets/icons/password_on.svg";
 import passwordOff from "@/assets/icons/password_off.svg";
+import { useRouter } from "next/router";
+import { authProps } from "../data";
 
-const Login = () => {
+const Login = ({ tabId, setTabId }: authProps) => {
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
 
+  const router = useRouter();
+
   return (
-    <div className={styles.login}>
+    <div className={styles.modal}>
       <h3 className={styles.title}>Kirish</h3>
       <form>
         <input
@@ -27,11 +31,15 @@ const Login = () => {
             alt="password icon"
           />
         </div>
-        <Link href="/">Parolni unutdim</Link>
+        <p className={styles.reset_pass} onClick={() => setTabId(tabId + 1)}>
+          Parolni unutdim
+        </p>
 
         <div className={styles.buttons_wrapper}>
           <button type="button">Tizimga kirish</button>
-          <button type="button">Ro’yxatdan o’tish</button>
+          <button type="button" onClick={() => router.push("/registration")}>
+            Ro’yxatdan o’tish
+          </button>
         </div>
       </form>
     </div>

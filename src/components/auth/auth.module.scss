@@ -1,0 +1,52 @@
+@use "../../styles/variables" as variables;
+
+.modal {
+  @extend %auth;
+
+  .form {
+    gap: 32px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .pass_input {
+    img {
+      cursor: pointer;
+      position: absolute;
+      right: 15%;
+      bottom: 47%;
+    }
+
+    .view_pass1 {
+      top: 34%;
+    }
+
+    .view_pass2 {
+      top: 52%;
+    }
+  }
+
+  .reset_pass {
+    cursor: pointer;
+    text-align: right;
+    padding-right: 15px;
+    @extend %main-text-16;
+    text-decoration: none;
+    color: #008842;
+    margin-bottom: 32px;
+  }
+
+  .buttons_wrapper {
+    display: flex;
+    gap: 8px;
+
+    button {
+      &:nth-last-of-type(1) {
+        color: #2f3330;
+        background-color: #f6f6f6;
+      }
+    }
+  }
+}

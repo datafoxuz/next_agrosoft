@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { BurgerMenu, WeatherModal } from "./components";
 import { openObjTypes } from "./data";
+import { useRouter } from "next/router";
 
 //icons
 import HamburgerIcon from "@/assets/icons/HamburgerIcon/HamburgerIcon";
@@ -20,6 +21,8 @@ const Navbar = ({ isStatic = false }: { isStatic?: boolean }) => {
     languagesModal: false,
     burgerMenu: false,
   });
+
+  const router = useRouter();
 
   return (
     <div className={styles.navbar} data-static={isStatic}>
@@ -71,6 +74,7 @@ const Navbar = ({ isStatic = false }: { isStatic?: boolean }) => {
         className={`${styles.main_logo} ${
           isStatic ? styles.animated_logo : ""
         }`}
+        onClick={() => router.push("/")}
       >
         <img
           src={logo.src}

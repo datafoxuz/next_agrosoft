@@ -85,6 +85,10 @@ $small_smartphone_width: 320px;
     letter-spacing: 0.35px;
     color: #2f3330;
   }
+
+  &:focus {
+    border-color: #008842;
+  }
 }
 
 // auth modal styles
@@ -114,15 +118,6 @@ $small_smartphone_width: 320px;
     width: 446px;
     display: flex;
     flex-direction: column;
-
-    a {
-      text-align: right;
-      padding-right: 15px;
-      @extend %main-text-16;
-      text-decoration: none;
-      color: #008842;
-      margin-bottom: 32px;
-    }
   }
 
   input {

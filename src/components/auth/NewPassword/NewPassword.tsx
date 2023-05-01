@@ -1,0 +1,72 @@
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { inputStates } from "../data";
+
+import styles from "../auth.module.scss";
+
+import passwordOn from "@/assets/icons/password_on.svg";
+import passwordOff from "@/assets/icons/password_off.svg";
+
+const NewPassword = () => {
+  const [isShowPass, setIsShowPass] = useState<inputStates>({
+    first: false,
+    second: false,
+  });
+
+  const router = useRouter();
+
+  return (
+    <div className={styles.modal}>
+      <h3>Yangi parol</h3>
+      <form className={styles.form}>
+        <div>
+          <div className={styles.pass_input}>
+            <input
+              type="password"
+              placeholder="Parolni kiriting"
+              className={styles.input}
+            />
+            <img
+              onClick={() =>
+                setIsShowPass((isShowPass) => ({
+                  ...isShowPass,
+                  first: !isShowPass.first,
+                }))
+              }
+              src={`${isShowPass.first ? passwordOn.src : passwordOff.src}`}
+              alt="password icon"
+              className={styles.view_pass1}
+            />
+          </div>
+          <div className={styles.pass_input}>
+            <input
+              type="password"
+              placeholder="Parolni  qaytadan kiriting"
+              className={styles.input}
+            />
+            <img
+              onClick={() =>
+                setIsShowPass((isShowPass) => ({
+                  ...isShowPass,
+                  second: !isShowPass.second,
+                }))
+              }
+              src={`${isShowPass.second ? passwordOn.src : passwordOff.src}`}
+              alt="password icon"
+              className={styles.view_pass2}
+            />
+          </div>
+        </div>
+
+        <div className={styles.buttons_wrapper}>
+          <button type="button">Tizimga kirish</button>
+          <button type="button" onClick={() => router.back()}>
+            Orqaga qaytish
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default NewPassword;
