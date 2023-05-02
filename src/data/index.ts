@@ -4,3 +4,8 @@ export const MOTION_CONFIGS = {
   initial: { opacity: 0, y: "-80%" },
   exit: { y: 0, opacity: 0 },
 };
+
+export interface sitewayProps {
+  title: string;
+  url: string;
+}

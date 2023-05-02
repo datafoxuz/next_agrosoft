@@ -1,26 +1,21 @@
-@use "../../../../styles/variables" as variables;
+@use "../../../../styles/_variables.scss" as variables;
 
 .menu {
   position: absolute;
   padding: 24px;
-  top: 334%;
-  right: 1.6%;
+  top: 170%;
+  right: 50px;
   background-color: #e6f3ec;
   box-shadow: 2px 2px 4px rgba(45, 45, 45, 0.05);
   border-radius: 8px;
   z-index: 99;
 
   .menu_item {
-    display: block;
+    cursor: pointer;
     font-weight: 700;
     font-size: 12px;
     line-height: 20px;
     margin-bottom: 13px;
     color: #232624 !important;
   }
-}
-
-.language_menu {
-  right: 11%;
-  top: 215%;
 }

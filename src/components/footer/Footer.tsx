@@ -2,14 +2,21 @@ import React from "react";
 import Link from "next/link";
 //assets
 import arrow from "@/assets/icons/arrow_top_footer.svg";
-import footer from "@/assets/icons/footer.png";
 
 import styles from "./footer.module.scss";
 
 const Footer = () => {
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className={styles.footer}>
-      <button type="button" className={styles.to_top_button}>
+      <button
+        type="button"
+        onClick={handleClick}
+        className={styles.to_top_button}
+      >
         <img
           src={arrow.src}
           alt="arrow top icon"

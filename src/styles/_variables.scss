@@ -67,6 +67,15 @@ $small_smartphone_width: 320px;
   text-transform: uppercase;
 }
 
+%snavbar-title {
+  font-family: Montserrat;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #101211;
+}
+
 %input {
   padding: 20px 32px;
   font-weight: 400;
@@ -105,12 +114,7 @@ $small_smartphone_width: 320px;
   text-align: center;
 
   h3 {
-    font-family: Montserrat;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 120%;
-    text-transform: uppercase;
-    color: #101211;
+    @extend %snavbar-title;
     margin-bottom: 32px;
   }
 

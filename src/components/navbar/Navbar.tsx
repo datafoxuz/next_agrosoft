@@ -10,7 +10,7 @@ import temperature from "@/assets/icons/NavbarIcons/sun_yellow.svg";
 import ArrowIcon from "@/assets/icons/NavbarIcons/ArrowIcons/ArrowIcon";
 import app_store from "@/assets/icons/NavbarIcons/app_store.svg";
 import play_store from "@/assets/icons/NavbarIcons/play_store.svg";
-import logo from "@/assets/icons/logo.svg";
+import logo from "@/assets/icons/NavbarIcons/logo.svg";
 
 //style
 import styles from "./navbar.module.scss";

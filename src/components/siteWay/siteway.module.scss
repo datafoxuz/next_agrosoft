@@ -1,0 +1,33 @@
+@use "../../styles/variables" as variables;
+
+.siteway {
+  padding-bottom: 24px;
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  .link {
+    text-decoration: none;
+    @extend %main-text-16;
+    font-weight: 600;
+    color: #2f3330;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:nth-child(1) {
+      color: #008842;
+    }
+
+    &:nth-last-child(1) {
+      .icon {
+        display: none;
+      }
+    }
+  }
+}

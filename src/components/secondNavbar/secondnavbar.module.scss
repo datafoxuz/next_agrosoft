@@ -1,0 +1,63 @@
+@use "../../styles/variables" as variables;
+
+.s_navbar {
+  padding: 34px 45px 48px;
+  background-color: #e6f3ec;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+
+  .title_wrapper {
+    flex: auto;
+    .title {
+      @extend %snavbar-title;
+    }
+  }
+
+  .filter_wrapper {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+
+    .input_wrapper {
+      flex: 8;
+      position: relative;
+
+      .input {
+        width: 100%;
+        @extend %input;
+        padding-block: 17px;
+        padding-left: 57px;
+      }
+
+      &::after {
+        position: absolute;
+        content: url("../../assets/icons/SecondNavbar/search.svg");
+        width: 21px;
+        height: 21px;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .button {
+      flex: 2;
+      display: flex;
+      justify-content: center;
+      gap: 51px;
+      align-items: center;
+      @extend %button;
+      background-color: #b0dac4;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 120%;
+      letter-spacing: 1.25px;
+      text-transform: uppercase;
+      color: #101211;
+    }
+  }
+}

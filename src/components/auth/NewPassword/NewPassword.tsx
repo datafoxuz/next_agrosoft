@@ -4,8 +4,8 @@ import { inputStates } from "../data";
 
 import styles from "../auth.module.scss";
 
-import passwordOn from "@/assets/icons/password_on.svg";
-import passwordOff from "@/assets/icons/password_off.svg";
+import passwordOn from "@/assets/icons/Auth/password_on.svg";
+import passwordOff from "@/assets/icons/Auth/password_off.svg";
 
 const NewPassword = () => {
   const [isShowPass, setIsShowPass] = useState<inputStates>({

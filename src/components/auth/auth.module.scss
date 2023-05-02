@@ -8,14 +8,15 @@
   }
 
   input {
-    width: 100%;
+    width: 92%;
+    margin-inline: auto;
   }
 
   .pass_input {
     img {
       cursor: pointer;
       position: absolute;
-      right: 15%;
+      right: 18%;
       bottom: 47%;
     }
 

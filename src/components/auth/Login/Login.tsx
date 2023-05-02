@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import styles from "../auth.module.scss";
 
-import passwordOn from "@/assets/icons/password_on.svg";
-import passwordOff from "@/assets/icons/password_off.svg";
+import passwordOn from "@/assets/icons/Auth/password_on.svg";
+import passwordOff from "@/assets/icons/Auth/password_off.svg";
 import { useRouter } from "next/router";
 import { authProps } from "../data";
 

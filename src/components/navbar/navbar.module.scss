@@ -1,13 +1,13 @@
 @use "../../styles/variables" as variables;
 
-@keyframes logo-fall {
-  from {
-    top: -175%; /* Start position of the logo */
-  }
-  to {
-    top: -75%; /* End position of the logo */
-  }
-}
+// @keyframes logo-fall {
+//   from {
+//     top: -175%; /* Start position of the logo */
+//   }
+//   to {
+//     top: -75%; /* End position of the logo */
+//   }
+// }
 
 .navbar {
   display: flex;
@@ -19,6 +19,7 @@
   z-index: 99;
 
   &[data-static="true"] {
+    background-color: #008842;
     .main_logo {
       position: absolute;
       flex-direction: row;
@@ -136,9 +137,9 @@
     }
   }
 
-  .animated_logo {
-    animation: logo-fall 0.5s ease-out;
-  }
+  // .animated_logo {
+  //   animation: logo-fall 0.5s ease-out;
+  // }
 
   .r_section {
     gap: 32px;
