@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export const MOTION_CONFIGS = {
   layout: true,
   animate: { opacity: 1, y: "-100%" },
@@ -6,6 +8,12 @@ export const MOTION_CONFIGS = {
 };
 
 export interface sitewayProps {
+  title: string;
+  url: string;
+}
+
+export interface cardTypes {
+  image: StaticImageData;
   title: string;
   url: string;
 }
