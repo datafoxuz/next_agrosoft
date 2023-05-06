@@ -1,0 +1,54 @@
+@use "../../../../styles/variables" as variables;
+
+.card {
+  display: flex;
+  max-width: 593px;
+  gap: 24px;
+  align-items: center;
+
+  .image {
+    width: 220px;
+    height: 137px;
+    border-radius: 144px;
+  }
+
+  .card_infos {
+    .description {
+      width: 349px;
+      @extend %main-text-16;
+      margin-bottom: 16px;
+      color: #232624;
+    }
+
+    .card_actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      div {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+
+        .icon {
+          width: 13px;
+          height: 13px;
+        }
+
+        h5 {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 140%;
+          letter-spacing: 0.25px;
+          color: #2f3330;
+        }
+      }
+
+      .answer_info {
+        padding: 6px 12px;
+        border-radius: 4px;
+        background-color: #e6f3ec;
+      }
+    }
+  }
+}

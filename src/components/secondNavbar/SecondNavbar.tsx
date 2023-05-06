@@ -10,9 +10,11 @@ import { FilterMenu } from "./components";
 const SecondNavbar = ({
   siteWay,
   title,
+  community = false,
 }: {
   siteWay: sitewayProps[];
   title: string;
+  community?: boolean;
 }) => {
   const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
   return (
@@ -30,19 +32,22 @@ const SecondNavbar = ({
             className={styles.input}
           />
         </div>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={() => setIsShowFilter(!isShowFilter)}
-        >
-          Saralash
-          <img
-            src={filter.src}
-            alt="filter black icon"
-            className={styles.icon}
-          />
-        </button>
-        {isShowFilter ? <FilterMenu active={isShowFilter} /> : null}
+        <div className={styles.filter_btn_wrapper}>
+          <button
+            type="button"
+            className={styles.filter_button}
+            onClick={() => setIsShowFilter(!isShowFilter)}
+          >
+            Saralash
+            <img
+              src={filter.src}
+              alt="filter black icon"
+              className={styles.icon}
+            />
+          </button>
+          {isShowFilter ? <FilterMenu active={isShowFilter} /> : null}
+        </div>
+        {community ? <button>Savol yozish</button> : null}
       </div>
     </div>
   );

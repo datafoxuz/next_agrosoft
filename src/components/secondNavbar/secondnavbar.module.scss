@@ -45,13 +45,20 @@
       }
     }
 
-    .button {
+    .filter_btn_wrapper {
+      position: relative;
+    }
+
+    button {
+      @extend %button;
+    }
+
+    .filter_button {
       flex: 2;
       display: flex;
       justify-content: center;
       gap: 51px;
       align-items: center;
-      @extend %button;
       background-color: #b0dac4;
       font-weight: 600;
       font-size: 14px;

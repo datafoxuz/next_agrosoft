@@ -9,38 +9,13 @@ import styles from "@/styles/home.module.scss";
 
 // icons and images
 import leaf from "@/assets/images/leaf.png";
-import articles from "@/assets/images/articles.png";
-import community from "@/assets/images/community.png";
 import diseases from "@/assets/images/diseases.png";
-import market from "@/assets/images/market.png";
 import half_logo from "@/assets/images/half_logo.png";
 import comment from "@/assets/icons/comment.svg";
 import cotton from "@/assets/images/cotton.png";
 import leaf_small from "@/assets/images/leaf_small.png";
 import calendar from "@/assets/icons/calendar.svg";
-
-const topcards = [
-  {
-    url: "",
-    image: articles,
-    title: "Agro maqolalar",
-  },
-  {
-    url: "",
-    image: community,
-    title: "Agro jamiyat",
-  },
-  {
-    url: "",
-    image: diseases,
-    title: "Agrokasalliklar",
-  },
-  {
-    url: "",
-    image: market,
-    title: "Agromarket",
-  },
-];
+import { topcards } from "@/data";
 
 export default function Home() {
   const router = useRouter();
@@ -72,7 +47,7 @@ export default function Home() {
             ) => (
               <div
                 className={styles.top_card}
-                onClick={() => router.push("/")}
+                onClick={() => router.push(item.url)}
                 key={index}
               >
                 <img

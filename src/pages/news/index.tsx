@@ -1,8 +1,8 @@
 import { Collections, SNavbar } from "@/components";
-import React from "react";
 import { cardsForExample } from "@/data";
+import React from "react";
 
-import styles from "./articles.module.scss";
+import styles from "./news.module.scss";
 
 const index = () => {
   const siteWay = [
@@ -11,14 +11,14 @@ const index = () => {
       url: "/",
     },
     {
-      title: "Agro maqolalar",
-      url: "/articles",
+      title: "Yangiliklar",
+      url: "/news",
     },
   ];
 
   return (
-    <div className={styles.articles}>
-      <SNavbar siteWay={siteWay} title="Agro maqolalar" />
+    <div>
+      <SNavbar siteWay={siteWay} title="Yangiliklar" />
       <Collections data={cardsForExample} />
     </div>
   );
