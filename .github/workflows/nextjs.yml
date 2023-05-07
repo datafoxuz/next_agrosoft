@@ -1,29 +1,24 @@
-name: Deploy Next.js App
+name: Node.js CI
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
-  deploy:
-    runs-on: centos-latest
+  build:
+
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build app
-        run: npm run build
-
-      - name: Deploy app
-        uses: easingthemes/ssh-deploy@v2.2.6
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh-public-key: ${{ secrets.SSH_PUBLIC_KEY }}
-          server: ${{ secrets.SERVER }}
-          username: ${{ secrets.USERNAME }}
-          local-path: ./out
-          remote-path: /var/www/test.agrosoft.uz
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm run build --if-present
+    - run: pm2 reload next-js
+      env:
+        CI: true
