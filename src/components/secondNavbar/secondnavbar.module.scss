@@ -73,6 +73,16 @@
       letter-spacing: 1.25px;
       text-transform: uppercase;
       color: #101211;
+
+      &[data-hidden="true"] {
+        display: none;
+      }
+    }
+
+    .add_button {
+      &[data-show="false"] {
+        display: none;
+      }
     }
   }
 }

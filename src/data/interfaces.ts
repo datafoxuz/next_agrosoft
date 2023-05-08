@@ -16,8 +16,8 @@ export interface cardTypes {
 
 export interface questionTypes {
   active: boolean;
-  title: string;
-  titleFile: null | StaticImageData;
-  desc: string;
-  descFile: null | StaticImageData;
+  title?: string;
+  titleFile?: null | StaticImageData;
+  desc?: string;
+  descFile?: null | StaticImageData;
 }

@@ -16,6 +16,11 @@ $small_smartphone_width: 320px;
   margin-inline: auto;
 }
 
+%small-container {
+  margin-inline: auto;
+  width: 680px;
+}
+
 %main-text-16 {
   font-weight: 600;
   font-size: 16px;
@@ -98,6 +103,29 @@ $small_smartphone_width: 320px;
   &:focus {
     border-color: #008842;
   }
+}
+
+%add-form-input {
+  @extend %input;
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid #a7a7a7;
+}
+
+%textarea {
+  @extend %add-form-input;
+  max-width: 680px;
+  min-height: 253px;
+}
+
+%add-file-button {
+  width: fit-content;
+  background-color: #e6f3ec;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #03a679;
 }
 
 // auth modal styles

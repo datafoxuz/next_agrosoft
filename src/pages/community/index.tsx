@@ -25,13 +25,6 @@ const index = () => {
     },
   ];
 
-  function handleClick() {
-    setQuestion((prevState) => ({
-      ...prevState,
-      active: !prevState.active,
-    }));
-  }
-
   return (
     <div className={styles.community}>
       <SNavbar
@@ -39,7 +32,8 @@ const index = () => {
         title="Agrojamiyat"
         community
         filter
-        handleClick={handleClick}
+        state={question}
+        setState={setQuestion}
       />
 
       {question.active ? (

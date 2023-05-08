@@ -11,16 +11,28 @@ const SecondNavbar = ({
   siteWay,
   title,
   community = false,
+  market = false,
   filter = false,
-  handleClick = undefined,
+  state,
+  setState,
 }: {
   siteWay: sitewayProps[];
   title?: string;
   community?: boolean;
+  market?: boolean;
   filter?: boolean;
-  handleClick?: () => void | undefined;
+  state: questionTypes;
+  setState: (v: questionTypes) => void;
 }) => {
   const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
+
+  function handleClick() {
+    setState({
+      ...state,
+      active: !state.active,
+    });
+  }
+
   return (
     <div className={styles.s_navbar} data-filter={filter}>
       <div className={styles.title_wrapper}>
@@ -41,6 +53,7 @@ const SecondNavbar = ({
             type="button"
             className={styles.filter_button}
             onClick={() => setIsShowFilter(!isShowFilter)}
+            data-hidden={market}
           >
             Saralash
             <img
@@ -51,11 +64,24 @@ const SecondNavbar = ({
           </button>
           {isShowFilter ? <FilterMenu active={isShowFilter} /> : null}
         </div>
-        {community && handleClick ? (
-          <button type="button" onClick={handleClick}>
-            Savol yozish
-          </button>
-        ) : null}
+
+        <button
+          type="button"
+          className={styles.add_button}
+          onClick={handleClick}
+          data-show={community}
+        >
+          Savol yozish
+        </button>
+
+        <button
+          type="button"
+          className={styles.add_button}
+          onClick={handleClick}
+          data-show={market}
+        >
+          Mahsulot qo’shish
+        </button>
       </div>
     </div>
   );

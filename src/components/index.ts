@@ -6,3 +6,5 @@ export { default as SiteWay } from "./siteWay/SiteWay";
 export { default as Collections } from "./cardsCollection/CardsCollection";
 export { default as InternalPage } from "./internalPage/InternalPage";
 export { default as Write } from "./write/Write";
+export { default as FilterSelect } from "./filterSelect/FilterSelect";
+export { default as AddProduct } from "./addProduct/AddProduct";

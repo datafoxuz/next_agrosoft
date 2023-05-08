@@ -1,17 +1,14 @@
 @use "../../styles/variables" as variables;
 
 .write {
-  width: 680px;
+  @extend %small-container;
 
   button {
     @extend %button;
   }
 
   input {
-    @extend %input;
-    width: 100%;
-    border-radius: 16px;
-    border: 1px solid #a7a7a7;
+    @extend %add-form-input;
   }
 
   &[data-type="true"] {
@@ -31,16 +28,7 @@
   }
 
   .textarea {
-    max-width: 680px;
-    width: 100%;
-    min-height: 253px;
-    background-color: transparent;
-    border: 1px solid #a7a7a7;
-    border-radius: 16px;
-    padding: 24px;
-    outline: none;
-    @extend %main-text-16;
-    margin-bottom: 24px;
+    @extend %textarea;
 
     &::placeholder {
       @extend %main-text-16;
@@ -66,12 +54,6 @@
   }
 
   .add_file {
-    width: fit-content;
-    background-color: #e6f3ec;
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    color: #03a679;
+    @extend %add-file-button;
   }
 }
