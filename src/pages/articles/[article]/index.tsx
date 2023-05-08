@@ -1,0 +1,31 @@
+import { InternalPage, SNavbar } from "@/components";
+import { useRouter } from "next/router";
+import React from "react";
+
+const index = () => {
+  const router = useRouter();
+
+  const siteWay = [
+    {
+      title: "Bosh sahifa",
+      url: "/",
+    },
+    {
+      title: "Agro maqolalar",
+      url: "/articles",
+    },
+    {
+      title: `${router.query.article}`,
+      url: "/articles",
+    },
+  ];
+
+  return (
+    <div>
+      <SNavbar siteWay={siteWay} />
+      <InternalPage />
+    </div>
+  );
+};
+
+export default index;

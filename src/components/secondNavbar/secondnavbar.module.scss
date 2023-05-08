@@ -9,6 +9,13 @@
   position: relative;
   margin-bottom: 72px;
 
+  &[data-filter="false"] {
+    padding: 24px 45px 0;
+    .filter_wrapper {
+      display: none;
+    }
+  }
+
   .title_wrapper {
     flex: auto;
     .title {

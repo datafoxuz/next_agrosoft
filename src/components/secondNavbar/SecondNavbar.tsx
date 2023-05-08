@@ -1,24 +1,28 @@
-import { sitewayProps } from "@/data";
+import { questionTypes, sitewayProps } from "@/data/interfaces";
 import React, { useState } from "react";
 import SiteWay from "../siteWay/SiteWay";
 
 import styles from "./secondnavbar.module.scss";
 
-import filter from "@/assets/icons/SecondNavbar/filter.svg";
+import filterImage from "@/assets/icons/SecondNavbar/filter.svg";
 import { FilterMenu } from "./components";
 
 const SecondNavbar = ({
   siteWay,
   title,
   community = false,
+  filter = false,
+  handleClick = undefined,
 }: {
   siteWay: sitewayProps[];
-  title: string;
+  title?: string;
   community?: boolean;
+  filter?: boolean;
+  handleClick?: () => void | undefined;
 }) => {
   const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
   return (
-    <div className={styles.s_navbar}>
+    <div className={styles.s_navbar} data-filter={filter}>
       <div className={styles.title_wrapper}>
         <SiteWay siteWay={siteWay} />
         <h3 className={styles.title}>{title}</h3>
@@ -40,14 +44,18 @@ const SecondNavbar = ({
           >
             Saralash
             <img
-              src={filter.src}
+              src={filterImage.src}
               alt="filter black icon"
               className={styles.icon}
             />
           </button>
           {isShowFilter ? <FilterMenu active={isShowFilter} /> : null}
         </div>
-        {community ? <button>Savol yozish</button> : null}
+        {community && handleClick ? (
+          <button type="button" onClick={handleClick}>
+            Savol yozish
+          </button>
+        ) : null}
       </div>
     </div>
   );

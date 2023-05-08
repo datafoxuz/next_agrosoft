@@ -6,8 +6,12 @@ import styles from "./card.module.scss";
 
 const Card = ({ item }: { item: cardTypes }) => {
   const router = useRouter();
+
   return (
-    <div className={styles.card} onClick={() => router.push(item.url)}>
+    <div
+      className={styles.card}
+      onClick={() => router.push(`${router.asPath}/${item.title}`)}
+    >
       <img
         src={item.image.src}
         alt={`image about ${item.title}`}

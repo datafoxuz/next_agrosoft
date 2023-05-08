@@ -18,7 +18,7 @@ const index = () => {
 
   return (
     <div className={styles.diseases}>
-      <SNavbar siteWay={siteWay} title="Agro Kasalliklar" />
+      <SNavbar siteWay={siteWay} title="Agro Kasalliklar" filter />
       <Collections data={cardsForExample} />
     </div>
   );

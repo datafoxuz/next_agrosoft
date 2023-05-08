@@ -1,0 +1,77 @@
+@use "../../styles/variables" as variables;
+
+.write {
+  width: 680px;
+
+  button {
+    @extend %button;
+  }
+
+  input {
+    @extend %input;
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid #a7a7a7;
+  }
+
+  &[data-type="true"] {
+    margin-inline: auto;
+    margin-bottom: 112px;
+  }
+
+  .quiz_title_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+
+    .title {
+      @extend %snavbar-title;
+    }
+  }
+
+  .textarea {
+    max-width: 680px;
+    width: 100%;
+    min-height: 253px;
+    background-color: transparent;
+    border: 1px solid #a7a7a7;
+    border-radius: 16px;
+    padding: 24px;
+    outline: none;
+    @extend %main-text-16;
+    margin-bottom: 24px;
+
+    &::placeholder {
+      @extend %main-text-16;
+    }
+  }
+
+  .button_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .submit_cancel {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .cancel_button {
+        background-color: #f6f6f6;
+        color: #2f3330;
+      }
+    }
+  }
+
+  .add_file {
+    width: fit-content;
+    background-color: #e6f3ec;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: #03a679;
+  }
+}
