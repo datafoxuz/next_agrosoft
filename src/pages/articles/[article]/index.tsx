@@ -22,7 +22,7 @@ const index = () => {
 
   return (
     <div>
-      <SNavbar siteWay={siteWay} />
+      <SNavbar siteWay={siteWay} innerPage />
       <InternalPage />
     </div>
   );

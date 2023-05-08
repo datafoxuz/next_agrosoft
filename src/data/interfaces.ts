@@ -12,6 +12,8 @@ export interface cardTypes {
   commentsNum?: string;
   date?: string;
   answered?: boolean;
+  location?: string;
+  price?: string;
 }
 
 export interface questionTypes {

@@ -1,4 +1,4 @@
-import { cardTypes } from "@/data";
+import { cardTypes } from "@/data/interfaces";
 import Card from "./components/card/Card";
 import React from "react";
 import Pagination from "@mui/material/Pagination";

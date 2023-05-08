@@ -1,24 +1,29 @@
 import { Collections, SNavbar } from "@/components";
 import { cardsForExample } from "@/data";
+import { useRouter } from "next/router";
 import React from "react";
 
-import styles from "./diseases.module.scss";
-
 const index = () => {
+  const router = useRouter();
+
   const siteWay = [
     {
       title: "Bosh sahifa",
       url: "/",
     },
     {
-      title: "Agro Kasalliklar",
-      url: "/diseases",
+      title: "Agromarket",
+      url: "/market",
+    },
+    {
+      title: "Agro Products",
+      url: `/market/${router.query.product}`,
     },
   ];
 
   return (
-    <div className={styles.diseases}>
-      <SNavbar siteWay={siteWay} title="Agro Kasalliklar" filter diseases />
+    <div>
+      <SNavbar siteWay={siteWay} title="Agro Products" filter product />
       <Collections data={cardsForExample} />
     </div>
   );

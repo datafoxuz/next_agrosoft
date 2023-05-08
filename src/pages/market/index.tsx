@@ -7,7 +7,7 @@ import styles from "./market.module.scss";
 
 const index = () => {
   const [market, setMarket] = useState<questionTypes>({
-    active: true,
+    active: false,
   });
 
   const siteWay = [

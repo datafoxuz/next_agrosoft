@@ -9,7 +9,11 @@
   position: relative;
   margin-bottom: 72px;
 
-  &[data-filter="false"] {
+  button {
+    @extend %button;
+  }
+
+  &[data-type="true"] {
     padding: 24px 45px 0;
     .filter_wrapper {
       display: none;
@@ -24,7 +28,7 @@
   }
 
   .filter_wrapper {
-    flex: 2;
+    flex: 4;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -56,10 +60,6 @@
       position: relative;
     }
 
-    button {
-      @extend %button;
-    }
-
     .filter_button {
       flex: 2;
       display: flex;
@@ -73,16 +73,22 @@
       letter-spacing: 1.25px;
       text-transform: uppercase;
       color: #101211;
+      white-space: nowrap;
 
       &[data-hidden="true"] {
         display: none;
       }
-    }
 
-    .add_button {
-      &[data-show="false"] {
-        display: none;
+      .icon {
+        font-size: 20px;
+        transform: rotate(-90deg);
       }
+    }
+  }
+
+  .add_button {
+    &[data-show="false"] {
+      display: none;
     }
   }
 }

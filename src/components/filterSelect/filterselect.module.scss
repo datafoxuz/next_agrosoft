@@ -29,6 +29,10 @@
       transform: rotate(-90deg);
       color: #101211;
       font-size: 18px;
+
+      &[data-open="true"] {
+        transform: rotate(90deg);
+      }
     }
   }
 

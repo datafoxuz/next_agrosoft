@@ -1,7 +1,5 @@
-import React from "react";
-
+import React, { useState } from "react";
 import styles from "./filterselect.module.scss";
-
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const FilterSelect = ({
@@ -15,20 +13,35 @@ const FilterSelect = ({
   data: string[];
   mb?: boolean;
 }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleList = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className={styles.select_wrapper} data-type={mb}>
-      <div className={styles.button}>
+      <div className={styles.button} onClick={toggleList}>
         <p>{item}</p>
-        <ArrowBackIosNewIcon className={styles.icon} />
+        <ArrowBackIosNewIcon className={styles.icon} data-open={isOpen} />
       </div>
 
-      {/* <div className={styles.list}>
-        {data.map((e, index) => (
-          <p className={styles.item} key={index}>
-            {e}
-          </p>
-        ))}
-      </div> */}
+      {isOpen && (
+        <div className={styles.list}>
+          {data.map((e, index) => (
+            <p
+              className={styles.item}
+              key={index}
+              onClick={() => {
+                setItem(e);
+                setIsOpen(false);
+              }}
+            >
+              {e}
+            </p>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
