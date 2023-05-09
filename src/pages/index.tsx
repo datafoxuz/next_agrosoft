@@ -4,6 +4,7 @@ import { SwiperCards } from "@/components";
 import SEO from "@/layouts/seo/seo";
 import Link from "next/link";
 import SwiperCard from "@/components/swiper/swiperCard/SwiperCard";
+import { topcards } from "@/data";
 
 import styles from "@/styles/home.module.scss";
 
@@ -15,7 +16,6 @@ import comment from "@/assets/icons/comment.svg";
 import cotton from "@/assets/images/cotton.png";
 import leaf_small from "@/assets/images/leaf_small.png";
 import calendar from "@/assets/icons/calendar.svg";
-import { topcards } from "@/data";
 
 export default function Home() {
   const router = useRouter();

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { sitewayProps } from "@/data";
+import { sitewayProps } from "@/data/interfaces";
 
 //style
 import styles from "./siteway.module.scss";
