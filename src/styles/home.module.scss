@@ -55,8 +55,25 @@
 
       .leaf_img {
         position: absolute;
-        top: 31.5%;
-        right: -8.3%;
+        top: 11.5%;
+        right: -41%;
+        transform-origin: left bottom;
+        user-select: none;
+
+        scale: 0;
+        opacity: 0;
+        animation: revealAnimation 2s ease forwards 0.3s;
+      }
+
+      @keyframes revealAnimation {
+        70% {
+          opacity: 0;
+        }
+
+        to {
+          scale: 0.5;
+          opacity: 1;
+        }
       }
     }
   }
