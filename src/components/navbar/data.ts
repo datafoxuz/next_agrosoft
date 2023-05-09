@@ -14,31 +14,31 @@ type routesType = routeObj[];
 export const routes: routesType = [
   {
     title: "Biz haqimizda",
-    url: "/",
+    url: "/about",
   },
   {
     title: "Ob-havo ma’lumotlari",
-    url: "/",
+    url: "/weather",
   },
   {
     title: "Yangiliklar",
-    url: "/",
+    url: "/news",
   },
   {
     title: "Agro jamiyat",
-    url: "/",
+    url: "/community",
   },
   {
     title: "Agro kasallikar",
-    url: "/",
+    url: "/diseases",
   },
   {
     title: "Agro maqolalar",
-    url: "/",
+    url: "/articles",
   },
   {
     title: "Agro market",
-    url: "/",
+    url: "/market",
   },
 ];
 

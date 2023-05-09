@@ -7,11 +7,12 @@
   background: #e6f3ec;
   box-shadow: 2px 2px 4px rgba(45, 45, 45, 0.05);
   border-radius: 8px;
-  z-index: 99;
+  z-index: 999;
 
   .weather_big_infos {
     display: flex;
     justify-content: space-between;
+    gap: 200px;
     margin-bottom: 24px;
 
     .section {
@@ -41,7 +42,8 @@
       }
     }
 
-    a {
+    .link {
+      cursor: pointer;
       @extend %main-text-16;
       color: #007137;
       display: flex;

@@ -20,12 +20,15 @@
 
   &[data-static="true"] {
     background-color: #008842;
+
     .main_logo {
       position: absolute;
       flex-direction: row;
       align-items: center;
       padding: 8px;
       top: 20%;
+      background-color: transparent;
+      color: #fff;
 
       .logo {
         width: 46px;
@@ -38,6 +41,10 @@
         background-color: transparent;
       }
     }
+  }
+
+  &[data-auth="true"] {
+    background-color: transparent;
   }
 
   .section {
@@ -136,11 +143,6 @@
       font-weight: 800;
     }
   }
-
-  // .animated_logo {
-  //   animation: logo-fall 0.5s ease-out;
-  // }
-
   .r_section {
     gap: 32px;
     @extend %main-text-16;
@@ -148,6 +150,15 @@
     a {
       color: #fff;
       text-decoration: none;
+    }
+
+    .ava_section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 15px;
+      background-color: #007a3b;
+      border-radius: 144px;
     }
 
     .languages {

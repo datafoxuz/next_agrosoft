@@ -361,7 +361,7 @@
 
   .main_news {
     @extend %container;
-    margin-bottom: 208px;
+    padding-bottom: 208px;
 
     .news_title {
       @extend %medium-title;

@@ -1,10 +1,15 @@
-import { Collections, SNavbar } from "@/components";
+import { AddProduct, Collections, SNavbar } from "@/components";
 import { cardsForExample } from "@/data";
-import React from "react";
+import { questionTypes } from "@/data/interfaces";
+import React, { useState } from "react";
 
 import styles from "./market.module.scss";
 
 const index = () => {
+  const [market, setMarket] = useState<questionTypes>({
+    active: false,
+  });
+
   const siteWay = [
     {
       title: "Bosh sahifa",
@@ -18,8 +23,20 @@ const index = () => {
 
   return (
     <div className={styles.market}>
-      <SNavbar siteWay={siteWay} title="Agromarket" />
-      <Collections data={cardsForExample} />
+      <SNavbar
+        siteWay={siteWay}
+        title="Agromarket"
+        filter
+        market
+        state={market}
+        setState={setMarket}
+      />
+
+      {market.active ? (
+        <AddProduct state={market} setState={setMarket} />
+      ) : (
+        <Collections data={cardsForExample} />
+      )}
     </div>
   );
 };

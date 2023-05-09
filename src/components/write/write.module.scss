@@ -1,0 +1,58 @@
+@use "../../styles/variables" as variables;
+
+.write {
+  @extend %small-container;
+
+  button {
+    @extend %button;
+  }
+
+  input {
+    @extend %add-form-input;
+  }
+
+  &[data-type="true"] {
+    margin-inline: auto;
+    margin-bottom: 112px;
+  }
+
+  .quiz_title_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+
+    .title {
+      @extend %snavbar-title;
+    }
+  }
+
+  .textarea {
+    @extend %textarea;
+
+    &::placeholder {
+      @extend %main-text-16;
+    }
+  }
+
+  .button_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .submit_cancel {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .cancel_button {
+        @extend %cancel-button;
+      }
+    }
+  }
+
+  .add_file {
+    @extend %add-file-button;
+  }
+}

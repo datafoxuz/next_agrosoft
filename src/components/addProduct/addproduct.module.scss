@@ -1,0 +1,123 @@
+@use "../../styles/variables" as variables;
+
+$margin-botton: 24px;
+
+.add_product {
+  @extend %small-container;
+  margin-bottom: 112px;
+
+  .main_title {
+    @extend %snavbar-title;
+    margin-bottom: 32px;
+    color: #2f3330;
+  }
+
+  h3 {
+    @extend %snavbar-title;
+    margin-bottom: $margin-botton;
+    color: #a7a7a7;
+  }
+
+  input {
+    @extend %add-form-input;
+  }
+
+  textarea {
+    @extend %textarea;
+    margin-bottom: $margin-botton;
+  }
+
+  button {
+    @extend %button;
+  }
+
+  .input_wrapper {
+    display: flex;
+    gap: $margin-botton;
+    margin-bottom: $margin-botton;
+
+    .cancel_button {
+      @extend %cancel-button;
+    }
+  }
+
+  .checkbox_wrapper {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 40px;
+
+    .checkbox {
+      display: flex;
+      gap: 8px;
+      cursor: pointer;
+
+      .circle {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #bfc9c2;
+        border-radius: 50%;
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: "";
+          width: 60%;
+          height: 60%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+        }
+      }
+
+      &[data-check="true"] {
+        .circle {
+          border-color: #008842;
+        }
+
+        .circle::after {
+          background-color: #008842;
+        }
+      }
+    }
+  }
+
+  .about {
+    .input {
+      margin-bottom: $margin-botton;
+    }
+
+    .price_weight {
+      display: flex;
+      margin-bottom: $margin-botton;
+
+      .price {
+        width: 70%;
+      }
+    }
+
+    .add_file {
+      @extend %add-file-button;
+      margin-bottom: $margin-botton;
+    }
+  }
+
+  .price {
+    .checkbox_wrapper {
+      display: flex;
+      justify-content: flex-start;
+
+      input {
+        width: fit-content;
+      }
+    }
+  }
+
+  .agree_text {
+    margin-top: 24px;
+    span {
+      font-weight: 900;
+    }
+  }
+}

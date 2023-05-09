@@ -8,7 +8,7 @@ import community from "@/assets/images/community.png";
 import diseases from "@/assets/images/diseases.png";
 import market from "@/assets/images/market.png";
 
-import { StaticImageData } from "next/image";
+import { cardTypes } from "./interfaces";
 
 export const MOTION_CONFIGS = {
   layout: true,
@@ -16,20 +16,6 @@ export const MOTION_CONFIGS = {
   initial: { opacity: 0, y: "-80%" },
   exit: { y: 0, opacity: 0 },
 };
-
-export interface sitewayProps {
-  title: string;
-  url: string;
-}
-
-export interface cardTypes {
-  image: StaticImageData;
-  title: string;
-  url: string;
-  commentsNum?: string;
-  date?: string;
-  answered?: boolean;
-}
 
 export const cardsForExample: cardTypes[] = [
   {
@@ -82,6 +68,8 @@ export const topcards: cardTypes[] = [
     url: "/articles",
     image: articles,
     title: "Agro maqolalar",
+    location: "Bukhara, Uzbekistan",
+    price: "0.99 - 5.9",
   },
   {
     url: "/community",
@@ -97,5 +85,44 @@ export const topcards: cardTypes[] = [
     url: "/market",
     image: market,
     title: "Agromarket",
+  },
+];
+
+export const weatherData = [
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
   },
 ];

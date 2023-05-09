@@ -1,0 +1,127 @@
+@use "../../styles/variables" as variables;
+
+.weather {
+  display: flex;
+  padding-inline: 48px;
+  margin-bottom: 120px;
+  .left_section {
+    flex: 2;
+
+    .date {
+      @extend %main-text-16;
+      color: #006632;
+      margin-bottom: 48px;
+    }
+
+    .big_weather {
+      margin-bottom: 52px;
+      h2 {
+        font-weight: 700;
+        font-size: 86px;
+        line-height: 100%;
+        text-align: center;
+        letter-spacing: -1.5px;
+        color: #008842;
+
+        display: flex;
+        margin-bottom: 8px;
+
+        span {
+          font-weight: 400;
+          font-size: 47px;
+          line-height: 120%;
+          text-align: center;
+          text-transform: uppercase;
+          color: #2f3330;
+        }
+      }
+
+      h3 {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        color: #2f3330;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+
+    .other_infos {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 140%;
+      letter-spacing: 0.25px;
+      color: #2f3330;
+    }
+  }
+
+  .right_section {
+    flex: 10;
+
+    .content {
+      margin-bottom: 56px;
+      .title {
+        @extend %snavbar-title;
+        font-size: 20px;
+        margin-bottom: 24px;
+      }
+
+      .wrapper {
+        display: flex;
+        gap: 24px;
+
+        button {
+          @extend %button;
+        }
+      }
+
+      .cards_wrapper {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        p {
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 120%;
+          letter-spacing: 1.25px;
+          text-transform: uppercase;
+          color: #627b6e;
+          margin-bottom: 8px;
+        }
+
+        .card_by_hour {
+          padding: 24px 16px;
+          background-color: #e6f3ec;
+          border-radius: 4px;
+
+          h5 {
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 24px;
+            color: #232624;
+          }
+        }
+
+        .card_by_day {
+          padding: 24px 32px;
+          background-color: #f6f6f6;
+          border-radius: 4px;
+
+          h5 {
+            font-weight: 600;
+            font-size: 32px;
+            line-height: 24px;
+            color: #232624;
+            margin-bottom: 12px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,16 +1,18 @@
-import { cardTypes } from "@/data";
+import { cardTypes } from "@/data/interfaces";
+import { useRouter } from "next/router";
 import React from "react";
+import CardActions from "./cardActions/CardActions";
 
 import styles from "./communitycard.module.scss";
 
-import comment from "@/assets/icons/comment_green.svg";
-import calendar from "@/assets/icons/calendar_green.svg";
-import verification from "@/assets/icons/verification.svg";
-import verificationDis from "@/assets/icons/verification_disabled.svg";
-
 const CommunityCard = ({ data }: { data: cardTypes }) => {
+  const router = useRouter();
+
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onClick={() => router.push(`${router.asPath}/${data.title}`)}
+    >
       <img
         src={data.image.src}
         alt={`image about ${data.title}`}
@@ -18,30 +20,7 @@ const CommunityCard = ({ data }: { data: cardTypes }) => {
       />
       <div className={styles.card_infos}>
         <h3 className={styles.description}>{data.title}</h3>
-        <div className={styles.card_actions}>
-          <div className={styles.info}>
-            <img src={comment.src} alt="comment icon" className={styles.icon} />
-            <h5>{data.commentsNum}</h5>
-          </div>
-          <div className={styles.info}>
-            <img
-              src={calendar.src}
-              alt="calendar icon"
-              className={styles.icon}
-            />
-            <h5>{data.date}</h5>
-          </div>
-          <div className={styles.answer_info} data-checked={data.answered}>
-            <img
-              src={
-                data.answered ? `${verification.src}` : `${verificationDis.src}`
-              }
-              alt="verification icon"
-              className={styles.icon}
-            />
-            <h5>{data.answered ? `Answered` : `Not answered`}</h5>
-          </div>
-        </div>
+        <CardActions data={data} />
       </div>
     </div>
   );
