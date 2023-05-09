@@ -8,6 +8,7 @@
 
   .image_wrapper {
     position: relative;
+    margin-bottom: 40px;
 
     .image {
       width: 100%;
@@ -19,7 +20,6 @@
       justify-content: center;
       gap: 16px;
       margin-top: -30px;
-      margin-bottom: 40px;
 
       button {
         @extend %button;

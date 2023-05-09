@@ -1,13 +1,14 @@
 @use "../../styles/variables" as variables;
 
 .s_navbar {
-  padding: 34px 45px 48px;
+  padding: 34px 45px;
   background-color: #e6f3ec;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   position: relative;
   margin-bottom: 72px;
+  z-index: 60;
 
   button {
     @extend %button;

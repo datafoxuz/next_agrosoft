@@ -1,0 +1,113 @@
+@use "../../styles/variables" as variables;
+
+.filter_section {
+  position: absolute;
+  top: 265px;
+  left: 0;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 40px 56px;
+  transform: translateY(-100%);
+  transition: 0.3s ease-in-out;
+  z-index: 55;
+
+  &[data-type="true"] {
+    transform: translateY(0);
+  }
+
+  button {
+    @extend %button;
+  }
+
+  .section {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 40px;
+
+    .title {
+      @extend %snavbar-title;
+      color: #a7a7a7;
+      margin-bottom: 24px;
+    }
+
+    .selects {
+      display: flex;
+      gap: 24px;
+    }
+
+    .inputs {
+      display: flex;
+      gap: 24px;
+
+      .input {
+        @extend %add-form-input;
+      }
+    }
+  }
+
+  .checkbox_wrapper {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 40px;
+
+    .checkbox {
+      display: flex;
+      gap: 8px;
+      cursor: pointer;
+
+      .circle {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #bfc9c2;
+        border-radius: 50%;
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: "";
+          width: 60%;
+          height: 60%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+        }
+      }
+
+      &[data-check="true"] {
+        .circle {
+          border-color: #008842;
+        }
+
+        .circle::after {
+          background-color: #008842;
+        }
+      }
+    }
+  }
+
+  .clear_button {
+    background-color: transparent;
+    padding: 0;
+    color: #57605b;
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    margin-bottom: 24px;
+
+    .icon {
+      color: #ea1a39;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 32px;
+
+    .cancel_button {
+      @extend %cancel-button;
+    }
+  }
+}

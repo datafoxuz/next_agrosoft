@@ -12,7 +12,7 @@ const Card = ({ item }: { item: cardTypes }) => {
   return (
     <div
       className={styles.card}
-      onClick={() => router.push(`${router.asPath}/${item.title}`)}
+      onClick={() => router.push(`${router.route}/${item.title}`)}
     >
       <img
         src={item.image.src}
@@ -22,7 +22,7 @@ const Card = ({ item }: { item: cardTypes }) => {
 
       {item.location && (
         <div className={styles.location}>
-          <RoomIcon /> {item.location}
+          <RoomIcon className={styles.icon} /> {item.location}
         </div>
       )}
 

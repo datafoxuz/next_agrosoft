@@ -37,8 +37,7 @@ $margin-botton: 24px;
     margin-bottom: $margin-botton;
 
     .cancel_button {
-      background-color: #f6f6f6;
-      color: #2f3330;
+      @extend %cancel-button;
     }
   }
 

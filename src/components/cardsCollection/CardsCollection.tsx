@@ -9,13 +9,19 @@ import CommunityCard from "./components/communityCard/CommunityCard";
 const CardsCollection = ({
   data,
   community = false,
+  account = false,
 }: {
   data: cardTypes[];
   community?: boolean;
+  account?: boolean;
 }) => {
   return (
     <div className={styles.collections}>
-      <div className={styles.cards_grid} data-community={community}>
+      <div
+        className={styles.cards_grid}
+        data-community={community}
+        data-account={account}
+      >
         {data.map((item: cardTypes, index: number) =>
           community ? (
             <CommunityCard data={item} key={index} />

@@ -11,11 +11,19 @@ import ArrowIcon from "@/assets/icons/NavbarIcons/ArrowIcons/ArrowIcon";
 import app_store from "@/assets/icons/NavbarIcons/app_store.svg";
 import play_store from "@/assets/icons/NavbarIcons/play_store.svg";
 import logo from "@/assets/icons/NavbarIcons/logo.svg";
+import logo_white from "@/assets/icons/logo_white.svg";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 //style
 import styles from "./navbar.module.scss";
 
-const Navbar = ({ isStatic = false }: { isStatic?: boolean }) => {
+const Navbar = ({
+  isStatic = false,
+  auth = false,
+}: {
+  isStatic?: boolean;
+  auth?: boolean;
+}) => {
   const [open, setOpen] = useState<openObjTypes>({
     weatherModal: false,
     languagesModal: false,
@@ -25,7 +33,7 @@ const Navbar = ({ isStatic = false }: { isStatic?: boolean }) => {
   const router = useRouter();
 
   return (
-    <div className={styles.navbar} data-static={isStatic}>
+    <div className={styles.navbar} data-static={isStatic} data-auth={auth}>
       <div className={styles.section}>
         <div
           className={styles.temperature}
@@ -70,22 +78,31 @@ const Navbar = ({ isStatic = false }: { isStatic?: boolean }) => {
         </div>
       </div>
 
-      <div
-        className={`${styles.main_logo} ${
-          isStatic ? styles.animated_logo : ""
-        }`}
-        onClick={() => router.push("/")}
-      >
-        <img
-          src={logo.src}
-          alt="main logo icon in the navbar center"
-          className={styles.logo}
-        />
+      <div className={`${styles.main_logo}`} onClick={() => router.push("/")}>
+        {isStatic ? (
+          <img
+            src={logo_white.src}
+            alt="main logo icon in the navbar center"
+            className={styles.logo}
+          />
+        ) : (
+          <img
+            src={logo.src}
+            alt="main logo icon in the navbar center"
+            className={styles.logo}
+          />
+        )}
         <h3>AgroSoft</h3>
       </div>
 
       <div className={`${styles.section} ${styles.r_section}`}>
-        <Link href="/login">Login</Link>
+        {/* <Link href="/login">Login</Link> */}
+
+        <Link href="/account" className={styles.ava_section}>
+          <AccountCircleIcon />
+          <span>Sh Raxmatov</span>
+        </Link>
+
         <div
           className={styles.languages}
           onClick={() =>

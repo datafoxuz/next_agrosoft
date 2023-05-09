@@ -45,8 +45,7 @@
 
     button {
       &:nth-last-of-type(1) {
-        color: #2f3330;
-        background-color: #f6f6f6;
+        @extend %cancel-button;
       }
     }
   }

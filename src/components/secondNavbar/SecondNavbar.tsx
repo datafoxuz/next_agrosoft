@@ -7,6 +7,7 @@ import styles from "./secondnavbar.module.scss";
 
 import filterImage from "@/assets/icons/SecondNavbar/filter.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import FilterSection from "../filterSection/FilterSection";
 
 const SecondNavbar = ({
   siteWay,
@@ -18,8 +19,8 @@ const SecondNavbar = ({
   market = false,
   filter = false,
   product = false,
-  diseases = false,
   innerPage = false,
+  about = false,
 }: {
   siteWay: sitewayProps[];
   state?: questionTypes;
@@ -30,10 +31,18 @@ const SecondNavbar = ({
   market?: boolean;
   filter?: boolean;
   product?: boolean;
-  diseases?: boolean;
   innerPage?: boolean;
+  about?: boolean;
 }) => {
-  const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<{
+    buy: boolean;
+    filter1: boolean;
+    filter2: boolean;
+  }>({
+    buy: false,
+    filter1: false,
+    filter2: false,
+  });
 
   function handleClick() {
     if (setState && state) {
@@ -45,107 +54,144 @@ const SecondNavbar = ({
   }
 
   return (
-    <div className={styles.s_navbar} data-type={innerPage}>
-      <div className={styles.title_wrapper}>
-        <SiteWay siteWay={siteWay} />
-        <h3 className={styles.title}>{title}</h3>
-      </div>
+    <>
+      <div className={styles.s_navbar} data-type={innerPage}>
+        <div className={styles.title_wrapper}>
+          <SiteWay siteWay={siteWay} />
+          <h3 className={styles.title}>{title}</h3>
+        </div>
 
-      <div className={styles.filter_wrapper}>
-        {filter && (
-          <div className={styles.input_wrapper}>
-            <input
-              type="text"
-              placeholder="Kalit so’zni yozing"
-              className={styles.input}
-            />
-          </div>
-        )}
+        <div className={styles.filter_wrapper}>
+          {filter && (
+            <div className={styles.input_wrapper}>
+              <input
+                type="text"
+                placeholder="Kalit so’zni yozing"
+                className={styles.input}
+              />
+            </div>
+          )}
 
-        {product && (
-          <>
-            <button className={styles.filter_button}>
-              Sotib olish <ArrowBackIosNewIcon className={styles.icon} />
+          {product && (
+            <>
+              <div className={styles.filter_btn_wrapper}>
+                <button
+                  type="button"
+                  className={styles.filter_button}
+                  onClick={() =>
+                    setIsOpen((prevState) => ({
+                      ...prevState,
+                      buy: !prevState.buy,
+                    }))
+                  }
+                >
+                  Sotib olish
+                  <ArrowBackIosNewIcon className={styles.icon} />
+                </button>
+                {isOpen.buy ? <FilterMenu active={isOpen.buy} /> : null}
+              </div>
+              <div className={styles.filter_btn_wrapper}>
+                <button
+                  type="button"
+                  className={styles.filter_button}
+                  onClick={() =>
+                    setIsOpen((prevState) => ({
+                      ...prevState,
+                      filter1: !prevState.filter1,
+                    }))
+                  }
+                >
+                  Filter
+                  <img
+                    src={filterImage.src}
+                    alt="filter black icon"
+                    className={styles.icon}
+                  />
+                </button>
+              </div>
+            </>
+          )}
+
+          {product ||
+            (community && (
+              <div className={styles.filter_btn_wrapper}>
+                <button
+                  type="button"
+                  className={styles.filter_button}
+                  onClick={() =>
+                    setIsOpen((prevState) => ({
+                      ...prevState,
+                      filter2: !prevState.filter2,
+                    }))
+                  }
+                >
+                  Saralash
+                  <img
+                    src={filterImage.src}
+                    alt="filter black icon"
+                    className={styles.icon}
+                  />
+                </button>
+                {isOpen ? <FilterMenu active={isOpen.filter2} /> : null}
+              </div>
+            ))}
+
+          {article && (
+            <div className={styles.filter_btn_wrapper}>
+              <button
+                type="button"
+                className={styles.filter_button}
+                onClick={() =>
+                  setIsOpen((prevState) => ({
+                    ...prevState,
+                    filter2: !prevState.filter2,
+                  }))
+                }
+              >
+                Saralash
+                <img
+                  src={filterImage.src}
+                  alt="filter black icon"
+                  className={styles.icon}
+                />
+              </button>
+              {isOpen.filter2 ? <FilterMenu active={isOpen.filter2} /> : null}
+            </div>
+          )}
+
+          {community && (
+            <button
+              type="button"
+              className={styles.add_button}
+              onClick={handleClick}
+            >
+              Savol yozish
             </button>
-            <div className={styles.filter_btn_wrapper}>
-              <button
-                type="button"
-                className={styles.filter_button}
-                onClick={() => setIsShowFilter(!isShowFilter)}
-              >
-                Filter
-                <img
-                  src={filterImage.src}
-                  alt="filter black icon"
-                  className={styles.icon}
-                />
-              </button>
-              {isShowFilter ? <FilterMenu active={isShowFilter} /> : null}
-            </div>
-          </>
-        )}
+          )}
 
-        {product ||
-          article ||
-          (community && (
-            <div className={styles.filter_btn_wrapper}>
-              <button
-                type="button"
-                className={styles.filter_button}
-                onClick={() => setIsShowFilter(!isShowFilter)}
-              >
-                Saralash
-                <img
-                  src={filterImage.src}
-                  alt="filter black icon"
-                  className={styles.icon}
-                />
-              </button>
-              {isShowFilter ? <FilterMenu active={isShowFilter} /> : null}
-            </div>
-          ))}
+          {market && (
+            <button
+              type="button"
+              className={styles.add_button}
+              onClick={handleClick}
+            >
+              Mahsulot qo’shish
+            </button>
+          )}
 
-        {diseases ||
-          (product && (
-            <div className={styles.filter_btn_wrapper}>
-              <button
-                type="button"
-                className={styles.filter_button}
-                onClick={() => setIsShowFilter(!isShowFilter)}
-              >
-                Saralash
-                <img
-                  src={filterImage.src}
-                  alt="filter black icon"
-                  className={styles.icon}
-                />
-              </button>
-              {isShowFilter ? <FilterMenu active={isShowFilter} /> : null}
-            </div>
-          ))}
-
-        {community && (
-          <button
-            type="button"
-            className={styles.add_button}
-            onClick={handleClick}
-          >
-            Savol yozish
-          </button>
-        )}
-
-        {market && (
-          <button
-            type="button"
-            className={styles.add_button}
-            onClick={handleClick}
-            data-show={market}
-          >
-            Mahsulot qo’shish
-          </button>
-        )}
+          {about && (
+            <button
+              type="button"
+              className={styles.add_button}
+              onClick={handleClick}
+            >
+              Biz bilan bog’laning
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+      {product && <FilterSection active={isOpen.filter1} />}
+    </>
   );
 };
 

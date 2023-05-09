@@ -11,7 +11,13 @@ import ShareIcon from "@mui/icons-material/Share";
 import Answer from "./Answer/Answer";
 import { questionTypes } from "@/data/interfaces";
 
-const InternalPage = ({ questions = false }: { questions?: boolean }) => {
+const InternalPage = ({
+  questions = false,
+  about,
+}: {
+  questions?: boolean;
+  about?: boolean;
+}) => {
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
     active: false,
     title: "",
@@ -34,15 +40,17 @@ const InternalPage = ({ questions = false }: { questions?: boolean }) => {
     <div className={styles.internal}>
       <div className={styles.image_wrapper}>
         <img src={image.src} alt="about image" className={styles.image} />
-        <div className={styles.events}>
-          <button>
-            <TurnedInNotIcon /> Saqlab qo’yish
-          </button>
-          <button>
-            <ShareIcon />
-            Ulashish
-          </button>
-        </div>
+        {!about && (
+          <div className={styles.events}>
+            <button>
+              <TurnedInNotIcon /> Saqlab qo’yish
+            </button>
+            <button>
+              <ShareIcon />
+              Ulashish
+            </button>
+          </div>
+        )}
       </div>
       <h2 className={styles.title}>
         Aholi xonadonlarida bedana boqish va ko‘paytirish

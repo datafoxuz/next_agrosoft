@@ -63,6 +63,12 @@ $small_smartphone_width: 320px;
   }
 }
 
+%cancel-button {
+  @extend %button;
+  background-color: #f6f6f6;
+  color: #2f3330;
+}
+
 %medium-title {
   font-weight: 900;
   font-size: 33px;

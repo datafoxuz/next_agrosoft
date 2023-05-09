@@ -21,7 +21,10 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className={styles.container}>
-      <Navbar isStatic={asPath !== "/"} />
+      <Navbar
+        isStatic={asPath !== "/"}
+        auth={asPath == "/login" || asPath == "/registration"}
+      />
       <div>{children}</div>
       {isShowFooter ? <Footer /> : null}
     </div>

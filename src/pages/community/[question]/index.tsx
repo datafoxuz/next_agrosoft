@@ -11,7 +11,7 @@ const index = () => {
       url: "/",
     },
     {
-      title: "Agro maqolalar",
+      title: "Agro jamiyat",
       url: "/community",
     },
     {

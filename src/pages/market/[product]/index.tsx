@@ -1,5 +1,5 @@
 import { Collections, SNavbar } from "@/components";
-import { cardsForExample } from "@/data";
+import { cardsForExample, topcards } from "@/data";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -24,7 +24,7 @@ const index = () => {
   return (
     <div>
       <SNavbar siteWay={siteWay} title="Agro Products" filter product />
-      <Collections data={cardsForExample} />
+      <Collections data={topcards} />
     </div>
   );
 };

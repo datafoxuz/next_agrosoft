@@ -68,6 +68,8 @@ export const topcards: cardTypes[] = [
     url: "/articles",
     image: articles,
     title: "Agro maqolalar",
+    location: "Bukhara, Uzbekistan",
+    price: "0.99 - 5.9",
   },
   {
     url: "/community",

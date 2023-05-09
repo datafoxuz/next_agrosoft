@@ -11,20 +11,20 @@ const index = () => {
       url: "/",
     },
     {
-      title: "Agro maqolalar",
-      url: "/articles",
+      title: "Agro Kasalliklar",
+      url: "/diseases",
     },
     {
-      title: `${router.query.article}`,
-      url: `/articles/${router.query.article}`,
+      title: `${router.query.page}`,
+      url: `/diseases/${router.query.page}`,
     },
   ];
 
   return (
-    <div>
+    <>
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage />
-    </div>
+    </>
   );
 };
 
