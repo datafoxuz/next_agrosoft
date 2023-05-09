@@ -2,6 +2,7 @@ import { FilterSelect, SNavbar } from "@/components";
 import React, { useState } from "react";
 import CardsCollection from "@/components/cardsCollection/CardsCollection";
 import { cardsForExample } from "@/data";
+import SEO from "@/layouts/seo/seo";
 
 import styles from "./profile.module.scss";
 
@@ -64,87 +65,58 @@ const index = () => {
   ];
 
   return (
-    <div className={styles.profile}>
-      <SNavbar siteWay={siteWay} title="Akkount ma’lumotlari" />
+    <SEO metaTitle="Account">
+      <div className={styles.profile}>
+        <SNavbar siteWay={siteWay} title="Akkount ma’lumotlari" />
 
-      <div className={styles.profile_wrapper}>
-        <div className={styles.sidebar}>
-          {sidebarLinks.map((item, index) => (
-            <p
-              className={styles.item}
-              key={index}
-              data-active={item.tabId == tabId}
-              onClick={() => setTabId(item.tabId)}
-            >
-              {item.title}
-            </p>
-          ))}
-        </div>
+        <div className={styles.profile_wrapper}>
+          <div className={styles.sidebar}>
+            {sidebarLinks.map((item, index) => (
+              <p
+                className={styles.item}
+                key={index}
+                data-active={item.tabId == tabId}
+                onClick={() => setTabId(item.tabId)}
+              >
+                {item.title}
+              </p>
+            ))}
+          </div>
 
-        {tabId == 1 ? (
-          <div className={styles.content}>
-            <h3 className={styles.title}>Shaxsiy ma’lumotlar</h3>
+          {tabId == 1 ? (
+            <div className={styles.content}>
+              <h3 className={styles.title}>Shaxsiy ma’lumotlar</h3>
 
-            <div className={styles.image_container}>
-              <div className={styles.account_image}>
-                <img
-                  src={defaultImg.src}
-                  alt="default image"
-                  className={styles.image}
+              <div className={styles.image_container}>
+                <div className={styles.account_image}>
+                  <img
+                    src={defaultImg.src}
+                    alt="default image"
+                    className={styles.image}
+                  />
+                </div>
+                <label className={styles.image_label} htmlFor="imageUpload">
+                  Add photo
+                </label>
+                <input
+                  id="imageUpload"
+                  accept="image/png, image/gif, image/jpeg"
+                  type="file"
                 />
               </div>
-              <label className={styles.image_label} htmlFor="imageUpload">
-                Add photo
-              </label>
-              <input
-                id="imageUpload"
-                accept="image/png, image/gif, image/jpeg"
-                type="file"
-              />
-            </div>
 
-            <form className={styles.form}>
-              <div className={styles.input_label}>
-                <label>Profession</label>
-                <input type="text" placeholder="Raxmatov Shoxrux" />
-              </div>
-              <div className={styles.input_label}>
-                <label>Phone</label>
-                <input type="text" placeholder="+99897 888 99 33" />
-              </div>
-              <div className={styles.input_label}>
-                <label>Email</label>
-                <input type="text" placeholder="mygmail@gmail.com" />
-              </div>
-
-              <div className={styles.button_wrapper}>
-                <button type="button">O’zgarishlarni saqlash</button>
-                <button type="button" className={styles.cancel_button}>
-                  Bekor qilish
-                </button>
-              </div>
-            </form>
-          </div>
-        ) : tabId == 2 ? (
-          <div className={styles.content}>
-            <h3 className={styles.title}>
               <form className={styles.form}>
                 <div className={styles.input_label}>
-                  <label htmlFor="prof">Profession</label>
-                  <input type="text" id="prof" placeholder="Agronom" />
+                  <label>Profession</label>
+                  <input type="text" placeholder="Raxmatov Shoxrux" />
                 </div>
                 <div className={styles.input_label}>
-                  <label htmlFor="farm">Farms territory (in hectars)</label>
-                  <input type="text" id="farm" placeholder="23" />
+                  <label>Phone</label>
+                  <input type="text" placeholder="+99897 888 99 33" />
                 </div>
-
                 <div className={styles.input_label}>
-                  <label htmlFor="farm">Location</label>
-
-                  <div className={styles.selects}>
-                    <FilterSelect item={item} setItem={setItem} data={data} />
-                    <FilterSelect item={item} setItem={setItem} data={data} />
-                  </div>
+                  <label>Email</label>
+                  <input type="text" placeholder="mygmail@gmail.com" />
                 </div>
 
                 <div className={styles.button_wrapper}>
@@ -154,43 +126,74 @@ const index = () => {
                   </button>
                 </div>
               </form>
-            </h3>
-          </div>
-        ) : tabId == 3 ? (
-          <div className={styles.content}>
-            <h3 className={styles.title}>Saqlanganlar</h3>
-
-            <div className={styles.tab_titles}>
-              {contentTabLinks.map((item) => (
-                <h3
-                  className={styles.title}
-                  key={item.id}
-                  data-active={item.id == contentTab}
-                  onClick={() => setContentTab(item.id)}
-                >
-                  {item.title}
-                </h3>
-              ))}
             </div>
+          ) : tabId == 2 ? (
+            <div className={styles.content}>
+              <h3 className={styles.title}>
+                <form className={styles.form}>
+                  <div className={styles.input_label}>
+                    <label htmlFor="prof">Profession</label>
+                    <input type="text" id="prof" placeholder="Agronom" />
+                  </div>
+                  <div className={styles.input_label}>
+                    <label htmlFor="farm">Farms territory (in hectars)</label>
+                    <input type="text" id="farm" placeholder="23" />
+                  </div>
 
-            {contentTab == "a" ? (
+                  <div className={styles.input_label}>
+                    <label htmlFor="farm">Location</label>
+
+                    <div className={styles.selects}>
+                      <FilterSelect item={item} setItem={setItem} data={data} />
+                      <FilterSelect item={item} setItem={setItem} data={data} />
+                    </div>
+                  </div>
+
+                  <div className={styles.button_wrapper}>
+                    <button type="button">O’zgarishlarni saqlash</button>
+                    <button type="button" className={styles.cancel_button}>
+                      Bekor qilish
+                    </button>
+                  </div>
+                </form>
+              </h3>
+            </div>
+          ) : tabId == 3 ? (
+            <div className={styles.content}>
+              <h3 className={styles.title}>Saqlanganlar</h3>
+
+              <div className={styles.tab_titles}>
+                {contentTabLinks.map((item) => (
+                  <h3
+                    className={styles.title}
+                    key={item.id}
+                    data-active={item.id == contentTab}
+                    onClick={() => setContentTab(item.id)}
+                  >
+                    {item.title}
+                  </h3>
+                ))}
+              </div>
+
+              {contentTab == "a" ? (
+                <CardsCollection data={cardsForExample} account />
+              ) : contentTab == "b" ? (
+                <p>Cards</p>
+              ) : contentTab == "c" ? (
+                <CardsCollection data={cardsForExample} account />
+              ) : (
+                <CardsCollection data={cardsForExample} account />
+              )}
+            </div>
+          ) : tabId == 4 ? (
+            <div className={styles.content}>
+              <h3 className={styles.title}>Mahsulotlarim</h3>
               <CardsCollection data={cardsForExample} account />
-            ) : contentTab == "b" ? (
-              <p>Cards</p>
-            ) : contentTab == "c" ? (
-              <CardsCollection data={cardsForExample} account />
-            ) : (
-              <CardsCollection data={cardsForExample} account />
-            )}
-          </div>
-        ) : tabId == 4 ? (
-          <div className={styles.content}>
-            <h3 className={styles.title}>Mahsulotlarim</h3>
-            <CardsCollection data={cardsForExample} account />
-          </div>
-        ) : null}
+            </div>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </SEO>
   );
 };
 

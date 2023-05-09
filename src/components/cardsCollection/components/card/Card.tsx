@@ -1,6 +1,6 @@
 import { cardTypes } from "@/data/interfaces";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import styles from "./card.module.scss";
 
@@ -8,18 +8,17 @@ import RoomIcon from "@mui/icons-material/Room";
 
 const Card = ({ item }: { item: cardTypes }) => {
   const router = useRouter();
-  const [path, setPath] = useState<string>("");
 
-  useEffect(() => {
-    if (router.query.product) {
-      setPath(`/market/${router.query.product}/${item.title}`);
+  function handleCardClick(title: string) {
+    if (!router.query.product) {
+      router.push(`/${router.asPath}/${title}`);
+    } else {
+      router.push(`/market/${router.query.product}/${title}`);
     }
-
-    setPath(`/${router.route}/${item.title}`);
-  }, [router]);
+  }
 
   return (
-    <div className={styles.card} onClick={() => router.push(path)}>
+    <div className={styles.card} onClick={() => handleCardClick(item.title)}>
       <img
         src={item.image.src}
         alt={`image about ${item.title}`}

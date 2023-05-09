@@ -1,9 +1,8 @@
 import { Collections, SNavbar, Write } from "@/components";
 import { cardsForExample } from "@/data";
 import { questionTypes } from "@/data/interfaces";
+import SEO from "@/layouts/seo/seo";
 import React, { useState } from "react";
-
-import styles from "./community.module.scss";
 
 const index = () => {
   const [question, setQuestion] = useState<questionTypes>({
@@ -26,7 +25,7 @@ const index = () => {
   ];
 
   return (
-    <div className={styles.community}>
+    <SEO metaTitle="Community">
       <SNavbar
         siteWay={siteWay}
         title="Agrojamiyat"
@@ -41,7 +40,7 @@ const index = () => {
       ) : (
         <Collections data={cardsForExample} community />
       )}
-    </div>
+    </SEO>
   );
 };
 

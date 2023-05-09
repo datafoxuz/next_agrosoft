@@ -4,15 +4,10 @@
   padding: 34px 45px;
   background-color: #e6f3ec;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
   position: relative;
   margin-bottom: 72px;
   z-index: 60;
-
-  button {
-    @extend %button;
-  }
 
   &[data-type="true"] {
     padding: 24px 45px 0;
@@ -21,75 +16,88 @@
     }
   }
 
-  .title_wrapper {
-    flex: auto;
-    .title {
-      @extend %snavbar-title;
-    }
-  }
-
-  .filter_wrapper {
-    flex: 4;
+  .s_navbar_wrapper {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    button {
+      @extend %button;
+    }
 
-    .input_wrapper {
-      flex: 8;
-      position: relative;
-
-      .input {
-        width: 100%;
-        @extend %input;
-        padding-block: 17px;
-        padding-left: 57px;
-      }
-
-      &::after {
-        position: absolute;
-        content: url("../../assets/icons/SecondNavbar/search.svg");
-        width: 21px;
-        height: 21px;
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
+    .title_wrapper {
+      flex: auto;
+      .title {
+        @extend %snavbar-title;
       }
     }
 
-    .filter_btn_wrapper {
-      position: relative;
-    }
-
-    .filter_button {
-      flex: 2;
+    .filter_wrapper {
+      flex: 4;
       display: flex;
-      justify-content: center;
-      gap: 51px;
+      justify-content: flex-end;
       align-items: center;
-      background-color: #b0dac4;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 120%;
-      letter-spacing: 1.25px;
-      text-transform: uppercase;
-      color: #101211;
-      white-space: nowrap;
+      gap: 16px;
 
-      &[data-hidden="true"] {
+      &[data-type="true"] {
+        flex: 8;
+      }
+
+      .input_wrapper {
+        flex: 8;
+        position: relative;
+
+        .input {
+          width: 100%;
+          @extend %input;
+          padding-block: 17px;
+          padding-left: 57px;
+        }
+
+        &::after {
+          position: absolute;
+          content: url("../../assets/icons/SecondNavbar/search.svg");
+          width: 21px;
+          height: 21px;
+          left: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+
+      .filter_btn_wrapper {
+        position: relative;
+      }
+
+      .filter_button {
+        flex: 2;
+        display: flex;
+        justify-content: center;
+        gap: 51px;
+        align-items: center;
+        background-color: #b0dac4;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 120%;
+        letter-spacing: 1.25px;
+        text-transform: uppercase;
+        color: #101211;
+        white-space: nowrap;
+
+        &[data-hidden="true"] {
+          display: none;
+        }
+
+        .icon {
+          font-size: 20px;
+          transform: rotate(-90deg);
+        }
+      }
+    }
+
+    .add_button {
+      &[data-show="false"] {
         display: none;
       }
-
-      .icon {
-        font-size: 20px;
-        transform: rotate(-90deg);
-      }
-    }
-  }
-
-  .add_button {
-    &[data-show="false"] {
-      display: none;
     }
   }
 }

@@ -1,4 +1,5 @@
 import { InternalPage, SNavbar } from "@/components";
+import SEO from "@/layouts/seo/seo";
 import React from "react";
 
 const index = () => {
@@ -13,10 +14,10 @@ const index = () => {
     },
   ];
   return (
-    <div>
+    <SEO metaTitle="About">
       <SNavbar siteWay={siteWay} title="Biz haqimizda" about />
       <InternalPage about />
-    </div>
+    </SEO>
   );
 };
 

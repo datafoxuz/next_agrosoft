@@ -1,8 +1,7 @@
 import { Collections, SNavbar } from "@/components";
 import { cardsForExample } from "@/data";
+import SEO from "@/layouts/seo/seo";
 import React from "react";
-
-import styles from "./news.module.scss";
 
 const index = () => {
   const siteWay = [
@@ -17,10 +16,10 @@ const index = () => {
   ];
 
   return (
-    <div>
+    <SEO metaTitle="News">
       <SNavbar siteWay={siteWay} title="Yangiliklar" filter article />
       <Collections data={cardsForExample} />
-    </div>
+    </SEO>
   );
 };
 

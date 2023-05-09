@@ -1,5 +1,6 @@
 import React from "react";
 import { StaticImageData } from "next/image";
+import { useRouter } from "next/router";
 
 import card_image from "@/assets/images/articles.png";
 
@@ -12,14 +13,15 @@ interface swiperProps {
 }
 
 const SwiperCard = ({
-  item,
   cardDate,
 }: {
   item?: swiperProps;
   cardDate?: string;
 }) => {
+  const router = useRouter();
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={() => router.push("/articles")}>
       <img
         src={card_image.src}
         alt={`image about`}
