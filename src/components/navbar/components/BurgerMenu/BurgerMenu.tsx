@@ -1,6 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { routes, routeObj, languagesData, languagesObj } from "../../data";
+import {
+  routes,
+  routeObj,
+  languagesData,
+  languagesObj,
+  openObjTypes,
+} from "../../data";
 import { AnimatePresence, motion } from "framer-motion";
 import { MOTION_CONFIGS } from "@/data";
 
@@ -9,10 +15,20 @@ import styles from "./burgermenu.module.scss";
 const BurgerMenu = ({
   active,
   language = false,
+  setOpen,
 }: {
   active: boolean;
   language?: boolean;
+  setOpen: (v: openObjTypes) => void;
 }) => {
+  function handleClick() {
+    setOpen({
+      weatherModal: false,
+      burgerMenu: false,
+      languagesModal: false,
+    });
+  }
+
   return (
     <AnimatePresence>
       {active ? (
@@ -22,7 +38,12 @@ const BurgerMenu = ({
         >
           {!language
             ? routes.map((item: routeObj, index: number) => (
-                <Link href={item.url} className={styles.menu_item} key={index}>
+                <Link
+                  href={item.url}
+                  className={styles.menu_item}
+                  key={index}
+                  onClick={() => handleClick()}
+                >
                   {item.title}
                 </Link>
               ))

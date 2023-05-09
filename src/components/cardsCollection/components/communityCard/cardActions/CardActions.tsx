@@ -1,5 +1,5 @@
 import React from "react";
-import { cardTypes } from "@/data";
+import { cardTypes } from "@/data/interfaces";
 
 import styles from "./cardactions.module.scss";
 

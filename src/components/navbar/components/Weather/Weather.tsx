@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { MOTION_CONFIGS } from "@/data";
+import { MOTION_CONFIGS, weatherData } from "@/data";
 import { AnimatePresence, motion } from "framer-motion";
+import { openObjTypes } from "../../data";
+import { useRouter } from "next/router";
 
 //icons
 import EastIcon from "@mui/icons-material/East";
@@ -9,7 +11,25 @@ import sun from "@/assets/icons/sun_orange.svg";
 
 import styles from "./weather.module.scss";
 
-const Weather = ({ active }: { active: boolean }) => {
+const Weather = ({
+  active,
+  open,
+  setOpen,
+}: {
+  active: boolean;
+  open: openObjTypes;
+  setOpen: (v: openObjTypes) => void;
+}) => {
+  const router = useRouter();
+
+  function handleClick() {
+    router.push("/weather");
+    setOpen({
+      ...open,
+      weatherModal: !open.weatherModal,
+    });
+  }
+
   return (
     <AnimatePresence>
       {active ? (
@@ -31,60 +51,18 @@ const Weather = ({ active }: { active: boolean }) => {
                 <p>Wind: 18 km/h</p>
               </div>
             </div>
-            <Link href="/">
+            <p className={styles.link} onClick={() => handleClick()}>
               To’liq ma’lumot <EastIcon />
-            </Link>
+            </p>
           </div>
 
           <div className={styles.weather_degree_cards}>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
-            <div className={styles.card}>
-              <p>00:00</p>
-              <h3>5°</h3>
-            </div>
+            {weatherData.map((item, index) => (
+              <div className={styles.card} key={index}>
+                <p>{item.time}</p>
+                <h3>{item.gradus}</h3>
+              </div>
+            ))}
           </div>
         </motion.div>
       ) : null}

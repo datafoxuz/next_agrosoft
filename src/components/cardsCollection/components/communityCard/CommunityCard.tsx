@@ -1,4 +1,4 @@
-import { cardTypes } from "@/data";
+import { cardTypes } from "@/data/interfaces";
 import { useRouter } from "next/router";
 import React from "react";
 import CardActions from "./cardActions/CardActions";

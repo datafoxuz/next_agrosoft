@@ -24,13 +24,13 @@ const Navbar = ({
   isStatic?: boolean;
   auth?: boolean;
 }) => {
+  const router = useRouter();
+
   const [open, setOpen] = useState<openObjTypes>({
     weatherModal: false,
     languagesModal: false,
     burgerMenu: false,
   });
-
-  const router = useRouter();
 
   return (
     <div className={styles.navbar} data-static={isStatic} data-auth={auth}>
@@ -58,7 +58,13 @@ const Navbar = ({
           </div>
         </div>
 
-        {open.weatherModal ? <WeatherModal active={open.weatherModal} /> : null}
+        {open.weatherModal ? (
+          <WeatherModal
+            active={open.weatherModal}
+            open={open}
+            setOpen={setOpen}
+          />
+        ) : null}
 
         <div className={styles.downloads}>
           <img
@@ -116,7 +122,11 @@ const Navbar = ({
           <p className={styles.text}>Uz</p>
           <ArrowIcon active={open.languagesModal} />
           {open.languagesModal ? (
-            <BurgerMenu active={open.languagesModal} language />
+            <BurgerMenu
+              active={open.languagesModal}
+              language
+              setOpen={setOpen}
+            />
           ) : null}
         </div>
 
@@ -133,7 +143,9 @@ const Navbar = ({
           <HamburgerIcon active={open.burgerMenu} />
           <p>Menyu</p>
         </div>
-        {open.burgerMenu ? <BurgerMenu active={open.burgerMenu} /> : null}
+        {open.burgerMenu ? (
+          <BurgerMenu active={open.burgerMenu} setOpen={setOpen} />
+        ) : null}
       </div>
     </div>
   );

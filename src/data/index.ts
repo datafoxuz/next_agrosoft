@@ -87,3 +87,42 @@ export const topcards: cardTypes[] = [
     title: "Agromarket",
   },
 ];
+
+export const weatherData = [
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+  {
+    time: "00:00",
+    gradus: "5°",
+  },
+];

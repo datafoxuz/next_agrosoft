@@ -4,28 +4,26 @@ import React from "react";
 
 const index = () => {
   const router = useRouter();
-
   const siteWay = [
     {
       title: "Bosh sahifa",
       url: "/",
     },
     {
-      title: "Agromarket",
-      url: "/market",
+      title: "Yangiliklar",
+      url: "/news",
     },
     {
-      title: "Agromarket",
-      url: "/market",
+      title: `${router.query.new}`,
+      url: `/articles/${router.query.new}`,
     },
   ];
 
-  console.log(router);
   return (
-    <>
+    <div>
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage />
-    </>
+    </div>
   );
 };
 

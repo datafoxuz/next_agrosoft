@@ -12,6 +12,7 @@
   .weather_big_infos {
     display: flex;
     justify-content: space-between;
+    gap: 200px;
     margin-bottom: 24px;
 
     .section {
@@ -41,7 +42,8 @@
       }
     }
 
-    a {
+    .link {
+      cursor: pointer;
       @extend %main-text-16;
       color: #007137;
       display: flex;

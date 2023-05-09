@@ -18,7 +18,7 @@ const index = () => {
 
   return (
     <div>
-      <SNavbar siteWay={siteWay} title="Yangiliklar" />
+      <SNavbar siteWay={siteWay} title="Yangiliklar" filter article />
       <Collections data={cardsForExample} />
     </div>
   );

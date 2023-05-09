@@ -21,6 +21,8 @@ const index = () => {
     },
   ];
 
+  console.log(router);
+
   return (
     <div>
       <SNavbar siteWay={siteWay} title="Agro Products" filter product />
