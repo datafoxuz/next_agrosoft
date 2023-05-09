@@ -1,6 +1,7 @@
 import { FilterSelect, SNavbar } from "@/components";
 import React, { useState } from "react";
 import { weatherData } from "@/data";
+import SEO from "@/layouts/seo/seo";
 
 import styles from "./weather.module.scss";
 
@@ -59,7 +60,7 @@ const index = () => {
   ];
 
   return (
-    <div>
+    <SEO metaTitle="Weather">
       <SNavbar siteWay={siteWay} title="Ob havo ma’lumotlari" />
 
       <div className={styles.weather}>
@@ -118,7 +119,7 @@ const index = () => {
           </div>
         </div>
       </div>
-    </div>
+    </SEO>
   );
 };
 

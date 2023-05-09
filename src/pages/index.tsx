@@ -20,6 +20,68 @@ import calendar from "@/assets/icons/calendar.svg";
 export default function Home() {
   const router = useRouter();
 
+  function handleNavigate(path: string) {
+    router.push(path);
+  }
+
+  const communityData = [
+    {
+      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
+      comments: 12,
+    },
+    {
+      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
+      comments: 14,
+    },
+    {
+      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
+      comments: 16,
+    },
+    {
+      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
+      comments: 12,
+    },
+    {
+      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
+      comments: 11,
+    },
+  ];
+
+  const diseasesData = [
+    {
+      title: "Shot Hole Disease",
+      image: diseases,
+    },
+    {
+      title: "Shot Hole Disease",
+      image: diseases,
+    },
+    {
+      title: "Shot Hole Disease",
+      image: diseases,
+    },
+    {
+      title: "Shot Hole Disease",
+      image: diseases,
+    },
+    {
+      title: "Shot Hole Disease",
+      image: diseases,
+    },
+    {
+      title: "Shot Hole Disease",
+      image: diseases,
+    },
+    {
+      title: "Shot Hole Disease",
+      image: diseases,
+    },
+    {
+      title: "Shot Hole Disease",
+      image: diseases,
+    },
+  ];
+
   return (
     <SEO>
       <div className={styles.main}>
@@ -81,7 +143,10 @@ export default function Home() {
           />
           <div className={styles.articles_left_section}>
             <h2 className={styles.articles_title}>sO’NGGI mAQOLALAR</h2>
-            <button className={styles.articles_button}>
+            <button
+              className={styles.articles_button}
+              onClick={() => handleNavigate("/articles")}
+            >
               Barchasini o’qish
             </button>
           </div>
@@ -101,60 +166,31 @@ export default function Home() {
             className={styles.top_cotton_img}
           />
           <div className={styles.community_questions}>
-            <Link href="/" className={styles.question}>
-              <p className={styles.text}>
-                Pomidorning falon kasalligiga qanday kurashish mumkin?
-              </p>
-              <div className={styles.comment_section}>
-                <img
-                  src={comment.src}
-                  alt="comment icon"
-                  className={styles.icon}
-                />
-                <span>12</span>
-              </div>
-            </Link>
-            <Link href="/" className={styles.question}>
-              <p className={styles.text}>
-                Pomidorning falon kasalligiga qanday kurashish mumkin?
-              </p>
-              <div className={styles.comment_section}>
-                <img
-                  src={comment.src}
-                  alt="comment icon"
-                  className={styles.icon}
-                />
-                <span>12</span>
-              </div>
-            </Link>
-            <Link href="/" className={styles.question}>
-              <p className={styles.text}>
-                Pomidorning falon kasalligiga qanday kurashish mumkin?
-              </p>
-              <div className={styles.comment_section}>
-                <img
-                  src={comment.src}
-                  alt="comment icon"
-                  className={styles.icon}
-                />
-                <span>12</span>
-              </div>
-            </Link>
-            <Link href="/" className={styles.question}>
-              <p className={styles.text}>
-                Pomidorning falon kasalligiga qanday kurashish mumkin?
-              </p>
-              <div className={styles.comment_section}>
-                <img
-                  src={comment.src}
-                  alt="comment icon"
-                  className={styles.icon}
-                />
-                <span>12</span>
-              </div>
-            </Link>
+            {communityData.map((item, index) => (
+              <Link
+                href={`/community/${item.title}`}
+                className={styles.question}
+                key={index}
+              >
+                <p className={styles.text}>
+                  Pomidorning falon kasalligiga qanday kurashish mumkin?
+                </p>
+                <div className={styles.comment_section}>
+                  <img
+                    src={comment.src}
+                    alt="comment icon"
+                    className={styles.icon}
+                  />
+                  <span>{item.comments}</span>
+                </div>
+              </Link>
+            ))}
           </div>
-          <button type="button" className={styles.community_button}>
+          <button
+            type="button"
+            className={styles.community_button}
+            onClick={() => handleNavigate("/community")}
+          >
             Barchasini o’qish
           </button>
           <img
@@ -171,74 +207,31 @@ export default function Home() {
             123 dan ortiq kasalliklar tashxislari bilan
           </p>
 
-          <div className={styles.diseases_grid}>
-            <div className={styles.card}>
-              <img
-                src={diseases.src}
-                alt="diseasess image"
-                className={styles.image}
-              />
-              <p className={styles.title}>Shot Hole Disease</p>
-            </div>
-            <div className={styles.card}>
-              <img
-                src={diseases.src}
-                alt="diseasess image"
-                className={styles.image}
-              />
-              <p className={styles.title}>Shot Hole Disease</p>
-            </div>
-            <div className={styles.card}>
-              <img
-                src={diseases.src}
-                alt="diseasess image"
-                className={styles.image}
-              />
-              <p className={styles.title}>Shot Hole Disease</p>
-            </div>
-            <div className={styles.card}>
-              <img
-                src={diseases.src}
-                alt="diseasess image"
-                className={styles.image}
-              />
-              <p className={styles.title}>Shot Hole Disease</p>
-            </div>
-            <div className={styles.card}>
-              <img
-                src={diseases.src}
-                alt="diseasess image"
-                className={styles.image}
-              />
-              <p className={styles.title}>Shot Hole Disease</p>
-            </div>
-            <div className={styles.card}>
-              <img
-                src={diseases.src}
-                alt="diseasess image"
-                className={styles.image}
-              />
-              <p className={styles.title}>Shot Hole Disease</p>
-            </div>
-            <div className={styles.card}>
-              <img
-                src={diseases.src}
-                alt="diseasess image"
-                className={styles.image}
-              />
-              <p className={styles.title}>Shot Hole Disease</p>
-            </div>
-            <div className={styles.card}>
-              <img
-                src={diseases.src}
-                alt="diseasess image"
-                className={styles.image}
-              />
-              <p className={styles.title}>Shot Hole Disease</p>
-            </div>
+          <div
+            className={styles.diseases_grid}
+            data-length={diseasesData.length == 8}
+          >
+            {diseasesData.map((item, index) => (
+              <div
+                className={styles.card}
+                key={index}
+                onClick={() => handleNavigate(`/diseases/${item.title}`)}
+              >
+                <img
+                  src={item.image.src}
+                  alt="diseasess image"
+                  className={styles.image}
+                />
+                <p className={styles.title}>{item.title}</p>
+              </div>
+            ))}
           </div>
 
-          <button type="button" className={styles.diseases_button}>
+          <button
+            type="button"
+            className={styles.diseases_button}
+            onClick={() => handleNavigate(`/diseases`)}
+          >
             Barcha kasalliklarni ko’rish
           </button>
         </div>
@@ -255,7 +248,11 @@ export default function Home() {
             <h2 className={styles.section_title}>yirik Ulgurji sotuvchilar</h2>
           </div>
 
-          <button type="button" className={styles.market_button}>
+          <button
+            type="button"
+            className={styles.market_button}
+            onClick={() => handleNavigate("/market")}
+          >
             Marketga kirish
           </button>
         </div>
@@ -266,49 +263,30 @@ export default function Home() {
           <div className={styles.new_wrapper}>
             <SwiperCard cardDate="12.04.2023" />
             <div className={styles.news_section}>
-              <div className={styles.news_list}>
-                <Link href="/" className={styles.news_item}>
-                  100 ming gektardan ziyod yer maydoni qishloq xo‘jaligi
-                  sohasiga qayta foydalanishga kiritiladi
-                </Link>
-                <p className={styles.news_date}>
-                  <img
-                    src={calendar.src}
-                    alt="calendar small icon"
-                    className={styles.icon}
-                  />{" "}
-                  12.04.2023
-                </p>
-              </div>
-              <div className={styles.news_list}>
-                <Link href="/" className={styles.news_item}>
-                  100 ming gektardan ziyod yer maydoni qishloq xo‘jaligi
-                  sohasiga qayta foydalanishga kiritiladi
-                </Link>
-                <p className={styles.news_date}>
-                  <img
-                    src={calendar.src}
-                    alt="calendar small icon"
-                    className={styles.icon}
-                  />{" "}
-                  12.04.2023
-                </p>
-              </div>
-              <div className={styles.news_list}>
-                <Link href="/" className={styles.news_item}>
-                  100 ming gektardan ziyod yer maydoni qishloq xo‘jaligi
-                  sohasiga qayta foydalanishga kiritiladi
-                </Link>
-                <p className={styles.news_date}>
-                  <img
-                    src={calendar.src}
-                    alt="calendar small icon"
-                    className={styles.icon}
-                  />{" "}
-                  12.04.2023
-                </p>
-              </div>
-              <button type="button" className={styles.news_button}>
+              {communityData.slice(0, 3).map((item, index) => (
+                <div className={styles.news_list} key={index}>
+                  <Link
+                    href={`/news/${item.title}`}
+                    className={styles.news_item}
+                  >
+                    100 ming gektardan ziyod yer maydoni qishloq xo‘jaligi
+                    sohasiga qayta foydalanishga kiritiladi
+                  </Link>
+                  <p className={styles.news_date}>
+                    <img
+                      src={calendar.src}
+                      alt="calendar small icon"
+                      className={styles.icon}
+                    />{" "}
+                    12.04.2023
+                  </p>
+                </div>
+              ))}
+              <button
+                type="button"
+                className={styles.news_button}
+                onClick={() => handleNavigate("/news")}
+              >
                 Barcha yangiliklarni o’qish
               </button>
             </div>

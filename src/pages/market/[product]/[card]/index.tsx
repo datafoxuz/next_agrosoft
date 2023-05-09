@@ -1,4 +1,5 @@
 import { InternalPage, SNavbar } from "@/components";
+import SEO from "@/layouts/seo/seo";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -15,17 +16,20 @@ const index = () => {
       url: "/market",
     },
     {
-      title: "Agromarket",
-      url: "/market",
+      title: `${router.query.product}`,
+      url: `/market/${router.query.product}`,
+    },
+    {
+      title: `${router.query.card}`,
+      url: `/market/${router.query.product}/${router.query.card}`,
     },
   ];
 
-  console.log(router);
   return (
-    <>
+    <SEO metaTitle={`${router.query.card}`}>
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage />
-    </>
+    </SEO>
   );
 };
 

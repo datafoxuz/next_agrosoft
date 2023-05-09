@@ -1,4 +1,5 @@
 import { InternalPage, SNavbar } from "@/components";
+import SEO from "@/layouts/seo/seo";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -21,10 +22,10 @@ const index = () => {
   ];
 
   return (
-    <div>
+    <SEO metaTitle={`${router.query.article}`}>
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage />
-    </div>
+    </SEO>
   );
 };
 

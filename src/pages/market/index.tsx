@@ -1,9 +1,8 @@
 import { AddProduct, Collections, SNavbar } from "@/components";
 import { cardsForExample } from "@/data";
 import { questionTypes } from "@/data/interfaces";
+import SEO from "@/layouts/seo/seo";
 import React, { useState } from "react";
-
-import styles from "./market.module.scss";
 
 const index = () => {
   const [market, setMarket] = useState<questionTypes>({
@@ -22,7 +21,7 @@ const index = () => {
   ];
 
   return (
-    <div className={styles.market}>
+    <SEO metaTitle="Agromarket">
       <SNavbar
         siteWay={siteWay}
         title="Agromarket"
@@ -37,7 +36,7 @@ const index = () => {
       ) : (
         <Collections data={cardsForExample} />
       )}
-    </div>
+    </SEO>
   );
 };
 
