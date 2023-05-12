@@ -7,17 +7,30 @@
   border-radius: 144px;
   cursor: pointer;
 
+  @media screen and (max-width: variables.$default_tablet_width) {
+    width: 253px;
+  }
+
   .card_image {
     width: 100%;
     height: 356px;
     object-fit: cover;
     object-position: center;
     border-radius: 144px 144px 0px 0px;
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      width: 253px;
+      height: 233px;
+    }
   }
 
   .card_desc {
     padding: 34px 66px 57px;
     text-align: center;
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      padding: 20px 42px 45px;
+    }
 
     .card_title {
       @extend %main-text-16;

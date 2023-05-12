@@ -1,6 +1,6 @@
 $high_res_laptop_width: 1920px;
 $default_laptop_width: 1440px;
-$small_laptop_width: 1024px;
+$small_laptop_width: 1146px;
 
 $high_res_tablet_width: 834px;
 $default_tablet_width: 768px;
@@ -11,9 +11,13 @@ $default_smartphone_width: 375px;
 $small_smartphone_width: 320px;
 
 %container {
-  max-width: 1146px;
-  width: 100%;
+  width: $small_laptop_width;
   margin-inline: auto;
+
+  @media only screen and (max-width: $small_laptop_width) {
+    width: 100%;
+    padding-inline: 20px;
+  }
 }
 
 %small-container {
@@ -76,6 +80,10 @@ $small_smartphone_width: 320px;
   font-family: Montserrat;
   letter-spacing: 0.25px;
   text-transform: uppercase;
+
+  @media screen and (max-width: $high_res_tablet_width) {
+    font-size: 24px;
+  }
 }
 
 %snavbar-title {

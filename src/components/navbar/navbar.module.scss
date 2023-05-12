@@ -1,14 +1,5 @@
 @use "../../styles/variables" as variables;
 
-// @keyframes logo-fall {
-//   from {
-//     top: -175%; /* Start position of the logo */
-//   }
-//   to {
-//     top: -75%; /* End position of the logo */
-//   }
-// }
-
 .navbar {
   display: flex;
   position: relative;
@@ -85,38 +76,9 @@
         }
       }
     }
-
-    .downloads {
-      display: flex;
-      gap: 14px;
-
-      .downloads_icon {
-        cursor: pointer;
-      }
-
-      .text {
-        display: flex;
-        flex-direction: column;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 1.25px;
-        color: #f6f6f6;
-        text-transform: uppercase;
-
-        span {
-          font-weight: 400;
-          font-size: 12px;
-          line-height: 120%;
-          letter-spacing: 0.4px;
-          color: #e6f3ec;
-          text-transform: capitalize;
-        }
-      }
-    }
   }
 
   .main_logo {
-    animation: logo-fall 1s ease-out;
     transition: 0.1s all ease;
     position: absolute;
     display: flex;
@@ -129,20 +91,31 @@
     background-color: #fff;
     border-radius: 2222px;
     color: #000;
-    top: -75%;
+    top: -87%;
     left: 50%;
     transform: translate(-50%);
     cursor: pointer;
 
+    @media only screen and (max-width: 1024px) {
+      padding-inline: 18px;
+      align-items: center;
+    }
+
     .logo {
       width: 84px;
       height: 90px;
+
+      @media only screen and (max-width: 1024px) {
+        width: 53px;
+        height: 58px;
+      }
     }
 
     h3 {
       font-weight: 800;
     }
   }
+
   .r_section {
     gap: 32px;
     @extend %main-text-16;
@@ -159,6 +132,18 @@
       padding: 7px 15px;
       background-color: #007a3b;
       border-radius: 144px;
+
+      @media only screen and (max-width: 1024px) {
+        display: none;
+      }
+    }
+  }
+
+  .modal_wrapper {
+    position: relative;
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      position: static;
     }
 
     .languages {
@@ -166,6 +151,10 @@
       cursor: pointer;
       align-items: center;
       gap: 8px;
+
+      @media screen and (max-width: variables.$default_tablet_width) {
+        display: none;
+      }
     }
 
     .burger_menu {

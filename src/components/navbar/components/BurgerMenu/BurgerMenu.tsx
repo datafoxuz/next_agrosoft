@@ -1,24 +1,18 @@
 import React from "react";
 import Link from "next/link";
-import {
-  routes,
-  routeObj,
-  languagesData,
-  languagesObj,
-  openObjTypes,
-} from "../../data";
+import { routes, routeObj, openObjTypes } from "../../data";
 import { AnimatePresence, motion } from "framer-motion";
 import { MOTION_CONFIGS } from "@/data";
 
 import styles from "./burgermenu.module.scss";
 
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 const BurgerMenu = ({
   active,
-  language = false,
   setOpen,
 }: {
   active: boolean;
-  language?: boolean;
   setOpen: (v: openObjTypes) => void;
 }) => {
   function handleClick() {
@@ -32,26 +26,38 @@ const BurgerMenu = ({
   return (
     <AnimatePresence>
       {active ? (
-        <motion.div
-          className={`${styles.menu} ${language ? styles.language_menu : ""}`}
-          {...MOTION_CONFIGS}
-        >
-          {!language
-            ? routes.map((item: routeObj, index: number) => (
+        <motion.div className={styles.menu} {...MOTION_CONFIGS}>
+          {
+            <div className={styles.auth_link}>
+              {true ? (
                 <Link
-                  href={item.url}
-                  className={styles.menu_item}
-                  key={index}
-                  onClick={() => handleClick()}
+                  href="/account"
+                  className={`${styles.menu_item} ${styles.ava_section}`}
                 >
-                  {item.title}
+                  <span>Sh Raxmatov</span>
+                  <AccountCircleIcon className={styles.icon} />
                 </Link>
-              ))
-            : languagesData.map((item: languagesObj, index: number) => (
-                <p className={styles.menu_item} key={index}>
-                  {item.title}
-                </p>
-              ))}
+              ) : (
+                <Link href="/login" className={styles.menu_item}>
+                  Kirish
+                </Link>
+              )}
+            </div>
+          }
+          {routes.map((item: routeObj, index: number) => (
+            <Link
+              href={item.url}
+              className={styles.menu_item}
+              key={index}
+              onClick={() => handleClick()}
+            >
+              {item.title}
+            </Link>
+          ))}
+          <div className={styles.languages}>
+            <p className={styles.menu_item}>Uz</p>
+            <p className={styles.menu_item}>Ру</p>
+          </div>
         </motion.div>
       ) : null}
     </AnimatePresence>

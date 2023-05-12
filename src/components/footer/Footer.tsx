@@ -63,30 +63,32 @@ const Footer = () => {
               AgroSoft © {new Date().getFullYear()}. All rights reserved
             </p>
           </div>
-          <div className={styles.footer_links}>
-            <Link href="" className={styles.link}>
-              Biz haqimizda
-            </Link>
-            <Link href="" className={styles.link}>
-              Ob-havo ma’lumotlari
-            </Link>
-            <Link href="" className={styles.link}>
-              Yangiliklar
-            </Link>
-          </div>
-          <div className={styles.footer_links}>
-            <Link href="" className={styles.link}>
-              Agro jamiyat
-            </Link>
-            <Link href="" className={styles.link}>
-              Agro kasallikar
-            </Link>
-            <Link href="" className={styles.link}>
-              Agro maqolalar
-            </Link>
-            <Link href="" className={styles.link}>
-              Agro market
-            </Link>
+          <div className={styles.footer_links_wrapper}>
+            <div className={styles.footer_links}>
+              <Link href="" className={styles.link}>
+                Biz haqimizda
+              </Link>
+              <Link href="" className={styles.link}>
+                Ob-havo ma’lumotlari
+              </Link>
+              <Link href="" className={styles.link}>
+                Yangiliklar
+              </Link>
+            </div>
+            <div className={styles.footer_links}>
+              <Link href="" className={styles.link}>
+                Agro jamiyat
+              </Link>
+              <Link href="" className={styles.link}>
+                Agro kasallikar
+              </Link>
+              <Link href="" className={styles.link}>
+                Agro maqolalar
+              </Link>
+              <Link href="" className={styles.link}>
+                Agro market
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,44 @@
+@use "../../../../styles/variables" as variables;
+
+.downloads {
+  display: flex;
+  gap: 14px;
+
+  &[data-type="true"] {
+    display: none;
+
+    @media only screen and (max-width: variables.$high_res_tablet_width) {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 60px;
+      text-align: left;
+    }
+  }
+
+  @media only screen and (max-width: variables.$high_res_tablet_width) {
+    display: none;
+  }
+
+  .downloads_icon {
+    cursor: pointer;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.25px;
+    color: #f6f6f6;
+    text-transform: uppercase;
+
+    span {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 120%;
+      letter-spacing: 0.4px;
+      color: #e6f3ec;
+      text-transform: capitalize;
+    }
+  }
+}

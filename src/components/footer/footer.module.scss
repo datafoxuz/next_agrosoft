@@ -18,8 +18,18 @@
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    right: 8%;
-    top: -10%;
+    right: 150px;
+    top: -50px;
+
+    @media only screen and (max-width: variables.$small_laptop_width) {
+      top: 120px;
+    }
+    @media only screen and (max-width: variables.$high_res_tablet_width) {
+      padding: 20px 25px;
+      height: fit-content;
+      top: 90%;
+      right: 5%;
+    }
   }
 
   .footer_wrapper {
@@ -33,6 +43,12 @@
       padding-bottom: 71px;
       margin-bottom: 40px;
       border-bottom: 1px solid #00522834;
+
+      @media only screen and (max-width: variables.$small_laptop_width) {
+        flex-direction: column;
+        gap: 69px;
+        border: none;
+      }
 
       .footer_section {
         display: flex;
@@ -51,6 +67,9 @@
           background: #e6f3ec;
           border-radius: 144px;
           width: 563px;
+          @media screen and (max-width: variables.$high_res_tablet_width) {
+            width: 100%;
+          }
 
           .footer_input {
             flex: auto;
@@ -89,6 +108,11 @@
       justify-content: space-between;
       position: relative;
 
+      @media only screen and (max-width: variables.$small_laptop_width) {
+        gap: 128px;
+        flex-direction: column-reverse;
+      }
+
       .footer_section {
         max-width: 555px;
         margin-right: 145px;
@@ -113,15 +137,19 @@
         }
       }
 
-      .footer_links {
+      .footer_links_wrapper {
         display: flex;
-        flex-direction: column;
-        gap: 12px;
-        z-index: 2;
+        gap: 108px;
+        .footer_links {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          z-index: 2;
 
-        .link {
-          text-decoration: none;
-          @extend %footer-small-text;
+          .link {
+            text-decoration: none;
+            @extend %footer-small-text;
+          }
         }
       }
     }

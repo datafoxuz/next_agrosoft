@@ -12,8 +12,8 @@ import { cardTypes } from "./interfaces";
 
 export const MOTION_CONFIGS = {
   layout: true,
-  animate: { opacity: 1, y: "-100%" },
-  initial: { opacity: 0, y: "-80%" },
+  animate: { opacity: 1, y: "10px" },
+  initial: { opacity: 0, y: "100px" },
   exit: { y: 0, opacity: 0 },
 };
 

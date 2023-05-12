@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { BurgerMenu, WeatherModal } from "./components";
+import {
+  BurgerMenu,
+  DownloadLinks,
+  LanguagesModal,
+  WeatherModal,
+} from "./components";
 import { openObjTypes } from "./data";
 import { useRouter } from "next/router";
 
@@ -8,8 +13,6 @@ import { useRouter } from "next/router";
 import HamburgerIcon from "@/assets/icons/HamburgerIcon/HamburgerIcon";
 import temperature from "@/assets/icons/NavbarIcons/sun_yellow.svg";
 import ArrowIcon from "@/assets/icons/NavbarIcons/ArrowIcons/ArrowIcon";
-import app_store from "@/assets/icons/NavbarIcons/app_store.svg";
-import play_store from "@/assets/icons/NavbarIcons/play_store.svg";
 import logo from "@/assets/icons/NavbarIcons/logo.svg";
 import logo_white from "@/assets/icons/logo_white.svg";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -35,53 +38,41 @@ const Navbar = ({
   return (
     <div className={styles.navbar} data-static={isStatic} data-auth={auth}>
       <div className={styles.section}>
-        <div
-          className={styles.temperature}
-          onClick={() =>
-            setOpen((prevState) => ({
-              ...prevState,
-              weatherModal: !prevState.weatherModal,
-            }))
-          }
-        >
-          <img
-            src={temperature.src}
-            alt="sun icon for temperature button"
-            className={styles.icon}
-          />
-          <div>
-            <p>
-              12
-              <span>°C</span>
-            </p>
-            <ArrowIcon active={open.weatherModal} />
+        <div className={styles.modal_wrapper}>
+          <div
+            className={styles.temperature}
+            onClick={() =>
+              setOpen({
+                weatherModal: !open.weatherModal,
+                burgerMenu: false,
+                languagesModal: false,
+              })
+            }
+          >
+            <img
+              src={temperature.src}
+              alt="sun icon for temperature button"
+              className={styles.icon}
+            />
+            <div>
+              <p>
+                12
+                <span>°C</span>
+              </p>
+              <ArrowIcon active={open.weatherModal} />
+            </div>
           </div>
+
+          {open.weatherModal && (
+            <WeatherModal
+              active={open.weatherModal}
+              setOpen={setOpen}
+              open={open}
+            />
+          )}
         </div>
 
-        {open.weatherModal ? (
-          <WeatherModal
-            active={open.weatherModal}
-            open={open}
-            setOpen={setOpen}
-          />
-        ) : null}
-
-        <div className={styles.downloads}>
-          <img
-            src={app_store.src}
-            alt="app store icon"
-            className={styles.downloads_icon}
-          />
-          <img
-            src={play_store.src}
-            alt="play store icon"
-            className={styles.downloads_icon}
-          />
-          <p className={styles.text}>
-            <span>Yuklab oling</span>
-            Agrosoft
-          </p>
-        </div>
+        <DownloadLinks />
       </div>
 
       <div className={`${styles.main_logo}`} onClick={() => router.push("/")}>
@@ -102,50 +93,58 @@ const Navbar = ({
       </div>
 
       <div className={`${styles.section} ${styles.r_section}`}>
-        {/* <Link href="/login">Login</Link> */}
+        {true ? (
+          <Link href="/account" className={styles.ava_section}>
+            <AccountCircleIcon />
+            <span>Sh Raxmatov</span>
+          </Link>
+        ) : (
+          <Link href="/login">Login</Link>
+        )}
 
-        <Link href="/account" className={styles.ava_section}>
-          <AccountCircleIcon />
-          <span>Sh Raxmatov</span>
-        </Link>
+        <div className={styles.modal_wrapper}>
+          <div
+            className={styles.languages}
+            onClick={() =>
+              setOpen({
+                weatherModal: false,
+                burgerMenu: false,
+                languagesModal: !open.languagesModal,
+              })
+            }
+          >
+            <p className={styles.text}>Uz</p>
+            <ArrowIcon active={open.languagesModal} />
+          </div>
 
-        <div
-          className={styles.languages}
-          onClick={() =>
-            setOpen((prevState) => ({
-              ...prevState,
-              languagesModal: !prevState.languagesModal,
-              burgerMenu: false,
-            }))
-          }
-        >
-          <p className={styles.text}>Uz</p>
-          <ArrowIcon active={open.languagesModal} />
-          {open.languagesModal ? (
-            <BurgerMenu
+          {open.languagesModal && (
+            <LanguagesModal
               active={open.languagesModal}
-              language
+              open={open}
               setOpen={setOpen}
             />
-          ) : null}
+          )}
         </div>
 
-        <div
-          className={styles.burger_menu}
-          onClick={() =>
-            setOpen((prevState) => ({
-              ...prevState,
-              burgerMenu: !prevState.burgerMenu,
-              languagesModal: false,
-            }))
-          }
-        >
-          <HamburgerIcon active={open.burgerMenu} />
-          <p>Menyu</p>
+        <div className={styles.modal_wrapper}>
+          <div
+            className={styles.burger_menu}
+            onClick={() =>
+              setOpen({
+                weatherModal: false,
+                burgerMenu: !open.burgerMenu,
+                languagesModal: false,
+              })
+            }
+          >
+            <HamburgerIcon active={open.burgerMenu} />
+            <p>Menyu</p>
+          </div>
+
+          {open.burgerMenu && (
+            <BurgerMenu active={open.burgerMenu} setOpen={setOpen} />
+          )}
         </div>
-        {open.burgerMenu ? (
-          <BurgerMenu active={open.burgerMenu} setOpen={setOpen} />
-        ) : null}
       </div>
     </div>
   );

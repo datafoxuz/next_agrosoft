@@ -10,6 +10,11 @@
 
 .main {
   background-color: #fef2e8;
+
+  .container {
+    @extend %container;
+  }
+
   .main_hero {
     background-image: url("../assets/images/hero_bg.png");
     background-position: center;
@@ -25,6 +30,10 @@
       position: relative;
       margin-inline: auto;
 
+      @media only screen and (max-width: variables.$high_res_tablet_width) {
+        padding-top: 173px;
+      }
+
       h4 {
         @extend %title;
         font-size: 20px;
@@ -39,6 +48,11 @@
         color: #fff;
         font-size: 59px;
         margin-bottom: 16px;
+
+        @media only screen and (max-width: variables.$high_res_tablet_width) {
+          font-size: 33px;
+          margin-bottom: 8px;
+        }
       }
 
       .text {
@@ -59,6 +73,16 @@
         scale: 0;
         opacity: 0;
         animation: revealAnimation 2s ease forwards 0.3s;
+
+        @media only screen and (max-width: variables.$high_res_tablet_width) {
+          width: 179px;
+          right: 15px;
+          top: 200px;
+        }
+
+        @media only screen and (max-width: 563px) {
+          display: none;
+        }
       }
 
       @keyframes revealAnimation {
@@ -76,10 +100,17 @@
 
   .main_top_cards {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin-top: -120px;
     margin-bottom: 160px;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      width: 370px;
+      margin-inline: auto;
+      margin-bottom: 80px;
+    }
 
     .top_card {
       text-align: center;
@@ -87,6 +118,15 @@
       cursor: pointer;
       z-index: 99;
       transition: 0.2s all ease;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        width: calc(50% - 10px);
+        margin-bottom: 40px;
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
       .card_image {
         width: 214px;
@@ -96,6 +136,11 @@
         border: 4px solid #fff4eb;
         border-radius: 208px;
         margin-bottom: 16px;
+
+        @media screen and (max-width: variables.$default_tablet_width) {
+          width: 200px;
+          height: 200px;
+        }
       }
 
       .card_title {
@@ -104,6 +149,9 @@
 
       &:hover {
         transform: scale(1.1);
+        @media screen and (max-width: variables.$high_res_tablet_width) {
+          transform: scale(1);
+        }
 
         .card_image {
           border-color: #e1ffaf;
@@ -113,7 +161,6 @@
   }
 
   .main_about {
-    @extend %container;
     background: linear-gradient(
       92.59deg,
       #f2dbc9 -5.16%,
@@ -124,6 +171,11 @@
     text-align: center;
     margin-bottom: 240px;
 
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      padding: 50px;
+      margin-bottom: 80px;
+    }
+
     .about_title {
       font-family: Montserrat;
       font-size: 32px;
@@ -132,6 +184,10 @@
       text-transform: uppercase;
       color: #232624;
       margin-bottom: 16px;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        font-size: 24px;
+      }
     }
 
     .about_text {
@@ -150,17 +206,41 @@
     margin-inline: auto;
     margin-bottom: 187px;
 
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+      margin-bottom: 113px;
+    }
+
     .articles_left_section {
       margin-left: 155px;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        margin-left: 0;
+      }
+
       .articles_title {
         @extend %medium-title;
         color: #232624;
         margin-bottom: 36px;
         max-width: 235px;
       }
+    }
+    .articles__top_button {
+      @extend %button;
 
-      .articles_button {
-        @extend %button;
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        display: none;
+      }
+    }
+
+    .articles__bottom_button {
+      @extend %button;
+      display: none;
+      margin-top: 36px;
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        display: block;
       }
     }
 
@@ -168,11 +248,14 @@
       position: absolute;
       top: -250px;
       left: 0px;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        display: none;
+      }
     }
   }
 
   .main_community {
-    @extend %container;
     padding: 104px 150px;
     background-color: #007a39;
     border-radius: 144px;
@@ -180,15 +263,33 @@
     position: relative;
     margin-bottom: 236px;
 
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      margin-bottom: 113px;
+    }
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      padding-inline: 50px;
+    }
+
     .top_cotton_img {
       position: absolute;
-      right: -7%;
+      right: 0%;
       top: -10%;
+
+      @media screen and (max-width: variables.$default_tablet_width) {
+        width: 164px;
+        top: -3%;
+      }
     }
 
     .community_title {
       @extend %medium-title;
       margin-bottom: 8px;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        font-size: 24px;
+        text-align: center;
+      }
     }
 
     .community_text {
@@ -198,6 +299,10 @@
       letter-spacing: 0.1px;
       color: #e6f3ec;
       margin-bottom: 56px;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        text-align: center;
+      }
     }
 
     .community_questions {
@@ -213,6 +318,17 @@
         justify-content: space-between;
         padding-block: 24px;
         border-bottom: 1px dashed #008842;
+        flex-wrap: wrap;
+
+        @media screen and (max-width: variables.$high_res_tablet_width) {
+          padding-block: 17px;
+        }
+
+        .text {
+          @media screen and (max-width: variables.$high_res_tablet_width) {
+            margin-bottom: 17px;
+          }
+        }
 
         &:nth-last-child(1) {
           border: none;
@@ -235,19 +351,33 @@
         background-color: #b0dac4;
         opacity: 0.3;
       }
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        width: fit-content;
+        margin-inline: auto;
+        display: flex;
+      }
     }
 
     .leaf_small_img {
       position: absolute;
       left: 50%;
       bottom: -11%;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        bottom: -7%;
+        left: 65%;
+      }
     }
   }
 
   .main_diseases {
-    @extend %container;
     text-align: center;
     margin-bottom: 160px;
+
+    @media screen and (max-width: variables.$high_res_laptop_width) {
+      margin-bottom: 113px;
+    }
 
     .diseases_title {
       @extend %medium-title;
@@ -259,6 +389,10 @@
       @extend %main-text-16;
       font-weight: 400;
       margin-bottom: 80px;
+
+      @media screen and (max-width: variables.$high_res_laptop_width) {
+        margin-bottom: 56px;
+      }
     }
 
     .diseases_grid {
@@ -268,6 +402,24 @@
         "card5 card2 card6 card7 card8";
       gap: 13px;
       margin-bottom: 80px;
+
+      @media only screen and (max-width: variables.$small_laptop_width) {
+        grid-template: none;
+        grid-template-columns: repeat(4, 1fr);
+
+        .card {
+          width: 100% !important;
+          height: 100%;
+        }
+      }
+
+      @media screen and (max-width: variables.$high_res_laptop_width) {
+        margin-bottom: 56px;
+      }
+
+      @media only screen and (max-width: variables.$default_tablet_width) {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
       &[data-length="true"] {
         .card {
@@ -287,6 +439,20 @@
             .image {
               width: 100%;
             }
+
+            @media only screen and (max-width: variables.$small_laptop_width) {
+              max-width: 100%;
+            }
+
+            @media only screen and (max-width: variables.$default_tablet_width) {
+              grid-column: span 1;
+            }
+          }
+
+          &:nth-of-type(4) {
+            @media only screen and (max-width: variables.$default_tablet_width) {
+              grid-column: span 2;
+            }
           }
         }
       }
@@ -294,6 +460,10 @@
       .card {
         width: 218px;
         cursor: pointer;
+
+        @media only screen and (max-width: variables.$small_laptop_width) {
+          width: 208px;
+        }
 
         &:hover {
           .image {
@@ -352,6 +522,12 @@
     background-color: #f6e8dd;
     margin-bottom: 160px;
 
+    @media screen and (max-width: variables.$high_res_laptop_width) {
+      text-align: center;
+      padding-left: 0;
+      margin-bottom: 80px;
+    }
+
     h2 {
       @extend %medium-title;
     }
@@ -359,6 +535,11 @@
     .main_desc {
       padding-left: 116px;
       margin-bottom: 64px;
+
+      @media screen and (max-width: variables.$high_res_laptop_width) {
+        padding-left: 0;
+        margin-bottom: 56px;
+      }
 
       .market_title {
         color: #232624;
@@ -378,15 +559,23 @@
       border-radius: 144px 0px 0px 144px;
       margin-bottom: 85px;
 
+      @media screen and (max-width: variables.$high_res_laptop_width) {
+        margin-bottom: 56px;
+      }
+
       .section_title {
         color: #fff;
         text-align: center;
         padding-left: 90px;
-        margin-left: 501px;
         border-radius: 144px 0px 0px 144px;
         background: #f27c1c;
         opacity: 0.9;
         padding-block: 95px;
+
+        @media screen and (max-width: variables.$high_res_laptop_width) {
+          font-size: 20px;
+          padding-block: 83px;
+        }
       }
     }
 
@@ -394,18 +583,29 @@
       @extend %button;
       position: relative;
       left: 70%;
+
+      @media screen and (max-width: variables.$high_res_laptop_width) {
+        left: 0;
+      }
     }
   }
 
   .main_news {
-    @extend %container;
     padding-bottom: 208px;
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      padding-bottom: 104px;
+    }
 
     .news_title {
       @extend %medium-title;
       color: #2f3330;
       margin-bottom: 80px;
       text-align: center;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        margin-bottom: 56px;
+      }
     }
 
     .new_wrapper {
@@ -413,11 +613,25 @@
       align-items: center;
       gap: 128px;
 
+      @media only screen and (max-width: 1024px) {
+        gap: 30px;
+      }
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        flex-direction: column;
+        gap: 56px;
+      }
+
       .news_section {
         .news_list {
           padding-bottom: 32px;
           border-bottom: 1px solid #fdebdd;
           margin-bottom: 32px;
+
+          @media screen and (max-width: variables.$default_tablet_width) {
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+          }
 
           .news_item {
             @extend %main-text-16;
@@ -443,6 +657,12 @@
 
         .news_button {
           @extend %button;
+
+          @media screen and (max-width: variables.$high_res_laptop_width) {
+            display: flex;
+            width: fit-content;
+            margin-inline: auto;
+          }
         }
       }
     }

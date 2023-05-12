@@ -16,6 +16,7 @@ import comment from "@/assets/icons/comment.svg";
 import cotton from "@/assets/images/cotton.png";
 import leaf_small from "@/assets/images/leaf_small.png";
 import calendar from "@/assets/icons/calendar.svg";
+import { DownloadLinks } from "@/components/navbar/components";
 
 export default function Home() {
   const router = useRouter();
@@ -88,6 +89,7 @@ export default function Home() {
         {/* Header and Hero section */}
         <div className={styles.main_hero}>
           <div className={styles.hero_text}>
+            <DownloadLinks classN />
             <h4>Agrosoft</h4>
             <h1 className={styles.title}>Sizning Agro yordamchingiz!</h1>
             <p className={styles.text}>Barcha agro-ma’lumotlar bir yerda! </p>
@@ -124,14 +126,16 @@ export default function Home() {
         </div>
 
         {/* About */}
-        <div className={styles.main_about}>
-          <h2 className={styles.about_title}>Loyiha haqida</h2>
-          <p className={styles.about_text}>
-            Bu veb-portali qishloq xo‘jaligi sohasidagi muhim yangiliklar va
-            foydali maqolalar yoritib borish uchun tashkil etilgan. Saytga
-            tashrif buyuruvchilarni sifatli va foydali maʼlumotlar bilan
-            taʼminlash – bizning oldimizga qo‘ygan asosiy maqsadimiz.
-          </p>
+        <div className={styles.container}>
+          <div className={styles.main_about}>
+            <h2 className={styles.about_title}>Loyiha haqida</h2>
+            <p className={styles.about_text}>
+              Bu veb-portali qishloq xo‘jaligi sohasidagi muhim yangiliklar va
+              foydali maqolalar yoritib borish uchun tashkil etilgan. Saytga
+              tashrif buyuruvchilarni sifatli va foydali maʼlumotlar bilan
+              taʼminlash – bizning oldimizga qo‘ygan asosiy maqsadimiz.
+            </p>
+          </div>
         </div>
 
         {/* Latest articles */}
@@ -144,7 +148,7 @@ export default function Home() {
           <div className={styles.articles_left_section}>
             <h2 className={styles.articles_title}>sO’NGGI mAQOLALAR</h2>
             <button
-              className={styles.articles_button}
+              className={styles.articles__top_button}
               onClick={() => handleNavigate("/articles")}
             >
               Barchasini o’qish
@@ -152,88 +156,99 @@ export default function Home() {
           </div>
 
           <SwiperCards />
-        </div>
 
-        {/* Community */}
-        <div className={styles.main_community}>
-          <h3 className={styles.community_title}>Agro jamiyat</h3>
-          <p className={styles.community_text}>
-            Qizg’in muhokamalar, savol-javoblar
-          </p>
-          <img
-            src={cotton.src}
-            alt="cotton image"
-            className={styles.top_cotton_img}
-          />
-          <div className={styles.community_questions}>
-            {communityData.map((item, index) => (
-              <Link
-                href={`/community/${item.title}`}
-                className={styles.question}
-                key={index}
-              >
-                <p className={styles.text}>
-                  Pomidorning falon kasalligiga qanday kurashish mumkin?
-                </p>
-                <div className={styles.comment_section}>
-                  <img
-                    src={comment.src}
-                    alt="comment icon"
-                    className={styles.icon}
-                  />
-                  <span>{item.comments}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
           <button
-            type="button"
-            className={styles.community_button}
-            onClick={() => handleNavigate("/community")}
+            className={styles.articles__bottom_button}
+            onClick={() => handleNavigate("/articles")}
           >
             Barchasini o’qish
           </button>
-          <img
-            src={leaf_small.src}
-            alt="cotton image"
-            className={styles.leaf_small_img}
-          />
+        </div>
+
+        {/* Community */}
+        <div className={styles.container}>
+          <div className={styles.main_community}>
+            <h3 className={styles.community_title}>Agro jamiyat</h3>
+            <p className={styles.community_text}>
+              Qizg’in muhokamalar, savol-javoblar
+            </p>
+            <img
+              src={cotton.src}
+              alt="cotton image"
+              className={styles.top_cotton_img}
+            />
+            <div className={styles.community_questions}>
+              {communityData.map((item, index) => (
+                <Link
+                  href={`/community/${item.title}`}
+                  className={styles.question}
+                  key={index}
+                >
+                  <p className={styles.text}>
+                    Pomidorning falon kasalligiga qanday kurashish mumkin?
+                  </p>
+                  <div className={styles.comment_section}>
+                    <img
+                      src={comment.src}
+                      alt="comment icon"
+                      className={styles.icon}
+                    />
+                    <span>{item.comments}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <button
+              type="button"
+              className={styles.community_button}
+              onClick={() => handleNavigate("/community")}
+            >
+              Barchasini o’qish
+            </button>
+            <img
+              src={leaf_small.src}
+              alt="cotton image"
+              className={styles.leaf_small_img}
+            />
+          </div>
         </div>
 
         {/* Diseases */}
-        <div className={styles.main_diseases}>
-          <h2 className={styles.diseases_title}>Agrokasalliklar</h2>
-          <p className={styles.diseases_text}>
-            123 dan ortiq kasalliklar tashxislari bilan
-          </p>
+        <div className={styles.container}>
+          <div className={styles.main_diseases}>
+            <h2 className={styles.diseases_title}>Agrokasalliklar</h2>
+            <p className={styles.diseases_text}>
+              123 dan ortiq kasalliklar tashxislari bilan
+            </p>
 
-          <div
-            className={styles.diseases_grid}
-            data-length={diseasesData.length == 8}
-          >
-            {diseasesData.map((item, index) => (
-              <div
-                className={styles.card}
-                key={index}
-                onClick={() => handleNavigate(`/diseases/${item.title}`)}
-              >
-                <img
-                  src={item.image.src}
-                  alt="diseasess image"
-                  className={styles.image}
-                />
-                <p className={styles.title}>{item.title}</p>
-              </div>
-            ))}
+            <div
+              className={styles.diseases_grid}
+              data-length={diseasesData.length == 8}
+            >
+              {diseasesData.map((item, index) => (
+                <div
+                  className={styles.card}
+                  key={index}
+                  onClick={() => handleNavigate(`/diseases/${item.title}`)}
+                >
+                  <img
+                    src={item.image.src}
+                    alt="diseasess image"
+                    className={styles.image}
+                  />
+                  <p className={styles.title}>{item.title}</p>
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className={styles.diseases_button}
+              onClick={() => handleNavigate(`/diseases`)}
+            >
+              Barcha kasalliklarni ko’rish
+            </button>
           </div>
-
-          <button
-            type="button"
-            className={styles.diseases_button}
-            onClick={() => handleNavigate(`/diseases`)}
-          >
-            Barcha kasalliklarni ko’rish
-          </button>
         </div>
 
         {/* Agro Market*/}
@@ -258,37 +273,39 @@ export default function Home() {
         </div>
 
         {/* News */}
-        <div className={styles.main_news}>
-          <h2 className={styles.news_title}>So’nggi yangiliklar</h2>
-          <div className={styles.new_wrapper}>
-            <SwiperCard cardDate="12.04.2023" />
-            <div className={styles.news_section}>
-              {communityData.slice(0, 3).map((item, index) => (
-                <div className={styles.news_list} key={index}>
-                  <Link
-                    href={`/news/${item.title}`}
-                    className={styles.news_item}
-                  >
-                    100 ming gektardan ziyod yer maydoni qishloq xo‘jaligi
-                    sohasiga qayta foydalanishga kiritiladi
-                  </Link>
-                  <p className={styles.news_date}>
-                    <img
-                      src={calendar.src}
-                      alt="calendar small icon"
-                      className={styles.icon}
-                    />{" "}
-                    12.04.2023
-                  </p>
-                </div>
-              ))}
-              <button
-                type="button"
-                className={styles.news_button}
-                onClick={() => handleNavigate("/news")}
-              >
-                Barcha yangiliklarni o’qish
-              </button>
+        <div className={styles.container}>
+          <div className={styles.main_news}>
+            <h2 className={styles.news_title}>So’nggi yangiliklar</h2>
+            <div className={styles.new_wrapper}>
+              <SwiperCard cardDate="12.04.2023" />
+              <div className={styles.news_section}>
+                {communityData.slice(0, 3).map((item, index) => (
+                  <div className={styles.news_list} key={index}>
+                    <Link
+                      href={`/news/${item.title}`}
+                      className={styles.news_item}
+                    >
+                      100 ming gektardan ziyod yer maydoni qishloq xo‘jaligi
+                      sohasiga qayta foydalanishga kiritiladi
+                    </Link>
+                    <p className={styles.news_date}>
+                      <img
+                        src={calendar.src}
+                        alt="calendar small icon"
+                        className={styles.icon}
+                      />{" "}
+                      12.04.2023
+                    </p>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className={styles.news_button}
+                  onClick={() => handleNavigate("/news")}
+                >
+                  Barcha yangiliklarni o’qish
+                </button>
+              </div>
             </div>
           </div>
         </div>

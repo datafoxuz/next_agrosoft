@@ -7,6 +7,7 @@ import { FreeMode, Navigation, Autoplay } from "swiper";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import styles from "./swipercards.module.scss";
 
 const SwiperCards = () => {
   return (
@@ -27,28 +28,28 @@ const SwiperCards = () => {
       loop={true}
       speed={500}
     >
-      <SwiperSlide style={{ width: "388px" }}>
+      <SwiperSlide className={styles.swiper_slide}>
         <SwiperCard />
       </SwiperSlide>
-      <SwiperSlide style={{ width: "388px" }}>
+      <SwiperSlide className={styles.swiper_slide}>
         <SwiperCard />
       </SwiperSlide>
-      <SwiperSlide style={{ width: "388px" }}>
+      <SwiperSlide className={styles.swiper_slide}>
         <SwiperCard />
       </SwiperSlide>
-      <SwiperSlide style={{ width: "388px" }}>
+      <SwiperSlide className={styles.swiper_slide}>
         <SwiperCard />
       </SwiperSlide>
-      <SwiperSlide style={{ width: "388px" }}>
+      <SwiperSlide className={styles.swiper_slide}>
         <SwiperCard />
       </SwiperSlide>
-      <SwiperSlide style={{ width: "388px" }}>
+      <SwiperSlide className={styles.swiper_slide}>
         <SwiperCard />
       </SwiperSlide>
-      <SwiperSlide style={{ width: "388px" }}>
+      <SwiperSlide className={styles.swiper_slide}>
         <SwiperCard />
       </SwiperSlide>
-      <SwiperSlide style={{ width: "388px" }}>
+      <SwiperSlide className={styles.swiper_slide}>
         <SwiperCard />
       </SwiperSlide>
     </Swiper>
