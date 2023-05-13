@@ -6,7 +6,6 @@ jobs:
   build:
 
     runs-on: self-hosted
-
     strategy:
       matrix:
         node-version: [16.x]
@@ -16,6 +15,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
+        path: '/var/www/test.agrosoft.uz/'
         node-version: ${{ matrix.node-version }}
     - run: cd /var/www/test.agrosoft.uz
     - run: npm install
@@ -24,4 +24,3 @@ jobs:
     - run: pm2 reload your-app-name
       env:
         CI: true
-        
