@@ -1,14 +1,25 @@
 @use "../../styles/variables" as variables;
 
 .profile {
+  .hidden_title {
+    @extend %hidden-title;
+  }
   .profile_wrapper {
     padding-inline: 30px;
     display: flex;
     gap: 77px;
     margin-bottom: 120px;
 
+    @media screen and (max-width: variables.$small_laptop_width) {
+      flex-direction: column;
+    }
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      gap: 58px;
+    }
+
     .sidebar {
-      flex: 3;
+      flex: auto;
       background-color: #f6f6f6;
       @extend %main-text-16;
       color: #2f3330;
@@ -19,6 +30,15 @@
       gap: 32px;
       border-radius: 8px;
       height: fit-content;
+
+      @media screen and (max-width: variables.$small_laptop_width) {
+        padding-block: 32px;
+        padding-left: 24px;
+      }
+
+      @media screen and (max-width: variables.$default_tablet_width) {
+        gap: 24px;
+      }
 
       .item {
         cursor: pointer;
@@ -31,6 +51,14 @@
     .content {
       flex: 9;
 
+      @media screen and (max-width: variables.$small_laptop_width) {
+        text-align: center;
+      }
+
+      @media screen and (max-width: variables.$default_tablet_width) {
+        text-align: left;
+      }
+
       .title {
         @extend %snavbar-title;
         margin-bottom: 32px;
@@ -41,10 +69,16 @@
         gap: 8px;
 
         .title {
-          padding: 16px 48px;
+          padding: 16px 0;
           border-radius: 144px;
           font-size: 20px;
           cursor: pointer;
+          text-align: center;
+          width: 100%;
+
+          @media screen and (max-width: variables.$default_laptop_width) {
+            font-size: 14px;
+          }
 
           &[data-active="true"] {
             background-color: #e6f3ec;
@@ -57,6 +91,14 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 24px;
+
+        @media screen and (max-width: variables.$small_laptop_width) {
+          margin-inline: auto;
+        }
+
+        @media screen and (max-width: variables.$default_tablet_width) {
+          margin-left: 0;
+        }
 
         .account_image {
           width: 219px;
@@ -90,9 +132,14 @@
         gap: 24px;
         max-width: 680px;
 
+        @media screen and (max-width: variables.$small_laptop_width) {
+          margin-inline: auto;
+        }
+
         .input_label {
           display: flex;
           flex-direction: column;
+          text-align: left;
           gap: 8px;
 
           label {
@@ -119,7 +166,16 @@
 
         .button_wrapper {
           display: flex;
+          flex-wrap: wrap;
           gap: 24px;
+
+          @media screen and (max-width: variables.$small_laptop_width) {
+            justify-content: center;
+          }
+
+          @media screen and (max-width: variables.$default_tablet_width) {
+            justify-content: flex-start;
+          }
 
           button {
             @extend %button;

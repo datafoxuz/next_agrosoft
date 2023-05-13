@@ -4,6 +4,63 @@
   padding-inline: 30px;
   margin-bottom: 108px;
 
+  .top_section {
+    justify-content: space-between;
+    padding-bottom: 24px;
+    align-items: center;
+    display: none;
+
+    @media screen and (max-width: variables.$small_laptop_width) {
+      display: flex;
+    }
+
+    .title {
+      @extend %hidden-title;
+      margin: 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+
+      button {
+        border: none;
+        background-color: transparent;
+
+        .icon {
+          color: #008842;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  &[data-community="true"] {
+    .cards_grid {
+      grid-template-columns: repeat(2, 1fr);
+
+      @media screen and (max-width: variables.$default_laptop_width) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+  &[data-account="true"] {
+    @media screen and (max-width: variables.$small_laptop_width) {
+      margin-bottom: 0;
+    }
+    .cards_grid {
+      grid-template-columns: repeat(3, 1fr);
+
+      @media screen and (max-width: variables.$small_laptop_width) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media screen and (max-width: variables.$small_tablet_width) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+
   .cards_grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -11,16 +68,21 @@
     row-gap: 72px;
     margin-bottom: 80px;
 
-    &[data-community="true"] {
-      grid-template-columns: repeat(2, 1fr);
+    @media only screen and (max-width: 1540px) {
+      grid-template-columns: repeat(4, 1fr);
     }
 
-    &[data-account="true"] {
+    @media screen and (max-width: variables.$small_laptop_width) {
       grid-template-columns: repeat(3, 1fr);
     }
 
-    @media only screen and (max-width: 1540px) {
-      grid-template-columns: repeat(4, 1fr);
+    @media screen and (max-width: variables.$default_tablet_width) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media screen and (max-width: variables.$small_tablet_width) {
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 

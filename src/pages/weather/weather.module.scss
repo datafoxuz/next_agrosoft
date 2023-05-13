@@ -4,6 +4,14 @@
   display: flex;
   padding-inline: 48px;
   margin-bottom: 120px;
+  gap: 40px;
+
+  @media screen and (max-width: variables.$default_tablet_width) {
+    flex-direction: column;
+    padding-inline: 20px;
+    margin-bottom: 56px;
+  }
+
   .left_section {
     flex: 2;
 
@@ -65,6 +73,7 @@
 
     .content {
       margin-bottom: 56px;
+
       .title {
         @extend %snavbar-title;
         font-size: 20px;
@@ -75,8 +84,13 @@
         display: flex;
         gap: 24px;
 
+        @media screen and (max-width: variables.$small_tablet_width) {
+          flex-direction: column;
+        }
+
         button {
           @extend %button;
+          width: fit-content;
         }
       }
 
@@ -84,6 +98,7 @@
         display: flex;
         gap: 8px;
         align-items: center;
+        flex-wrap: wrap;
 
         p {
           font-weight: 600;
@@ -113,6 +128,10 @@
           background-color: #f6f6f6;
           border-radius: 4px;
 
+          @media screen and (max-width: variables.$default_tablet_width) {
+            padding: 24px;
+          }
+
           h5 {
             font-weight: 600;
             font-size: 32px;
@@ -124,4 +143,9 @@
       }
     }
   }
+}
+
+.hidden_title {
+  @extend %hidden-title;
+  margin-left: 20px;
 }

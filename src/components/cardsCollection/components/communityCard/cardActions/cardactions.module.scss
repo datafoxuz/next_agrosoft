@@ -1,8 +1,18 @@
+@use "../../../../../styles/variables" as variables;
+
 .card_actions {
   display: flex;
   align-items: center;
   gap: 16px;
-  justify-content: center;
+  width: 100%;
+
+  &[data-type="false"] {
+    justify-content: center;
+  }
+
+  @media screen and (max-width: variables.$small_tablet_width) {
+    justify-content: center;
+  }
 
   div {
     display: flex;

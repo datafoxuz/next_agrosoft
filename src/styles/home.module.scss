@@ -368,6 +368,11 @@
         bottom: -7%;
         left: 65%;
       }
+
+      @media screen and (max-width: 500px) {
+        width: 100px;
+        bottom: -4%;
+      }
     }
   }
 
@@ -613,7 +618,7 @@
       align-items: center;
       gap: 128px;
 
-      @media only screen and (max-width: 1024px) {
+      @media only screen and (max-width: variables.$small_laptop_width) {
         gap: 30px;
       }
 

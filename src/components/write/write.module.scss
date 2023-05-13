@@ -5,6 +5,11 @@
 
   button {
     @extend %button;
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      font-size: 12px;
+      padding: 10px 12px;
+    }
   }
 
   input {
@@ -48,11 +53,17 @@
 
       .cancel_button {
         @extend %cancel-button;
+
+        @media screen and (max-width: variables.$default_tablet_width) {
+          font-size: 12px;
+          padding: 10px 12px;
+        }
       }
     }
   }
 
   .add_file {
     @extend %add-file-button;
+    padding: 10px 12px;
   }
 }

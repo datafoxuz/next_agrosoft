@@ -9,6 +9,10 @@
   color: #fff;
   z-index: 99;
 
+  @media screen and (max-width: variables.$default_tablet_width) {
+    padding: 18px;
+  }
+
   &[data-static="true"] {
     background-color: #008842;
 
@@ -21,9 +25,23 @@
       background-color: transparent;
       color: #fff;
 
+      @media screen and (max-width: variables.$default_tablet_width) {
+        top: 5%;
+      }
+
       .logo {
         width: 46px;
         height: 50px;
+
+        @media screen and (max-width: variables.$default_tablet_width) {
+          width: 32px;
+        }
+      }
+
+      h3 {
+        @media screen and (max-width: variables.$default_tablet_width) {
+          font-size: 16px;
+        }
       }
     }
 
@@ -96,23 +114,41 @@
     transform: translate(-50%);
     cursor: pointer;
 
-    @media only screen and (max-width: 1024px) {
+    @media only screen and (max-width: variables.$small_laptop_width) {
       padding-inline: 18px;
       align-items: center;
+    }
+
+    @media only screen and (max-width: variables.$default_tablet_width) {
+      padding-inline: 14px;
+      padding-bottom: 18px;
+      top: -120%;
     }
 
     .logo {
       width: 84px;
       height: 90px;
 
-      @media only screen and (max-width: 1024px) {
+      @media only screen and (max-width: variables.$small_laptop_width) {
         width: 53px;
         height: 58px;
+      }
+      @media only screen and (max-width: variables.$default_tablet_width) {
+        width: 36px;
+        height: 36px;
       }
     }
 
     h3 {
       font-weight: 800;
+
+      @media only screen and (max-width: variables.$high_res_smartphone_width) {
+        font-size: 16px;
+      }
+
+      @media screen and (max-width: variables.$default_tablet_width) {
+        font-size: 14px;
+      }
     }
   }
 
@@ -133,7 +169,7 @@
       background-color: #007a3b;
       border-radius: 144px;
 
-      @media only screen and (max-width: 1024px) {
+      @media only screen and (max-width: variables.$small_laptop_width) {
         display: none;
       }
     }

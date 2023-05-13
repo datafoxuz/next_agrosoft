@@ -135,6 +135,14 @@ button.MuiButtonBase-root.Mui-disabled.MuiPaginationItem-root.MuiPaginationItem-
   background-color: #c5c5c5;
 }
 
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorBottom.css-9emuhu-MuiPaper-root-MuiDrawer-paper {
+  border-radius: 16px 16px 0px 0px;
+}
+
+.css-fy2uxz {
+  background-color: transparent !important;
+}
+
 @media only screen and (max-width: variables.$default_laptop_width) {
   .swiper-button-prev {
     right: 70%;

@@ -6,6 +6,36 @@
   margin-inline: auto;
   text-align: center;
 
+  @media screen and (max-width: variables.$default_tablet_width) {
+    max-width: 100%;
+    padding-inline: 20px;
+  }
+
+  .internal_top {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      display: flex;
+    }
+
+    .hidden_title {
+      @extend %hidden-title;
+      margin: 0;
+    }
+
+    .top_button {
+      @extend %button;
+      font-size: 12px;
+      padding: 10px 12px;
+      &::after {
+        display: none;
+      }
+    }
+  }
+
   .image_wrapper {
     position: relative;
     margin-bottom: 40px;
@@ -27,6 +57,11 @@
         display: flex;
         align-items: center;
         gap: 9px;
+
+        @media screen and (max-width: variables.$default_tablet_width) {
+          font-size: 12px;
+          padding: 10px 12px;
+        }
       }
     }
   }
@@ -36,6 +71,10 @@
     width: 450px;
     margin-inline: auto;
     margin-bottom: 9px;
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      width: 100%;
+    }
   }
 
   .date {
@@ -80,7 +119,21 @@
 
         .button {
           @extend %button;
+
+          @media screen and (max-width: variables.$default_tablet_width) {
+            font-size: 12px;
+            padding: 10px 12px;
+          }
         }
+      }
+    }
+
+    .answer_write {
+      width: 100%;
+
+      .write_ans {
+        width: fit-content;
+        margin-left: auto;
       }
     }
   }

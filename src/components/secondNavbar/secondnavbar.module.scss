@@ -9,6 +9,13 @@
   margin-bottom: 72px;
   z-index: 60;
 
+  @media screen and (max-width: variables.$small_laptop_width) {
+    padding-top: 24px;
+    padding-bottom: 0;
+    padding-inline: 20px;
+    margin-bottom: 27px;
+  }
+
   &[data-type="true"] {
     padding: 24px 45px 0;
     .filter_wrapper {
@@ -28,6 +35,10 @@
       flex: auto;
       .title {
         @extend %snavbar-title;
+
+        @media screen and (max-width: variables.$small_laptop_width) {
+          display: none;
+        }
       }
     }
 
@@ -40,6 +51,10 @@
 
       &[data-type="true"] {
         flex: 8;
+      }
+
+      @media screen and (max-width: variables.$small_laptop_width) {
+        display: none;
       }
 
       .input_wrapper {
@@ -96,6 +111,10 @@
 
     .add_button {
       &[data-show="false"] {
+        display: none;
+      }
+
+      @media screen and (max-width: variables.$default_tablet_width) {
         display: none;
       }
     }

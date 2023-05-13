@@ -8,18 +8,39 @@
   cursor: pointer;
   margin-inline: auto;
 
+  @media screen and (max-width: variables.$default_laptop_width) {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  @media screen and (max-width: variables.$small_tablet_width) {
+    flex-direction: column;
+    text-align: center;
+  }
+
   .image {
     width: 220px;
     height: 137px;
     border-radius: 144px;
+    flex: 4;
+
+    @media screen and (max-width: variables.$small_tablet_width) {
+      width: 330px;
+      height: 205px;
+    }
   }
 
   .card_infos {
+    flex: 8;
     .description {
       width: 349px;
       @extend %main-text-16;
       margin-bottom: 16px;
       color: #232624;
+
+      @media screen and (max-width: variables.$small_laptop_width) {
+        width: 100%;
+      }
     }
   }
 }

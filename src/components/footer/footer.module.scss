@@ -20,6 +20,7 @@
     cursor: pointer;
     right: 150px;
     top: -50px;
+    z-index: 99;
 
     @media only screen and (max-width: variables.$small_laptop_width) {
       top: 120px;
@@ -29,6 +30,16 @@
       height: fit-content;
       top: 90%;
       right: 5%;
+    }
+
+    @media only screen and (max-width: variables.$default_tablet_width) {
+      padding: 15px 20px;
+    }
+
+    .arrow_icon {
+      @media only screen and (max-width: variables.$default_tablet_width) {
+        width: 15px;
+      }
     }
   }
 
@@ -80,6 +91,10 @@
             @extend %main-text-16;
             color: #2f3330;
 
+            @media screen and (max-width: variables.$default_tablet_width) {
+              flex: auto;
+            }
+
             &::placeholder {
               @extend %main-text-16;
               color: #2f3330;
@@ -88,6 +103,13 @@
 
           .footer_button {
             @extend %button;
+
+            @media screen and (max-width: variables.$default_tablet_width) {
+              font-size: 14px;
+              padding: 15px 27px;
+              position: absolute;
+              right: 30px;
+            }
           }
         }
 

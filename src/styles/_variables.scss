@@ -23,6 +23,11 @@ $small_smartphone_width: 320px;
 %small-container {
   margin-inline: auto;
   width: 680px;
+
+  @media screen and (max-width: $default_tablet_width) {
+    width: 100%;
+    padding-inline: 20px;
+  }
 }
 
 %main-text-16 {
@@ -65,6 +70,12 @@ $small_smartphone_width: 320px;
     left: 0;
     border-radius: 120px;
   }
+
+  @media screen and (max-width: $default_tablet_width) {
+    &::after {
+      display: none;
+    }
+  }
 }
 
 %cancel-button {
@@ -93,6 +104,16 @@ $small_smartphone_width: 320px;
   line-height: 120%;
   text-transform: uppercase;
   color: #101211;
+
+  @media screen and (max-width: $small_laptop_width) {
+    font-size: 20px;
+  }
+}
+
+%hidden-title {
+  @extend %snavbar-title;
+  margin-bottom: 24px;
+  margin-left: 30px;
 }
 
 %input {
@@ -130,6 +151,10 @@ $small_smartphone_width: 320px;
   @extend %add-form-input;
   max-width: 680px;
   min-height: 253px;
+
+  @media screen and (max-width: $default_tablet_width) {
+    max-width: 100%;
+  }
 }
 
 %add-file-button {

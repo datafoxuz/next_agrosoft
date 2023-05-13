@@ -69,6 +69,7 @@ const index = () => {
       <div className={styles.profile}>
         <SNavbar siteWay={siteWay} title="Akkount ma’lumotlari" />
 
+        <h3 className={styles.hidden_title}>Akkount ma’lumotlari</h3>
         <div className={styles.profile_wrapper}>
           <div className={styles.sidebar}>
             {sidebarLinks.map((item, index) => (

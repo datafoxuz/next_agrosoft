@@ -38,6 +38,16 @@ const InternalPage = ({
 
   return (
     <div className={styles.internal}>
+      {about && (
+        <div className={styles.internal_top}>
+          <h3 className={styles.hidden_title}>Biz haqimizda</h3>
+
+          <button type="button" className={styles.top_button}>
+            Biz bilan bog’laning
+          </button>
+        </div>
+      )}
+
       <div className={styles.image_wrapper}>
         <img src={image.src} alt="about image" className={styles.image} />
         {!about && (
@@ -85,7 +95,7 @@ const InternalPage = ({
                   ) : (
                     <button
                       type="button"
-                      className={styles.button}
+                      className={`${styles.button} ${styles.write_ans}`}
                       onClick={() =>
                         setIsWriteAns((propState) => ({
                           ...propState,

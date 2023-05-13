@@ -8,9 +8,15 @@ import calendar from "@/assets/icons/calendar_green.svg";
 import verification from "@/assets/icons/verification.svg";
 import verificationDis from "@/assets/icons/verification_disabled.svg";
 
-const CardActions = ({ data }: { data: cardTypes }) => {
+const CardActions = ({
+  data,
+  inCallection = false,
+}: {
+  data: cardTypes;
+  inCallection?: boolean;
+}) => {
   return (
-    <div className={styles.card_actions}>
+    <div className={styles.card_actions} data-type={inCallection}>
       <div className={styles.info}>
         <img src={comment.src} alt="comment icon" className={styles.icon} />
         <h5>{data.commentsNum}</h5>

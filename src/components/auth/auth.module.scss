@@ -3,6 +3,10 @@
 .modal {
   @extend %auth;
 
+  @media screen and (max-width: variables.$small_tablet_width) {
+    width: 97%;
+  }
+
   .form {
     gap: 32px;
   }

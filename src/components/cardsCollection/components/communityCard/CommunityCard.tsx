@@ -20,7 +20,7 @@ const CommunityCard = ({ data }: { data: cardTypes }) => {
       />
       <div className={styles.card_infos}>
         <h3 className={styles.description}>{data.title}</h3>
-        <CardActions data={data} />
+        <CardActions data={data} inCallection />
       </div>
     </div>
   );
