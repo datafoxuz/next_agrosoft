@@ -180,6 +180,10 @@ $small_smartphone_width: 320px;
   border-radius: 144px;
   text-align: center;
 
+  @media screen and (max-width: $small_tablet_width) {
+    padding: 32px;
+  }
+
   h3 {
     @extend %snavbar-title;
     margin-bottom: 32px;
@@ -189,6 +193,10 @@ $small_smartphone_width: 320px;
     width: 446px;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: $small_tablet_width) {
+      width: 100%;
+    }
   }
 
   input {

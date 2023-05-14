@@ -1,3 +1,5 @@
+@use "../../styles/variables" as variables;
+
 .auth {
   background: url("../../assets/images/auth_bg.png");
   background-position: center;
@@ -8,6 +10,10 @@
   margin-top: -110px;
   position: relative;
 
+  @media screen and (max-width: variables.$default_tablet_width) {
+    min-height: 110vh;
+  }
+
   &::before {
     position: absolute;
     content: "";
@@ -17,17 +23,6 @@
     opacity: 0.9;
     z-index: 78;
   }
-
-  // &::after {
-  //   position: absolute;
-  //   content: url("../../assets/images/auth_bg.png");
-  //   width: 100%;
-  //   height: 100%;
-  //   z-index: 77;
-  //   object-fit: cover;
-  //   object-position: center;
-  // }
-
   .bg_image {
     position: absolute;
     width: 100%;
