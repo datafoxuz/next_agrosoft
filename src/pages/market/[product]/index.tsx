@@ -1,10 +1,15 @@
 import { Collections, SNavbar } from "@/components";
-import { cardsForExample, topcards } from "@/data";
+import { topcards } from "@/data";
+import { questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
 const index = () => {
+  const [open, setOpen] = useState<questionTypes>({
+    active: false,
+  });
+
   const router = useRouter();
 
   const siteWay = [
@@ -30,8 +35,10 @@ const index = () => {
         filter
         article
         product
+        state={open}
+        setState={setOpen}
       />
-      <Collections data={topcards} title={`${router.query.product}`} product />
+      <Collections data={topcards} product={open.active} />
     </SEO>
   );
 };

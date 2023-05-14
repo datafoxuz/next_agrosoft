@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import CardsCollection from "@/components/cardsCollection/CardsCollection";
 import { cardsForExample } from "@/data";
 import SEO from "@/layouts/seo/seo";
+import FilterDrawer from "./components/filterDrawer/filterDrawer";
 
 import styles from "./profile.module.scss";
 
@@ -67,9 +68,8 @@ const index = () => {
   return (
     <SEO metaTitle="Account">
       <div className={styles.profile}>
-        <SNavbar siteWay={siteWay} title="Akkount ma’lumotlari" />
+        <SNavbar siteWay={siteWay} title="Akkount ma’lumotlari" account />
 
-        <h3 className={styles.hidden_title}>Akkount ma’lumotlari</h3>
         <div className={styles.profile_wrapper}>
           <div className={styles.sidebar}>
             {sidebarLinks.map((item, index) => (
@@ -161,19 +161,23 @@ const index = () => {
             </div>
           ) : tabId == 3 ? (
             <div className={styles.content}>
-              <h3 className={styles.title}>Saqlanganlar</h3>
+              <div className={styles.content_head}>
+                <h3 className={styles.title}>Saqlanganlar</h3>
 
-              <div className={styles.tab_titles}>
-                {contentTabLinks.map((item) => (
-                  <h3
-                    className={styles.title}
-                    key={item.id}
-                    data-active={item.id == contentTab}
-                    onClick={() => setContentTab(item.id)}
-                  >
-                    {item.title}
-                  </h3>
-                ))}
+                <div className={styles.tab_titles}>
+                  {contentTabLinks.map((item) => (
+                    <h3
+                      className={styles.title}
+                      key={item.id}
+                      data-active={item.id == contentTab}
+                      onClick={() => setContentTab(item.id)}
+                    >
+                      {item.title}
+                    </h3>
+                  ))}
+                </div>
+
+                <FilterDrawer />
               </div>
 
               {contentTab == "a" ? (

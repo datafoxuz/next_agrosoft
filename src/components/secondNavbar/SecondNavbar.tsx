@@ -26,6 +26,7 @@ const SecondNavbar = ({
   product = false,
   innerPage = false,
   about = false,
+  account = false,
 }: {
   siteWay: sitewayProps[];
   state?: questionTypes;
@@ -38,6 +39,7 @@ const SecondNavbar = ({
   product?: boolean;
   innerPage?: boolean;
   about?: boolean;
+  account?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState<{
     buy: boolean;
@@ -75,7 +77,7 @@ const SecondNavbar = ({
         data-type={innerPage}
         data-product={product}
       >
-        <SiteWay siteWay={siteWay} />
+        <SiteWay siteWay={siteWay} product />
         <div className={styles.s_navbar_wrapper}>
           <div className={styles.title_wrapper}>
             <h3 className={styles.title} data-type={product}>
@@ -116,12 +118,7 @@ const SecondNavbar = ({
                   <button
                     type="button"
                     className={styles.filter_button}
-                    onClick={() =>
-                      setIsOpen((prevState) => ({
-                        ...prevState,
-                        filter1: !prevState.filter1,
-                      }))
-                    }
+                    onClick={handleClick}
                   >
                     Filter
                     <img
@@ -213,53 +210,62 @@ const SecondNavbar = ({
           </div>
         </div>
 
-        <div className={styles.hidden_section}>
-          <div className={styles.top_section}>
-            <h3 className={styles.title}>{title}</h3>
+        {!innerPage && !about && !account && (
+          <div className={styles.hidden_section}>
+            <div className={styles.top_section}>
+              <h3 className={styles.title}>{title}</h3>
 
-            <div className={styles.buttons}>
-              {community && (
-                <button>
-                  <RateReviewIcon
-                    className={styles.icon}
-                    onClick={() => handleClick()}
-                  />
-                </button>
-              )}
+              <div className={styles.buttons}>
+                {community && (
+                  <button>
+                    <RateReviewIcon
+                      className={styles.icon}
+                      onClick={() => handleClick()}
+                    />
+                  </button>
+                )}
 
-              {market && (
-                <button>
-                  <AddBoxIcon
-                    className={styles.icon}
-                    onClick={() => handleClick()}
-                  />
-                </button>
-              )}
+                {market && (
+                  <button>
+                    <AddBoxIcon
+                      className={styles.icon}
+                      onClick={() => handleClick()}
+                    />
+                  </button>
+                )}
 
-              {product && (
-                <button>
-                  <FilterListIcon
-                    className={styles.icon}
-                    onClick={() => handleClick()}
-                  />
-                </button>
-              )}
-              <SortDrawer />
+                {product && (
+                  <button>
+                    <FilterListIcon
+                      className={styles.icon}
+                      onClick={() => handleClick()}
+                    />
+                  </button>
+                )}
+                <SortDrawer />
+              </div>
+            </div>
+
+            <div className={styles.input_wrapper}>
+              <input
+                type="text"
+                placeholder="Qidirish"
+                className={styles.input}
+              />
+
+              <SearchIcon className={styles.icon} />
             </div>
           </div>
+        )}
 
-          <div className={styles.input_wrapper}>
-            <input
-              type="text"
-              placeholder="Qidirish"
-              className={styles.input}
-            />
-
-            <SearchIcon className={styles.icon} />
+        {account && (
+          <div className={styles.hidden_section}>
+            <div className={styles.top_section}>
+              <h3 className={styles.title}>{title}</h3>
+            </div>
           </div>
-        </div>
+        )}
       </div>
-      {product && <FilterSection active={isOpen.filter1} />}
     </>
   );
 };

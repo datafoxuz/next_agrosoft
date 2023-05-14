@@ -5,26 +5,22 @@
   background-color: #e6f3ec;
   display: flex;
   flex-direction: column;
-  position: relative;
   margin-bottom: 72px;
-  z-index: 60;
+  z-index: 999;
 
   @media screen and (max-width: variables.$small_laptop_width) {
     padding-top: 24px;
     padding-bottom: 0;
-    padding-inline: 20px;
+    padding-inline: 0;
     margin-bottom: 27px;
-  }
-
-  @media screen and (max-width: variables.$default_laptop_width) {
-    padding: 0;
-    padding-top: 24px;
   }
 
   &[data-type="true"] {
     padding: 24px 45px 0;
-    .filter_wrapper {
-      display: none;
+
+    @media screen and (max-width: variables.$small_laptop_width) {
+      padding-top: 24px;
+      padding-inline: 0;
     }
   }
 
@@ -32,8 +28,20 @@
     @media screen and (max-width: variables.$default_laptop_width) {
       padding-top: 24px;
       padding-bottom: 0;
-      padding-inline: 20px;
       margin-bottom: 27px;
+      padding-inline: 0;
+
+      .hidden_section {
+        display: block;
+
+        .top_section {
+          display: flex;
+        }
+
+        .input_wrapper {
+          display: block;
+        }
+      }
     }
   }
 
@@ -147,8 +155,10 @@
   .hidden_section {
     display: none;
     background-color: #fff;
+    padding-inline: 20px;
+    padding-top: 24px;
 
-    @media screen and (max-width: variables.$default_laptop_width) {
+    @media screen and (max-width: variables.$small_laptop_width) {
       display: block;
     }
     .top_section {

@@ -1,0 +1,66 @@
+@use "@/styles/variables" as variables;
+
+.sort_drawer {
+  z-index: 2;
+  bottom: 0;
+  right: 0;
+  max-width: 1920px;
+  width: 100%;
+  box-shadow: 0 0 40px #08071099;
+  background-color: #e6f3ec;
+  border-radius: 16px 16px 0px 0px;
+  color: #fff;
+  padding-block: 44px;
+  padding-inline: 24px;
+  color: #101211;
+  display: none;
+
+  @media screen and (max-width: variables.$default_tablet_width) {
+    display: block;
+  }
+
+  .sort_items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .item {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @extend %main-text-16;
+    font-weight: 600;
+  }
+
+  .item_active {
+    color: #008842;
+  }
+
+  .top_line {
+    position: absolute;
+    width: 40px;
+    height: 4px;
+    background: #2a314d;
+    border-radius: 41px;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  display: none;
+
+  @media screen and (max-width: variables.$default_tablet_width) {
+    display: block;
+  }
+
+  .icon {
+    color: #008842;
+    font-size: 30px;
+  }
+}

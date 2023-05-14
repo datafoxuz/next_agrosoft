@@ -5,11 +5,13 @@ import Pagination from "@mui/material/Pagination";
 import CommunityCard from "./components/communityCard/CommunityCard";
 
 import styles from "./cardscollection.module.scss";
+import FilterSection from "../filterSection/FilterSection";
 
 const CardsCollection = ({
   data,
   community = false,
   account = false,
+  product = false,
 }: {
   data: cardTypes[];
   community?: boolean;
@@ -17,6 +19,8 @@ const CardsCollection = ({
   market?: boolean;
   product?: boolean;
 }) => {
+  console.log(product);
+
   return (
     <div
       className={styles.collections}
@@ -32,6 +36,7 @@ const CardsCollection = ({
           )
         )}
       </div>
+      <FilterSection active={product} />
       <Pagination count={data.length} className={styles.pagination} />
     </div>
   );

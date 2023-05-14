@@ -17,7 +17,7 @@
     align-items: center;
     padding-bottom: 24px;
 
-    @media screen and (max-width: variables.$default_tablet_width) {
+    @media screen and (max-width: variables.$small_laptop_width) {
       display: flex;
     }
 
@@ -119,11 +119,8 @@
 
         .button {
           @extend %button;
-
-          @media screen and (max-width: variables.$default_tablet_width) {
-            font-size: 12px;
-            padding: 10px 12px;
-          }
+          display: flex;
+          justify-content: flex-end;
         }
       }
     }

@@ -34,13 +34,7 @@ const index = () => {
       {market.active ? (
         <AddProduct state={market} setState={setMarket} />
       ) : (
-        <Collections
-          data={cardsForExample}
-          title="Agromarket"
-          state={market}
-          setState={setMarket}
-          market
-        />
+        <Collections data={cardsForExample} market />
       )}
     </SEO>
   );

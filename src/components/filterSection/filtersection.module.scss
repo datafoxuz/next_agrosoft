@@ -2,17 +2,24 @@
 
 .filter_section {
   position: absolute;
-  top: 55px;
+  top: -200%;
   left: 0;
-  background-color: #ffffff;
+  background-color: #fff;
   width: 100%;
   padding: 40px 56px;
-  transform: translateY(-100%);
   transition: 0.3s ease-in-out;
   z-index: 55;
 
+  @media screen and (max-width: variables.$default_laptop_width) {
+    padding-inline: 24px;
+  }
+
   &[data-type="true"] {
-    transform: translateY(200px);
+    top: -90px;
+
+    @media screen and (max-width: variables.$default_laptop_width) {
+      top: -50px;
+    }
   }
 
   button {
@@ -21,6 +28,7 @@
 
   .section {
     display: flex;
+    flex-wrap: wrap;
     gap: 40px;
     align-items: center;
     margin-bottom: 40px;
@@ -33,6 +41,7 @@
 
     .selects {
       display: flex;
+      flex-wrap: wrap;
       gap: 24px;
     }
 
@@ -104,6 +113,7 @@
 
   .buttons {
     display: flex;
+    flex-wrap: wrap;
     gap: 32px;
 
     .cancel_button {

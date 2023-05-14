@@ -61,9 +61,8 @@ const index = () => {
 
   return (
     <SEO metaTitle="Weather">
-      <SNavbar siteWay={siteWay} title="Ob havo ma’lumotlari" />
+      <SNavbar siteWay={siteWay} title="Ob havo ma’lumotlari" account />
 
-      <h3 className={styles.hidden_title}>Ob havo ma’lumotlari</h3>
       <div className={styles.weather}>
         <div className={styles.left_section}>
           <p className={styles.date}>1-Iyun, 2022</p>

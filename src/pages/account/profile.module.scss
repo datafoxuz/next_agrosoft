@@ -59,6 +59,15 @@
         text-align: left;
       }
 
+      .content_head {
+        display: block;
+
+        @media screen and (max-width: variables.$default_tablet_width) {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+
       .title {
         @extend %snavbar-title;
         margin-bottom: 32px;
@@ -67,6 +76,10 @@
       .tab_titles {
         display: flex;
         gap: 8px;
+
+        @media screen and (max-width: variables.$default_tablet_width) {
+          display: none;
+        }
 
         .title {
           padding: 16px 0;
@@ -161,6 +174,7 @@
 
         .selects {
           display: flex;
+          flex-wrap: wrap;
           gap: 24px;
         }
 

@@ -107,9 +107,13 @@
     margin-bottom: 160px;
 
     @media screen and (max-width: variables.$high_res_tablet_width) {
-      width: 350px;
+      width: 400px;
       margin-inline: auto;
       margin-bottom: 80px;
+    }
+
+    @media screen and (max-width: variables.$high_res_smartphone_width) {
+      width: 300px;
     }
 
     .top_card {

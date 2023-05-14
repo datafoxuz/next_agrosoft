@@ -2,7 +2,7 @@ import { SwipeableDrawer } from "@mui/material";
 import React, { useState } from "react";
 
 //style
-import styles from "./sortdrawer.module.scss";
+import styles from "./filterdrawer.module.scss";
 
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
@@ -54,9 +54,12 @@ const SortDrawer = () => {
   ];
 
   return (
-    <div className={styles.burger_menu}>
+    <div className={styles.burger_Pmenu}>
       <React.Fragment key={"bottom"}>
-        <button onClick={toggleDrawer("bottom", true)}>
+        <button
+          onClick={toggleDrawer("bottom", true)}
+          className={styles.button}
+        >
           <FilterAltIcon className={styles.icon} />
         </button>
         <SwipeableDrawer
@@ -66,8 +69,6 @@ const SortDrawer = () => {
           onOpen={toggleDrawer("bottom", true)}
         >
           <div className={styles.sort_drawer}>
-            <h3 className={styles.title}>Saralash</h3>
-
             <div className={styles.sort_items}>
               {tabItems.map((item, index) => (
                 <p

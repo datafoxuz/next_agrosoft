@@ -5,7 +5,7 @@ import styles from "./filtersection.module.scss";
 
 import ClearIcon from "@mui/icons-material/Clear";
 
-const FilterSection = ({ active }: { active: boolean }) => {
+const FilterSection = ({ active = false }: { active?: boolean }) => {
   const [item, setItem] = useState<string>("bir");
 
   const data = ["bir", "ikki", "uch"];

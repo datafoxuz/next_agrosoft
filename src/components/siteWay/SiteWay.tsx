@@ -8,9 +8,15 @@ import styles from "./siteway.module.scss";
 //icon
 import right from "../../assets/icons/arrow_right.svg";
 
-const SiteWay = ({ siteWay }: { siteWay: sitewayProps[] }) => {
+const SiteWay = ({
+  siteWay,
+  product = false,
+}: {
+  siteWay: sitewayProps[];
+  product?: boolean;
+}) => {
   return (
-    <div className={styles.siteway}>
+    <div className={styles.siteway} data-product={product}>
       {siteWay?.map((item, index) => (
         <Link key={index} href={item.url} className={styles.link}>
           {item.title}
