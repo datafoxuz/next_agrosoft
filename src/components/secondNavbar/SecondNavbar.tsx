@@ -2,12 +2,17 @@ import { questionTypes, sitewayProps } from "@/data/interfaces";
 import { FilterMenu } from "./components";
 import React, { useState } from "react";
 import SiteWay from "../siteWay/SiteWay";
+import SortDrawer from "../sortDrawer/SortDrawer";
 
 import styles from "./secondnavbar.module.scss";
 
 import filterImage from "@/assets/icons/SecondNavbar/filter.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import FilterSection from "../filterSection/FilterSection";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import SearchIcon from "@mui/icons-material/Search";
 
 const SecondNavbar = ({
   siteWay,
@@ -65,11 +70,17 @@ const SecondNavbar = ({
 
   return (
     <>
-      <div className={styles.s_navbar} data-type={innerPage}>
+      <div
+        className={styles.s_navbar}
+        data-type={innerPage}
+        data-product={product}
+      >
         <SiteWay siteWay={siteWay} />
         <div className={styles.s_navbar_wrapper}>
           <div className={styles.title_wrapper}>
-            <h3 className={styles.title}>{shortenString(title, 20)}</h3>
+            <h3 className={styles.title} data-type={product}>
+              {shortenString(title, 20)}
+            </h3>
           </div>
 
           <div className={styles.filter_wrapper} data-type={product}>
@@ -199,6 +210,52 @@ const SecondNavbar = ({
                 Biz bilan bog’laning
               </button>
             )}
+          </div>
+        </div>
+
+        <div className={styles.hidden_section}>
+          <div className={styles.top_section}>
+            <h3 className={styles.title}>{title}</h3>
+
+            <div className={styles.buttons}>
+              {community && (
+                <button>
+                  <RateReviewIcon
+                    className={styles.icon}
+                    onClick={() => handleClick()}
+                  />
+                </button>
+              )}
+
+              {market && (
+                <button>
+                  <AddBoxIcon
+                    className={styles.icon}
+                    onClick={() => handleClick()}
+                  />
+                </button>
+              )}
+
+              {product && (
+                <button>
+                  <FilterListIcon
+                    className={styles.icon}
+                    onClick={() => handleClick()}
+                  />
+                </button>
+              )}
+              <SortDrawer />
+            </div>
+          </div>
+
+          <div className={styles.input_wrapper}>
+            <input
+              type="text"
+              placeholder="Qidirish"
+              className={styles.input}
+            />
+
+            <SearchIcon className={styles.icon} />
           </div>
         </div>
       </div>

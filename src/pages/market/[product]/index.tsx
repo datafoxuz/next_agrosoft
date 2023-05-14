@@ -31,7 +31,7 @@ const index = () => {
         article
         product
       />
-      <Collections data={topcards} />
+      <Collections data={topcards} title={`${router.query.product}`} product />
     </SEO>
   );
 };

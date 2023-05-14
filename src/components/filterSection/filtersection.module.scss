@@ -2,7 +2,7 @@
 
 .filter_section {
   position: absolute;
-  top: 265px;
+  top: 55px;
   left: 0;
   background-color: #ffffff;
   width: 100%;
@@ -12,7 +12,7 @@
   z-index: 55;
 
   &[data-type="true"] {
-    transform: translateY(0);
+    transform: translateY(200px);
   }
 
   button {

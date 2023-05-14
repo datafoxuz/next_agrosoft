@@ -5,6 +5,7 @@ import React, { useContext, useState } from "react";
 import styles from "./sortdrawer.module.scss";
 
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import SearchIcon from "@mui/icons-material/Search";
 
 const SortDrawer = () => {
   const [tabId, setTabId] = useState(1);
@@ -67,6 +68,7 @@ const SortDrawer = () => {
         >
           <div className={styles.sort_drawer}>
             <h3 className={styles.title}>Saralash</h3>
+
             <div className={styles.sort_items}>
               {tabItems.map((item, index) => (
                 <p

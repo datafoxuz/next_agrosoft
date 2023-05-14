@@ -1,12 +1,10 @@
-import { cardTypes } from "@/data/interfaces";
+import { cardTypes, questionTypes } from "@/data/interfaces";
 import Card from "./components/card/Card";
 import React from "react";
 import Pagination from "@mui/material/Pagination";
 import CommunityCard from "./components/communityCard/CommunityCard";
-import SortDrawer from "../sortDrawer/SortDrawer";
 
 import styles from "./cardscollection.module.scss";
-import SearchIcon from "@mui/icons-material/Search";
 
 const CardsCollection = ({
   data,
@@ -16,6 +14,8 @@ const CardsCollection = ({
   data: cardTypes[];
   community?: boolean;
   account?: boolean;
+  market?: boolean;
+  product?: boolean;
 }) => {
   return (
     <div
@@ -23,16 +23,6 @@ const CardsCollection = ({
       data-account={account}
       data-community={community}
     >
-      <div className={styles.top_section}>
-        <h3 className={styles.title}>Agro Products</h3>
-
-        <div className={styles.buttons}>
-          <button>
-            <SearchIcon className={styles.icon} />
-          </button>
-          <SortDrawer />
-        </div>
-      </div>
       <div className={styles.cards_grid}>
         {data.map((item: cardTypes, index: number) =>
           community ? (

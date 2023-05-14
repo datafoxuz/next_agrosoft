@@ -18,7 +18,7 @@ const index = () => {
   return (
     <SEO metaTitle="News">
       <SNavbar siteWay={siteWay} title="Yangiliklar" filter article />
-      <Collections data={cardsForExample} />
+      <Collections data={cardsForExample} title="Yangiliklar" />
     </SEO>
   );
 };
