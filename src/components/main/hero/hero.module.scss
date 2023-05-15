@@ -1,0 +1,84 @@
+@use "../../../styles/variables" as variables;
+
+.main_hero {
+  background-image: url("../assets/images/hero_bg.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: -110px;
+
+  .hero_text {
+    text-align: center;
+    width: fit-content;
+    padding-top: 235px;
+    padding-bottom: 191px;
+    position: relative;
+    margin-inline: auto;
+
+    @media only screen and (max-width: variables.$high_res_tablet_width) {
+      padding-top: 173px;
+    }
+
+    h4 {
+      @extend %title;
+      font-size: 20px;
+      color: #d9ede3;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      max-width: 564px;
+      margin-inline: auto;
+      @extend %title;
+      color: #fff;
+      font-size: 59px;
+      margin-bottom: 16px;
+
+      @media only screen and (max-width: variables.$high_res_tablet_width) {
+        font-size: 33px;
+        margin-bottom: 8px;
+      }
+    }
+
+    .text {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 120%;
+      letter-spacing: 0.15px;
+      color: #d9ede3;
+    }
+
+    .leaf_img {
+      position: absolute;
+      top: 11.5%;
+      right: -41%;
+      transform-origin: left bottom;
+      user-select: none;
+
+      scale: 0;
+      opacity: 0;
+      animation: revealAnimation 2s ease forwards 0.3s;
+
+      @media only screen and (max-width: variables.$high_res_tablet_width) {
+        width: 179px;
+        right: 15px;
+        top: 200px;
+      }
+
+      @media only screen and (max-width: 563px) {
+        display: none;
+      }
+    }
+
+    @keyframes revealAnimation {
+      70% {
+        opacity: 0;
+      }
+
+      to {
+        scale: 0.5;
+        opacity: 1;
+      }
+    }
+  }
+}

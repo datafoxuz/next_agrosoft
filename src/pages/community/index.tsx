@@ -38,13 +38,7 @@ const index = () => {
       {question.active ? (
         <Write state={question} setState={setQuestion} quiz />
       ) : (
-        <Collections
-          data={cardsForExample}
-          community
-          title="Agrojamiyat"
-          state={question}
-          setState={setQuestion}
-        />
+        <Collections data={cardsForExample} community />
       )}
     </SEO>
   );

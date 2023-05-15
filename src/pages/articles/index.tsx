@@ -21,7 +21,7 @@ const index = () => {
     <SEO metaTitle="Articles">
       <div className={styles.articles}>
         <SNavbar siteWay={siteWay} title="Agro maqolalar" filter article />
-        <Collections data={cardsForExample} title="Agro maqolalar" />
+        <Collections data={cardsForExample} />
       </div>
     </SEO>
   );

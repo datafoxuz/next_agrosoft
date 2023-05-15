@@ -4,19 +4,17 @@ import { SwiperCards } from "@/components";
 import SEO from "@/layouts/seo/seo";
 import Link from "next/link";
 import SwiperCard from "@/components/swiper/swiperCard/SwiperCard";
-import { topcards } from "@/data";
 
 import styles from "@/styles/home.module.scss";
 
 // icons and images
-import leaf from "@/assets/images/leaf.png";
 import diseases from "@/assets/images/diseases.png";
 import half_logo from "@/assets/images/half_logo.png";
 import comment from "@/assets/icons/comment.svg";
 import cotton from "@/assets/images/cotton.png";
 import leaf_small from "@/assets/images/leaf_small.png";
 import calendar from "@/assets/icons/calendar.svg";
-import { DownloadLinks } from "@/components/navbar/components";
+import { Hero, TopCards } from "@/components/main";
 
 export default function Home() {
   const router = useRouter();
@@ -86,44 +84,8 @@ export default function Home() {
   return (
     <SEO>
       <div className={styles.main}>
-        {/* Header and Hero section */}
-        <div className={styles.main_hero}>
-          <div className={styles.hero_text}>
-            <DownloadLinks classN />
-            <h4>Agrosoft</h4>
-            <h1 className={styles.title}>Sizning Agro yordamchingiz!</h1>
-            <p className={styles.text}>Barcha agro-ma’lumotlar bir yerda! </p>
-
-            <img
-              src={leaf.src}
-              alt="leaf image top right"
-              className={styles.leaf_img}
-            />
-          </div>
-        </div>
-
-        {/* Hero cards */}
-        <div className={styles.main_top_cards}>
-          {topcards.map(
-            (
-              item: { url: string; image: StaticImageData; title: string },
-              index: number
-            ) => (
-              <div
-                className={styles.top_card}
-                onClick={() => router.push(item.url)}
-                key={index}
-              >
-                <img
-                  src={item.image.src}
-                  alt={`image about ${item.title}`}
-                  className={styles.card_image}
-                />
-                <p className={styles.card_title}>{item.title}</p>
-              </div>
-            )
-          )}
-        </div>
+        <Hero />
+        <TopCards />
 
         {/* About */}
         <div className={styles.container}>
