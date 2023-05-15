@@ -98,6 +98,72 @@
     }
   }
 
+  .main_top_cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: -120px;
+    margin-bottom: 160px;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      width: 400px;
+      margin-inline: auto;
+      margin-bottom: 80px;
+    }
+
+    @media screen and (max-width: variables.$high_res_smartphone_width) {
+      width: 300px;
+    }
+
+    .top_card {
+      text-align: center;
+      margin-left: -30px;
+      cursor: pointer;
+      z-index: 99;
+      transition: 0.2s all ease;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        width: calc(50% - 10px);
+        margin-bottom: 40px;
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card_image {
+        width: 214px;
+        height: 228px;
+        object-fit: cover;
+        object-position: center;
+        border: 4px solid #fff4eb;
+        border-radius: 208px;
+        margin-bottom: 16px;
+
+        @media screen and (max-width: variables.$default_tablet_width) {
+          width: 200px;
+          height: 200px;
+        }
+      }
+
+      .card_title {
+        @extend %main-text-16;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+        @media screen and (max-width: variables.$high_res_tablet_width) {
+          transform: scale(1);
+        }
+
+        .card_image {
+          border-color: #e1ffaf;
+        }
+      }
+    }
+  }
+
   .main_about {
     background: linear-gradient(
       92.59deg,
