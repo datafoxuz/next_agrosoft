@@ -1,0 +1,79 @@
+@use "../../../styles/variables" as variables;
+
+.main_market {
+  padding-block: 80px;
+  background-color: #f6e8dd;
+  margin-bottom: 160px;
+
+  @media screen and (max-width: variables.$high_res_laptop_width) {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  h2 {
+    @extend %medium-title;
+  }
+
+  .main_desc {
+    padding-left: 116px;
+    margin-bottom: 64px;
+
+    @media screen and (max-width: variables.$high_res_laptop_width) {
+      padding-left: 0;
+      margin-bottom: 56px;
+    }
+
+    .market_title {
+      color: #232624;
+      margin-bottom: 8px;
+    }
+
+    .market_text {
+      @extend %main-text-16;
+    }
+  }
+
+  .market_section {
+    background: url("../../../assets/images/file.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 144px 0px 0px 144px;
+    margin-bottom: 85px;
+    margin-left: 147px;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      margin-bottom: 56px;
+      margin-left: 24px;
+    }
+
+    .section_title {
+      color: #fff;
+      text-align: center;
+      padding-left: 90px;
+      border-radius: 144px 0px 0px 144px;
+      background: #f27c1c;
+      opacity: 0.9;
+      padding-block: 95px;
+      margin-left: 40%;
+
+      @media screen and (max-width: variables.$high_res_laptop_width) {
+        font-size: 20px;
+        padding-block: 83px;
+      }
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .market_button {
+    @extend %button;
+    position: relative;
+    margin-left: 50%;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      margin-left: 0;
+    }
+  }
+}

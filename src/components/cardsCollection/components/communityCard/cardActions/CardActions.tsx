@@ -1,5 +1,6 @@
 import React from "react";
 import { cardTypes } from "@/data/interfaces";
+import Image from "next/image";
 
 import styles from "./cardactions.module.scss";
 
@@ -18,18 +19,32 @@ const CardActions = ({
   return (
     <div className={styles.card_actions} data-type={inCallection}>
       <div className={styles.info}>
-        <img src={comment.src} alt="comment icon" className={styles.icon} />
+        <Image
+          src={comment.src}
+          alt="comment icon"
+          className={styles.icon}
+          width={13}
+          height={13}
+        />
         <h5>{data.commentsNum}</h5>
       </div>
       <div className={styles.info}>
-        <img src={calendar.src} alt="calendar icon" className={styles.icon} />
+        <Image
+          src={calendar.src}
+          alt="calendar icon"
+          className={styles.icon}
+          width={13}
+          height={13}
+        />
         <h5>{data.date}</h5>
       </div>
       <div className={styles.answer_info} data-checked={data.answered}>
-        <img
+        <Image
           src={data.answered ? `${verification.src}` : `${verificationDis.src}`}
           alt="verification icon"
           className={styles.icon}
+          width={13}
+          height={13}
         />
         <h5>{data.answered ? `Answered` : `Not answered`}</h5>
       </div>

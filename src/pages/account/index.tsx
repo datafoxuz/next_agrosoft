@@ -4,6 +4,7 @@ import CardsCollection from "@/components/cardsCollection/CardsCollection";
 import { cardsForExample } from "@/data";
 import SEO from "@/layouts/seo/seo";
 import FilterDrawer from "./components/filterDrawer/filterDrawer";
+import Image from "next/image";
 
 import styles from "./profile.module.scss";
 
@@ -90,10 +91,12 @@ const index = () => {
 
               <div className={styles.image_container}>
                 <div className={styles.account_image}>
-                  <img
+                  <Image
                     src={defaultImg.src}
                     alt="default image"
                     className={styles.image}
+                    width={84}
+                    height={84}
                   />
                 </div>
                 <label className={styles.image_label} htmlFor="imageUpload">

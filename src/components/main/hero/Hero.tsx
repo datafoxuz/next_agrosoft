@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 import { DownloadLinks } from "@/components/navbar/components";
 
@@ -15,10 +16,12 @@ const Hero = () => {
         <h1 className={styles.title}>Sizning Agro yordamchingiz!</h1>
         <p className={styles.text}>Barcha agro-ma’lumotlar bir yerda! </p>
 
-        <img
+        <Image
           src={leaf.src}
           alt="leaf image top right"
           className={styles.leaf_img}
+          width={362}
+          height={254}
         />
       </div>
     </div>

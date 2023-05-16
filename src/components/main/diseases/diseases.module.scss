@@ -1,0 +1,150 @@
+@use "../../../styles/variables" as variables;
+
+.container {
+  @extend %container;
+}
+
+.main_diseases {
+  text-align: center;
+  margin-bottom: 160px;
+
+  @media screen and (max-width: variables.$high_res_laptop_width) {
+    margin-bottom: 113px;
+  }
+
+  .diseases_title {
+    @extend %medium-title;
+    color: #2f3330;
+    margin-bottom: 8px;
+  }
+
+  .diseases_text {
+    @extend %main-text-16;
+    font-weight: 400;
+    margin-bottom: 80px;
+
+    @media screen and (max-width: variables.$high_res_laptop_width) {
+      margin-bottom: 56px;
+    }
+  }
+
+  .diseases_grid {
+    display: grid;
+    grid-template:
+      "card1 card2 card3 card3 card4"
+      "card5 card2 card6 card7 card8";
+    gap: 13px;
+    margin-bottom: 80px;
+
+    @media only screen and (max-width: variables.$small_laptop_width) {
+      grid-template: none;
+      grid-template-columns: repeat(4, 1fr);
+
+      .card {
+        width: 100% !important;
+        height: 100%;
+      }
+    }
+
+    @media screen and (max-width: variables.$high_res_laptop_width) {
+      margin-bottom: 56px;
+    }
+
+    @media only screen and (max-width: variables.$default_tablet_width) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &[data-length="true"] {
+      .card {
+        &:nth-of-type(2) {
+          grid-row: span 2;
+
+          .image {
+            height: 93.5% !important;
+          }
+        }
+
+        &:nth-of-type(3) {
+          grid-column: span 2;
+          max-width: 447px;
+          width: 100%;
+
+          .image {
+            width: 100%;
+          }
+
+          @media only screen and (max-width: variables.$small_laptop_width) {
+            max-width: 100%;
+          }
+
+          @media only screen and (max-width: variables.$default_tablet_width) {
+            grid-column: span 1;
+          }
+        }
+
+        &:nth-of-type(4) {
+          @media only screen and (max-width: variables.$default_tablet_width) {
+            grid-column: span 2;
+          }
+        }
+      }
+    }
+
+    .card {
+      width: 218px;
+      cursor: pointer;
+
+      @media only screen and (max-width: variables.$small_laptop_width) {
+        width: 208px;
+      }
+
+      &:hover {
+        .image {
+          filter: grayscale(0%);
+        }
+      }
+
+      .image {
+        width: 100%;
+        height: 179px !important;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 46.5043px;
+        margin-bottom: 6px;
+        aspect-ratio: 1;
+        transition: all 0.2s ease;
+        filter: grayscale(100%);
+      }
+
+      &:nth-of-type(1) {
+        .image {
+          filter: grayscale(0%);
+        }
+      }
+      &:nth-of-type(2) {
+        .image {
+          filter: grayscale(0%);
+        }
+      }
+      &:nth-of-type(4) {
+        .image {
+          filter: grayscale(0%);
+        }
+      }
+      &:nth-of-type(7) {
+        .image {
+          filter: grayscale(0%);
+        }
+      }
+
+      .title {
+        @extend %main-text-16;
+      }
+    }
+  }
+
+  .diseases_button {
+    @extend %button;
+  }
+}

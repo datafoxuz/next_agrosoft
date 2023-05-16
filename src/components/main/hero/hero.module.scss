@@ -9,7 +9,7 @@
 }
 
 .main_hero {
-  background-image: url("../assets/images/hero_bg.png");
+  background-image: url("../../../assets/images/hero_bg.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -69,6 +69,7 @@
 
       @media only screen and (max-width: variables.$high_res_tablet_width) {
         width: 179px;
+        height: 129px;
         right: 15px;
         top: 200px;
       }

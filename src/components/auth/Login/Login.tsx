@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
 
 import styles from "../auth.module.scss";
 
@@ -25,10 +25,12 @@ const Login = ({ tabId, setTabId }: authProps) => {
         <div className={styles.pass_input}>
           <input type="password" placeholder="Parol" className={styles.input} />
 
-          <img
+          <Image
             onClick={() => setIsShowPass(!isShowPass)}
             src={`${isShowPass ? passwordOn.src : passwordOff.src}`}
             alt="password icon"
+            width={22}
+            height={12}
           />
         </div>
         <p className={styles.reset_pass} onClick={() => setTabId(tabId + 1)}>

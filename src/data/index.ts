@@ -10,6 +10,8 @@ import market from "@/assets/images/market.png";
 
 import { cardTypes } from "./interfaces";
 
+export const baseUrl = "agrosoft.uz/api";
+
 export const MOTION_CONFIGS = {
   layout: true,
   animate: { opacity: 1, y: "10px" },

@@ -1,0 +1,126 @@
+@use "../../../styles/variables" as variables;
+
+.container {
+  @extend %container;
+}
+
+.main_community {
+  padding: 104px 150px;
+  background-color: #007a39;
+  border-radius: 144px;
+  color: #fff;
+  position: relative;
+  margin-bottom: 236px;
+
+  @media screen and (max-width: variables.$high_res_tablet_width) {
+    margin-bottom: 113px;
+  }
+
+  @media screen and (max-width: variables.$default_tablet_width) {
+    padding-inline: 50px;
+  }
+
+  .top_cotton_img {
+    position: absolute;
+    right: 0%;
+    top: -10%;
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      width: 164px;
+      top: -3%;
+    }
+  }
+
+  .community_title {
+    @extend %medium-title;
+    margin-bottom: 8px;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      font-size: 24px;
+      text-align: center;
+    }
+  }
+
+  .community_text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 120%;
+    letter-spacing: 0.1px;
+    color: #e6f3ec;
+    margin-bottom: 56px;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      text-align: center;
+    }
+  }
+
+  .community_questions {
+    margin-bottom: 48px;
+
+    .question {
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 24px;
+      color: #e6f3ec;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      padding-block: 24px;
+      border-bottom: 1px dashed #008842;
+      flex-wrap: wrap;
+
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        padding-block: 17px;
+      }
+
+      .text {
+        @media screen and (max-width: variables.$high_res_tablet_width) {
+          margin-bottom: 17px;
+        }
+      }
+
+      &:nth-last-child(1) {
+        border: none;
+      }
+
+      .comment_section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+
+  .community_button {
+    @extend %button;
+    background-color: #d9ede3;
+    color: #008842;
+
+    &::after {
+      background-color: #b0dac4;
+      opacity: 0.3;
+    }
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      width: fit-content;
+      margin-inline: auto;
+      display: flex;
+    }
+  }
+
+  .leaf_small_img {
+    position: absolute;
+    left: 50%;
+    bottom: -11%;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      bottom: -7%;
+      left: 65%;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 100px;
+      bottom: -4%;
+    }
+  }
+}

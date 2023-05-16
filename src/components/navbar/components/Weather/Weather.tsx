@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import Image from "next/image";
 import { MOTION_CONFIGS, weatherData } from "@/data";
 import { AnimatePresence, motion } from "framer-motion";
 import { openObjTypes } from "../../data";
@@ -37,10 +37,12 @@ const Weather = ({
           <div className={styles.weather_big_infos}>
             <div className={styles.section}>
               <div className={styles.weather_degree}>
-                <img
+                <Image
                   src={sun.src}
                   alt="orange sun icon"
                   className={styles.icon}
+                  width={56}
+                  height={56}
                 />
                 <h2 className={styles.title}>12°</h2>
               </div>

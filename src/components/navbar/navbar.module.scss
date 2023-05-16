@@ -12,6 +12,9 @@
   @media screen and (max-width: variables.$default_tablet_width) {
     padding: 18px;
   }
+  @media screen and (max-width: variables.$small_tablet_width) {
+    padding: 12px;
+  }
 
   &[data-static="true"] {
     background-color: #008842;
@@ -123,6 +126,10 @@
       padding-inline: 14px;
       padding-bottom: 18px;
       top: -120%;
+    }
+
+    @media screen and (max-width: variables.$small_tablet_width) {
+      top: -155%;
     }
 
     .logo {

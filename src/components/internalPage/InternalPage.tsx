@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Write } from "@/components";
 import CardActions from "../cardsCollection/components/communityCard/cardActions/CardActions";
+import Image from "next/image";
 
 import styles from "./internalPage.module.scss";
 
@@ -49,7 +50,13 @@ const InternalPage = ({
       )}
 
       <div className={styles.image_wrapper}>
-        <img src={image.src} alt="about image" className={styles.image} />
+        <Image
+          src={image.src}
+          alt="about image"
+          className={styles.image}
+          width={680}
+          height={382}
+        />
         {!about && (
           <div className={styles.events}>
             <button>

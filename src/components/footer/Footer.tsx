@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+
 //assets
 import arrow from "@/assets/icons/arrow_top_footer.svg";
 
@@ -17,10 +19,12 @@ const Footer = () => {
         onClick={handleClick}
         className={styles.to_top_button}
       >
-        <img
+        <Image
           src={arrow.src}
           alt="arrow top icon"
           className={styles.arrow_icon}
+          width={25}
+          height={32}
         />
       </button>
       <div className={styles.footer_wrapper}>

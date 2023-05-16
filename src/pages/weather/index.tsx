@@ -2,6 +2,7 @@ import { FilterSelect, SNavbar } from "@/components";
 import React, { useState } from "react";
 import { weatherData } from "@/data";
 import SEO from "@/layouts/seo/seo";
+import Image from "next/image";
 
 import styles from "./weather.module.scss";
 
@@ -73,7 +74,12 @@ const index = () => {
             </h2>
 
             <h3 className={styles.weather_status}>
-              <img src={yellowSun.src} alt="yellow sun icon" />
+              <Image
+                src={yellowSun.src}
+                alt="yellow sun icon"
+                width={32}
+                height={32}
+              />
               Sunny
             </h3>
           </div>
@@ -112,7 +118,12 @@ const index = () => {
                 <div className={styles.card_by_day} key={index}>
                   <p>{item.date}</p>
                   <h5>{item.gradus}°</h5>
-                  <img src={item.statusImage.src} alt="weather icon" />
+                  <Image
+                    src={item.statusImage.src}
+                    alt="weather icon"
+                    width={57}
+                    height={57}
+                  />
                 </div>
               ))}
             </div>

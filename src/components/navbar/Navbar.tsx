@@ -8,6 +8,7 @@ import {
 } from "./components";
 import { openObjTypes } from "./data";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 //icons
 import HamburgerIcon from "@/assets/icons/HamburgerIcon/HamburgerIcon";
@@ -49,10 +50,12 @@ const Navbar = ({
               })
             }
           >
-            <img
+            <Image
               src={temperature.src}
               alt="sun icon for temperature button"
               className={styles.icon}
+              width={32}
+              height={32}
             />
             <div>
               <p>
@@ -77,16 +80,20 @@ const Navbar = ({
 
       <div className={`${styles.main_logo}`} onClick={() => router.push("/")}>
         {isStatic ? (
-          <img
+          <Image
             src={logo_white.src}
             alt="main logo icon in the navbar center"
             className={styles.logo}
+            width={46}
+            height={50}
           />
         ) : (
-          <img
+          <Image
             src={logo.src}
             alt="main logo icon in the navbar center"
             className={styles.logo}
+            width={84}
+            height={90}
           />
         )}
         <h3>AgroSoft</h3>

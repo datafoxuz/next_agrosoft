@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 import styles from "./download.module.scss";
 
@@ -8,15 +9,19 @@ import play_store from "@/assets/icons/NavbarIcons/play_store.svg";
 const DownloadLinks = ({ classN = false }: { classN?: boolean }) => {
   return (
     <div className={styles.downloads} data-type={classN}>
-      <img
+      <Image
         src={app_store.src}
         alt="app store icon"
         className={styles.downloads_icon}
+        width={30}
+        height={30}
       />
-      <img
+      <Image
         src={play_store.src}
         alt="play store icon"
         className={styles.downloads_icon}
+        width={30}
+        height={30}
       />
       <p className={styles.text}>
         <span>Yuklab oling</span>

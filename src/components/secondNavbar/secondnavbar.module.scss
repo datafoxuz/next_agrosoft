@@ -1,6 +1,7 @@
 @use "../../styles/variables" as variables;
 
 .s_navbar {
+  position: relative;
   padding: 34px 45px;
   background-color: #e6f3ec;
   display: flex;

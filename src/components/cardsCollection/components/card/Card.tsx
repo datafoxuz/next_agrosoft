@@ -1,6 +1,7 @@
 import { cardTypes } from "@/data/interfaces";
 import { useRouter } from "next/router";
 import React from "react";
+import Image from "next/image";
 
 import styles from "./card.module.scss";
 
@@ -19,10 +20,12 @@ const Card = ({ item }: { item: cardTypes }) => {
 
   return (
     <div className={styles.card} onClick={() => handleCardClick(item.title)}>
-      <img
+      <Image
         src={item.image.src}
         alt={`image about ${item.title}`}
         className={styles.image}
+        width={305}
+        height={205}
       />
 
       {item.location && (

@@ -3,12 +3,12 @@ import { FilterMenu } from "./components";
 import React, { useState } from "react";
 import SiteWay from "../siteWay/SiteWay";
 import SortDrawer from "../sortDrawer/SortDrawer";
+import Image from "next/image";
 
 import styles from "./secondnavbar.module.scss";
 
 import filterImage from "@/assets/icons/SecondNavbar/filter.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import FilterSection from "../filterSection/FilterSection";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -121,10 +121,12 @@ const SecondNavbar = ({
                     onClick={handleClick}
                   >
                     Filter
-                    <img
+                    <Image
                       src={filterImage.src}
                       alt="filter black icon"
                       className={styles.icon}
+                      width={18}
+                      height={18}
                     />
                   </button>
                 </div>
@@ -145,10 +147,12 @@ const SecondNavbar = ({
                     }
                   >
                     Saralash
-                    <img
+                    <Image
                       src={filterImage.src}
                       alt="filter black icon"
                       className={styles.icon}
+                      width={18}
+                      height={18}
                     />
                   </button>
                   {isOpen ? <FilterMenu active={isOpen.filter2} /> : null}
@@ -168,10 +172,12 @@ const SecondNavbar = ({
                   }
                 >
                   Saralash
-                  <img
+                  <Image
                     src={filterImage.src}
                     alt="filter black icon"
                     className={styles.icon}
+                    width={18}
+                    height={18}
                   />
                 </button>
                 {isOpen.filter2 ? <FilterMenu active={isOpen.filter2} /> : null}

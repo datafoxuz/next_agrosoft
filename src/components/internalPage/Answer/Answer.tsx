@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import styles from "./answer.module.scss";
 
@@ -19,11 +20,13 @@ const Answer = () => {
         {images.length ? (
           <div className={styles.images}>
             {images.map((item, index) => (
-              <img
+              <Image
                 src={item.src}
                 alt="answer image"
                 key={index}
                 className={styles.image}
+                width={133}
+                height={119}
               />
             ))}
           </div>
@@ -31,7 +34,13 @@ const Answer = () => {
       </div>
 
       <div className={styles.person_section}>
-        <img src={image.src} alt="person image" className={styles.image} />
+        <Image
+          src={image.src}
+          alt="person image"
+          className={styles.image}
+          width={43}
+          height={43}
+        />
 
         <div className={styles.person_info}>
           <Link href="/">Ahmad Bobojonov</Link>

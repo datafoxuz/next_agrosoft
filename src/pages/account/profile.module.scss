@@ -16,6 +16,7 @@
 
     @media screen and (max-width: variables.$default_tablet_width) {
       gap: 58px;
+      padding-inline: 20px;
     }
 
     .sidebar {

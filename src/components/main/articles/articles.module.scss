@@ -1,0 +1,59 @@
+@use "../../../styles/variables" as variables;
+
+.main_l_articles {
+  max-width: 1920px;
+  display: flex;
+  align-items: center;
+  gap: 107px;
+  position: relative;
+  margin-inline: auto;
+  margin-bottom: 187px;
+
+  @media screen and (max-width: variables.$high_res_tablet_width) {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    margin-bottom: 113px;
+  }
+
+  .articles_left_section {
+    margin-left: 155px;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      margin-left: 0;
+    }
+
+    .articles_title {
+      @extend %medium-title;
+      color: #232624;
+      margin-bottom: 36px;
+      max-width: 235px;
+    }
+  }
+  .articles__top_button {
+    @extend %button;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      display: none;
+    }
+  }
+
+  .articles__bottom_button {
+    @extend %button;
+    display: none;
+    margin-top: 36px;
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      display: block;
+    }
+  }
+
+  .half_logo_image {
+    position: absolute;
+    top: -250px;
+    left: 0px;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      display: none;
+    }
+  }
+}

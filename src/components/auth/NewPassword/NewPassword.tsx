@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { inputStates } from "../data";
+import Image from "next/image";
 
 import styles from "../auth.module.scss";
 
@@ -26,7 +27,7 @@ const NewPassword = () => {
               placeholder="Parolni kiriting"
               className={styles.input}
             />
-            <img
+            <Image
               onClick={() =>
                 setIsShowPass((isShowPass) => ({
                   ...isShowPass,
@@ -36,6 +37,8 @@ const NewPassword = () => {
               src={`${isShowPass.first ? passwordOn.src : passwordOff.src}`}
               alt="password icon"
               className={styles.view_pass1}
+              width={22}
+              height={12}
             />
           </div>
           <div className={styles.pass_input}>
@@ -44,7 +47,7 @@ const NewPassword = () => {
               placeholder="Parolni  qaytadan kiriting"
               className={styles.input}
             />
-            <img
+            <Image
               onClick={() =>
                 setIsShowPass((isShowPass) => ({
                   ...isShowPass,
@@ -54,6 +57,8 @@ const NewPassword = () => {
               src={`${isShowPass.second ? passwordOn.src : passwordOff.src}`}
               alt="password icon"
               className={styles.view_pass2}
+              width={22}
+              height={12}
             />
           </div>
         </div>
