@@ -1,4 +1,4 @@
-import { cardTypes } from "@/data/interfaces";
+import { articles, cardTypes } from "@/data/interfaces";
 import { useRouter } from "next/router";
 import React from "react";
 import CardActions from "./cardActions/CardActions";
@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import styles from "./communitycard.module.scss";
 
-const CommunityCard = ({ data }: { data: cardTypes }) => {
+const CommunityCard = ({ data }: { data: articles }) => {
   const router = useRouter();
 
   return (

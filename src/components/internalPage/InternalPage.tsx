@@ -10,14 +10,16 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 
 import ShareIcon from "@mui/icons-material/Share";
 import Answer from "./Answer/Answer";
-import { questionTypes } from "@/data/interfaces";
+import { articles, questionTypes } from "@/data/interfaces";
 
 const InternalPage = ({
   questions = false,
   about,
+  data,
 }: {
   questions?: boolean;
   about?: boolean;
+  data: articles;
 }) => {
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
     active: false,
@@ -26,16 +28,6 @@ const InternalPage = ({
     desc: "",
     descFile: null,
   });
-
-  const data = {
-    image: image,
-    title:
-      "What is the difference between displacement capacity and CC of a farm tractor?",
-    url: "/",
-    commentsNum: "5",
-    date: "3.06.2022",
-    answered: true,
-  };
 
   return (
     <div className={styles.internal}>
@@ -51,7 +43,7 @@ const InternalPage = ({
 
       <div className={styles.image_wrapper}>
         <Image
-          src={image.src}
+          src={data?.image}
           alt="about image"
           className={styles.image}
           width={680}
@@ -74,7 +66,7 @@ const InternalPage = ({
       </h2>
       {questions ? (
         <>
-          <CardActions data={data} />
+          {/* <CardActions data={data} /> */}
           <div className={styles.section}>
             <div className={styles.question}>
               <h3 className={styles.title}>Savol:</h3>

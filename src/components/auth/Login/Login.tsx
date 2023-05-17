@@ -1,17 +1,30 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { authProps } from "../data";
+import { request } from "@/lib/request";
 
 import styles from "../auth.module.scss";
 
 import passwordOn from "@/assets/icons/Auth/password_on.svg";
 import passwordOff from "@/assets/icons/Auth/password_off.svg";
-import { useRouter } from "next/router";
-import { authProps } from "../data";
 
 const Login = ({ tabId, setTabId }: authProps) => {
+  const [user, setUser] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: "",
+    password: "",
+  });
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
-
   const router = useRouter();
+
+  function handleLogin(email: string, password: string) {
+    request(`/auth/register`, "POST", JSON.stringify({ email, password })).then(
+      (result) => console.log(result)
+    );
+  }
 
   return (
     <div className={styles.modal}>
@@ -21,16 +34,32 @@ const Login = ({ tabId, setTabId }: authProps) => {
           type="text"
           placeholder="Login yoki telefon raqamingiz"
           className={styles.input}
+          value={user.email}
+          onChange={(e) =>
+            setUser((prevState) => ({
+              ...prevState,
+              email: e.target.value,
+            }))
+          }
         />
         <div className={styles.pass_input}>
-          <input type="password" placeholder="Parol" className={styles.input} />
-
+          <input
+            type={`${isShowPass ? "text" : "password"}`}
+            placeholder="Parol"
+            className={styles.input}
+            onChange={(e) =>
+              setUser((prevState) => ({
+                ...prevState,
+                password: e.target.value,
+              }))
+            }
+          />
           <Image
             onClick={() => setIsShowPass(!isShowPass)}
             src={`${isShowPass ? passwordOn.src : passwordOff.src}`}
             alt="password icon"
             width={22}
-            height={12}
+            height={22}
           />
         </div>
         <p className={styles.reset_pass} onClick={() => setTabId(tabId + 1)}>
@@ -38,7 +67,12 @@ const Login = ({ tabId, setTabId }: authProps) => {
         </p>
 
         <div className={styles.buttons_wrapper}>
-          <button type="button">Tizimga kirish</button>
+          <button
+            type="button"
+            onClick={() => handleLogin(user.email, user.password)}
+          >
+            Tizimga kirish
+          </button>
           <button type="button" onClick={() => router.push("/registration")}>
             Ro’yxatdan o’tish
           </button>

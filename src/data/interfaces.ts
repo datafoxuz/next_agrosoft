@@ -23,3 +23,16 @@ export interface questionTypes {
   desc?: string;
   descFile?: null | StaticImageData;
 }
+
+export interface card {
+  id: number;
+  title: string;
+  slug: string;
+  image: StaticImageData;
+  created_at: string;
+}
+
+export interface siteWayTypes {
+  title: string;
+  url: string;
+}

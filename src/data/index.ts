@@ -10,7 +10,7 @@ import market from "@/assets/images/market.png";
 
 import { cardTypes } from "./interfaces";
 
-export const baseUrl = "agrosoft.uz/api";
+export const baseUrl = "https://agrosoft.uz/api/v1/site";
 
 export const MOTION_CONFIGS = {
   layout: true,

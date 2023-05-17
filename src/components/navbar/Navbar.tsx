@@ -100,7 +100,7 @@ const Navbar = ({
       </div>
 
       <div className={`${styles.section} ${styles.r_section}`}>
-        {true ? (
+        {false ? (
           <Link href="/account" className={styles.ava_section}>
             <AccountCircleIcon />
             <span>Sh Raxmatov</span>

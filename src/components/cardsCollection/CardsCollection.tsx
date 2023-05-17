@@ -1,8 +1,9 @@
-import { cardTypes, questionTypes } from "@/data/interfaces";
+import { card } from "@/data/interfaces";
 import Card from "./components/card/Card";
-import React from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import CommunityCard from "./components/communityCard/CommunityCard";
+import { useRouter } from "next/router";
 
 import styles from "./cardscollection.module.scss";
 import FilterSection from "../filterSection/FilterSection";
@@ -13,13 +14,25 @@ const CardsCollection = ({
   account = false,
   product = false,
 }: {
-  data: cardTypes[];
+  data: card[];
   community?: boolean;
   account?: boolean;
   market?: boolean;
   product?: boolean;
 }) => {
-  console.log(product);
+  const router = useRouter();
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    const currentPageValue = router.query.page ? Number(router.query.page) : 1;
+    setCurrentPage(currentPageValue);
+  }, [router.query.page]);
+
+  const handleChange = (event: ChangeEvent<unknown>, value: number) => {
+    router.push(`?page=${value}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div
@@ -28,7 +41,7 @@ const CardsCollection = ({
       data-community={community}
     >
       <div className={styles.cards_grid}>
-        {data.map((item: cardTypes, index: number) =>
+        {data.map((item: card, index: number) =>
           community ? (
             <CommunityCard data={item} key={index} />
           ) : (
@@ -36,8 +49,16 @@ const CardsCollection = ({
           )
         )}
       </div>
-      <FilterSection active={product} />
-      <Pagination count={data.length} className={styles.pagination} />
+      {router.pathname.includes("/market") && (
+        <FilterSection active={product} />
+      )}
+
+      <Pagination
+        count={1}
+        page={currentPage}
+        className={styles.pagination}
+        onChange={handleChange}
+      />
     </div>
   );
 };

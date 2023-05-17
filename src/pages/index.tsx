@@ -1,6 +1,8 @@
 import React from "react";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
+import { fetchCachedData } from "@/lib/fetchData";
+
+import { card } from "@/data/interfaces";
 
 import {
   About,
@@ -15,14 +17,14 @@ import {
 
 import styles from "@/styles/home.module.scss";
 
-const Home = ({ articles }: { articles: [] }) => {
+const Home = ({ articles }: { articles: card[] }) => {
   return (
     <SEO>
       <div className={styles.main}>
         <Hero />
         <TopCards />
         <About />
-        <Articles />
+        <Articles data={articles} />
         <Community />
         <Diseases />
         <Market />
@@ -33,20 +35,13 @@ const Home = ({ articles }: { articles: [] }) => {
 };
 
 export async function getServerSideProps() {
-  try {
-    const articlesData = await request("/site/articles/get-latest-articles");
-    return {
-      props: {
-        articles: articlesData || null,
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        articles: null,
-      },
-    };
-  }
+  const articlesData = await fetchCachedData("/articles/get-latest-articles");
+
+  return {
+    props: {
+      articles: articlesData,
+    },
+  };
 }
 
 export default Home;

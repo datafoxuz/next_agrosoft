@@ -3,13 +3,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCard from "./swiperCard/SwiperCard";
 // import required modules
 import { FreeMode, Navigation, Autoplay } from "swiper";
+import { card } from "@/data/interfaces";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import styles from "./swipercards.module.scss";
 
-const SwiperCards = () => {
+const SwiperCards = ({ data }: { data: card[] }) => {
   return (
     <Swiper
       slidesPerView={"auto"}
@@ -28,30 +29,11 @@ const SwiperCards = () => {
       loop={true}
       speed={500}
     >
-      <SwiperSlide className={styles.swiper_slide}>
-        <SwiperCard />
-      </SwiperSlide>
-      <SwiperSlide className={styles.swiper_slide}>
-        <SwiperCard />
-      </SwiperSlide>
-      <SwiperSlide className={styles.swiper_slide}>
-        <SwiperCard />
-      </SwiperSlide>
-      <SwiperSlide className={styles.swiper_slide}>
-        <SwiperCard />
-      </SwiperSlide>
-      <SwiperSlide className={styles.swiper_slide}>
-        <SwiperCard />
-      </SwiperSlide>
-      <SwiperSlide className={styles.swiper_slide}>
-        <SwiperCard />
-      </SwiperSlide>
-      <SwiperSlide className={styles.swiper_slide}>
-        <SwiperCard />
-      </SwiperSlide>
-      <SwiperSlide className={styles.swiper_slide}>
-        <SwiperCard />
-      </SwiperSlide>
+      {data.map((item: card, index: number) => (
+        <SwiperSlide className={styles.swiper_slide} key={index}>
+          <SwiperCard data={item} />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };

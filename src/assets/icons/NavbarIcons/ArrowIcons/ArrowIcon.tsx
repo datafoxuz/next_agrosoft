@@ -15,9 +15,9 @@ const ArrowIcon = ({ active = false }: { active: boolean }) => {
         className={styles.line}
         d={`M15 ${active ? "7L8 1L1 7" : "1L8 7L1 1"}`}
         stroke="#B0DAC4"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

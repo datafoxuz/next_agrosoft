@@ -2,12 +2,13 @@ import React from "react";
 import { useRouter } from "next/router";
 import SwiperCards from "@/components/swiper/SwiperCards";
 import Image from "next/image";
+import { articles } from "@/data/interfaces";
 
 import styles from "./articles.module.scss";
 
 import half_logo from "@/assets/images/half_logo.png";
 
-const Articles = () => {
+const Articles = ({ data }: { data: articles[] }) => {
   const router = useRouter();
   function handleNavigate(path: string) {
     router.push(path);
@@ -32,7 +33,7 @@ const Articles = () => {
         </button>
       </div>
 
-      <SwiperCards />
+      <SwiperCards data={data} />
 
       <button
         className={styles.articles__bottom_button}
