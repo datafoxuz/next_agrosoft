@@ -106,7 +106,9 @@ const Navbar = ({
             <span>Sh Raxmatov</span>
           </Link>
         ) : (
-          <Link href="/login">Login</Link>
+          <Link href="/login" className={styles.login_link}>
+            Login
+          </Link>
         )}
 
         <div className={styles.modal_wrapper}>

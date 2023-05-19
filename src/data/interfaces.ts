@@ -28,8 +28,24 @@ export interface card {
   id: number;
   title: string;
   slug: string;
-  image: StaticImageData;
+  image?: StaticImageData;
+  images?: StaticImageData[];
   created_at: string;
+  body?: string;
+}
+
+export interface meta {
+  currentPage: number;
+  pageCount: number;
+  perPage: number;
+  totalCount: number;
+}
+
+export interface data {
+  success: boolean;
+  data: card[];
+  message: string;
+  meta: meta;
 }
 
 export interface siteWayTypes {

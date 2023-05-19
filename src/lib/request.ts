@@ -21,7 +21,7 @@ async function request(
       return returnNull ? null : [];
     }
 
-    const { data } = await response.json();
+    const data = await response.json();
     return data;
   } catch (err) {
     console.log(err);

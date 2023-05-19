@@ -1,5 +1,5 @@
 import { InternalPage, SNavbar } from "@/components";
-import { card } from "@/data/interfaces";
+import { card, data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchCachedData } from "@/lib/fetchData";
 import { useRouter } from "next/router";
@@ -18,12 +18,11 @@ const index = ({ article }: { article: card }) => {
       url: "/articles",
     },
     {
-      title: `${router.query.article}`,
+      title: `${article.title}`,
       url: `/articles/${router.query.article}`,
     },
   ];
 
-  console.log(article);
   return (
     <SEO metaTitle={`${router.query.article}`}>
       <SNavbar siteWay={siteWay} innerPage />
@@ -37,11 +36,11 @@ export async function getServerSideProps({
 }: {
   params: { article: string };
 }) {
-  const articleData = await fetchCachedData(`/article/${params.article}`);
+  const { data } = await fetchCachedData(`/article/${params.article}`);
 
   return {
     props: {
-      article: articleData,
+      article: data,
     },
   };
 }

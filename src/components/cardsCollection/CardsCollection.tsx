@@ -1,4 +1,4 @@
-import { card } from "@/data/interfaces";
+import { card, meta } from "@/data/interfaces";
 import Card from "./components/card/Card";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
@@ -10,11 +10,13 @@ import FilterSection from "../filterSection/FilterSection";
 
 const CardsCollection = ({
   data,
+  meta,
   community = false,
   account = false,
   product = false,
 }: {
   data: card[];
+  meta: meta;
   community?: boolean;
   account?: boolean;
   market?: boolean;
@@ -54,8 +56,8 @@ const CardsCollection = ({
       )}
 
       <Pagination
-        count={1}
-        page={currentPage}
+        count={meta.pageCount}
+        page={meta.currentPage}
         className={styles.pagination}
         onChange={handleChange}
       />

@@ -37,6 +37,7 @@
     column-gap: 20px;
     row-gap: 72px;
     margin-bottom: 80px;
+    min-height: 300px;
 
     @media only screen and (max-width: 1540px) {
       grid-template-columns: repeat(4, 1fr);
@@ -49,6 +50,7 @@
     @media screen and (max-width: variables.$default_tablet_width) {
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
+      min-height: fit-content;
     }
 
     @media screen and (max-width: variables.$small_tablet_width) {

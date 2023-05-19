@@ -3,14 +3,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCard from "./swiperCard/SwiperCard";
 // import required modules
 import { FreeMode, Navigation, Autoplay } from "swiper";
-import { card } from "@/data/interfaces";
+import { card, data } from "@/data/interfaces";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import styles from "./swipercards.module.scss";
 
-const SwiperCards = ({ data }: { data: card[] }) => {
+const SwiperCards = ({ data }: { data: data }) => {
   return (
     <Swiper
       slidesPerView={"auto"}
@@ -29,7 +29,7 @@ const SwiperCards = ({ data }: { data: card[] }) => {
       loop={true}
       speed={500}
     >
-      {data.map((item: card, index: number) => (
+      {data.data.map((item: card, index: number) => (
         <SwiperSlide className={styles.swiper_slide} key={index}>
           <SwiperCard data={item} />
         </SwiperSlide>

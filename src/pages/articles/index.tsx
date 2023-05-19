@@ -1,8 +1,8 @@
 import { Collections, SNavbar } from "@/components";
 import React from "react";
 import SEO from "@/layouts/seo/seo";
-import { clearCachedData, fetchCachedData } from "@/lib/fetchData";
-import { card, siteWayTypes } from "@/data/interfaces";
+import { fetchCachedData } from "@/lib/fetchData";
+import { data, siteWayTypes } from "@/data/interfaces";
 import { ParsedUrlQuery } from "querystring";
 
 import styles from "./articles.module.scss";
@@ -18,12 +18,12 @@ const siteWay: siteWayTypes[] = [
   },
 ];
 
-const index = ({ articles }: { articles: card[] }) => {
+const index = ({ articles }: { articles: data }) => {
   return (
     <SEO metaTitle="Articles">
       <div className={styles.articles}>
         <SNavbar siteWay={siteWay} title="Agro maqolalar" filter article />
-        <Collections data={articles} />
+        <Collections data={articles.data} meta={articles.meta} />
       </div>
     </SEO>
   );
@@ -32,10 +32,8 @@ const index = ({ articles }: { articles: card[] }) => {
 export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
   const page = query.page || 1;
   const articlesData = await fetchCachedData(
-    `/articles/articles-with-pagination?page=${page}&per_page=5`
+    `/articles/articles-with-pagination?page=${page}&per_page=2`
   );
-
-  clearCachedData();
 
   return {
     props: {

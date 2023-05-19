@@ -10,7 +10,7 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 
 import ShareIcon from "@mui/icons-material/Share";
 import Answer from "./Answer/Answer";
-import { articles, questionTypes } from "@/data/interfaces";
+import { card, questionTypes } from "@/data/interfaces";
 
 const InternalPage = ({
   questions = false,
@@ -19,7 +19,7 @@ const InternalPage = ({
 }: {
   questions?: boolean;
   about?: boolean;
-  data: articles;
+  data?: card;
 }) => {
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
     active: false,
@@ -43,7 +43,7 @@ const InternalPage = ({
 
       <div className={styles.image_wrapper}>
         <Image
-          src={data?.image}
+          src={data?.images ? data?.images[0] : ""}
           alt="about image"
           className={styles.image}
           width={680}
@@ -61,9 +61,7 @@ const InternalPage = ({
           </div>
         )}
       </div>
-      <h2 className={styles.title}>
-        Aholi xonadonlarida bedana boqish va ko‘paytirish
-      </h2>
+      <h2 className={styles.title}>{data?.title}</h2>
       {questions ? (
         <>
           {/* <CardActions data={data} /> */}
@@ -119,35 +117,7 @@ const InternalPage = ({
       ) : (
         <div className={styles.section}>
           <span className={styles.date}>12 March, 2024</span>
-          <h5 className={styles.description}>
-            Peppers can be rewarding and fun to grow, with so many different
-            types to be explored by cultivating this vegetable on your own. What
-            isn’t rewarding is a ruined crop from pests, disease, or poor
-            nutrition. The likelihood of these issues can be reduced or
-            mitigated without any added chemicals; instead, all you need are
-            some more plants! Adding companion plants for peppers to your garden
-            can reduce risks to your crop and may even increase the flavor and
-            yield of your peppers, so continue reading to learn more about
-            giving your veggies a helping hand from some friends. Peppers can be
-            rewarding and fun to grow, with so many different types to be
-            explored by cultivating this vegetable on your own. What isn’t
-            rewarding is a ruined crop from pests, disease, or poor nutrition.
-            The likelihood of these issues can be reduced or mitigated without
-            any added chemicals; instead, all you need are some more plants!
-            Adding companion plants for peppers to your garden can reduce risks
-            to your crop and may even increase the flavor and yield of your
-            peppers, so continue reading to learn more about giving your veggies
-            a helping hand from some friends. Peppers can be rewarding and fun
-            to grow, with so many different types to be explored by cultivating
-            this vegetable on your own. What isn’t rewarding is a ruined crop
-            from pests, disease, or poor nutrition. The likelihood of these
-            issues can be reduced or mitigated without any added chemicals;
-            instead, all you need are some more plants! Adding companion plants
-            for peppers to your garden can reduce risks to your crop and may
-            even increase the flavor and yield of your peppers, so continue
-            reading to learn more about giving your veggies a helping hand from
-            some friends.
-          </h5>
+          <h5 className={styles.description}>{data?.body}</h5>
         </div>
       )}
     </div>
