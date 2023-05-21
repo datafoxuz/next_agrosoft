@@ -1,10 +1,11 @@
 import { AddProduct, Collections, SNavbar } from "@/components";
-import { cardsForExample } from "@/data";
-import { questionTypes } from "@/data/interfaces";
+import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
+import { fetchData } from "@/lib/fetchData";
+import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
 
-const index = () => {
+const index = ({ categories }: { categories: data }) => {
   const [market, setMarket] = useState<questionTypes>({
     active: false,
   });
@@ -34,10 +35,20 @@ const index = () => {
       {market.active ? (
         <AddProduct state={market} setState={setMarket} />
       ) : (
-        <Collections data={cardsForExample} market />
+        <Collections data={categories.data} meta={categories.meta} market />
       )}
     </SEO>
   );
 };
+
+export async function getServerSideProps() {
+  const categoriesData = await fetchData(`/marketplace/categories`);
+
+  return {
+    props: {
+      categories: categoriesData,
+    },
+  };
+}
 
 export default index;

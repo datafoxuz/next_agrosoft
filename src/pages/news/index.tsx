@@ -1,9 +1,11 @@
 import { Collections, SNavbar } from "@/components";
-import { cardsForExample } from "@/data";
+import { card, data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
+import { fetchData } from "@/lib/fetchData";
+import { ParsedUrlQuery } from "querystring";
 import React from "react";
 
-const index = () => {
+const index = ({ articles }: { articles: data }) => {
   const siteWay = [
     {
       title: "Bosh sahifa",
@@ -16,11 +18,24 @@ const index = () => {
   ];
 
   return (
-    <SEO metaTitle="News">
+    <SEO metaTitle="News - AgroSoft">
       <SNavbar siteWay={siteWay} title="Yangiliklar" filter article />
-      <Collections data={cardsForExample} />
+      <Collections data={articles.data} meta={articles.meta} />
     </SEO>
   );
 };
+
+export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
+  const page = query.page || 1;
+  const articlesData = await fetchData(
+    `/articles/articles-with-pagination?page=${page}&per_page=5`
+  );
+
+  return {
+    props: {
+      articles: articlesData,
+    },
+  };
+}
 
 export default index;

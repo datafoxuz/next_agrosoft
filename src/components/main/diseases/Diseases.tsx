@@ -5,43 +5,9 @@ import Image from "next/image";
 import styles from "./diseases.module.scss";
 
 import diseases from "@/assets/images/diseases.png";
+import { card, data } from "@/data/interfaces";
 
-const Diseases = () => {
-  const diseasesData = [
-    {
-      title: "Shot Hole Disease",
-      image: diseases,
-    },
-    {
-      title: "Shot Hole Disease",
-      image: diseases,
-    },
-    {
-      title: "Shot Hole Disease",
-      image: diseases,
-    },
-    {
-      title: "Shot Hole Disease",
-      image: diseases,
-    },
-    {
-      title: "Shot Hole Disease",
-      image: diseases,
-    },
-    {
-      title: "Shot Hole Disease",
-      image: diseases,
-    },
-    {
-      title: "Shot Hole Disease",
-      image: diseases,
-    },
-    {
-      title: "Shot Hole Disease",
-      image: diseases,
-    },
-  ];
-
+const Diseases = ({ data }: { data: data }) => {
   const router = useRouter();
 
   function handleNavigate(path: string) {
@@ -58,16 +24,16 @@ const Diseases = () => {
 
         <div
           className={styles.diseases_grid}
-          data-length={diseasesData.length == 8}
+          data-length={data.data.length == 8}
         >
-          {diseasesData.map((item, index) => (
+          {data.data.map((item: card, index: number) => (
             <div
               className={styles.card}
               key={index}
-              onClick={() => handleNavigate(`/diseases/${item.title}`)}
+              onClick={() => handleNavigate(`/diseases/${item.slug}`)}
             >
               <Image
-                src={item.image.src}
+                src={item.image ? item.image : diseases.src}
                 alt="diseasess image"
                 className={styles.image}
                 width={300}

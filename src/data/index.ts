@@ -67,7 +67,7 @@ export const cardsForExample: cardTypes[] = [
 
 export const topcards: cardTypes[] = [
   {
-    url: "/articles",
+    url: "/blogs",
     image: articles,
     title: "Agro maqolalar",
     location: "Bukhara, Uzbekistan",

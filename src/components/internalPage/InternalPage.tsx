@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Write } from "@/components";
-import CardActions from "../cardsCollection/components/communityCard/cardActions/CardActions";
 import Image from "next/image";
 
 import styles from "./internalPage.module.scss";
@@ -43,7 +42,7 @@ const InternalPage = ({
 
       <div className={styles.image_wrapper}>
         <Image
-          src={data?.images ? data?.images[0] : ""}
+          src={data?.image ? data.image : ""}
           alt="about image"
           className={styles.image}
           width={680}
@@ -116,7 +115,7 @@ const InternalPage = ({
         </>
       ) : (
         <div className={styles.section}>
-          <span className={styles.date}>12 March, 2024</span>
+          {data?.date && <span className={styles.date}>12 March, 2024</span>}
           <h5 className={styles.description}>{data?.body}</h5>
         </div>
       )}

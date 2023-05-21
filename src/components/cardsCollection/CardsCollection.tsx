@@ -16,7 +16,7 @@ const CardsCollection = ({
   product = false,
 }: {
   data: card[];
-  meta: meta;
+  meta?: meta;
   community?: boolean;
   account?: boolean;
   market?: boolean;
@@ -55,12 +55,14 @@ const CardsCollection = ({
         <FilterSection active={product} />
       )}
 
-      <Pagination
-        count={meta.pageCount}
-        page={meta.currentPage}
-        className={styles.pagination}
-        onChange={handleChange}
-      />
+      {meta && (
+        <Pagination
+          count={meta.pageCount}
+          page={meta.currentPage}
+          className={styles.pagination}
+          onChange={handleChange}
+        />
+      )}
     </div>
   );
 };

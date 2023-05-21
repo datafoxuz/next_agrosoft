@@ -24,6 +24,14 @@ export interface questionTypes {
   descFile?: null | StaticImageData;
 }
 
+export interface seo {
+  title: string;
+  description: string;
+  image: StaticImageData;
+  author: string;
+  robots: string;
+}
+
 export interface card {
   id: number;
   title: string;
@@ -32,6 +40,10 @@ export interface card {
   images?: StaticImageData[];
   created_at: string;
   body?: string;
+  seo?: seo;
+  date?: "";
+  country_name?: string;
+  region_name?: string;
 }
 
 export interface meta {

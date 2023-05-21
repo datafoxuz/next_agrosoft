@@ -1,11 +1,11 @@
 import { Collections, SNavbar } from "@/components";
-import { card } from "@/data/interfaces";
+import { card, data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { clearCachedData, fetchCachedData } from "@/lib/fetchData";
+import { fetchData } from "@/lib/fetchData";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
 
-const index = ({ diseasess }: { diseasess: card[] }) => {
+const index = ({ diseasess }: { diseasess: data }) => {
   const siteWay = [
     {
       title: "Bosh sahifa",
@@ -20,16 +20,16 @@ const index = ({ diseasess }: { diseasess: card[] }) => {
   return (
     <SEO metaTitle="Diseases">
       <SNavbar siteWay={siteWay} title="Agro Kasalliklar" filter article />
-      <Collections data={diseasess} />
+      <Collections data={diseasess.data} meta={diseasess.meta} />
     </SEO>
   );
 };
 
 export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
   const page = query.page || 1;
-  const diseasesData = await fetchCachedData(`/deceases/get-popular-deceases`);
-
-  clearCachedData();
+  const diseasesData = await fetchData(
+    `/deceases/get-deceases?page=${page}&per_page=5`
+  );
 
   return {
     props: {

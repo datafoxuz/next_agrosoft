@@ -1,10 +1,6 @@
 import { request } from "./request";
 
-export async function fetchCachedData(api: string) {
-  // if (cachedData) {
-  //   return cachedData;
-  // }
-
+export async function fetchData(api: string) {
   try {
     const data = await request(api);
     return data;

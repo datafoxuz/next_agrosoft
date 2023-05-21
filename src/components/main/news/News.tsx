@@ -3,12 +3,13 @@ import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { card, data } from "@/data/interfaces";
 
 import styles from "./news.module.scss";
 
 import calendar from "@/assets/icons/calendar.svg";
 
-const News = () => {
+const News = ({ data }: { data: data }) => {
   const communityData = [
     {
       title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
@@ -31,6 +32,7 @@ const News = () => {
       comments: 11,
     },
   ];
+  const newCard: card[] = data.data.slice(0, 2);
 
   const router = useRouter();
 
@@ -43,7 +45,7 @@ const News = () => {
       <div className={styles.main_news}>
         <h2 className={styles.news_title}>So’nggi yangiliklar</h2>
         <div className={styles.new_wrapper}>
-          <SwiperCard cardDate="12.04.2023" />
+          <SwiperCard cardDate="12.04.2023" data={newCard[0]} />
           <div className={styles.news_section}>
             {communityData.slice(0, 3).map((item, index) => (
               <div className={styles.news_list} key={index}>

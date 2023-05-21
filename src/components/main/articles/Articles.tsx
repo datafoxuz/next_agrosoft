@@ -2,13 +2,13 @@ import React from "react";
 import { useRouter } from "next/router";
 import SwiperCards from "@/components/swiper/SwiperCards";
 import Image from "next/image";
-import { articles } from "@/data/interfaces";
+import { card, data } from "@/data/interfaces";
 
 import styles from "./articles.module.scss";
 
 import half_logo from "@/assets/images/half_logo.png";
 
-const Articles = ({ data }: { data: articles[] }) => {
+const Articles = ({ data }: { data: data }) => {
   const router = useRouter();
   function handleNavigate(path: string) {
     router.push(path);
@@ -27,7 +27,7 @@ const Articles = ({ data }: { data: articles[] }) => {
         <h2 className={styles.articles_title}>sO’NGGI mAQOLALAR</h2>
         <button
           className={styles.articles__top_button}
-          onClick={() => handleNavigate("/articles")}
+          onClick={() => handleNavigate("/blogs")}
         >
           Barchasini o’qish
         </button>
@@ -37,7 +37,7 @@ const Articles = ({ data }: { data: articles[] }) => {
 
       <button
         className={styles.articles__bottom_button}
-        onClick={() => handleNavigate("/articles")}
+        onClick={() => handleNavigate("/blogs")}
       >
         Barchasini o’qish
       </button>

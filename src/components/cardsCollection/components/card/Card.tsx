@@ -5,8 +5,6 @@ import Image from "next/image";
 
 import styles from "./card.module.scss";
 
-import RoomIcon from "@mui/icons-material/Room";
-
 const Card = ({ item }: { item: card }) => {
   const router = useRouter();
 
@@ -25,7 +23,7 @@ const Card = ({ item }: { item: card }) => {
   return (
     <div className={styles.card} onClick={() => handleCardClick(item.slug)}>
       <Image
-        src={item.image}
+        src={item.image ? item.image : ""}
         alt={`image about ${item.title}`}
         className={styles.image}
         width={305}
