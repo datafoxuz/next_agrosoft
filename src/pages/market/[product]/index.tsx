@@ -1,5 +1,4 @@
 import { Collections, SNavbar } from "@/components";
-import { topcards } from "@/data";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";

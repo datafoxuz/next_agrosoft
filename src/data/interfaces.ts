@@ -42,8 +42,15 @@ export interface card {
   body?: string;
   seo?: seo;
   date?: "";
+  author_name?: string;
+  author_phone?: number;
   country_name?: string;
   region_name?: string;
+  low_price?: number;
+  high_price?: number;
+  amount_type_name?: string;
+  answers_count?: number;
+  is_answered?: number;
 }
 
 export interface meta {
@@ -64,3 +71,8 @@ export interface siteWayTypes {
   title: string;
   url: string;
 }
+
+export type Location = {
+  latitude: number;
+  longitude: number;
+} | null;

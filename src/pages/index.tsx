@@ -2,7 +2,7 @@ import React from "react";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
 
-import { card, data } from "@/data/interfaces";
+import { data } from "@/data/interfaces";
 
 import {
   About,
@@ -21,10 +21,12 @@ const Home = ({
   blogs,
   diseases,
   news,
+  communities,
 }: {
   blogs: data;
   diseases: data;
   news: data;
+  communities: data;
 }) => {
   return (
     <SEO>
@@ -33,7 +35,7 @@ const Home = ({
         <TopCards />
         <About />
         <Articles data={blogs} />
-        <Community />
+        <Community data={communities} />
         <Diseases data={diseases} />
         <Market />
         <News data={news} />
@@ -46,12 +48,14 @@ export async function getServerSideProps() {
   const blogsData = await fetchData("/blogs/get-latest-blogs");
   const diseasesData = await fetchData("/deceases/get-popular-deceases");
   const newsData = await fetchData("/articles/get-latest-articles");
+  const communitiesData = await fetchData("/community/latest-problems");
 
   return {
     props: {
       blogs: blogsData,
       diseases: diseasesData,
       news: newsData,
+      communities: communitiesData,
     },
   };
 }

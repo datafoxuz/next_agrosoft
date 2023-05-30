@@ -1,4 +1,4 @@
-import { articles, cardTypes } from "@/data/interfaces";
+import { card } from "@/data/interfaces";
 import { useRouter } from "next/router";
 import React from "react";
 import CardActions from "./cardActions/CardActions";
@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import styles from "./communitycard.module.scss";
 
-const CommunityCard = ({ data }: { data: articles }) => {
+const CommunityCard = ({ data }: { data: card }) => {
   const router = useRouter();
 
   return (
@@ -15,7 +15,7 @@ const CommunityCard = ({ data }: { data: articles }) => {
       onClick={() => router.push(`${router.asPath}/${data.title}`)}
     >
       <Image
-        src={data.image.src}
+        src={data.image ? data.image : ""}
         alt={`image about ${data.title}`}
         className={styles.image}
         width={220}

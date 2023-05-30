@@ -23,6 +23,8 @@
     height: 137px;
     border-radius: 144px;
     flex: 4;
+    object-fit: cover;
+    object-position: center;
 
     @media screen and (max-width: variables.$small_tablet_width) {
       width: 330px;
@@ -31,7 +33,7 @@
   }
 
   .card_infos {
-    flex: 8;
+    flex: 6;
     .description {
       width: 349px;
       @extend %main-text-16;
