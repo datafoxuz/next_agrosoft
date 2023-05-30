@@ -4,7 +4,6 @@ import Image from "next/image";
 
 import styles from "./internalPage.module.scss";
 
-import image from "@/assets/images/community.png";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 
 import ShareIcon from "@mui/icons-material/Share";
