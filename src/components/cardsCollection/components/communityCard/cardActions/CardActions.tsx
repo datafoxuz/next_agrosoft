@@ -1,5 +1,5 @@
 import React from "react";
-import { cardTypes } from "@/data/interfaces";
+import { card, cardTypes } from "@/data/interfaces";
 import Image from "next/image";
 
 import styles from "./cardactions.module.scss";
@@ -13,7 +13,7 @@ const CardActions = ({
   data,
   inCallection = false,
 }: {
-  data: cardTypes;
+  data: card;
   inCallection?: boolean;
 }) => {
   return (
@@ -26,7 +26,7 @@ const CardActions = ({
           width={13}
           height={13}
         />
-        <h5>{data.commentsNum}</h5>
+        <h5>{data.answers_count}</h5>
       </div>
       <div className={styles.info}>
         <Image
@@ -36,17 +36,21 @@ const CardActions = ({
           width={13}
           height={13}
         />
-        <h5>{data.date}</h5>
+        <h5>{data.created_at}</h5>
       </div>
-      <div className={styles.answer_info} data-checked={data.answered}>
+      <div className={styles.answer_info} data-checked={data.is_answered}>
         <Image
-          src={data.answered ? `${verification.src}` : `${verificationDis.src}`}
+          src={
+            data.is_answered == 1
+              ? `${verification.src}`
+              : `${verificationDis.src}`
+          }
           alt="verification icon"
           className={styles.icon}
           width={13}
           height={13}
         />
-        <h5>{data.answered ? `Answered` : `Not answered`}</h5>
+        <h5>{data.is_answered ? `Answered` : `Not answered`}</h5>
       </div>
     </div>
   );

@@ -5,6 +5,8 @@ import Image from "next/image";
 
 import styles from "./card.module.scss";
 
+import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
+
 const Card = ({ item }: { item: card }) => {
   const router = useRouter();
 
@@ -30,17 +32,17 @@ const Card = ({ item }: { item: card }) => {
         height={205}
       />
 
-      {/* {item.location && (
+      {item.country_name && (
         <div className={styles.location}>
-          <RoomIcon className={styles.icon} /> {item.location}
+          <FmdGoodOutlinedIcon className={styles.icon} />{" "}
+          {item.region_name && item.region_name}, {item.country_name}
         </div>
       )}
 
-
-      {item.price && (
-        <div className={styles.price}>{item.price} USD / per kg</div>
-        )} */}
       <p className={styles.title}>{item.title}</p>
+      {item.high_price && (
+        <div className={styles.price}>{item.high_price} USD / per kg</div>
+      )}
     </div>
   );
 };

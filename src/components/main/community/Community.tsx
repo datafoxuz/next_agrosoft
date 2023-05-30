@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { card, data } from "@/data/interfaces";
 
 import styles from "./community.module.scss";
 
@@ -9,30 +10,7 @@ import cotton from "@/assets/images/cotton.png";
 import comment from "@/assets/icons/comment.svg";
 import leaf_small from "@/assets/images/leaf_small.png";
 
-const Community = () => {
-  const communityData = [
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 12,
-    },
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 14,
-    },
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 16,
-    },
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 12,
-    },
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 11,
-    },
-  ];
-
+const Community = ({ data }: { data: data }) => {
   const router = useRouter();
 
   function handleNavigate(path: string) {
@@ -54,15 +32,13 @@ const Community = () => {
           height={242}
         />
         <div className={styles.community_questions}>
-          {communityData.map((item, index) => (
+          {data.data.map((item: card, index: number) => (
             <Link
               href={`/community/${item.title}`}
               className={styles.question}
               key={index}
             >
-              <p className={styles.text}>
-                Pomidorning falon kasalligiga qanday kurashish mumkin?
-              </p>
+              <p className={styles.text}>{item.title}</p>
               <div className={styles.comment_section}>
                 <Image
                   src={comment.src}
@@ -71,7 +47,7 @@ const Community = () => {
                   width={22}
                   height={22}
                 />
-                <span>{item.comments}</span>
+                <span>{item.answers_count}</span>
               </div>
             </Link>
           ))}

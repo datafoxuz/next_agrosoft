@@ -69,27 +69,27 @@ const Footer = () => {
           </div>
           <div className={styles.footer_links_wrapper}>
             <div className={styles.footer_links}>
-              <Link href="" className={styles.link}>
+              <Link href="/about" className={styles.link}>
                 Biz haqimizda
               </Link>
-              <Link href="" className={styles.link}>
+              <Link href="/weather" className={styles.link}>
                 Ob-havo ma’lumotlari
               </Link>
-              <Link href="" className={styles.link}>
+              <Link href="/news" className={styles.link}>
                 Yangiliklar
               </Link>
             </div>
             <div className={styles.footer_links}>
-              <Link href="" className={styles.link}>
+              <Link href="/community" className={styles.link}>
                 Agro jamiyat
               </Link>
-              <Link href="" className={styles.link}>
+              <Link href="diseases" className={styles.link}>
                 Agro kasallikar
               </Link>
-              <Link href="" className={styles.link}>
+              <Link href="/blogs" className={styles.link}>
                 Agro maqolalar
               </Link>
-              <Link href="" className={styles.link}>
+              <Link href="/market" className={styles.link}>
                 Agro market
               </Link>
             </div>
