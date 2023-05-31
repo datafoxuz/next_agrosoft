@@ -48,7 +48,6 @@ export async function getServerSideProps({
       },
     };
   } catch (error) {
-    console.log(error);
     return {
       props: {
         article: undefined, // Set article to undefined in case of an error

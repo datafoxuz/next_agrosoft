@@ -8,8 +8,10 @@ import "nprogress/nprogress.css";
 
 // Show the NProgress bar on page load
 NProgress.configure({ showSpinner: false, speed: 500 });
-Router.events.on("routeChangeStart", () => {
-  NProgress.start();
+Router.events.on("routeChangeStart", (url) => {
+  if (!url.includes("?search=") && !url.includes("&search=")) {
+    NProgress.start();
+  }
 });
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
