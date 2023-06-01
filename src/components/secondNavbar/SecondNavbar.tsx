@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import SiteWay from "../siteWay/SiteWay";
 import SortDrawer from "../sortDrawer/SortDrawer";
 import Image from "next/image";
+import { handleChange, handleClick, shortenString } from "./utils/navbarUtils";
 
 import styles from "./secondnavbar.module.scss";
 
@@ -55,40 +56,6 @@ const SecondNavbar = ({
   });
   const [searchVal, setSearchVal] = useState<string>("");
 
-  function handleClick() {
-    if (setState && state) {
-      setState({
-        ...state,
-        active: !state.active,
-      });
-    }
-  }
-
-  function shortenString(str: string | undefined, maxLength: number) {
-    if (str) {
-      if (str.length > maxLength) {
-        return str.slice(0, maxLength) + "...";
-      } else {
-        return str;
-      }
-    }
-  }
-
-  function handleChange(str: string) {
-    setSearchVal(str);
-    if (!router.query.page) {
-      router.replace(`${router.pathname}?search=${str}`, undefined, {
-        shallow: false,
-      });
-    } else {
-      router.push(
-        `${router.pathname}?page=${router.query.page}&search=${str}`,
-        undefined,
-        { shallow: false }
-      );
-    }
-  }
-
   return (
     <>
       <div
@@ -112,7 +79,9 @@ const SecondNavbar = ({
                   placeholder="Kalit so’zni yozing"
                   className={styles.input}
                   value={searchVal}
-                  onChange={(e) => handleChange(e.target.value)}
+                  onChange={(e) =>
+                    handleChange(router, e.target.value, setSearchVal)
+                  }
                 />
               </div>
             )}
@@ -139,7 +108,7 @@ const SecondNavbar = ({
                   <button
                     type="button"
                     className={styles.filter_button}
-                    onClick={handleClick}
+                    onClick={() => handleClick(state, setState)}
                   >
                     Filter
                     <Image
@@ -209,7 +178,7 @@ const SecondNavbar = ({
               <button
                 type="button"
                 className={styles.add_button}
-                onClick={handleClick}
+                onClick={() => handleClick(state, setState)}
               >
                 Savol yozish
               </button>
@@ -219,7 +188,7 @@ const SecondNavbar = ({
               <button
                 type="button"
                 className={styles.add_button}
-                onClick={handleClick}
+                onClick={() => handleClick(state, setState)}
               >
                 Mahsulot qo’shish
               </button>
@@ -229,7 +198,7 @@ const SecondNavbar = ({
               <button
                 type="button"
                 className={styles.add_button}
-                onClick={handleClick}
+                onClick={() => handleClick(state, setState)}
               >
                 Biz bilan bog’laning
               </button>
@@ -247,7 +216,7 @@ const SecondNavbar = ({
                   <button>
                     <RateReviewIcon
                       className={styles.icon}
-                      onClick={() => handleClick()}
+                      onClick={() => handleClick(state, setState)}
                     />
                   </button>
                 )}
@@ -256,7 +225,7 @@ const SecondNavbar = ({
                   <button>
                     <AddBoxIcon
                       className={styles.icon}
-                      onClick={() => handleClick()}
+                      onClick={() => handleClick(state, setState)}
                     />
                   </button>
                 )}
@@ -265,7 +234,7 @@ const SecondNavbar = ({
                   <button>
                     <FilterListIcon
                       className={styles.icon}
-                      onClick={() => handleClick()}
+                      onClick={() => handleClick(state, setState)}
                     />
                   </button>
                 )}

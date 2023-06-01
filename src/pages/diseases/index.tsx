@@ -1,7 +1,8 @@
-import { Collections, SNavbar } from "@/components";
+import { Collections, NotFound, SNavbar } from "@/components";
 import { card, data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { searchDatas } from "@/lib/searchData";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
 
@@ -20,16 +21,28 @@ const index = ({ diseasess }: { diseasess: data }) => {
   return (
     <SEO metaTitle="Diseases">
       <SNavbar siteWay={siteWay} title="Agro Kasalliklar" filter article />
-      <Collections data={diseasess.data} meta={diseasess.meta} />
+
+      {diseasess.data.length ? (
+        <Collections data={diseasess.data} meta={diseasess.meta} />
+      ) : (
+        <NotFound />
+      )}
     </SEO>
   );
 };
 
 export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
   const page = query.page || 1;
-  const diseasesData = await fetchData(
-    `/deceases/get-deceases?page=${page}&per_page=5`
-  );
+  const search = query.search || "";
+  let diseasesData;
+
+  if (search.length) {
+    diseasesData = await searchDatas(`/decease-search?q=${search}`);
+  } else {
+    diseasesData = await fetchData(
+      `/deceases/get-deceases?page=${page}&per_page=5`
+    );
+  }
 
   return {
     props: {
