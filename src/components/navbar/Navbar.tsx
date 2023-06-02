@@ -9,6 +9,7 @@ import {
 import { openObjTypes } from "./data";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 //icons
 import HamburgerIcon from "@/assets/icons/HamburgerIcon/HamburgerIcon";
@@ -35,6 +36,8 @@ const Navbar = ({
     languagesModal: false,
     burgerMenu: false,
   });
+
+  const { data: session } = useSession();
 
   return (
     <div className={styles.navbar} data-static={isStatic} data-auth={auth}>
@@ -100,7 +103,7 @@ const Navbar = ({
       </div>
 
       <div className={`${styles.section} ${styles.r_section}`}>
-        {false ? (
+        {session?.user ? (
           <Link href="/account" className={styles.ava_section}>
             <AccountCircleIcon />
             <span>Sh Raxmatov</span>
