@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { authProps } from "../data";
-import { request } from "@/lib/request";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 import styles from "../auth.module.scss";
 
@@ -22,19 +21,23 @@ const Login = ({ tabId, setTabId }: authProps) => {
   const router = useRouter();
 
   const handleLogin = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    username: string,
+    password: string
   ) => {
     e.preventDefault();
-
+    // Sign in using the provided credentials
     const result = await signIn("credentials", {
-      // redirect: false,
-      ...user,
-      // callbackUrl: "/",
+      username,
+      password,
+      redirect: true,
+      callbackUrl: "/",
     });
 
     if (result && !result.error) {
-      // Redirect or handle successful login
+      router.push("/");
     } else {
+      console.error("Login failed:", result?.error);
       // Handle login error
     }
   };
@@ -80,7 +83,10 @@ const Login = ({ tabId, setTabId }: authProps) => {
         </p>
 
         <div className={styles.buttons_wrapper}>
-          <button type="button" onClick={(e) => handleLogin(e)}>
+          <button
+            type="button"
+            onClick={(e) => handleLogin(e, user.email, user.password)}
+          >
             Tizimga kirish
           </button>
           <button type="button" onClick={() => router.push("/registration")}>

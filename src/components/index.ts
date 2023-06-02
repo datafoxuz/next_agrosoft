@@ -9,3 +9,4 @@ export { default as Write } from "./write/Write";
 export { default as FilterSelect } from "./filterSelect/FilterSelect";
 export { default as AddProduct } from "./addProduct/AddProduct";
 export { default as SortDrawer } from "./sortDrawer/SortDrawer";
+export { default as NotFound } from "./notFound/NotFound";
