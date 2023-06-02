@@ -13,6 +13,7 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SearchIcon from "@mui/icons-material/Search";
+import { useRouter } from "next/router";
 
 const SecondNavbar = ({
   siteWay,
@@ -41,6 +42,8 @@ const SecondNavbar = ({
   about?: boolean;
   account?: boolean;
 }) => {
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState<{
     buy: boolean;
     filter1: boolean;
@@ -50,6 +53,7 @@ const SecondNavbar = ({
     filter1: false,
     filter2: false,
   });
+  const [searchVal, setSearchVal] = useState<string>("");
 
   function handleClick() {
     if (setState && state) {
@@ -67,6 +71,21 @@ const SecondNavbar = ({
       } else {
         return str;
       }
+    }
+  }
+
+  function handleChange(str: string) {
+    setSearchVal(str);
+    if (!router.query.page) {
+      router.replace(`${router.pathname}?search=${str}`, undefined, {
+        shallow: false,
+      });
+    } else {
+      router.push(
+        `${router.pathname}?page=${router.query.page}&search=${str}`,
+        undefined,
+        { shallow: false }
+      );
     }
   }
 
@@ -92,6 +111,8 @@ const SecondNavbar = ({
                   type="text"
                   placeholder="Kalit so’zni yozing"
                   className={styles.input}
+                  value={searchVal}
+                  onChange={(e) => handleChange(e.target.value)}
                 />
               </div>
             )}

@@ -9,7 +9,15 @@ import {
 import { openObjTypes } from "./data";
 import { useRouter } from "next/router";
 import Image from "next/image";
+<<<<<<< HEAD
+import { useSession } from "next-auth/react";
+<<<<<<< HEAD
 
+=======
+>>>>>>> f6e8c4d347747cfe5d56156bd1f46f372bef65c5
+=======
+
+>>>>>>> parent of f6e8c4d (search)
 //icons
 import HamburgerIcon from "@/assets/icons/HamburgerIcon/HamburgerIcon";
 import temperature from "@/assets/icons/NavbarIcons/sun_yellow.svg";
@@ -35,6 +43,8 @@ const Navbar = ({
     languagesModal: false,
     burgerMenu: false,
   });
+
+  const { data: session } = useSession();
 
   return (
     <div className={styles.navbar} data-static={isStatic} data-auth={auth}>

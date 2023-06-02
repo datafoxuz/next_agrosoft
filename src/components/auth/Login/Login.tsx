@@ -11,10 +11,10 @@ import passwordOff from "@/assets/icons/Auth/password_off.svg";
 
 const Login = ({ tabId, setTabId }: authProps) => {
   const [user, setUser] = useState<{
-    email: string;
+    username: string;
     password: string;
   }>({
-    email: "",
+    username: "",
     password: "",
   });
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
@@ -34,11 +34,11 @@ const Login = ({ tabId, setTabId }: authProps) => {
           type="text"
           placeholder="Login yoki telefon raqamingiz"
           className={styles.input}
-          value={user.email}
+          value={user.username}
           onChange={(e) =>
             setUser((prevState) => ({
               ...prevState,
-              email: e.target.value,
+              username: e.target.value,
             }))
           }
         />
