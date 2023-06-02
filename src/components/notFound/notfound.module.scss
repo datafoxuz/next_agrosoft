@@ -1,0 +1,28 @@
+@use "../../styles/variables" as variables;
+
+.notfound {
+  height: 56.4vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+
+  .content_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+    .image {
+      width: 122px;
+      height: 122px;
+    }
+
+    .title {
+      color: #cee5da;
+      font-size: 20px;
+      line-height: 120%;
+      letter-spacing: 0.15px;
+      text-transform: uppercase;
+    }
+  }
+}

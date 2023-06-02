@@ -1,8 +1,9 @@
-import { Collections, SNavbar, Write } from "@/components";
+import { Collections, NotFound, SNavbar, Write } from "@/components";
 import { cardsForExample } from "@/data";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { searchDatas } from "@/lib/searchData";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
 
@@ -26,8 +27,6 @@ const index = ({ communities }: { communities: data }) => {
     },
   ];
 
-  console.log(communities);
-
   return (
     <SEO metaTitle="Community">
       <SNavbar
@@ -41,8 +40,10 @@ const index = ({ communities }: { communities: data }) => {
 
       {question.active ? (
         <Write state={question} setState={setQuestion} quiz />
-      ) : (
+      ) : communities.data.length ? (
         <Collections data={communities.data} community />
+      ) : (
+        <NotFound />
       )}
     </SEO>
   );
@@ -50,9 +51,16 @@ const index = ({ communities }: { communities: data }) => {
 
 export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
   const page = query.page || 1;
-  const communitiesData = await fetchData(
-    `/community/index?page=${page}&per_page=5`
-  );
+  const search = query.search || "";
+  let communitiesData;
+
+  if (search.length) {
+    communitiesData = await searchDatas(`/community-search?q=${search}`);
+  } else {
+    communitiesData = await fetchData(
+      `/community/index?page=${page}&per_page=5`
+    );
+  }
 
   return {
     props: {

@@ -64,8 +64,6 @@ const WeatherPage = () => {
     },
   ];
 
-  console.log(weatherData);
-
   return (
     <WeatherLayout>
       <SEO metaTitle="Weather">

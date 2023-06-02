@@ -1,7 +1,8 @@
-import { AddProduct, Collections, SNavbar } from "@/components";
+import { AddProduct, Collections, NotFound, SNavbar } from "@/components";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { searchDatas } from "@/lib/searchData";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
 
@@ -34,15 +35,25 @@ const index = ({ categories }: { categories: data }) => {
 
       {market.active ? (
         <AddProduct state={market} setState={setMarket} />
-      ) : (
+      ) : categories.data.length ? (
         <Collections data={categories.data} meta={categories.meta} market />
+      ) : (
+        <NotFound />
       )}
     </SEO>
   );
 };
 
-export async function getServerSideProps() {
-  const categoriesData = await fetchData(`/marketplace/categories`);
+export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
+  const search = query.search || "";
+
+  let categoriesData;
+
+  if (search.length) {
+    categoriesData = await searchDatas(`/marketplace-search?q=${search}`);
+  } else {
+    categoriesData = await fetchData(`/marketplace/categories`);
+  }
 
   return {
     props: {

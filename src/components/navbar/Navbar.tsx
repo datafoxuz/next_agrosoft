@@ -9,15 +9,11 @@ import {
 import { openObjTypes } from "./data";
 import { useRouter } from "next/router";
 import Image from "next/image";
-<<<<<<< HEAD
 import { useSession } from "next-auth/react";
 <<<<<<< HEAD
 
 =======
 >>>>>>> f6e8c4d347747cfe5d56156bd1f46f372bef65c5
-=======
-
->>>>>>> parent of f6e8c4d (search)
 //icons
 import HamburgerIcon from "@/assets/icons/HamburgerIcon/HamburgerIcon";
 import temperature from "@/assets/icons/NavbarIcons/sun_yellow.svg";
@@ -36,6 +32,8 @@ const Navbar = ({
   isStatic?: boolean;
   auth?: boolean;
 }) => {
+  const session = useSession();
+
   const router = useRouter();
 
   const [open, setOpen] = useState<openObjTypes>({
@@ -110,7 +108,7 @@ const Navbar = ({
       </div>
 
       <div className={`${styles.section} ${styles.r_section}`}>
-        {false ? (
+        {session.status == "authenticated" ? (
           <Link href="/account" className={styles.ava_section}>
             <AccountCircleIcon />
             <span>Sh Raxmatov</span>
