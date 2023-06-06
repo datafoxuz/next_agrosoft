@@ -38,9 +38,7 @@ const index = ({ communities }: { communities: data }) => {
         setState={setQuestion}
       />
 
-      {question.active ? (
-        <Write state={question} setState={setQuestion} quiz />
-      ) : communities.data.length ? (
+      {communities.data.length ? (
         <Collections data={communities.data} community />
       ) : (
         <NotFound />

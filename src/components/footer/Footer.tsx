@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { request } from "@/lib/request";
 
 //assets
 import arrow from "@/assets/icons/arrow_top_footer.svg";
 
 import styles from "./footer.module.scss";
+import { baseUrl } from "@/data";
 
 const Footer = () => {
+  const [email, setEmail] = useState<string>("");
+  const [isError, setIsError] = useState<boolean>(false);
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSubscribe = async (email: string) => {
+    if (email.length) {
+      setIsError(false);
+      const data = await request(
+        `/email-subscribe`,
+        "POST",
+        JSON.stringify({ email })
+      );
+    } else {
+      setIsError(true);
+    }
   };
 
   return (
@@ -33,14 +50,20 @@ const Footer = () => {
             <p className={styles.text}>
               So’nggi yangiliklardan habardor bo’lib turing
             </p>
-            <div className={styles.input_section}>
+            <div className={styles.input_section} data-err={isError}>
               <input
                 type="text"
                 placeholder="Emailingizni kiriting"
                 className={styles.footer_input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <button type="button" className={styles.footer_button}>
-                Obuna bo’lsih
+              <button
+                type="button"
+                className={styles.footer_button}
+                onClick={() => handleSubscribe(email)}
+              >
+                Obuna bo’lish
               </button>
             </div>
           </div>

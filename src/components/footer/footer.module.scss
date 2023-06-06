@@ -78,8 +78,13 @@
           background: #e6f3ec;
           border-radius: 144px;
           width: 563px;
+          border: 1px solid transparent;
           @media screen and (max-width: variables.$high_res_tablet_width) {
             width: 100%;
+          }
+
+          &[data-err="true"] {
+            border-color: #ea1a39;
           }
 
           .footer_input {

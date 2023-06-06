@@ -8,7 +8,7 @@ import community from "@/assets/images/community.png";
 import diseases from "@/assets/images/diseases.png";
 import market from "@/assets/images/market.png";
 
-import { cardTypes } from "./interfaces";
+import { card, cardTypes } from "./interfaces";
 
 export const baseUrl = "https://agrosoft.uz/api/v1/site";
 
@@ -19,7 +19,7 @@ export const MOTION_CONFIGS = {
   exit: { y: 0, opacity: 0 },
 };
 
-export const cardsForExample: cardTypes[] = [
+export const cardsForExample: card[] = [
   {
     image: articlesImage,
     title:
@@ -28,6 +28,9 @@ export const cardsForExample: cardTypes[] = [
     commentsNum: "5",
     date: "3.06.2022",
     answered: true,
+    id: 2,
+    slug: "",
+    created_at: "",
   },
   {
     image: communityImage,
@@ -36,6 +39,9 @@ export const cardsForExample: cardTypes[] = [
     commentsNum: "15",
     date: "3.06.2022",
     answered: false,
+    id: 2,
+    slug: "",
+    created_at: "",
   },
   {
     image: diseasesImage,
@@ -44,6 +50,9 @@ export const cardsForExample: cardTypes[] = [
     commentsNum: "5",
     date: "31.06.2022",
     answered: false,
+    id: 1,
+    slug: "",
+    created_at: "",
   },
   {
     image: marketImage,
@@ -53,6 +62,9 @@ export const cardsForExample: cardTypes[] = [
     commentsNum: "5",
     date: "3.06.2022",
     answered: true,
+    id: 2,
+    slug: "",
+    created_at: "",
   },
   {
     image: articlesImage,
@@ -62,6 +74,9 @@ export const cardsForExample: cardTypes[] = [
     commentsNum: "5",
     date: "3.06.2022",
     answered: true,
+    id: 2,
+    slug: "",
+    created_at: "",
   },
 ];
 

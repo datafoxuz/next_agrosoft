@@ -9,15 +9,25 @@ import styles from "../auth.module.scss";
 import passwordOn from "@/assets/icons/Auth/password_on.svg";
 import passwordOff from "@/assets/icons/Auth/password_off.svg";
 
+interface inpProps {
+  username: string;
+  password: string;
+  prevState?: {};
+}
+
 const Login = ({ tabId, setTabId }: authProps) => {
-  const [user, setUser] = useState<{
-    username: string;
-    password: string;
-  }>({
-    username: "",
-    password: "",
+  const [user, setUser] = useState<inpProps>({
+    username: "fayzulloevasadbek@gmail.com",
+    password: "password",
   });
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
+  const [isError, setIsError] = useState<{
+    username: boolean;
+    password: boolean;
+  }>({
+    username: false,
+    password: false,
+  });
   const router = useRouter();
 
   const handleLogin = async (
@@ -25,22 +35,62 @@ const Login = ({ tabId, setTabId }: authProps) => {
     username: string,
     password: string
   ) => {
-    e.preventDefault();
-    // Sign in using the provided credentials
-    const result = await signIn("credentials", {
-      username,
-      password,
-      redirect: true,
-      callbackUrl: "/",
-    });
+    if (username.length > 13 && password.length > 4) {
+      e.preventDefault();
+      setIsError({ username: false, password: false });
+      // Sign in using the provided credentials
+      const result = await signIn("credentials", {
+        username: user.username,
+        password: user.password,
+        redirect: true,
+        callbackUrl: "/",
+      });
 
-    if (result && !result.error) {
-      router.push("/");
+      if (result && !result.error) {
+        router.push("/");
+      }
     } else {
-      console.error("Login failed:", result?.error);
-      // Handle login error
+      if (username.length < 13) {
+        setIsError((value) => ({
+          ...value,
+          username: true,
+        }));
+      } else {
+        setIsError((value) => ({
+          ...value,
+          password: true,
+        }));
+      }
     }
   };
+
+  function handleChangeUserInp(value: string) {
+    setUser((prevstate) => ({
+      ...prevstate,
+      username: value,
+    }));
+
+    if (user.username.length >= 13) {
+      setIsError((prevstate) => ({
+        ...prevstate,
+        username: false,
+      }));
+    }
+  }
+
+  function handleChangePassInp(value: string) {
+    setUser((prevstate) => ({
+      ...prevstate,
+      password: value,
+    }));
+
+    if (user.password.length >= 4) {
+      setIsError((prevstate) => ({
+        ...prevstate,
+        password: false,
+      }));
+    }
+  }
 
   return (
     <div className={styles.modal}>
@@ -49,26 +99,24 @@ const Login = ({ tabId, setTabId }: authProps) => {
         <input
           type="text"
           placeholder="Login yoki telefon raqamingiz"
-          className={styles.input}
+          className={`${styles.input} ${styles.username_inp}`}
           value={user.username}
-          onChange={(e) =>
-            setUser((prevState) => ({
-              ...prevState,
-              username: e.target.value,
-            }))
-          }
+          data-err={isError.username}
+          onChange={(e) => handleChangeUserInp(e.target.value)}
         />
+        {isError.username ? (
+          <p className={styles.error_msg}>
+            Username kamida 13 ta harfdan iborat bo'lishi kerak
+          </p>
+        ) : null}
         <div className={styles.pass_input}>
           <input
             type={`${isShowPass ? "text" : "password"}`}
             placeholder="Parol"
-            className={styles.input}
-            onChange={(e) =>
-              setUser((prevState) => ({
-                ...prevState,
-                password: e.target.value,
-              }))
-            }
+            className={`${styles.input} ${styles.password_inp}`}
+            value={user.password}
+            data-err={isError.password}
+            onChange={(e) => handleChangePassInp(e.target.value)}
           />
           <Image
             onClick={() => setIsShowPass(!isShowPass)}
@@ -78,14 +126,18 @@ const Login = ({ tabId, setTabId }: authProps) => {
             height={22}
           />
         </div>
+        {isError.password ? (
+          <p className={styles.error_msg}>
+            Password kamida 4 ta harfdan iborat bo'lishi kerak
+          </p>
+        ) : null}
         <p className={styles.reset_pass} onClick={() => setTabId(tabId + 1)}>
           Parolni unutdim
         </p>
-
         <div className={styles.buttons_wrapper}>
           <button
             type="button"
-            onClick={(e) => handleLogin(e, user.email, user.password)}
+            onClick={(e) => handleLogin(e, user.username, user.password)}
           >
             Tizimga kirish
           </button>

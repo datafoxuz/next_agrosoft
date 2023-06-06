@@ -10,10 +10,8 @@ import { openObjTypes } from "./data";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-<<<<<<< HEAD
+import { generateName } from "@/utils/helperFunctions";
 
-=======
->>>>>>> f6e8c4d347747cfe5d56156bd1f46f372bef65c5
 //icons
 import HamburgerIcon from "@/assets/icons/HamburgerIcon/HamburgerIcon";
 import temperature from "@/assets/icons/NavbarIcons/sun_yellow.svg";
@@ -32,7 +30,7 @@ const Navbar = ({
   isStatic?: boolean;
   auth?: boolean;
 }) => {
-  const session = useSession();
+  const { data, status }: { data: any; status: string } = useSession();
 
   const router = useRouter();
 
@@ -41,8 +39,6 @@ const Navbar = ({
     languagesModal: false,
     burgerMenu: false,
   });
-
-  const { data: session } = useSession();
 
   return (
     <div className={styles.navbar} data-static={isStatic} data-auth={auth}>
@@ -108,10 +104,15 @@ const Navbar = ({
       </div>
 
       <div className={`${styles.section} ${styles.r_section}`}>
-        {session.status == "authenticated" ? (
+        {status == "authenticated" ? (
           <Link href="/account" className={styles.ava_section}>
             <AccountCircleIcon />
-            <span>Sh Raxmatov</span>
+            <span>
+              {generateName(
+                data?.user?.data.user.name,
+                data?.user?.data.user.lastname
+              )}
+            </span>
           </Link>
         ) : (
           <Link href="/login" className={styles.login_link}>

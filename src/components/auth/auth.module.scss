@@ -16,11 +16,32 @@
     margin-inline: auto;
   }
 
+  .username_inp {
+    &[data-err="true"] {
+      border-color: #ea1a39;
+    }
+  }
+
+  .password_inp {
+    &[data-err="true"] {
+      border-color: #ea1a39;
+    }
+  }
+
+  .error_msg {
+    color: #ea1a39;
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-align: left;
+    margin-left: 30px;
+  }
+
   .pass_input {
+    position: relative;
     img {
       cursor: pointer;
       position: absolute;
-      right: 18%;
+      right: 10%;
       bottom: 46%;
 
       @media screen and (max-width: 464px) {

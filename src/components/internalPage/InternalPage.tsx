@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Write } from "@/components";
+import { Collections, Write } from "@/components";
 import Image from "next/image";
 
 import styles from "./internalPage.module.scss";
@@ -9,6 +9,7 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import ShareIcon from "@mui/icons-material/Share";
 import Answer from "./Answer/Answer";
 import { card, questionTypes } from "@/data/interfaces";
+import { cardsForExample } from "@/data";
 
 const InternalPage = ({
   questions = false,
@@ -27,10 +28,12 @@ const InternalPage = ({
     descFile: null,
   });
 
+  const arr = [];
+
   return (
     <div className={styles.internal}>
       {about && (
-        <div className={styles.internal_top}>
+        <div className={`${styles.internal_top} ${styles.section}`}>
           <h3 className={styles.hidden_title}>Biz haqimizda</h3>
 
           <button type="button" className={styles.top_button}>
@@ -41,7 +44,7 @@ const InternalPage = ({
 
       {data && (
         <>
-          <div className={styles.image_wrapper}>
+          <div className={`${styles.image_wrapper} ${styles.section}`}>
             <Image
               src={data.image ? data.image : ""}
               alt="about image"
@@ -107,7 +110,6 @@ const InternalPage = ({
                     </div>
                   </div>
                 </div>
-
                 <div className={styles.answer_list}>
                   {[1, 2, 3].map((item, index) => (
                     <Answer />
@@ -116,39 +118,50 @@ const InternalPage = ({
               </div>
             </>
           ) : (
-            <div className={styles.section}>
-              {data.created_at && (
-                <span className={styles.date}>{data.created_at}</span>
-              )}
-              <div className={styles.infos_wrapper}>
-                {data.author_name && (
-                  <p className={styles.infos}>
-                    Muallif: <span>{data.author_name}</span>
-                  </p>
+            <>
+              <div className={styles.section}>
+                {data.created_at && (
+                  <span className={styles.date}>{data.created_at}</span>
                 )}
-                {data.author_phone && (
-                  <p className={styles.infos}>
-                    Tell: <span>{data.author_phone}</span>
-                  </p>
-                )}
-                {data.country_name && (
-                  <p className={styles.infos}>
-                    Davlat: <span>{data.country_name}</span>
-                  </p>
-                )}
-                {data.region_name && (
-                  <p className={styles.infos}>
-                    Viloyat: <span>{data.region_name}</span>
-                  </p>
-                )}
-                {data.high_price && (
-                  <p className={styles.infos}>
-                    Narxi: <span>{data.high_price} USD per/kg</span>
-                  </p>
-                )}
+                <div className={styles.infos_wrapper}>
+                  {data.author_name && (
+                    <p className={styles.infos}>
+                      Muallif: <span>{data.author_name}</span>
+                    </p>
+                  )}
+                  {data.author_phone && (
+                    <p className={styles.infos}>
+                      Tell: <span>{data.author_phone}</span>
+                    </p>
+                  )}
+                  {data.country_name && (
+                    <p className={styles.infos}>
+                      Davlat: <span>{data.country_name}</span>
+                    </p>
+                  )}
+                  {data.region_name && (
+                    <p className={styles.infos}>
+                      Viloyat: <span>{data.region_name}</span>
+                    </p>
+                  )}
+                  {data.high_price && (
+                    <p className={styles.infos}>
+                      Narxi: <span>{data.high_price} USD per/kg</span>
+                    </p>
+                  )}
+                </div>
+                <h5 className={styles.description}>{data.body}</h5>
               </div>
-              <h5 className={styles.description}>{data.body}</h5>
-            </div>
+
+              {arr.length ? (
+                <div className={styles.liked}>
+                  <h2 className={`${styles.title} ${styles.liked_title}`}>
+                    O’xshash maqolalar
+                  </h2>
+                  {/* <Collections data={arr} /> */}
+                </div>
+              ) : null}
+            </>
           )}
         </>
       )}

@@ -7,7 +7,7 @@ import { baseUrl } from "@/data";
 const options = {
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
@@ -17,29 +17,25 @@ const options = {
           throw new Error("Missing credentials");
         }
 
-        try {
-          // Make a POST request to the login endpoint
-          const response = await fetch(`${baseUrl}/auth/login`, {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-              username: credentials.username,
-              password: credentials.password,
-            }),
-          });
+        const { username, password } = credentials as any;
 
-          const user = await response.json();
+        const response = await fetch(`${baseUrl}/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+        });
 
-          if (response.ok && user) {
-            return user;
-          } else {
-            return null;
-          }
-        } catch (error) {
-          // Handle any errors that occur during authentication
-          throw new Error("Authentication failed.");
+        const user = await response.json();
+
+        if (response.ok && user) {
+          return user;
+        } else {
+          return null;
         }
       },
     }),

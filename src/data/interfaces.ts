@@ -41,7 +41,7 @@ export interface card {
   created_at: string;
   body?: string;
   seo?: seo;
-  date?: "";
+  date?: string;
   author_name?: string;
   author_phone?: number;
   country_name?: string;
@@ -51,6 +51,9 @@ export interface card {
   amount_type_name?: string;
   answers_count?: number;
   is_answered?: number;
+  url?: string;
+  commentsNum?: string;
+  answered?: boolean;
 }
 
 export interface meta {

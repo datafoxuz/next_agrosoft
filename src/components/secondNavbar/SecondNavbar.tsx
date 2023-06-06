@@ -122,7 +122,6 @@ const SecondNavbar = ({
                 </div>
               </>
             )}
-
             {product ||
               (community && (
                 <div className={styles.filter_btn_wrapper}>
@@ -178,7 +177,7 @@ const SecondNavbar = ({
               <button
                 type="button"
                 className={styles.add_button}
-                onClick={() => handleClick(state, setState)}
+                onClick={() => router.push("/community/create")}
               >
                 Savol yozish
               </button>
@@ -253,7 +252,6 @@ const SecondNavbar = ({
             </div>
           </div>
         )}
-
         {account && (
           <div className={styles.hidden_section}>
             <div className={styles.top_section}>

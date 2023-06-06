@@ -3,6 +3,8 @@ import Link from "next/link";
 import { routes, routeObj, openObjTypes } from "../../data";
 import { AnimatePresence, motion } from "framer-motion";
 import { MOTION_CONFIGS } from "@/data";
+import { generateName } from "@/utils/helperFunctions";
+import { useSession } from "next-auth/react";
 
 import styles from "./burgermenu.module.scss";
 
@@ -15,6 +17,7 @@ const BurgerMenu = ({
   active: boolean;
   setOpen: (v: openObjTypes) => void;
 }) => {
+  const { data }: { data: any } = useSession();
   function handleClick() {
     setOpen({
       weatherModal: false,
@@ -34,7 +37,12 @@ const BurgerMenu = ({
                   href="/account"
                   className={`${styles.menu_item} ${styles.ava_section}`}
                 >
-                  <span>Sh Raxmatov</span>
+                  <span>
+                    {generateName(
+                      data?.user?.data.user.name,
+                      data?.user?.data.user.lastname
+                    )}
+                  </span>
                   <AccountCircleIcon className={styles.icon} />
                 </Link>
               ) : (
