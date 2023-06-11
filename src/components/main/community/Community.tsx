@@ -32,9 +32,9 @@ const Community = ({ data }: { data: data }) => {
           height={242}
         />
         <div className={styles.community_questions}>
-          {data.data.map((item: card, index: number) => (
+          {data?.data?.map((item: card, index: number) => (
             <Link
-              href={`/community/${item.title}`}
+              href={`/community/${item.slug}`}
               className={styles.question}
               key={index}
             >

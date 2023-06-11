@@ -29,7 +29,7 @@ const SwiperCards = ({ data }: { data: data }) => {
       loop={true}
       speed={500}
     >
-      {data.data.map((item: card, index: number) => (
+      {data?.data?.map((item: card, index: number) => (
         <SwiperSlide className={styles.swiper_slide} key={index}>
           <SwiperCard data={item} />
         </SwiperSlide>

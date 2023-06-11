@@ -38,7 +38,7 @@ const index = ({ communities }: { communities: data }) => {
         setState={setQuestion}
       />
 
-      {communities.data.length ? (
+      {communities?.data?.length ? (
         <Collections data={communities.data} community />
       ) : (
         <NotFound />

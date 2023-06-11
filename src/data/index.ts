@@ -10,7 +10,7 @@ import market from "@/assets/images/market.png";
 
 import { card, cardTypes } from "./interfaces";
 
-export const baseUrl = "https://agrosoft.uz/api/v1/site";
+export const baseUrl = "https://api.agrosoft.uz/api/v1/site";
 
 export const MOTION_CONFIGS = {
   layout: true,
@@ -141,5 +141,29 @@ export const weatherData = [
   {
     time: "00:00",
     gradus: "5°",
+  },
+];
+
+export const regions = [
+  {
+    name: "Tashkent",
+    districts: [
+      { districtName: "Yangiyul", lang: 3245436654, lat: 34534 },
+      { districtName: "Chirchiq", lang: 3245436654, lat: 34534 },
+    ],
+  },
+  {
+    name: "Samarqand",
+    districts: [
+      { districtName: "Urgut", lang: 3245436654, lat: 34534 },
+      { districtName: "Kitob", lang: 3245436654, lat: 34534 },
+    ],
+  },
+  {
+    name: "Navoiy",
+    districts: [
+      { districtName: "Qiziltepa", lang: 3245436654, lat: 34534 },
+      { districtName: "Chirchiq", lang: 3245436654, lat: 34534 },
+    ],
   },
 ];

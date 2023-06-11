@@ -24,7 +24,7 @@ const index = ({ blogs }: { blogs: data }) => {
     <SEO metaTitle="Blogs - AgroSoft">
       <div className={styles.articles}>
         <SNavbar siteWay={siteWay} title="Agro maqolalar" filter article />
-        {blogs.data.length ? (
+        {blogs?.data?.length ? (
           <Collections data={blogs.data} meta={blogs.meta} />
         ) : (
           <NotFound />

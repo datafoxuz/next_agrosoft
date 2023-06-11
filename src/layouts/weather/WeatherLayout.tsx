@@ -20,6 +20,7 @@ const WeatherLayout = ({ children }: LayoutProps) => {
             `/weather?lat=${latitude}&long=${longitude}`
           );
           setWeatherData(data);
+          console.log(data);
         }
       } catch (error) {
         console.error("Error fetching weather data:", error);

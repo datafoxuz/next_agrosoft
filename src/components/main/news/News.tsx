@@ -32,7 +32,7 @@ const News = ({ data }: { data: data }) => {
       comments: 11,
     },
   ];
-  const newCard: card[] = data.data.slice(0, 2);
+  const newCard: card[] = data?.data?.slice(0, 2);
 
   const router = useRouter();
 
@@ -45,7 +45,9 @@ const News = ({ data }: { data: data }) => {
       <div className={styles.main_news}>
         <h2 className={styles.news_title}>So’nggi yangiliklar</h2>
         <div className={styles.new_wrapper}>
-          <SwiperCard cardDate="12.04.2023" data={newCard[0]} />
+          {newCard?.length ? (
+            <SwiperCard cardDate="12.04.2023" data={newCard[0]} />
+          ) : null}
           <div className={styles.news_section}>
             {communityData.slice(0, 3).map((item, index) => (
               <div className={styles.news_list} key={index}>

@@ -24,9 +24,9 @@ const Diseases = ({ data }: { data: data }) => {
 
         <div
           className={styles.diseases_grid}
-          data-length={data.data.length == 8}
+          data-length={data?.data?.length == 8}
         >
-          {data.data.map((item: card, index: number) => (
+          {data?.data?.map((item: card, index: number) => (
             <div
               className={styles.card}
               key={index}

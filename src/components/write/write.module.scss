@@ -27,6 +27,14 @@
     }
   }
 
+  .label {
+    width: fit-content;
+  }
+
+  .file_input {
+    @extend %file_input;
+  }
+
   .textarea {
     @extend %textarea;
     margin-bottom: 24px;
@@ -57,7 +65,14 @@
   }
 
   .add_file {
+    @extend %button;
     @extend %add-file-button;
     padding: 10px 12px;
+    border-radius: 120px;
+    cursor: pointer;
+
+    .icon {
+      transform: rotate(45deg);
+    }
   }
 }
