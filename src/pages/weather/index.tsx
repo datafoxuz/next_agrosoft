@@ -7,8 +7,6 @@ import { useMyContext } from "@/hooks/useMyContext";
 
 import styles from "./weather.module.scss";
 import { ParsedUrlQuery } from "querystring";
-import { fetchData } from "@/lib/fetchData";
-import { request } from "@/lib/request";
 
 interface DailyWeatherType {
   date: number;
@@ -23,8 +21,24 @@ interface DailyWeatherType {
   wind_speed: string;
 }
 
-const WeatherPage = ({ regions }: { regions: any }) => {
-  const [item, setItem] = useState<string>("Tashkent");
+const WeatherPage = ({
+  regions,
+  districts,
+}: {
+  regions: any;
+  districts: any;
+}) => {
+  const [regionItem, setRegionItem] = useState<string>("Tashkent");
+  const [districtItem, setDistrictItem] = useState<{
+    name: string;
+    lang: string;
+    lat: string;
+  }>({
+    name: districts?.data[0]?.name,
+    lang: "",
+    lat: "",
+  });
+
   const { weatherData } = useMyContext();
 
   const siteWay = [
@@ -37,6 +51,10 @@ const WeatherPage = ({ regions }: { regions: any }) => {
       url: "/weather",
     },
   ];
+
+  function handleChangeLocation() {
+    localStorage.setItem("location", JSON.stringify({ districtItem }));
+  }
 
   return (
     <WeatherLayout>
@@ -89,16 +107,19 @@ const WeatherPage = ({ regions }: { regions: any }) => {
               <h3 className={styles.title}>Lokatsiya</h3>
               <div className={styles.wrapper}>
                 <FilterSelect
-                  item={item}
-                  setItem={setItem}
+                  item={regionItem}
+                  setItem={setRegionItem}
                   data={regions.data}
+                  region
                 />
                 <FilterSelect
-                  item={item}
-                  setItem={setItem}
-                  data={regions.data}
+                  item={districtItem.name}
+                  setItem={setDistrictItem}
+                  data={districts.data}
                 />
-                <button type="button">O’zgartirish</button>
+                <button type="button" onClick={() => handleChangeLocation()}>
+                  O’zgartirish
+                </button>
               </div>
             </div>
             <div className={styles.content}>
@@ -140,8 +161,10 @@ const WeatherPage = ({ regions }: { regions: any }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
+  const { regionId } = query;
   let regionsData;
+  let districtData;
 
   await fetch(`https://agrosoft.uz/api/v1/1/regions`)
     .then((res) => res.json())
@@ -149,9 +172,24 @@ export async function getServerSideProps() {
       regionsData = data;
     });
 
+  if (regionId) {
+    await fetch(`https://agrosoft.uz/api/v1/site/data/${regionId}/districts`)
+      .then((res) => res.json())
+      .then((data) => {
+        districtData = data;
+      });
+  } else {
+    await fetch(`https://agrosoft.uz/api/v1/site/data/1/districts`)
+      .then((res) => res.json())
+      .then((data) => {
+        districtData = data;
+      });
+  }
+
   return {
     props: {
       regions: regionsData,
+      districts: districtData,
     },
   };
 }

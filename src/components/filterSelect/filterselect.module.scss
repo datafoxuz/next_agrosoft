@@ -65,10 +65,10 @@
 
   ::-webkit-scrollbar {
     background-color: transparent;
+    width: 3px;
   }
 
   ::-webkit-scrollbar-thumb {
-    width: 3px;
-    background-color: #101211;
+    background-color: #dedede;
   }
 }

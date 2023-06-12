@@ -6,7 +6,8 @@ import { useMyContext } from "@/hooks/useMyContext";
 
 const WeatherLayout = ({ children }: LayoutProps) => {
   const userLocation = useUserLocation();
-  const { weatherData, setWeatherData } = useMyContext();
+  const { setWeatherData } = useMyContext();
+  const location = localStorage.getItem("location");
 
   useEffect(() => {
     const fetchWeatherData = async () => {
