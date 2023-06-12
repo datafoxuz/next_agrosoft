@@ -148,8 +148,16 @@ const index = () => {
                     <label htmlFor="farm">Location</label>
 
                     <div className={styles.selects}>
-                      <FilterSelect item={item} setItem={setItem} data={data} />
-                      <FilterSelect item={item} setItem={setItem} data={data} />
+                      <FilterSelect
+                        item={item}
+                        setItem={setItem}
+                        strData={data}
+                      />
+                      <FilterSelect
+                        item={item}
+                        setItem={setItem}
+                        strData={data}
+                      />
                     </div>
                   </div>
 

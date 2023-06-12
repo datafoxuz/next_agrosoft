@@ -7,11 +7,21 @@ import { useMyContext } from "@/hooks/useMyContext";
 const WeatherLayout = ({ children }: LayoutProps) => {
   const userLocation = useUserLocation();
   const { setWeatherData } = useMyContext();
-  const location = localStorage.getItem("location");
+  let locationInfo: { name: string; long: string; lat: string } | null = null;
+
+  // if (typeof window !== "undefined" && localStorage) {
+  //   locationInfo = JSON.parse(localStorage.getItem("location"));
+  // }
 
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
+        if (locationInfo) {
+          const data = await fetchData(
+            `/weather?lat=${locationInfo.long}&long=${locationInfo.lat}`
+          );
+          setWeatherData(data);
+        }
         if (userLocation) {
           const { latitude, longitude } = userLocation;
           const data = await fetchData(
@@ -25,7 +35,7 @@ const WeatherLayout = ({ children }: LayoutProps) => {
     };
 
     fetchWeatherData();
-  }, [userLocation, setWeatherData]);
+  }, [userLocation, setWeatherData, locationInfo]);
 
   return <div>{children}</div>;
 };

@@ -53,7 +53,7 @@ const WeatherPage = ({
   ];
 
   function handleChangeLocation() {
-    localStorage.setItem("location", JSON.stringify({ districtItem }));
+    localStorage.setItem("location", JSON.stringify({ ...districtItem }));
   }
 
   return (
@@ -64,41 +64,42 @@ const WeatherPage = ({
         <div className={styles.weather}>
           <div className={styles.left_section}>
             <p className={styles.date}>
-              {weatherData?.data.time.split(",")[0]}, {new Date().getFullYear()}
+              {weatherData?.data?.time.split(",")[0]},{" "}
+              {new Date().getFullYear()}
             </p>
 
             <div className={styles.big_weather}>
               <h2>
-                {weatherData?.data.current_degree
-                  ? Math.floor(weatherData?.data.current_degree)
+                {weatherData?.data?.current_degree
+                  ? Math.floor(weatherData?.data?.current_degree)
                   : 0}
                 <span>°C</span>
               </h2>
 
               <h3 className={styles.weather_status}>
                 <Image
-                  src={weatherData?.data.weather_icon_url}
+                  src={weatherData?.data?.weather_icon_url}
                   alt="yellow sun icon"
                   width={32}
                   height={32}
                 />
-                {weatherData?.data.weather_status}
+                {weatherData?.data?.weather_status}
               </h3>
             </div>
 
             <div className={styles.other_infos}>
               <p>
-                {weatherData?.data.coldest_degree
-                  ? Math.floor(weatherData?.data.coldest_degree)
+                {weatherData?.data?.coldest_degree
+                  ? Math.floor(weatherData?.data?.coldest_degree)
                   : 0}
                 °C /
-                {weatherData?.data.hottest_degree
-                  ? Math.floor(weatherData?.data.hottest_degree)
+                {weatherData?.data?.hottest_degree
+                  ? Math.floor(weatherData?.data?.hottest_degree)
                   : 0}
                 °C
               </p>
-              <p>{weatherData?.data.humidity}% Humidity</p>
-              <p>{weatherData?.data.wind_speed} km/h Wind speed</p>
+              <p>{weatherData?.data?.humidity}% Humidity</p>
+              <p>{weatherData?.data?.wind_speed} km/h Wind speed</p>
             </div>
           </div>
 
@@ -125,7 +126,7 @@ const WeatherPage = ({
             <div className={styles.content}>
               <h3 className={styles.title}>Soat bo’yicha</h3>
               <div className={styles.cards_wrapper}>
-                {weatherData?.data.hourly
+                {weatherData?.data?.hourly
                   .slice(0, 12)
                   .map((item: DailyWeatherType, index: number) => (
                     <div className={styles.card_by_hour} key={index}>
@@ -138,7 +139,7 @@ const WeatherPage = ({
             <div className={styles.content}>
               <h3 className={styles.title}>Boshqa kunlar</h3>
               <div className={styles.cards_wrapper}>
-                {weatherData?.data.daily.map(
+                {weatherData?.data?.daily.map(
                   (item: DailyWeatherType, index: number) => (
                     <div className={styles.card_by_day} key={index}>
                       <p>{item.date}</p>

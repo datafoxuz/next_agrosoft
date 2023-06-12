@@ -6,13 +6,15 @@ import { useRouter } from "next/router";
 const FilterSelect = ({
   item,
   setItem,
-  data,
+  data = [],
+  strData = [],
   mb = false,
   region = false,
 }: {
   item: string;
   setItem: (v: any) => void;
-  data: [];
+  data?: [];
+  strData?: string[];
   mb?: boolean;
   region?: boolean;
 }) => {

@@ -16,7 +16,7 @@ const AddProduct = ({
   const [item, setItem] = useState<string>("bir");
   const [check, setCheck] = useState<number>(1);
 
-  const data = ["bir", "ikki", "uch"];
+  const data: string[] = ["bir", "ikki", "uch"];
 
   return (
     <div className={styles.add_product}>
@@ -51,7 +51,7 @@ const AddProduct = ({
 
         <div className={styles.input_wrapper}>
           <input type="number" placeholder="Narx" className={styles.price} />
-          <FilterSelect item={item} setItem={setItem} data={data} />
+          <FilterSelect item={item} setItem={setItem} strData={data} />
         </div>
 
         <button type="button" className={styles.add_file}>
@@ -62,7 +62,7 @@ const AddProduct = ({
 
       <div className={styles.category}>
         <h3 className={styles.title}>Kategoriya</h3>
-        <FilterSelect item={item} setItem={setItem} data={data} mb />
+        <FilterSelect item={item} setItem={setItem} strData={data} mb />
       </div>
 
       <div className={styles.price}>
@@ -89,8 +89,8 @@ const AddProduct = ({
         <h3 className={styles.title}>Location</h3>
 
         <div className={styles.input_wrapper}>
-          <FilterSelect item={item} setItem={setItem} data={data} />
-          <FilterSelect item={item} setItem={setItem} data={data} />
+          <FilterSelect item={item} setItem={setItem} strData={data} />
+          <FilterSelect item={item} setItem={setItem} strData={data} />
         </div>
       </div>
 

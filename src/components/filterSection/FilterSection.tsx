@@ -15,13 +15,13 @@ const FilterSection = ({ active = false }: { active?: boolean }) => {
       <div className={styles.section}>
         <div className={styles.wrapper}>
           <h3 className={styles.title}>Kategoriya</h3>
-          <FilterSelect item={item} setItem={setItem} data={data} />
+          <FilterSelect item={item} setItem={setItem} strData={data} />
         </div>
         <div className={styles.wrapper}>
           <h3 className={styles.title}>Location</h3>
           <div className={styles.selects}>
-            <FilterSelect item={item} setItem={setItem} data={data} />
-            <FilterSelect item={item} setItem={setItem} data={data} />
+            <FilterSelect item={item} setItem={setItem} strData={data} />
+            <FilterSelect item={item} setItem={setItem} strData={data} />
           </div>
         </div>
       </div>
