@@ -10,7 +10,7 @@ const FilterSelect = ({
 }: {
   item: string;
   setItem: (v: string) => void;
-  data: string[];
+  data: [];
   mb?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -28,16 +28,16 @@ const FilterSelect = ({
 
       {isOpen && (
         <div className={styles.list}>
-          {data.map((e, index) => (
+          {data.map((e: { name: string; id: number }, index: number) => (
             <p
               className={styles.item}
               key={index}
               onClick={() => {
-                setItem(e);
+                setItem(e.name);
                 setIsOpen(false);
               }}
             >
-              {e}
+              {e.name}
             </p>
           ))}
         </div>

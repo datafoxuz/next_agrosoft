@@ -79,3 +79,32 @@ export type Location = {
   latitude: number;
   longitude: number;
 } | null;
+
+type StaticImport = any;
+
+type WeatherData = {
+  success: boolean;
+  message: string;
+  data: {
+    coldest_degree: number;
+    coldest_time: string;
+    current_degree: number;
+    daily: [];
+    daily_object: [];
+    hottest_degree: number;
+    hottest_time: string;
+    hourly: [];
+    humidity: number;
+    short_info: null | string;
+    time: string;
+    weather_icon: number;
+    weather_icon_url: string | StaticImageData | StaticImport;
+    weather_status: string;
+    wind_speed: number;
+  };
+};
+
+export interface MainContextType {
+  weatherData: WeatherData | null;
+  setWeatherData: React.Dispatch<React.SetStateAction<null>>;
+}

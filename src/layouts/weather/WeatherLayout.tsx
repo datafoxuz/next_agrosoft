@@ -1,15 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import useUserLocation from "@/hooks/useUserLocation";
-import {
-  WeatherContext,
-  WeatherContextProvider,
-} from "@/context/weatherContext/WeatherContext";
 import { LayoutProps } from "../props";
 import { fetchData } from "@/lib/fetchData";
+import { useMyContext } from "@/hooks/useMyContext";
 
 const WeatherLayout = ({ children }: LayoutProps) => {
   const userLocation = useUserLocation();
-  const { setWeatherData } = useContext(WeatherContext);
+  const { weatherData, setWeatherData } = useMyContext();
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -20,7 +17,6 @@ const WeatherLayout = ({ children }: LayoutProps) => {
             `/weather?lat=${latitude}&long=${longitude}`
           );
           setWeatherData(data);
-          console.log(data);
         }
       } catch (error) {
         console.error("Error fetching weather data:", error);
@@ -30,11 +26,7 @@ const WeatherLayout = ({ children }: LayoutProps) => {
     fetchWeatherData();
   }, [userLocation, setWeatherData]);
 
-  return (
-    <WeatherContextProvider>
-      <div>{children}</div>
-    </WeatherContextProvider>
-  );
+  return <div>{children}</div>;
 };
 
 export default WeatherLayout;

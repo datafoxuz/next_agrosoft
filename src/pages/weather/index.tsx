@@ -1,24 +1,31 @@
 import { FilterSelect, SNavbar } from "@/components";
-import React, { useContext, useState } from "react";
-import { weatherData } from "@/data";
+import React, { useState } from "react";
 import SEO from "@/layouts/seo/seo";
-import Image, { StaticImageData } from "next/image";
-import fetchUserLocation from "@/lib/fetchUserLocation";
+import Image from "next/image";
+import WeatherLayout from "@/layouts/weather/WeatherLayout";
+import { useMyContext } from "@/hooks/useMyContext";
 
 import styles from "./weather.module.scss";
+import { ParsedUrlQuery } from "querystring";
+import { fetchData } from "@/lib/fetchData";
+import { request } from "@/lib/request";
 
-import yellowSun from "@/assets/icons/NavbarIcons/sun_yellow.svg";
-import weather1 from "@/assets/icons/weather1.svg";
-import weather2 from "@/assets/icons/weather2.svg";
-import weather3 from "@/assets/icons/weather3.svg";
-import { WeatherContext } from "@/context/weatherContext/WeatherContext";
-import WeatherLayout from "@/layouts/weather/WeatherLayout";
+interface DailyWeatherType {
+  date: number;
+  humidity: number;
+  max: number;
+  min: number;
+  weather_description: string;
+  weather_icon: string;
+  weather_icon_day: string;
+  weather_icon_night: string;
+  weather_main: string;
+  wind_speed: string;
+}
 
-const WeatherPage = () => {
-  const [item, setItem] = useState<string>("bir");
-  const { weatherData } = useContext(WeatherContext);
-
-  const data = ["bir", "ikki", "uch"];
+const WeatherPage = ({ regions }: { regions: any }) => {
+  const [item, setItem] = useState<string>("Tashkent");
+  const { weatherData } = useMyContext();
 
   const siteWay = [
     {
@@ -31,39 +38,6 @@ const WeatherPage = () => {
     },
   ];
 
-  const weatherData2 = [
-    {
-      date: "02.06",
-      gradus: "5",
-      statusImage: weather1,
-    },
-    {
-      date: "02.06",
-      gradus: "5",
-      statusImage: weather2,
-    },
-    {
-      date: "02.06",
-      gradus: "5",
-      statusImage: weather3,
-    },
-    {
-      date: "02.06",
-      gradus: "5",
-      statusImage: weather1,
-    },
-    {
-      date: "02.06",
-      gradus: "5",
-      statusImage: weather2,
-    },
-    {
-      date: "02.06",
-      gradus: "5",
-      statusImage: weather3,
-    },
-  ];
-
   return (
     <WeatherLayout>
       <SEO metaTitle="Weather">
@@ -71,28 +45,42 @@ const WeatherPage = () => {
 
         <div className={styles.weather}>
           <div className={styles.left_section}>
-            <p className={styles.date}>1-Iyun, 2022</p>
+            <p className={styles.date}>
+              {weatherData?.data.time.split(",")[0]}, {new Date().getFullYear()}
+            </p>
 
             <div className={styles.big_weather}>
               <h2>
-                12 <span>°C</span>
+                {weatherData?.data.current_degree
+                  ? Math.floor(weatherData?.data.current_degree)
+                  : 0}
+                <span>°C</span>
               </h2>
 
               <h3 className={styles.weather_status}>
                 <Image
-                  src={yellowSun.src}
+                  src={weatherData?.data.weather_icon_url}
                   alt="yellow sun icon"
                   width={32}
                   height={32}
                 />
-                Sunny
+                {weatherData?.data.weather_status}
               </h3>
             </div>
 
             <div className={styles.other_infos}>
-              <p>10 °C / 26 °C</p>
-              <p>20% Humidity</p>
-              <p>12 km/h Wind speed</p>
+              <p>
+                {weatherData?.data.coldest_degree
+                  ? Math.floor(weatherData?.data.coldest_degree)
+                  : 0}
+                °C /
+                {weatherData?.data.hottest_degree
+                  ? Math.floor(weatherData?.data.hottest_degree)
+                  : 0}
+                °C
+              </p>
+              <p>{weatherData?.data.humidity}% Humidity</p>
+              <p>{weatherData?.data.wind_speed} km/h Wind speed</p>
             </div>
           </div>
 
@@ -100,37 +88,49 @@ const WeatherPage = () => {
             <div className={styles.content}>
               <h3 className={styles.title}>Lokatsiya</h3>
               <div className={styles.wrapper}>
-                <FilterSelect item={item} setItem={setItem} data={data} />
-                <FilterSelect item={item} setItem={setItem} data={data} />
+                <FilterSelect
+                  item={item}
+                  setItem={setItem}
+                  data={regions.data}
+                />
+                <FilterSelect
+                  item={item}
+                  setItem={setItem}
+                  data={regions.data}
+                />
                 <button type="button">O’zgartirish</button>
               </div>
             </div>
             <div className={styles.content}>
-              <h3 className={styles.title}>Lokatsiya</h3>
+              <h3 className={styles.title}>Soat bo’yicha</h3>
               <div className={styles.cards_wrapper}>
-                {/* {weatherData.map((item, index) => (
-                <div className={styles.card_by_hour} key={index}>
-                  <p>{item.time}</p>
-                  <h5>{item.gradus}</h5>
-                </div>
-              ))} */}
+                {weatherData?.data.hourly
+                  .slice(0, 12)
+                  .map((item: DailyWeatherType, index: number) => (
+                    <div className={styles.card_by_hour} key={index}>
+                      <p>{item.date}</p>
+                      <h5>{Math.floor(item.max)}°</h5>
+                    </div>
+                  ))}
               </div>
             </div>
             <div className={styles.content}>
               <h3 className={styles.title}>Boshqa kunlar</h3>
               <div className={styles.cards_wrapper}>
-                {weatherData2.map((item, index) => (
-                  <div className={styles.card_by_day} key={index}>
-                    <p>{item.date}</p>
-                    <h5>{item.gradus}°</h5>
-                    <Image
-                      src={item.statusImage.src}
-                      alt="weather icon"
-                      width={57}
-                      height={57}
-                    />
-                  </div>
-                ))}
+                {weatherData?.data.daily.map(
+                  (item: DailyWeatherType, index: number) => (
+                    <div className={styles.card_by_day} key={index}>
+                      <p>{item.date}</p>
+                      <h5>{Math.floor(item.max)}°</h5>
+                      <Image
+                        src={item.weather_icon_day}
+                        alt="weather icon"
+                        width={57}
+                        height={57}
+                      />
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -139,5 +139,21 @@ const WeatherPage = () => {
     </WeatherLayout>
   );
 };
+
+export async function getServerSideProps() {
+  let regionsData;
+
+  await fetch(`https://agrosoft.uz/api/v1/1/regions`)
+    .then((res) => res.json())
+    .then((data) => {
+      regionsData = data;
+    });
+
+  return {
+    props: {
+      regions: regionsData,
+    },
+  };
+}
 
 export default WeatherPage;

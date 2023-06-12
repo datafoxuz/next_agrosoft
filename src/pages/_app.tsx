@@ -3,6 +3,7 @@ import NProgress from "nprogress";
 import Router from "next/router";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
+import { MainContextProvider } from "@/context";
 
 import "@/styles/globals.scss";
 import "nprogress/nprogress.css";
@@ -22,10 +23,12 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </SessionProvider>
+    <MainContextProvider>
+      <SessionProvider session={session}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SessionProvider>
+    </MainContextProvider>
   );
 }
