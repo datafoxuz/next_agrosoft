@@ -1,6 +1,7 @@
 import React from "react";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { ToastContainer } from "react-toastify";
 
 import { data } from "@/data/interfaces";
 
@@ -39,6 +40,7 @@ const Home = ({
         <Diseases data={diseases} />
         <Market />
         <News data={news} />
+        <ToastContainer />
       </div>
     </SEO>
   );

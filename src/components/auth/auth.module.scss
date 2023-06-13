@@ -87,5 +87,9 @@
         @extend %cancel-button;
       }
     }
+
+    .load_button {
+      @extend %load-button;
+    }
   }
 }

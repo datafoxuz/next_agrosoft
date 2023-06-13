@@ -117,3 +117,16 @@ export interface MainContextType {
   locationInfo: LocationInfoType | null;
   setLocationInfo: React.Dispatch<React.SetStateAction<null>>;
 }
+
+export interface DailyAndHourlyWeatherType {
+  date: number;
+  humidity: number;
+  max: number;
+  min: number;
+  weather_description: string;
+  weather_icon: string;
+  weather_icon_day: string;
+  weather_icon_night: string;
+  weather_main: string;
+  wind_speed: string;
+}

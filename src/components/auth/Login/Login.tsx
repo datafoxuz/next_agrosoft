@@ -29,6 +29,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
     password: false,
   });
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleLogin = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -37,6 +38,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
   ) => {
     if (username.length > 13 && password.length > 4) {
       e.preventDefault();
+      setIsLoading(true);
       setIsError({ username: false, password: false });
       // Sign in using the provided credentials
       const result = await signIn("credentials", {
@@ -47,6 +49,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
       });
 
       if (result && !result.error) {
+        setIsLoading(false);
         router.push("/");
       }
     } else {
@@ -135,12 +138,18 @@ const Login = ({ tabId, setTabId }: authProps) => {
           Parolni unutdim
         </p>
         <div className={styles.buttons_wrapper}>
-          <button
-            type="button"
-            onClick={(e) => handleLogin(e, user.username, user.password)}
-          >
-            Tizimga kirish
-          </button>
+          {isLoading ? (
+            <button type="button" className={styles.load_button}>
+              Tizimga kirish
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={(e) => handleLogin(e, user.username, user.password)}
+            >
+              Tizimga kirish
+            </button>
+          )}
           <button type="button" onClick={() => router.push("/registration")}>
             Ro’yxatdan o’tish
           </button>

@@ -5,6 +5,7 @@ import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { MainContextProvider } from "@/context";
 
+import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.scss";
 import "nprogress/nprogress.css";
 

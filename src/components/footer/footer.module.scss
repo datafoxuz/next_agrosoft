@@ -116,6 +116,10 @@
               right: 30px;
             }
           }
+
+          .load_button {
+            @extend %load-button;
+          }
         }
 
         .contact {

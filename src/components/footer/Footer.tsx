@@ -1,31 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, KeyboardEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { request } from "@/lib/request";
+import { toast } from "react-toastify";
 
 //assets
 import arrow from "@/assets/icons/arrow_top_footer.svg";
 
 import styles from "./footer.module.scss";
-import { baseUrl } from "@/data";
 
 const Footer = () => {
   const [email, setEmail] = useState<string>("");
   const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleSubscribe = async (email: string) => {
     if (email.length) {
+      setIsLoading(true);
       setIsError(false);
       const data = await request(
         `/email-subscribe`,
         "POST",
         JSON.stringify({ email })
       );
+
+      if (data.success) {
+        toast.success("Emailingiz qabul qilindi!");
+        setEmail("");
+        setIsLoading(false);
+      } else {
+        toast.warning("Bu email avval qabul qilingan!");
+        setIsLoading(false);
+      }
     } else {
       setIsError(true);
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSubscribe(email);
     }
   };
 
@@ -57,14 +76,24 @@ const Footer = () => {
                 className={styles.footer_input}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyPress={handleKeyPress}
               />
-              <button
-                type="button"
-                className={styles.footer_button}
-                onClick={() => handleSubscribe(email)}
-              >
-                Obuna bo’lish
-              </button>
+              {isLoading ? (
+                <button
+                  type="button"
+                  className={`${styles.footer_button} ${styles.load_button}`}
+                >
+                  Obuna bo’lish
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={styles.footer_button}
+                  onClick={() => handleSubscribe(email)}
+                >
+                  Obuna bo’lish
+                </button>
+              )}
             </div>
           </div>
           <div className={styles.footer_section}>

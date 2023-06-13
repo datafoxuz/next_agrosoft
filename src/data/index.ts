@@ -105,7 +105,7 @@ export const topcards: cardTypes[] = [
   },
 ];
 
-export const weatherData = [
+export const weatherDataExample = [
   {
     time: "00:00",
     gradus: "5°",
