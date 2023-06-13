@@ -34,7 +34,7 @@ const WeatherPage = ({
     lang: string;
     lat: string;
   }>({
-    name: districts?.data[0]?.name,
+    name: districts?.data[0].name,
     lang: "",
     lat: "",
   });
@@ -53,7 +53,10 @@ const WeatherPage = ({
   ];
 
   function handleChangeLocation() {
-    localStorage.setItem("location", JSON.stringify({ ...districtItem }));
+    localStorage.setItem(
+      "location",
+      JSON.stringify({ ...districtItem, regionName: regionItem })
+    );
   }
 
   return (

@@ -82,7 +82,7 @@ export type Location = {
 
 type StaticImport = any;
 
-type WeatherData = {
+export type WeatherData = {
   success: boolean;
   message: string;
   data: {
@@ -104,7 +104,16 @@ type WeatherData = {
   };
 };
 
+export type LocationInfoType = {
+  districtName: string;
+  long: string;
+  lat: string;
+  regionNmae: string;
+};
+
 export interface MainContextType {
   weatherData: WeatherData | null;
   setWeatherData: React.Dispatch<React.SetStateAction<null>>;
+  locationInfo: LocationInfoType | null;
+  setLocationInfo: React.Dispatch<React.SetStateAction<null>>;
 }

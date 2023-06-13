@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["agrosoft.uz", "agro-life.uz"],
+    domains: ["agrosoft.uz", "agro-life.uz", "cdn.agrosoft.uz"],
   },
 };
 

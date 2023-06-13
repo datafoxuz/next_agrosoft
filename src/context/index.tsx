@@ -9,9 +9,12 @@ export const MainContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [weatherData, setWeatherData] = useState(null);
+  const [locationInfo, setLocationInfo] = useState(null);
 
   return (
-    <MainContext.Provider value={{ weatherData, setWeatherData }}>
+    <MainContext.Provider
+      value={{ weatherData, setWeatherData, locationInfo, setLocationInfo }}
+    >
       {children}
     </MainContext.Provider>
   );

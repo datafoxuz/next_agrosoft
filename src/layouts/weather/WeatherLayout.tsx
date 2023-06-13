@@ -6,12 +6,11 @@ import { useMyContext } from "@/hooks/useMyContext";
 
 const WeatherLayout = ({ children }: LayoutProps) => {
   const userLocation = useUserLocation();
-  const { setWeatherData } = useMyContext();
-  let locationInfo: { name: string; long: string; lat: string } | null = null;
+  const { setWeatherData, setLocationInfo, locationInfo } = useMyContext();
 
-  // if (typeof window !== "undefined" && localStorage) {
-  //   locationInfo = JSON.parse(localStorage.getItem("location"));
-  // }
+  if (typeof window !== "undefined") {
+    // setLocationInfo(localStorage.getItem("location"));
+  }
 
   useEffect(() => {
     const fetchWeatherData = async () => {
