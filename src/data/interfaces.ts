@@ -106,7 +106,7 @@ export type WeatherData = {
 
 export type LocationInfoType = {
   districtName: string;
-  long: string;
+  lang: string;
   lat: string;
   regionNmae: string;
 };

@@ -19,6 +19,13 @@ export const MOTION_CONFIGS = {
   exit: { y: 0, opacity: 0 },
 };
 
+export const SORT_MOTION_CONFIGS = {
+  layout: true,
+  animate: { opacity: 1, y: "60%" },
+  initial: { opacity: 0, y: "90%" },
+  exit: { y: 0, opacity: 0 },
+};
+
 export const cardsForExample: card[] = [
   {
     image: articlesImage,

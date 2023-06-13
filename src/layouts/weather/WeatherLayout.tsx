@@ -9,6 +9,14 @@ const WeatherLayout = ({ children }: LayoutProps) => {
   const { setWeatherData, setLocationInfo } = useMyContext();
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedLocation = localStorage.getItem("location");
+      const parsedLocation = storedLocation ? JSON.parse(storedLocation) : null;
+      setLocationInfo(parsedLocation);
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchWeatherData = async () => {
       try {
         if (userLocation) {

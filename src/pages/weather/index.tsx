@@ -19,18 +19,24 @@ const WeatherPage = ({
   regions: any;
   districts: any;
 }) => {
-  const [regionItem, setRegionItem] = useState<string>("Tashkent");
+  const { weatherData, locationInfo } = useMyContext();
+
+  const [regionItem, setRegionItem] = useState<string>(
+    locationInfo ? locationInfo.regionNmae : regions ? regions.data[0].name : ""
+  );
   const [districtItem, setDistrictItem] = useState<{
-    name: string;
+    districtName: string;
     lang: string;
     lat: string;
   }>({
-    name: districts ? districts.data[0].name : "Tuman",
-    lang: "",
-    lat: "",
+    districtName: locationInfo
+      ? locationInfo.districtName
+      : districts
+      ? districts.data[0].name
+      : "",
+    lang: locationInfo ? locationInfo.lang : "0",
+    lat: locationInfo ? locationInfo.lat : "0",
   });
-
-  const { weatherData, locationInfo } = useMyContext();
 
   const siteWay = [
     {
@@ -102,7 +108,7 @@ const WeatherPage = ({
                     region
                   />
                   <FilterSelect
-                    item={districtItem.name}
+                    item={districtItem.districtName}
                     setItem={setDistrictItem}
                     data={districts.data}
                   />
@@ -194,7 +200,7 @@ const WeatherPage = ({
                     region
                   />
                   <FilterSelect
-                    item={districtItem.name}
+                    item={districtItem.districtName}
                     setItem={setDistrictItem}
                     data={districts.data}
                   />
