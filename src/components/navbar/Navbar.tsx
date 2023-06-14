@@ -3,7 +3,7 @@ import Link from "next/link";
 import {
   BurgerMenu,
   DownloadLinks,
-  LanguagesModal,
+  Languages,
   WeatherModal,
 } from "./components";
 import { openObjTypes } from "./data";
@@ -145,29 +145,7 @@ const Navbar = ({
             </Link>
           )}
 
-          <div className={styles.modal_wrapper}>
-            <div
-              className={styles.languages}
-              onClick={() =>
-                setOpen({
-                  weatherModal: false,
-                  burgerMenu: false,
-                  languagesModal: !open.languagesModal,
-                })
-              }
-            >
-              <p className={styles.text}>Uz</p>
-              <ArrowIcon active={open.languagesModal} />
-            </div>
-
-            {open.languagesModal && (
-              <LanguagesModal
-                active={open.languagesModal}
-                open={open}
-                setOpen={setOpen}
-              />
-            )}
-          </div>
+          <Languages />
 
           <div className={styles.modal_wrapper}>
             <div

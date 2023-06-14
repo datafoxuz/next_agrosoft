@@ -4,6 +4,7 @@ import Router from "next/router";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { MainContextProvider } from "@/context";
+import { appWithTranslation } from "next-i18next";
 
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.scss";
@@ -19,10 +20,7 @@ Router.events.on("routeChangeStart", (url) => {
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps) {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <MainContextProvider>
       <SessionProvider session={session}>
@@ -33,3 +31,5 @@ export default function App({
     </MainContextProvider>
   );
 }
+
+export default appWithTranslation(App);

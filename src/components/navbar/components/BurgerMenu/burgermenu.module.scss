@@ -48,11 +48,25 @@
       display: flex;
     }
 
-    p {
+    .lang_item {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      cursor: pointer;
+      padding: 5px 20px;
+
+      border-right: 1px solid #b0dac4;
+
       &:nth-of-type(1) {
-        border-right: 1px solid #b0dac4;
-        padding-right: 16px;
-        margin-right: 16px;
+        padding-left: 0;
+      }
+
+      &:nth-of-type(3) {
+        border: none;
+      }
+
+      .text {
+        color: #232624;
       }
     }
   }

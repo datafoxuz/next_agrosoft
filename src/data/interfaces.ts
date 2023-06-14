@@ -130,3 +130,10 @@ export interface DailyAndHourlyWeatherType {
   weather_main: string;
   wind_speed: string;
 }
+
+export interface LangTypes {
+  active: boolean;
+  value: string;
+  config?: string;
+  flag?: string;
+}

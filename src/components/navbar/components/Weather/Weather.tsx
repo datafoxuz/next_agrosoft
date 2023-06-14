@@ -43,7 +43,7 @@ const Weather = ({
               <div className={styles.section}>
                 <div className={styles.weather_degree}>
                   <Image
-                    src={sun.src}
+                    src={weatherData?.data?.weather_icon_url}
                     alt="orange sun icon"
                     className={styles.icon}
                     width={56}

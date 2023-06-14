@@ -1,6 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { routes, routeObj, openObjTypes } from "../../data";
+import {
+  routes,
+  routeObj,
+  openObjTypes,
+  languagesData,
+  languagesObj,
+} from "../../data";
 import { AnimatePresence, motion } from "framer-motion";
 import { MOTION_CONFIGS } from "@/data";
 import { generateName } from "@/utils/helperFunctions";
@@ -9,6 +15,7 @@ import { useSession } from "next-auth/react";
 import styles from "./burgermenu.module.scss";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Image from "next/image";
 
 const BurgerMenu = ({
   active,
@@ -63,8 +70,24 @@ const BurgerMenu = ({
             </Link>
           ))}
           <div className={styles.languages}>
-            <p className={styles.menu_item}>Uz</p>
-            <p className={styles.menu_item}>Ру</p>
+            {languagesData.map((item: languagesObj, index: number) => (
+              <div className={styles.lang_item}>
+                <Image
+                  src={item.icon}
+                  alt="flag icon"
+                  width={20}
+                  height={20}
+                  className={styles.icon}
+                />
+                <p
+                  className={styles.text}
+                  key={index}
+                  onClick={() => handleClick()}
+                >
+                  {item.title}
+                </p>
+              </div>
+            ))}
           </div>
         </motion.div>
       ) : null}

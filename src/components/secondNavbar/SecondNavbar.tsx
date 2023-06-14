@@ -29,6 +29,7 @@ const SecondNavbar = ({
   innerPage = false,
   about = false,
   account = false,
+  create = false,
 }: {
   siteWay: sitewayProps[];
   state?: questionTypes;
@@ -42,6 +43,7 @@ const SecondNavbar = ({
   innerPage?: boolean;
   about?: boolean;
   account?: boolean;
+  create?: boolean;
 }) => {
   const router = useRouter();
 
@@ -205,7 +207,7 @@ const SecondNavbar = ({
           </div>
         </div>
 
-        {!innerPage && !about && !account && (
+        {!innerPage && !about && !account && !create && (
           <div className={styles.hidden_section}>
             <div className={styles.top_section}>
               <h3 className={styles.title}>{title}</h3>
@@ -215,7 +217,7 @@ const SecondNavbar = ({
                   <button>
                     <RateReviewIcon
                       className={styles.icon}
-                      onClick={() => handleClick(state, setState)}
+                      onClick={() => router.push("/community/create")}
                     />
                   </button>
                 )}
@@ -237,19 +239,22 @@ const SecondNavbar = ({
                     />
                   </button>
                 )}
+
                 <SortDrawer />
               </div>
             </div>
 
-            <div className={styles.input_wrapper}>
-              <input
-                type="text"
-                placeholder="Qidirish"
-                className={styles.input}
-              />
+            {!create && (
+              <div className={styles.input_wrapper}>
+                <input
+                  type="text"
+                  placeholder="Qidirish"
+                  className={styles.input}
+                />
 
-              <SearchIcon className={styles.icon} />
-            </div>
+                <SearchIcon className={styles.icon} />
+              </div>
+            )}
           </div>
         )}
         {account && (

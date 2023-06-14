@@ -2,8 +2,8 @@ import React from "react";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
 import { ToastContainer } from "react-toastify";
-
 import { data } from "@/data/interfaces";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import {
   About,
@@ -46,7 +46,7 @@ const Home = ({
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale }: { locale: string }) {
   const blogsData = await fetchData("/blogs/get-latest-blogs");
   const diseasesData = await fetchData("/deceases/get-popular-deceases");
   const newsData = await fetchData("/articles/get-latest-articles");
@@ -58,6 +58,7 @@ export async function getServerSideProps() {
       diseases: diseasesData,
       news: newsData,
       communities: communitiesData,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }
