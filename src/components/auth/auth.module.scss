@@ -29,11 +29,7 @@
   }
 
   .error_msg {
-    color: #ea1a39;
-    font-size: 14px;
-    margin-bottom: 16px;
-    text-align: left;
-    margin-left: 30px;
+    @extend %err_message;
   }
 
   .pass_input {

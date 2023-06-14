@@ -9,6 +9,10 @@
 
   input {
     @extend %add-form-input;
+
+    &[data-err="true"] {
+      border-color: #ea1a39;
+    }
   }
 
   &[data-type="true"] {
@@ -31,6 +35,11 @@
     width: fit-content;
   }
 
+  .error_msg {
+    @extend %err_message;
+    margin: 0;
+  }
+
   .file_input {
     @extend %file_input;
   }
@@ -41,6 +50,10 @@
 
     &::placeholder {
       @extend %main-text-16;
+    }
+
+    &[data-err="true"] {
+      border-color: #ea1a39;
     }
   }
 
@@ -61,6 +74,10 @@
       .cancel_button {
         @extend %cancel-button;
       }
+    }
+
+    .load_btn {
+      @extend %load-button;
     }
   }
 

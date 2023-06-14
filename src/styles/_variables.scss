@@ -86,10 +86,10 @@ $small_smartphone_width: 320px;
 
 %load-button {
   @extend %button;
-  background-color: #92afa0;
-  cursor: auto;
+  background-color: #92afa0 !important;
+  cursor: auto !important;
   &::after {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -178,6 +178,14 @@ $small_smartphone_width: 320px;
 
 %file_input {
   display: none;
+}
+
+%err_message {
+  color: #ea1a39;
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: left;
+  margin-left: 30px;
 }
 
 // auth modal styles

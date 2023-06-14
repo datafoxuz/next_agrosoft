@@ -53,17 +53,10 @@ const Login = ({ tabId, setTabId }: authProps) => {
         router.push("/");
       }
     } else {
-      if (username.length < 13) {
-        setIsError((value) => ({
-          ...value,
-          username: true,
-        }));
-      } else {
-        setIsError((value) => ({
-          ...value,
-          password: true,
-        }));
-      }
+      setIsError({
+        username: username.length < 13,
+        password: password.length < 13,
+      });
     }
   };
 

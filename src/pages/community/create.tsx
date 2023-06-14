@@ -16,14 +16,21 @@ const create = () => {
   //states
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
+  const [isEmpty, setIsEmpty] = useState<{
+    title: boolean;
+    desc: boolean;
+    image: boolean;
+  }>({
+    title: false,
+    desc: false,
+    image: false,
+  });
 
   const [mainImage, setMainImage] = useState<File | null | undefined>(null);
-  const [mainImageId, setMainImageId] = useState<number | null>(null);
 
   const [secondImage, setSecondImage] = useState<File | null | undefined>(null);
-  const [secondImageId, setSecondImageId] = useState<number | null>(null);
 
-  const [currFileStatus, setCurrFileStatus] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const siteWay = [
     {
@@ -40,92 +47,99 @@ const create = () => {
     },
   ];
 
-  // useEffect(() => {
-  //   const sendRequest = async () => {
-  //     if (mainImage || secondImage) {
-  //       try {
-  //         let formData = new FormData();
-  //         if (mainImage && currFileStatus === "main") {
-  //           formData.append("file", mainImage, mainImage.name);
-  //         } else if (secondImage && currFileStatus === "second") {
-  //           formData.append("file", secondImage, secondImage.name);
-  //         }
+  const imageUpload = (file: File) => {
+    return new Promise<number>(async (resolve, reject) => {
+      const formData = new FormData();
+      formData.append("file", file, file.name);
 
-  //         // if (formData.get("file")) {
-  //         //   await request(`/file/upload`, "POST", formData, false, {
-  //         //     Authorization: `Bearer ${data?.user?.data.token}`,
-  //         //   });
-  //         //   console.log("File upload successful");
-  //         // } else {
-  //         //   console.log("No file found to upload");
-  //         // }
-
-  //         fetch(`${baseUrl}/file/upload`, {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "image/jpeg",
-  //             Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxNSIsImp0aSI6IjVkMTlhYWVlZWU1ODM2ZmU4ZDM4MTQ1ZTMxYmRmODIwY2ZiMzQyMTYxNTU1OGIwYThmZmY4YzliOTEwM2E4YzBhNDJmMjA5OGQwYjdhMzFmIiwiaWF0IjoxNjg2NTAyMTM4LjEzNjc2MywibmJmIjoxNjg2NTAyMTM4LjEzNjc2NywiZXhwIjoxNjg5MDk0MTM4LjEzMjUxMywic3ViIjoiMTg2Iiwic2NvcGVzIjpbXX0.YisFUev_Uu73ypQlWdwRWybikqXfTg2d0QMEZnBPHYeQ6z1GLftbQVGC2EQccjjM2kPvTylH9ppNPWiIJwBx99MV4aBFIMF18ltYk_gg1X4yTn27p8aLjH-XunMOcLU7nhkTAIPoMLXUpiG5a4DmpmeIzDujsyr5sgN3gmTCuqC2S4s688wfr2VB5GYLA7KzCbcqUvl0c0DC3Uan6fdsVwq0ezKgMo_FI3xt2iLBKhaS4gFdRTfNrTOawQ_zDkvCSza-fDbmbuGwi7RkFNLL1tZvF2mteAmOjl0MXrIBjvHFA9PBEvXonyVjY2wnUj7V38WUDokCsZJ2D11_ABb5NvUbMYQgjT67x3IGpY6edaL0g6bKaP3Dffku1cRUixrQapm4KZafpsVJVGNBGwJ-vLgTX1sHEsDNJjWXM4f8LXtSrwpOsbhMUe2zqPraGLxI3fBNHq-YmGquZ-gKcHmRaWFWhN8oh459klhbDUEiEkS91Ixq3jtifDptp_i6S3CA4XDIDFNqR2wOJy9Rn9aKMlpKdsg6eW9eXX7DDs4OUAVg1i1Ru8gmSD4RNuvaHaJuKUngBTHxG_Ht-XvQXrUdfCXEXVY_aVsFwsVsyfdzeTvXd9V55rQ9g477vEEAiXmTpMHfpFmc7yngGETyd0jQ8S5dkhDlEdLh3oZevaIS34s`,
-  //           },
-  //           body: formData,
-  //         })
-  //           .then((res) => res.json())
-  //           .then((data) => {
-  //             console.log(data);
-  //           });
-  //       } catch (error) {
-  //         console.error("Error occurred while uploading file:", error);
-  //       }
-  //     }
-  //   };
-
-  //   sendRequest();
-  // }, [mainImage, secondImage, currFileStatus]);
-
-  // function handleCreate() {
-  //   if (mainImage) {
-  //     const formData = new FormData();
-  //     formData.append("file", mainImage, mainImage.name);
-
-  //     // if (secondImage) {
-  //     //   formData.append("file", secondImage, secondImage.name);
-  //     // }
-  //     console.log(formData);
-
-  //     fetch(`${baseUrl}/file/upload`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //         Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxNSIsImp0aSI6IjVkMTlhYWVlZWU1ODM2ZmU4ZDM4MTQ1ZTMxYmRmODIwY2ZiMzQyMTYxNTU1OGIwYThmZmY4YzliOTEwM2E4YzBhNDJmMjA5OGQwYjdhMzFmIiwiaWF0IjoxNjg2NTAyMTM4LjEzNjc2MywibmJmIjoxNjg2NTAyMTM4LjEzNjc2NywiZXhwIjoxNjg5MDk0MTM4LjEzMjUxMywic3ViIjoiMTg2Iiwic2NvcGVzIjpbXX0.YisFUev_Uu73ypQlWdwRWybikqXfTg2d0QMEZnBPHYeQ6z1GLftbQVGC2EQccjjM2kPvTylH9ppNPWiIJwBx99MV4aBFIMF18ltYk_gg1X4yTn27p8aLjH-XunMOcLU7nhkTAIPoMLXUpiG5a4DmpmeIzDujsyr5sgN3gmTCuqC2S4s688wfr2VB5GYLA7KzCbcqUvl0c0DC3Uan6fdsVwq0ezKgMo_FI3xt2iLBKhaS4gFdRTfNrTOawQ_zDkvCSza-fDbmbuGwi7RkFNLL1tZvF2mteAmOjl0MXrIBjvHFA9PBEvXonyVjY2wnUj7V38WUDokCsZJ2D11_ABb5NvUbMYQgjT67x3IGpY6edaL0g6bKaP3Dffku1cRUixrQapm4KZafpsVJVGNBGwJ-vLgTX1sHEsDNJjWXM4f8LXtSrwpOsbhMUe2zqPraGLxI3fBNHq-YmGquZ-gKcHmRaWFWhN8oh459klhbDUEiEkS91Ixq3jtifDptp_i6S3CA4XDIDFNqR2wOJy9Rn9aKMlpKdsg6eW9eXX7DDs4OUAVg1i1Ru8gmSD4RNuvaHaJuKUngBTHxG_Ht-XvQXrUdfCXEXVY_aVsFwsVsyfdzeTvXd9V55rQ9g477vEEAiXmTpMHfpFmc7yngGETyd0jQ8S5dkhDlEdLh3oZevaIS34s`,
-  //       },
-  //       body: formData,
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log(formData);
-  //       });
-  //   }
-  // }
-
-  const imageUpload = async () => {
-    return new Promise<number>((resolve, reject) => {
-      if (mainImage) {
-        let formData = new FormData();
-        formData.append("file", mainImage, mainImage.name);
-
-        fetch(`${baseUrl}/file/upload`, {
+      try {
+        const response = await fetch(`${baseUrl}/file/upload`, {
           method: "POST",
           headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxNSIsImp0aSI6IjVkMTlhYWVlZWU1ODM2ZmU4ZDM4MTQ1ZTMxYmRmODIwY2ZiMzQyMTYxNTU1OGIwYThmZmY4YzliOTEwM2E4YzBhNDJmMjA5OGQwYjdhMzFmIiwiaWF0IjoxNjg2NTAyMTM4LjEzNjc2MywibmJmIjoxNjg2NTAyMTM4LjEzNjc2NywiZXhwIjoxNjg5MDk0MTM4LjEzMjUxMywic3ViIjoiMTg2Iiwic2NvcGVzIjpbXX0.YisFUev_Uu73ypQlWdwRWybikqXfTg2d0QMEZnBPHYeQ6z1GLftbQVGC2EQccjjM2kPvTylH9ppNPWiIJwBx99MV4aBFIMF18ltYk_gg1X4yTn27p8aLjH-XunMOcLU7nhkTAIPoMLXUpiG5a4DmpmeIzDujsyr5sgN3gmTCuqC2S4s688wfr2VB5GYLA7KzCbcqUvl0c0DC3Uan6fdsVwq0ezKgMo_FI3xt2iLBKhaS4gFdRTfNrTOawQ_zDkvCSza-fDbmbuGwi7RkFNLL1tZvF2mteAmOjl0MXrIBjvHFA9PBEvXonyVjY2wnUj7V38WUDokCsZJ2D11_ABb5NvUbMYQgjT67x3IGpY6edaL0g6bKaP3Dffku1cRUixrQapm4KZafpsVJVGNBGwJ-vLgTX1sHEsDNJjWXM4f8LXtSrwpOsbhMUe2zqPraGLxI3fBNHq-YmGquZ-gKcHmRaWFWhN8oh459klhbDUEiEkS91Ixq3jtifDptp_i6S3CA4XDIDFNqR2wOJy9Rn9aKMlpKdsg6eW9eXX7DDs4OUAVg1i1Ru8gmSD4RNuvaHaJuKUngBTHxG_Ht-XvQXrUdfCXEXVY_aVsFwsVsyfdzeTvXd9V55rQ9g477vEEAiXmTpMHfpFmc7yngGETyd0jQ8S5dkhDlEdLh3oZevaIS34s`,
+            Authorization:
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxNSIsImp0aSI6IjVkMTlhYWVlZWU1ODM2ZmU4ZDM4MTQ1ZTMxYmRmODIwY2ZiMzQyMTYxNTU1OGIwYThmZmY4YzliOTEwM2E4YzBhNDJmMjA5OGQwYjdhMzFmIiwiaWF0IjoxNjg2NTAyMTM4LjEzNjc2MywibmJmIjoxNjg2NTAyMTM4LjEzNjc2NywiZXhwIjoxNjg5MDk0MTM4LjEzMjUxMywic3ViIjoiMTg2Iiwic2NvcGVzIjpbXX0.YisFUev_Uu73ypQlWdwRWybikqXfTg2d0QMEZnBPHYeQ6z1GLftbQVGC2EQccjjM2kPvTylH9ppNPWiIJwBx99MV4aBFIMF18ltYk_gg1X4yTn27p8aLjH-XunMOcLU7nhkTAIPoMLXUpiG5a4DmpmeIzDujsyr5sgN3gmTCuqC2S4s688wfr2VB5GYLA7KzCbcqUvl0c0DC3Uan6fdsVwq0ezKgMo_FI3xt2iLBKhaS4gFdRTfNrTOawQ_zDkvCSza-fDbmbuGwi7RkFNLL1tZvF2mteAmOjl0MXrIBjvHFA9PBEvXonyVjY2wnUj7V38WUDokCsZJ2D11_ABb5NvUbMYQgjT67x3IGpY6edaL0g6bKaP3Dffku1cRUixrQapm4KZafpsVJVGNBGwJ-vLgTX1sHEsDNJjWXM4f8LXtSrwpOsbhMUe2zqPraGLxI3fBNHq-YmGquZ-gKcHmRaWFWhN8oh459klhbDUEiEkS91Ixq3jtifDptp_i6S3CA4XDIDFNqR2wOJy9Rn9aKMlpKdsg6eW9eXX7DDs4OUAVg1i1Ru8gmSD4RNuvaHaJuKUngBTHxG_Ht-XvQXrUdfCXEXVY_aVsFwsVsyfdzeTvXd9V55rQ9g477vEEAiXmTpMHfpFmc7yngGETyd0jQ8S5dkhDlEdLh3oZevaIS34s",
           },
           body: formData,
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          resolve(data.data.id);
+        } else {
+          console.log(
+            "File upload failed:",
+            response.status,
+            response.statusText
+          );
+        }
+      } catch (error) {
+        console.log("File upload error:", error);
       }
     });
+  };
+
+  const createQuestion = async (mainId: number, scndId?: number) => {
+    let body: {
+      title: string;
+      body: string;
+      file_id: number;
+      images?: number[] | null;
+    } = {
+      title: title,
+      body: desc,
+      file_id: mainId,
+    };
+
+    if (scndId) {
+      body = { ...body, images: [scndId] };
+    }
+
+    const data = await request(
+      `/community/create`,
+      "POST",
+      JSON.stringify(body),
+      false,
+      {
+        Authorization:
+          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxNSIsImp0aSI6IjVkMTlhYWVlZWU1ODM2ZmU4ZDM4MTQ1ZTMxYmRmODIwY2ZiMzQyMTYxNTU1OGIwYThmZmY4YzliOTEwM2E4YzBhNDJmMjA5OGQwYjdhMzFmIiwiaWF0IjoxNjg2NTAyMTM4LjEzNjc2MywibmJmIjoxNjg2NTAyMTM4LjEzNjc2NywiZXhwIjoxNjg5MDk0MTM4LjEzMjUxMywic3ViIjoiMTg2Iiwic2NvcGVzIjpbXX0.YisFUev_Uu73ypQlWdwRWybikqXfTg2d0QMEZnBPHYeQ6z1GLftbQVGC2EQccjjM2kPvTylH9ppNPWiIJwBx99MV4aBFIMF18ltYk_gg1X4yTn27p8aLjH-XunMOcLU7nhkTAIPoMLXUpiG5a4DmpmeIzDujsyr5sgN3gmTCuqC2S4s688wfr2VB5GYLA7KzCbcqUvl0c0DC3Uan6fdsVwq0ezKgMo_FI3xt2iLBKhaS4gFdRTfNrTOawQ_zDkvCSza-fDbmbuGwi7RkFNLL1tZvF2mteAmOjl0MXrIBjvHFA9PBEvXonyVjY2wnUj7V38WUDokCsZJ2D11_ABb5NvUbMYQgjT67x3IGpY6edaL0g6bKaP3Dffku1cRUixrQapm4KZafpsVJVGNBGwJ-vLgTX1sHEsDNJjWXM4f8LXtSrwpOsbhMUe2zqPraGLxI3fBNHq-YmGquZ-gKcHmRaWFWhN8oh459klhbDUEiEkS91Ixq3jtifDptp_i6S3CA4XDIDFNqR2wOJy9Rn9aKMlpKdsg6eW9eXX7DDs4OUAVg1i1Ru8gmSD4RNuvaHaJuKUngBTHxG_Ht-XvQXrUdfCXEXVY_aVsFwsVsyfdzeTvXd9V55rQ9g477vEEAiXmTpMHfpFmc7yngGETyd0jQ8S5dkhDlEdLh3oZevaIS34s",
+      }
+    );
+
+    if (data) {
+      setTitle("");
+      setDesc("");
+      setMainImage(null);
+      setSecondImage(null);
+      setIsLoading(false);
+    }
+  };
+
+  const createQuiestionHandler = async () => {
+    if (mainImage && title.length && desc.length) {
+      setIsLoading(true);
+      setIsEmpty({
+        title: title.length < 1,
+        desc: desc.length < 1,
+        image: !mainImage,
+      });
+      if (secondImage) {
+        await imageUpload(mainImage).then((mainImgId) =>
+          imageUpload(secondImage).then((scndImgId) =>
+            createQuestion(mainImgId, scndImgId)
+          )
+        );
+      } else {
+        await imageUpload(mainImage).then((mainImgId) =>
+          createQuestion(mainImgId)
+        );
+      }
+    } else {
+      setIsEmpty({
+        title: title.length < 1,
+        desc: desc.length < 1,
+        image: !mainImage,
+      });
+    }
   };
 
   //helper functions
@@ -133,12 +147,12 @@ const create = () => {
     event: React.ChangeEvent<HTMLInputElement>,
     status: string
   ) => {
-    if (event.currentTarget.files !== null) {
-      setCurrFileStatus(status);
-      if (status == "main") {
-        setMainImage(event.currentTarget.files[0]);
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      if (status === "main") {
+        setMainImage(file);
       } else {
-        setSecondImage(event.currentTarget.files[0]);
+        setSecondImage(file);
       }
     }
   };
@@ -159,6 +173,7 @@ const create = () => {
             type="text"
             className={styles.input}
             placeholder="Sarlavha"
+            data-err={isEmpty.title}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -178,6 +193,7 @@ const create = () => {
             <label
               htmlFor={!mainImage ? "mainImage" : ""}
               className={styles.label}
+              data-err={isEmpty.image}
             >
               <div className={styles.add_file}>
                 <AddIcon />
@@ -200,6 +216,7 @@ const create = () => {
           className={styles.textarea}
           placeholder="Savolingizni yozing"
           value={desc}
+          data-err={isEmpty.desc}
           onChange={(e) => setDesc(e.target.value)}
         />
 
@@ -237,22 +254,39 @@ const create = () => {
             defaultValue=""
           />
 
-          <div className={styles.submit_cancel}>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={() => imageUpload()}
-            >
-              Tasdiqlash
-            </button>
-            <button
-              type="button"
-              className={styles.cancel_button}
-              onClick={() => handleCancel()}
-            >
-              Bekor qilish
-            </button>
-          </div>
+          {isLoading ? (
+            <div className={styles.submit_cancel}>
+              <button
+                type="button"
+                className={`${styles.button} ${styles.load_btn}`}
+              >
+                Tasdiqlash
+              </button>
+              <button
+                type="button"
+                className={`${styles.cancel_button} ${styles.load_btn}`}
+              >
+                Bekor qilish
+              </button>
+            </div>
+          ) : (
+            <div className={styles.submit_cancel}>
+              <button
+                type="button"
+                className={styles.button}
+                onClick={() => createQuiestionHandler()}
+              >
+                Tasdiqlash
+              </button>
+              <button
+                type="button"
+                className={styles.cancel_button}
+                onClick={() => handleCancel()}
+              >
+                Bekor qilish
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </SEO>
