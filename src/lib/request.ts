@@ -10,7 +10,7 @@ async function request(
   headers: Record<string, string> = {
     "Content-Type": "application/json",
   }
-) {
+): Promise<{ response: Response; data: any }> {
   try {
     const response = await fetch(`${baseUrl}${url}`, { method, headers, body });
 
@@ -18,13 +18,14 @@ async function request(
       console.log(
         `Could not fetch ${baseUrl}${url}, status ${response.status}`
       );
-      return returnNull ? null : response;
+      // return returnNull ? null : response;
     }
 
     const data = await response.json();
     return { response, data };
   } catch (err) {
     console.log(err);
+    throw err;
   }
 }
 
