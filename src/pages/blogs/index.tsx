@@ -43,7 +43,7 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
     blogsData = await searchDatas(`/blog-search?q=${search}`);
   } else {
     blogsData = await fetchData(
-      `/blogs/blogs-with-pagination?page=${page}&per_page=5`
+      `/blogs/blogs-with-pagination?page=${page}&per_page=10`
     );
   }
 

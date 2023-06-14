@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Collections, Write } from "@/components";
+import { Collections, NotFound, Write } from "@/components";
 import Image from "next/image";
 
 import styles from "./internalPage.module.scss";
@@ -9,7 +9,7 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import ShareIcon from "@mui/icons-material/Share";
 import Answer from "./Answer/Answer";
 import { card, questionTypes } from "@/data/interfaces";
-import { cardsForExample } from "@/data";
+import image from "@/assets/images/community.png";
 
 const InternalPage = ({
   questions = false,
@@ -46,12 +46,13 @@ const InternalPage = ({
         <>
           <div className={`${styles.image_wrapper} ${styles.section}`}>
             <Image
-              src={data.image ? data.image : ""}
+              src={data.image ? data.image : image.src}
               alt="about image"
               className={styles.image}
               width={680}
               height={382}
             />
+
             {!about && (
               <div className={styles.events}>
                 <button>
@@ -71,17 +72,7 @@ const InternalPage = ({
               <div className={styles.section}>
                 <div className={styles.question}>
                   <h3 className={styles.title}>Savol:</h3>
-                  <h5 className={styles.description}>
-                    The document regulates the production, processing, storage,
-                    transportation, labeling and sale, as well as conformity
-                    assessment and authorization of organic products. In
-                    accordance with the law, the government will provide
-                    subsidies for the The document regulates the production,
-                    processing, storage, transportation, labeling and sale, as
-                    well as conformity assessment and authorization of organic
-                    products. In accordance with the law, the government will
-                    povide subsidies for the
-                  </h5>
+                  <h5 className={styles.description}>{data.body}</h5>
                 </div>
 
                 <div className={styles.answer}>
@@ -111,9 +102,11 @@ const InternalPage = ({
                   </div>
                 </div>
                 <div className={styles.answer_list}>
-                  {[1, 2, 3].map((item, index) => (
-                    <Answer />
-                  ))}
+                  {data.answers_count && data.answers_count > 0 ? (
+                    [1, 2, 3].map((item, index) => <Answer />)
+                  ) : (
+                    <NotFound />
+                  )}
                 </div>
               </div>
             </>

@@ -18,11 +18,11 @@ async function request(
       console.log(
         `Could not fetch ${baseUrl}${url}, status ${response.status}`
       );
-      return returnNull ? null : [];
+      return returnNull ? null : response;
     }
 
     const data = await response.json();
-    return data;
+    return { response, data };
   } catch (err) {
     console.log(err);
   }

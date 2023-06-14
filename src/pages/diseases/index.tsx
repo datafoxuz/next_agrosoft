@@ -40,7 +40,7 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
     diseasesData = await searchDatas(`/decease-search?q=${search}`);
   } else {
     diseasesData = await fetchData(
-      `/deceases/get-deceases?page=${page}&per_page=5`
+      `/deceases/get-deceases?page=${page}&per_page=10`
     );
   }
 

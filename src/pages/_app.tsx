@@ -5,6 +5,7 @@ import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { MainContextProvider } from "@/context";
 import { appWithTranslation } from "next-i18next";
+import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.scss";
@@ -28,6 +29,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           <Component {...pageProps} />
         </Layout>
       </SessionProvider>
+      <ToastContainer />
     </MainContextProvider>
   );
 }

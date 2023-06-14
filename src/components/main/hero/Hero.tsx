@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 import { DownloadLinks } from "@/components/navbar/components";
 
@@ -10,6 +11,7 @@ import leaf from "@/assets/images/leaf.png";
 
 const Hero = () => {
   const { t } = useTranslation("common");
+  const { locale } = useRouter();
 
   return (
     <div className={styles.main_hero}>
@@ -19,13 +21,15 @@ const Hero = () => {
         <h1 className={styles.title}>{t("title")}</h1>
         <p className={styles.text}>Barcha agro-ma’lumotlar bir yerda! </p>
 
-        <Image
-          src={leaf.src}
-          alt="leaf image top right"
-          className={styles.leaf_img}
-          width={362}
-          height={254}
-        />
+        {locale == "uz" && (
+          <Image
+            src={leaf.src}
+            alt="leaf image top right"
+            className={styles.leaf_img}
+            width={362}
+            height={254}
+          />
+        )}
       </div>
     </div>
   );

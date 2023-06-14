@@ -12,7 +12,7 @@ const CommunityCard = ({ data }: { data: card }) => {
   return (
     <div
       className={styles.card}
-      onClick={() => router.push(`${router.asPath}/${data.title}`)}
+      onClick={() => router.push(`${router.asPath}/${data.slug}`)}
     >
       <Image
         src={data.image ? data.image : ""}

@@ -4,10 +4,11 @@ import { SNavbar } from "@/components";
 import SEO from "@/layouts/seo/seo";
 import { useSession } from "next-auth/react";
 import { request } from "@/lib/request";
+import { toast } from "react-toastify";
+import { baseUrl } from "@/data";
 
 import styles from "@/components/write/write.module.scss";
 import AddIcon from "@mui/icons-material/Add";
-import { baseUrl } from "@/data";
 
 const create = () => {
   const router = useRouter();
@@ -94,7 +95,7 @@ const create = () => {
       body = { ...body, images: [scndId] };
     }
 
-    const result = await request(
+    const { response } = await request(
       `/community/create`,
       "POST",
       JSON.stringify(body),
@@ -104,12 +105,13 @@ const create = () => {
       }
     );
 
-    if (result) {
+    if (response.status == 200) {
       setTitle("");
       setDesc("");
       setMainImage(null);
       setSecondImage(null);
       setIsLoading(false);
+      toast.success("Savol yaratildi!");
     }
   };
 

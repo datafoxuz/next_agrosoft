@@ -1,5 +1,4 @@
-import { Collections, NotFound, SNavbar, Write } from "@/components";
-import { cardsForExample } from "@/data";
+import { Collections, NotFound, SNavbar } from "@/components";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
@@ -39,7 +38,11 @@ const index = ({ communities }: { communities: data }) => {
       />
 
       {communities?.data?.length ? (
-        <Collections data={communities.data} community />
+        <Collections
+          data={communities.data}
+          meta={communities.meta}
+          community
+        />
       ) : (
         <NotFound />
       )}
@@ -56,7 +59,7 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
     communitiesData = await searchDatas(`/community-search?q=${search}`);
   } else {
     communitiesData = await fetchData(
-      `/community/index?page=${page}&per_page=5`
+      `/community/index?page=${page}&per_page=10`
     );
   }
 

@@ -40,7 +40,7 @@ export const routes: routesType = [
   },
   {
     title: "Agro maqolalar",
-    url: "/articles",
+    url: "/blogs",
   },
   {
     title: "Agro market",

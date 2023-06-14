@@ -21,13 +21,13 @@ const Footer = () => {
     if (email.length) {
       setIsLoading(true);
       setIsError(false);
-      const data = await request(
+      const { response } = await request(
         `/email-subscribe`,
         "POST",
         JSON.stringify({ email })
       );
 
-      if (data.success) {
+      if (response.status == 200) {
         toast.success("Emailingiz qabul qilindi!");
         setEmail("");
         setIsLoading(false);
