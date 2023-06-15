@@ -32,6 +32,7 @@ const Home = ({
     <SEO>
       <div className={styles.main}>
         <Hero />
+        {/* commit */}
         <TopCards />
         <About />
         <Articles data={blogs} />
