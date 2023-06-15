@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { authProps } from "../data";
@@ -16,6 +16,7 @@ interface inpProps {
 }
 
 const Login = ({ tabId, setTabId }: authProps) => {
+  //states===========================================
   const [user, setUser] = useState<inpProps>({
     username: "fayzulloevasadbek@gmail.com",
     password: "password",
@@ -31,13 +32,16 @@ const Login = ({ tabId, setTabId }: authProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  //functions===================================================
+
   const handleLogin = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    e: FormEvent<HTMLFormElement>,
     username: string,
     password: string
   ) => {
+    e.preventDefault();
+
     if (username.length > 13 && password.length > 4) {
-      e.preventDefault();
       setIsLoading(true);
       setIsError({ username: false, password: false });
       // Sign in using the provided credentials
@@ -88,11 +92,14 @@ const Login = ({ tabId, setTabId }: authProps) => {
     }
   }
 
+  //JSX=========================================
+
   return (
     <div className={styles.modal}>
       <h3 className={styles.title}>Kirish</h3>
-      <form>
+      <form onSubmit={(e) => handleLogin(e, user.username, user.password)}>
         <input
+          name="username"
           type="text"
           placeholder="Login yoki telefon raqamingiz"
           className={`${styles.input} ${styles.username_inp}`}
@@ -100,13 +107,17 @@ const Login = ({ tabId, setTabId }: authProps) => {
           data-err={isError.username}
           onChange={(e) => handleChangeUserInp(e.target.value)}
         />
+
         {isError.username ? (
           <p className={styles.error_msg}>
             Username kamida 13 ta harfdan iborat bo'lishi kerak
           </p>
         ) : null}
+
+        {/* =========================================== */}
         <div className={styles.pass_input}>
           <input
+            name="password"
             type={`${isShowPass ? "text" : "password"}`}
             placeholder="Parol"
             className={`${styles.input} ${styles.password_inp}`}
@@ -122,30 +133,46 @@ const Login = ({ tabId, setTabId }: authProps) => {
             height={22}
           />
         </div>
+
         {isError.password ? (
           <p className={styles.error_msg}>
             Password kamida 4 ta harfdan iborat bo'lishi kerak
           </p>
         ) : null}
+
+        {/* =========================================== */}
+
         <p className={styles.reset_pass} onClick={() => setTabId(tabId + 1)}>
           Parolni unutdim
         </p>
+
         <div className={styles.buttons_wrapper}>
           {isLoading ? (
-            <button type="button" className={styles.load_button}>
-              Tizimga kirish
-            </button>
+            <>
+              <button type="button" className={styles.load_button}>
+                Tizimga kirish
+              </button>
+
+              <button type="button" className={styles.load_button}>
+                Ro’yxatdan o’tish
+              </button>
+            </>
           ) : (
-            <button
-              type="button"
-              onClick={(e) => handleLogin(e, user.username, user.password)}
-            >
-              Tizimga kirish
-            </button>
+            <>
+              <button
+                type="submit"
+                // onClick={(e) => handleLogin(user.username, user.password)}
+              >
+                Tizimga kirish
+              </button>
+              <button
+                type="button"
+                onClick={() => router.push("/registration")}
+              >
+                Ro’yxatdan o’tish
+              </button>
+            </>
           )}
-          <button type="button" onClick={() => router.push("/registration")}>
-            Ro’yxatdan o’tish
-          </button>
         </div>
       </form>
     </div>

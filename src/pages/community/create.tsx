@@ -18,19 +18,16 @@ const create = () => {
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [isEmpty, setIsEmpty] = useState<{
-    title: boolean;
-    desc: boolean;
-    image: boolean;
+    title?: boolean;
+    desc?: boolean;
+    image?: boolean;
   }>({
     title: false,
     desc: false,
     image: false,
   });
-
   const [mainImage, setMainImage] = useState<File | null | undefined>(null);
-
   const [secondImage, setSecondImage] = useState<File | null | undefined>(null);
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const siteWay = [
@@ -47,6 +44,8 @@ const create = () => {
       url: "/community/create",
     },
   ];
+
+  //main functions =========================================================
 
   const imageUpload = (file: File) => {
     return new Promise<number>(async (resolve, reject) => {
@@ -112,6 +111,9 @@ const create = () => {
       setSecondImage(null);
       setIsLoading(false);
       toast.success("Savol yaratildi!");
+    } else {
+      setIsLoading(false);
+      toast.error(`Error status: ${response.status}`);
     }
   };
 
@@ -143,7 +145,7 @@ const create = () => {
     }
   };
 
-  //helper functions
+  //helper functions ====================================================
   const handleSetImage = (
     event: React.ChangeEvent<HTMLInputElement>,
     status: string
@@ -152,6 +154,11 @@ const create = () => {
       const file = event.target.files[0];
       if (status === "main") {
         setMainImage(file);
+        setIsEmpty({
+          title: title.length < 1,
+          desc: desc.length < 1,
+          image: !mainImage,
+        });
       } else {
         setSecondImage(file);
       }
@@ -164,20 +171,31 @@ const create = () => {
     setSecondImage(null);
   }
 
+  //JSX=============================================
+
   return (
     <SEO metaTitle="Savol yozish">
       <SNavbar siteWay={siteWay} title="Savolingizni yozing" create />
+
       <div className={styles.write} data-type={true}>
         <div className={styles.quiz_title_wrapper}>
           <h3 className={styles.title}>Savol yozish</h3>
+
           <input
             type="text"
             className={styles.input}
             placeholder="Sarlavha"
             data-err={isEmpty.title}
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setIsEmpty((prevState) => ({
+                ...prevState,
+                title: e.target.value.length < 1,
+              }));
+            }}
           />
+
           {mainImage ? (
             <div className={styles.label}>
               <div
@@ -218,7 +236,13 @@ const create = () => {
           placeholder="Savolingizni yozing"
           value={desc}
           data-err={isEmpty.desc}
-          onChange={(e) => setDesc(e.target.value)}
+          onChange={(e) => {
+            setDesc(e.target.value);
+            setIsEmpty((prevState) => ({
+              ...prevState,
+              desc: e.target.value.length < 1,
+            }));
+          }}
         />
 
         <div className={styles.button_wrapper}>

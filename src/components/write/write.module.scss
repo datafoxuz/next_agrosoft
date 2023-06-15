@@ -33,6 +33,23 @@
 
   .label {
     width: fit-content;
+
+    &[data-err="true"] {
+      .add_file {
+        color: #ea1a39;
+      }
+    }
+    .add_file {
+      @extend %button;
+      @extend %add-file-button;
+      padding: 10px 12px;
+      border-radius: 120px;
+      cursor: pointer;
+
+      .icon {
+        transform: rotate(45deg);
+      }
+    }
   }
 
   .error_msg {
@@ -78,18 +95,6 @@
 
     .load_btn {
       @extend %load-button;
-    }
-  }
-
-  .add_file {
-    @extend %button;
-    @extend %add-file-button;
-    padding: 10px 12px;
-    border-radius: 120px;
-    cursor: pointer;
-
-    .icon {
-      transform: rotate(45deg);
     }
   }
 }

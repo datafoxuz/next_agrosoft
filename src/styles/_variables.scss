@@ -86,7 +86,8 @@ $small_smartphone_width: 320px;
 
 %load-button {
   @extend %button;
-  background-color: #92afa0 !important;
+  background-color: #c6cbc8 !important;
+  color: #e6f5ed !important;
   cursor: auto !important;
   &::after {
     display: none !important;
