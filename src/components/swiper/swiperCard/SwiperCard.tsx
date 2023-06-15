@@ -34,7 +34,11 @@ const SwiperCard = ({
         height={356}
       />
       <div className={styles.card_desc}>
-        <p className={styles.card_title}>{data?.title}</p>
+        <p className={styles.card_title}>
+          {data?.title.length < 60
+            ? data.title
+            : `${data.title.slice(0, 60)}...`}
+        </p>
         {cardDate ? <p className={styles.card_date}>{cardDate}</p> : null}
       </div>
     </div>

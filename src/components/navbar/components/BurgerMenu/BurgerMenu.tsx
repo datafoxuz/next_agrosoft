@@ -80,7 +80,7 @@ const BurgerMenu = ({
                   className={styles.icon}
                 />
                 <p
-                  className={styles.text}
+                  className={styles.menu_item}
                   key={index}
                   onClick={() => handleClick()}
                 >

@@ -33,7 +33,7 @@
     }
 
     @media only screen and (max-width: variables.$default_tablet_width) {
-      padding: 15px 20px;
+      padding: 8px 20px;
     }
 
     .arrow_icon {
@@ -83,6 +83,10 @@
             width: 100%;
           }
 
+          @media screen and (max-width: variables.$default_tablet_width) {
+            position: relative;
+          }
+
           &[data-err="true"] {
             border-color: #ea1a39;
           }
@@ -113,7 +117,8 @@
               font-size: 14px;
               padding: 15px 27px;
               position: absolute;
-              right: 30px;
+              top: 15.1%;
+              right: 2%;
             }
           }
 

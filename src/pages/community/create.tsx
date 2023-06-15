@@ -177,7 +177,7 @@ const create = () => {
     <SEO metaTitle="Savol yozish">
       <SNavbar siteWay={siteWay} title="Savolingizni yozing" create />
 
-      <div className={styles.write} data-type={true}>
+      <div className={styles.write} data-type={true} data-create={true}>
         <div className={styles.quiz_title_wrapper}>
           <h3 className={styles.title}>Savol yozish</h3>
 

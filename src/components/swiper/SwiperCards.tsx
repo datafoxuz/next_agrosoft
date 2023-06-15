@@ -18,11 +18,11 @@ const SwiperCards = ({ data }: { data: data }) => {
       pagination={{
         clickable: true,
       }}
-      autoplay={{
-        delay: 3000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      }}
+      // autoplay={{
+      //   delay: 3000,
+      //   disableOnInteraction: false,
+      //   pauseOnMouseEnter: true,
+      // }}
       navigation={true}
       modules={[FreeMode, Navigation, Autoplay]}
       className="mySwiper"

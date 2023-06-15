@@ -29,7 +29,8 @@
       color: #fff;
 
       @media screen and (max-width: variables.$default_tablet_width) {
-        top: 5%;
+        top: 10%;
+        padding-block: 0;
       }
 
       .logo {

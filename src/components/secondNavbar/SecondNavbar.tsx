@@ -250,6 +250,10 @@ const SecondNavbar = ({
                   type="text"
                   placeholder="Qidirish"
                   className={styles.input}
+                  value={searchVal}
+                  onChange={(e) =>
+                    handleChange(router, e.target.value, setSearchVal)
+                  }
                 />
 
                 <SearchIcon className={styles.icon} />

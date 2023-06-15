@@ -108,11 +108,18 @@ body {
 .swiper-button-next {
   background-color: #f27c1c;
   color: #fff;
-  padding: 32px 32px;
+  padding: 32px;
   border-radius: 50%;
 
   &::after {
     font-size: 22px;
+
+    @media screen and (max-width: 400px) {
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    padding: 25px;
   }
 }
 

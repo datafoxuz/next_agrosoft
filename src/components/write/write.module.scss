@@ -1,10 +1,17 @@
 @use "../../styles/variables" as variables;
 
 .write {
-  @extend %small-container;
-
   button {
     @extend %button;
+  }
+
+  &[data-type="true"] {
+    margin-inline: auto;
+    margin-bottom: 112px;
+  }
+
+  &[data-create="true"] {
+    @extend %small-container;
   }
 
   input {
@@ -13,11 +20,6 @@
     &[data-err="true"] {
       border-color: #ea1a39;
     }
-  }
-
-  &[data-type="true"] {
-    margin-inline: auto;
-    margin-bottom: 112px;
   }
 
   .quiz_title_wrapper {
@@ -39,16 +41,16 @@
         color: #ea1a39;
       }
     }
-    .add_file {
-      @extend %button;
-      @extend %add-file-button;
-      padding: 10px 12px;
-      border-radius: 120px;
-      cursor: pointer;
+  }
+  .add_file {
+    @extend %button;
+    @extend %add-file-button;
+    padding: 10px 12px;
+    border-radius: 120px;
+    cursor: pointer;
 
-      .icon {
-        transform: rotate(45deg);
-      }
+    .icon {
+      transform: rotate(45deg);
     }
   }
 

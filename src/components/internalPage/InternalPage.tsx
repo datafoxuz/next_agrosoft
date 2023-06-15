@@ -56,10 +56,10 @@ const InternalPage = ({
             {!about && (
               <div className={styles.events}>
                 <button>
-                  <TurnedInNotIcon /> Saqlab qo’yish
+                  <TurnedInNotIcon className={styles.icon} /> Saqlab qo’yish
                 </button>
                 <button>
-                  <ShareIcon />
+                  <ShareIcon className={styles.icon} />
                   Ulashish
                 </button>
               </div>
@@ -72,7 +72,9 @@ const InternalPage = ({
               <div className={styles.section}>
                 <div className={styles.question}>
                   <h3 className={styles.title}>Savol:</h3>
-                  <h5 className={styles.description}>{data.body}</h5>
+                  <h5 className={`${styles.description} ${styles.question}`}>
+                    {data.body}
+                  </h5>
                 </div>
 
                 <div className={styles.answer}>
@@ -105,7 +107,7 @@ const InternalPage = ({
                   {data.answers_count && data.answers_count > 0 ? (
                     [1, 2, 3].map((item, index) => <Answer />)
                   ) : (
-                    <NotFound />
+                    <p>Javoblar xali mavjud emas.</p>
                   )}
                 </div>
               </div>

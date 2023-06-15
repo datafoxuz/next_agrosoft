@@ -41,6 +41,10 @@
     .image {
       width: 100%;
       border-radius: 144px;
+
+      @media screen and (max-width: 400px) {
+        height: fit-content;
+      }
     }
 
     .events {
@@ -59,6 +63,18 @@
         @media screen and (max-width: variables.$default_tablet_width) {
           font-size: 12px;
           padding: 10px 12px;
+
+          @media screen and (max-width: 400px) {
+            padding: 6px 8px;
+            gap: 2px;
+            font-size: 10px;
+          }
+        }
+
+        .icon {
+          @media screen and (max-width: 400px) {
+            width: 15px;
+          }
         }
       }
     }
@@ -92,6 +108,10 @@
     line-height: 150%;
     text-align: left;
     margin-bottom: 150px;
+  }
+
+  .question {
+    margin-bottom: 24px;
   }
 
   .section {

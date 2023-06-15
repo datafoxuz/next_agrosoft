@@ -11,6 +11,10 @@
     width: 253px;
   }
 
+  @media screen and (max-width: 400px) {
+    width: 100%;
+  }
+
   .card_image {
     width: 100%;
     height: 356px;
@@ -20,16 +24,20 @@
 
     @media screen and (max-width: variables.$default_tablet_width) {
       width: 253px;
-      height: 233px;
+    }
+
+    @media screen and (max-width: 400px) {
+      width: 100%;
     }
   }
 
   .card_desc {
     padding: 34px 66px 57px;
     text-align: center;
+    height: 150px;
 
     @media screen and (max-width: variables.$default_tablet_width) {
-      padding: 20px 42px 45px;
+      padding: 20px 17px 45px;
     }
 
     .card_title {
