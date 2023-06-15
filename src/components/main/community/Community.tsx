@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { card, data } from "@/data/interfaces";
+import { useTranslation } from "next-i18next";
 
 import styles from "./community.module.scss";
 
@@ -11,6 +12,7 @@ import comment from "@/assets/icons/comment.svg";
 import leaf_small from "@/assets/images/leaf_small.png";
 
 const Community = ({ data }: { data: data }) => {
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   function handleNavigate(path: string) {
@@ -20,10 +22,8 @@ const Community = ({ data }: { data: data }) => {
   return (
     <div className={styles.container}>
       <div className={styles.main_community}>
-        <h3 className={styles.community_title}>Agro jamiyat</h3>
-        <p className={styles.community_text}>
-          Qizg’in muhokamalar, savol-javoblar
-        </p>
+        <h3 className={styles.community_title}>{t("community.title")}</h3>
+        <p className={styles.community_text}>{t("community.small_text")}</p>
         <Image
           src={cotton.src}
           alt="cotton image"
@@ -57,7 +57,7 @@ const Community = ({ data }: { data: data }) => {
           className={styles.community_button}
           onClick={() => handleNavigate("/community")}
         >
-          Barchasini o’qish
+          {t("buttons.read_all")}
         </button>
         <Image
           src={leaf_small.src}

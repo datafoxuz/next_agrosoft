@@ -4,37 +4,17 @@ import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { card, data } from "@/data/interfaces";
+import { useTranslation } from "next-i18next";
 
 import styles from "./news.module.scss";
 
 import calendar from "@/assets/icons/calendar.svg";
 
 const News = ({ data }: { data: data }) => {
-  const communityData = [
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 12,
-    },
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 14,
-    },
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 16,
-    },
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 12,
-    },
-    {
-      title: "Pomidorning falon kasalligiga qanday kurashish mumkin?",
-      comments: 11,
-    },
-  ];
-  const newCard: card[] = data?.data?.slice(0, 2);
-
+  const { t } = useTranslation("common");
   const router = useRouter();
+
+  const newCard: card[] = data?.data?.slice(0, 2);
 
   function handleNavigate(path: string) {
     router.push(path);
@@ -43,17 +23,16 @@ const News = ({ data }: { data: data }) => {
   return (
     <div className={styles.container}>
       <div className={styles.main_news}>
-        <h2 className={styles.news_title}>So’nggi yangiliklar</h2>
+        <h2 className={styles.news_title}>{t("news.title")}</h2>
         <div className={styles.new_wrapper}>
           {newCard?.length ? (
             <SwiperCard cardDate="12.04.2023" data={newCard[0]} />
           ) : null}
           <div className={styles.news_section}>
-            {communityData.slice(0, 3).map((item, index) => (
+            {data.data.slice(0, 3).map((item, index) => (
               <div className={styles.news_list} key={index}>
-                <Link href={`/news/${item.title}`} className={styles.news_item}>
-                  100 ming gektardan ziyod yer maydoni qishloq xo‘jaligi
-                  sohasiga qayta foydalanishga kiritiladi
+                <Link href={`/news/${item.slug}`} className={styles.news_item}>
+                  {item.title}
                 </Link>
                 <p className={styles.news_date}>
                   <Image
@@ -63,7 +42,7 @@ const News = ({ data }: { data: data }) => {
                     width={16}
                     height={16}
                   />
-                  12.04.2023
+                  {item.created_at}
                 </p>
               </div>
             ))}
@@ -72,7 +51,7 @@ const News = ({ data }: { data: data }) => {
               className={styles.news_button}
               onClick={() => handleNavigate("/news")}
             >
-              Barcha yangiliklarni o’qish
+              {t("buttons.read_all")}
             </button>
           </div>
         </div>

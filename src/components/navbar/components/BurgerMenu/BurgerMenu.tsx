@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import {
-  routes,
   routeObj,
   openObjTypes,
   languagesData,
@@ -11,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { MOTION_CONFIGS } from "@/data";
 import { generateName } from "@/utils/helperFunctions";
 import { useSession } from "next-auth/react";
+import { useTranslation } from "next-i18next";
 
 import styles from "./burgermenu.module.scss";
 
@@ -25,6 +25,39 @@ const BurgerMenu = ({
   setOpen: (v: openObjTypes) => void;
 }) => {
   const { data }: { data: any } = useSession();
+  const { t } = useTranslation("common");
+
+  const routes: routeObj[] = [
+    {
+      title: t("main_topics.about"),
+      url: "/about",
+    },
+    {
+      title: t("main_topics.weather"),
+      url: "/weather",
+    },
+    {
+      title: t("main_topics.news"),
+      url: "/news",
+    },
+    {
+      title: t("main_topics.community"),
+      url: "/community",
+    },
+    {
+      title: t("main_topics.diseases"),
+      url: "/diseases",
+    },
+    {
+      title: t("main_topics.blogs"),
+      url: "/blogs",
+    },
+    {
+      title: t("main_topics.market"),
+      url: "/market",
+    },
+  ];
+
   function handleClick() {
     setOpen({
       weatherModal: false,

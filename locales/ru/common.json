@@ -1,3 +1,68 @@
 {
-  "title": "ВАШ АГРО ПОМОЩНИК!"
+  "main_topics": {
+    "blogs": "Статьи",
+    "community": "Общество",
+    "diseases": "Болезни",
+    "market": "Агромаркет",
+    "about": "О нас",
+    "weather": "Информация о погоде",
+    "news": "Новости"
+  },
+
+  "buttons": {
+    "read_all": "Читать все",
+    "view_diseases": "Посмотреть все болезни",
+    "enter_market": "Выйти на маркет",
+    "subscribe": "Подписаться"
+  },
+
+  "hero": {
+    "title": "ВАШ АГРО ПОМОЩНИК!",
+    "small_title": "Вся агроинформация в одном месте!",
+    "download": "Загрузить"
+  },
+
+  "weather": {
+    "humidity": "Влага:",
+    "wind": "Ветер:",
+    "full_info": "Полная информация"
+  },
+
+  "about": {
+    "title": "О ПРОЕКТЕ",
+    "desc": "Этот веб-портал создан для освещения важных новостей и полезных статей в области сельского хозяйства. Предоставление нашим посетителям качественной и полезной информации – наша главная цель."
+  },
+
+  "blogs": {
+    "title": "ПОСЛЕДНИЕ СТАТЬИ"
+  },
+
+  "community": {
+    "title": "СЕЛЬСКОХОЗЯЙСТВЕННОЕ ОБЩЕСТВО",
+    "small_text": "Оживленные дискуссии, вопросы и ответы"
+  },
+
+  "diseases": {
+    "title": "СЕЛЬСКОХОЗЯЙСТВЕННЫЕ БОЛЕЗНИ",
+    "small_text": "С более чем 123 диагнозами заболеваний"
+  },
+
+  "market": {
+    "title": "АГРОМАРКЕТ",
+    "small_text": "Большой маркетплейс с более чем 500 различными товарами",
+    "main_title": "ОСНОВНЫЕ ОПТОВЫЕ ПРОДАВЦЫ"
+  },
+
+  "news": {
+    "title": "Последние новости"
+  },
+
+  "footer": {
+    "title": "Будьте в курсе последних новостей",
+    "contact": "Контакт:",
+    "inp_placeholder": "Введите адрес электронной почты",
+    "why_agrosoft": "Почему Agrosoft?",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit i",
+    "reserved": "Все права защищены"
+  }
 }

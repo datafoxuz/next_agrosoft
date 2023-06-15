@@ -17,37 +17,6 @@ export type routeObj = {
 
 type routesType = routeObj[];
 
-export const routes: routesType = [
-  {
-    title: "Biz haqimizda",
-    url: "/about",
-  },
-  {
-    title: "Ob-havo ma’lumotlari",
-    url: "/weather",
-  },
-  {
-    title: "Yangiliklar",
-    url: "/news",
-  },
-  {
-    title: "Agro jamiyat",
-    url: "/community",
-  },
-  {
-    title: "Agro kasallikar",
-    url: "/diseases",
-  },
-  {
-    title: "Agro maqolalar",
-    url: "/blogs",
-  },
-  {
-    title: "Agro market",
-    url: "/market",
-  },
-];
-
 export type languagesObj = {
   title: string;
   config: string;

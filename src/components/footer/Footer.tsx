@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
+import { useTranslation } from "next-i18next";
 
 //assets
 import arrow from "@/assets/icons/arrow_top_footer.svg";
@@ -10,6 +11,7 @@ import arrow from "@/assets/icons/arrow_top_footer.svg";
 import styles from "./footer.module.scss";
 
 const Footer = () => {
+  const { t } = useTranslation("common");
   const [email, setEmail] = useState<string>("");
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -66,13 +68,11 @@ const Footer = () => {
       <div className={styles.footer_wrapper}>
         <div className={styles.footer_top}>
           <div className={styles.footer_section}>
-            <p className={styles.text}>
-              So’nggi yangiliklardan habardor bo’lib turing
-            </p>
+            <p className={styles.text}>{t("footer.title")}</p>
             <div className={styles.input_section} data-err={isError}>
               <input
                 type="text"
-                placeholder="Emailingizni kiriting"
+                placeholder={`${t("footer.inp_placeholder")}`}
                 className={styles.footer_input}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -83,7 +83,7 @@ const Footer = () => {
                   type="button"
                   className={`${styles.footer_button} ${styles.load_button}`}
                 >
-                  Obuna bo’lish
+                  {t("buttons.subscribe")}
                 </button>
               ) : (
                 <button
@@ -91,13 +91,13 @@ const Footer = () => {
                   className={styles.footer_button}
                   onClick={() => handleSubscribe(email)}
                 >
-                  Obuna bo’lish
+                  {t("buttons.subscribe")}
                 </button>
               )}
             </div>
           </div>
           <div className={styles.footer_section}>
-            <p className={styles.text}>Bog’lanish:</p>
+            <p className={styles.text}>{t("footer.contact")}</p>
             <div className={styles.contact}>
               <p className={styles.text}>info@agrosoft.uz</p>
               <p className={styles.text}>+998 99 887 92 45</p>
@@ -106,43 +106,37 @@ const Footer = () => {
         </div>
         <div className={styles.footer_bottom}>
           <div className={styles.footer_section}>
-            <h4 className={styles.title}>Why Agrosoft?</h4>
-            <p className={styles.text}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit i
-            </p>
+            <h4 className={styles.title}>{t("footer.why_agrosoft")}</h4>
+            <p className={styles.text}>{t("footer.desc")}</p>
 
             <p className={styles.footer_info}>
-              AgroSoft © {new Date().getFullYear()}. All rights reserved
+              AgroSoft © {new Date().getFullYear()}. {t("footer.reserved")}
             </p>
           </div>
           <div className={styles.footer_links_wrapper}>
             <div className={styles.footer_links}>
               <Link href="/about" className={styles.link}>
-                Biz haqimizda
+                {t("main_topics.about")}
               </Link>
               <Link href="/weather" className={styles.link}>
-                Ob-havo ma’lumotlari
+                {t("main_topics.weather")}
               </Link>
               <Link href="/news" className={styles.link}>
-                Yangiliklar
+                {t("main_topics.news")}
               </Link>
             </div>
             <div className={styles.footer_links}>
               <Link href="/community" className={styles.link}>
-                Agro jamiyat
+                {t("main_topics.community")}
               </Link>
               <Link href="diseases" className={styles.link}>
-                Agro kasallikar
+                {t("main_topics.diseasess")}
               </Link>
               <Link href="/blogs" className={styles.link}>
-                Agro maqolalar
+                {t("main_topics.blogs")}
               </Link>
               <Link href="/market" className={styles.link}>
-                Agro market
+                {t("main_topics.market")}
               </Link>
             </div>
           </div>

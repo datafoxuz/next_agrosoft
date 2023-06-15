@@ -18,8 +18,8 @@ const Hero = () => {
       <div className={styles.hero_text}>
         <DownloadLinks classN />
         <h4>Agrosoft</h4>
-        <h1 className={styles.title}>{t("title")}</h1>
-        <p className={styles.text}>Barcha agro-ma’lumotlar bir yerda! </p>
+        <h1 className={styles.title}>{t("hero.title")}</h1>
+        <p className={styles.text}>{t("hero.small_title")} </p>
 
         {locale == "uz" && (
           <Image

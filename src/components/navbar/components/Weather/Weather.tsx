@@ -5,8 +5,8 @@ import { DailyAndHourlyWeatherType } from "@/data/interfaces";
 import { AnimatePresence, motion } from "framer-motion";
 import { openObjTypes } from "../../data";
 import { useRouter } from "next/router";
-import WeatherLayout from "@/layouts/weather/WeatherLayout";
 import { useMyContext } from "@/hooks/useMyContext";
+import { useTranslation } from "next-i18next";
 
 //icons
 import EastIcon from "@mui/icons-material/East";
@@ -23,6 +23,7 @@ const Weather = ({
   open: openObjTypes;
   setOpen: (v: openObjTypes) => void;
 }) => {
+  const { t } = useTranslation("common");
   const router = useRouter();
   const { weatherData } = useMyContext();
 
@@ -55,12 +56,17 @@ const Weather = ({
                 </div>
 
                 <div className={styles.info_list}>
-                  <p>Humidity: {weatherData.data.humidity}% </p>
-                  <p>Wind: {Math.floor(weatherData.data.wind_speed)} km/h</p>
+                  <p>
+                    {t("weather.humidity")} {weatherData.data.humidity}%{" "}
+                  </p>
+                  <p>
+                    {t("weather.wind")}{" "}
+                    {Math.floor(weatherData.data.wind_speed)}km/h
+                  </p>
                 </div>
               </div>
               <p className={styles.link} onClick={() => handleClick()}>
-                To’liq ma’lumot <EastIcon />
+                {t("weather.full_info")} <EastIcon />
               </p>
             </div>
 
@@ -97,12 +103,12 @@ const Weather = ({
                 </div>
 
                 <div className={styles.info_list}>
-                  <p>Humidity: 61% </p>
-                  <p>Wind: 18 km/h</p>
+                  <p>{t("weather.humidity")} 52% </p>
+                  <p>{t("weather.wind")} 13 km/h</p>
                 </div>
               </div>
               <p className={styles.link} onClick={() => handleClick()}>
-                To’liq ma’lumot <EastIcon />
+                {t("weather.full_info")} <EastIcon />
               </p>
             </div>
 

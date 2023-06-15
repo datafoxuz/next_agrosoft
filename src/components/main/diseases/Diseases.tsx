@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 import styles from "./diseases.module.scss";
 
@@ -8,6 +9,7 @@ import diseases from "@/assets/images/diseases.png";
 import { card, data } from "@/data/interfaces";
 
 const Diseases = ({ data }: { data: data }) => {
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   function handleNavigate(path: string) {
@@ -17,10 +19,8 @@ const Diseases = ({ data }: { data: data }) => {
   return (
     <div className={styles.container}>
       <div className={styles.main_diseases}>
-        <h2 className={styles.diseases_title}>Agrokasalliklar</h2>
-        <p className={styles.diseases_text}>
-          123 dan ortiq kasalliklar tashxislari bilan
-        </p>
+        <h2 className={styles.diseases_title}>{t("diseases.title")}</h2>
+        <p className={styles.diseases_text}>{t("diseases.small_text")}</p>
 
         <div
           className={styles.diseases_grid}
@@ -49,7 +49,7 @@ const Diseases = ({ data }: { data: data }) => {
           className={styles.diseases_button}
           onClick={() => handleNavigate(`/diseases`)}
         >
-          Barcha kasalliklarni ko’rish
+          {t("buttons.view_diseases")}
         </button>
       </div>
     </div>

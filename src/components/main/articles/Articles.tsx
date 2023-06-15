@@ -3,12 +3,14 @@ import { useRouter } from "next/router";
 import SwiperCards from "@/components/swiper/SwiperCards";
 import Image from "next/image";
 import { card, data } from "@/data/interfaces";
+import { useTranslation } from "next-i18next";
 
 import styles from "./articles.module.scss";
 
 import half_logo from "@/assets/images/half_logo.png";
 
 const Articles = ({ data }: { data: data }) => {
+  const { t } = useTranslation("common");
   const router = useRouter();
   function handleNavigate(path: string) {
     router.push(path);
@@ -24,12 +26,12 @@ const Articles = ({ data }: { data: data }) => {
         height={350}
       />
       <div className={styles.articles_left_section}>
-        <h2 className={styles.articles_title}>sO’NGGI mAQOLALAR</h2>
+        <h2 className={styles.articles_title}>{t("blogs.title")}</h2>
         <button
           className={styles.articles__top_button}
           onClick={() => handleNavigate("/blogs")}
         >
-          Barchasini o’qish
+          {t("buttons.read_all")}
         </button>
       </div>
 
@@ -39,7 +41,7 @@ const Articles = ({ data }: { data: data }) => {
         className={styles.articles__bottom_button}
         onClick={() => handleNavigate("/blogs")}
       >
-        Barchasini o’qish
+        {t("buttons.read_all")}
       </button>
     </div>
   );

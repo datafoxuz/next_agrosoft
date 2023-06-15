@@ -3,11 +3,6 @@ import communityImage from "@/assets/images/community.png";
 import diseasesImage from "@/assets/images/diseases.png";
 import marketImage from "@/assets/images/market.png";
 
-import articles from "@/assets/images/articles.png";
-import community from "@/assets/images/community.png";
-import diseases from "@/assets/images/diseases.png";
-import market from "@/assets/images/market.png";
-
 import { card, cardTypes } from "./interfaces";
 
 export const baseUrl = "https://api.agrosoft.uz/api/v1/site";
@@ -84,31 +79,6 @@ export const cardsForExample: card[] = [
     id: 2,
     slug: "",
     created_at: "",
-  },
-];
-
-export const topcards: cardTypes[] = [
-  {
-    url: "/blogs",
-    image: articles,
-    title: "Agro maqolalar",
-    location: "Bukhara, Uzbekistan",
-    price: "0.99 - 5.9",
-  },
-  {
-    url: "/community",
-    image: community,
-    title: "Agro jamiyat",
-  },
-  {
-    url: "/diseases",
-    image: diseases,
-    title: "Agrokasalliklar",
-  },
-  {
-    url: "/market",
-    image: market,
-    title: "Agromarket",
   },
 ];
 
