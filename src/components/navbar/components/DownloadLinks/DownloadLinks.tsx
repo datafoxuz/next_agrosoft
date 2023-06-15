@@ -26,7 +26,7 @@ const DownloadLinks = ({ classN = false }: { classN?: boolean }) => {
         height={30}
       />
       <p className={styles.text}>
-        <span>{t("hero.download")}</span>
+        <span>{t("main.hero.download")}</span>
         Agrosoft
       </p>
     </div>

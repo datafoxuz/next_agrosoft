@@ -23,7 +23,7 @@ const News = ({ data }: { data: data }) => {
   return (
     <div className={styles.container}>
       <div className={styles.main_news}>
-        <h2 className={styles.news_title}>{t("news.title")}</h2>
+        <h2 className={styles.news_title}>{t("main.news.title")}</h2>
         <div className={styles.new_wrapper}>
           {newCard?.length ? (
             <SwiperCard cardDate="12.04.2023" data={newCard[0]} />

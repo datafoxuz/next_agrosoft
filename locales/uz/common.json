@@ -6,63 +6,84 @@
     "market": "Agromarket",
     "about": "Biz haqimizda",
     "weather": "Ob-havo ma’lumotlari",
-    "news": "Yangiliklar"
+    "news": "Yangiliklar",
+    "default_name": "Ism Familiya"
   },
 
   "buttons": {
     "read_all": "Barchasini o'qish",
     "view_diseases": "Barcha kasalliklarni ko'rish",
     "enter_market": "Marketga kirish",
-    "subscribe": "Obuna bo'lish"
+    "subscribe": "Obuna bo'lish",
+    "continue": "Davom etish",
+    "back": "Orqaga qaytish"
   },
 
-  "hero": {
-    "title": "Sizning agro yordamchingiz!",
-    "small_title": "Barcha agro-ma’lumotlar bir yerda!",
-    "download": "Yuklab oling"
+  "main": {
+    "menu": "Menyu",
+
+    "hero": {
+      "title": "Sizning agro yordamchingiz!",
+      "small_title": "Barcha agro-ma’lumotlar bir yerda!",
+      "download": "Yuklab oling"
+    },
+
+    "weather": {
+      "humidity": "Namlik:",
+      "wind": "Shamol:",
+      "full_info": "To’liq ma’lumot"
+    },
+
+    "about": {
+      "title": "LOYIHA HAQIDA",
+      "desc": "Bu veb-portali qishloq xo‘jaligi sohasidagi muhim yangiliklar va foydali maqolalar yoritib borish uchun tashkil etilgan. Saytga tashrif buyuruvchilarni sifatli va foydali maʼlumotlar bilan taʼminlash – bizning oldimizga qo‘ygan asosiy maqsadimiz."
+    },
+
+    "blogs": {
+      "title": "SO’NGGI MAQOLALAR"
+    },
+
+    "community": {
+      "title": "AGRO JAMIYAT",
+      "small_text": "Qizg’in muhokamalar, savol-javoblar"
+    },
+
+    "diseases": {
+      "title": "AGROKASALLIKLAR",
+      "small_text": "123 dan ortiq kasalliklar tashxislari bilan"
+    },
+
+    "market": {
+      "title": "AGROMARKET",
+      "small_text": "500+ xil mahsulotlardan iborat katta marketpleys",
+      "main_title": "YIRIK ULGURJI SOTUVCHILAR"
+    },
+
+    "news": {
+      "title": "So'nggi yangiliklar"
+    },
+
+    "footer": {
+      "title": "So’nggi yangiliklardan habardor bo’lib turing",
+      "contact": "Bog’lanish:",
+      "inp_placeholder": "Emailingizni kiriting",
+      "why_agrosoft": "Nega aynan Agrosoft?",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit i",
+      "reserved": "Barcha huquqlar himoyalangan"
+    }
   },
 
-  "weather": {
-    "humidity": "Namlik:",
-    "wind": "Shamol:",
-    "full_info": "To’liq ma’lumot"
-  },
-
-  "about": {
-    "title": "LOYIHA HAQIDA",
-    "desc": "Bu veb-portali qishloq xo‘jaligi sohasidagi muhim yangiliklar va foydali maqolalar yoritib borish uchun tashkil etilgan. Saytga tashrif buyuruvchilarni sifatli va foydali maʼlumotlar bilan taʼminlash – bizning oldimizga qo‘ygan asosiy maqsadimiz."
-  },
-
-  "blogs": {
-    "title": "SO’NGGI MAQOLALAR"
-  },
-
-  "community": {
-    "title": "AGRO JAMIYAT",
-    "small_text": "Qizg’in muhokamalar, savol-javoblar"
-  },
-
-  "diseases": {
-    "title": "AGROKASALLIKLAR",
-    "small_text": "123 dan ortiq kasalliklar tashxislari bilan"
-  },
-
-  "market": {
-    "title": "AGROMARKET",
-    "small_text": "500+ xil mahsulotlardan iborat katta marketpleys",
-    "main_title": "YIRIK ULGURJI SOTUVCHILAR"
-  },
-
-  "news": {
-    "title": "So'nggi yangiliklar"
-  },
-
-  "footer": {
-    "title": "So’nggi yangiliklardan habardor bo’lib turing",
-    "contact": "Bog’lanish:",
-    "inp_placeholder": "Emailingizni kiriting",
-    "why_agrosoft": "Nega aynan Agrosoft?",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit i",
-    "reserved": "Barcha huquqlar himoyalangan"
+  "auth": {
+    "login": "Tizimga kirish",
+    "signup": "Ro'yxatdan o'tish",
+    "username_inp": "Login yoki telefon raqamingiz",
+    "username_err_msg": "Foydalanuvchi nomi kamida 13 ta belgidan iborat boʻlishi kerak",
+    "pass_inp": "Parol",
+    "pass_err_msg": "Parol kamida 4 ta belgidan iborat boʻlishi kerak",
+    "forgot_pass": "Parolni unutdim",
+    "new_pass": "Parol o'rnating",
+    "enter_pass": "Parolni kiriting",
+    "enter_pass_again": "Parolni qaytadan kiriting",
+    "restore_pass": "Parolni tiklash"
   }
 }

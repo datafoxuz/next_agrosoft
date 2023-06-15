@@ -68,11 +68,11 @@ const Footer = () => {
       <div className={styles.footer_wrapper}>
         <div className={styles.footer_top}>
           <div className={styles.footer_section}>
-            <p className={styles.text}>{t("footer.title")}</p>
+            <p className={styles.text}>{t("main.footer.title")}</p>
             <div className={styles.input_section} data-err={isError}>
               <input
                 type="text"
-                placeholder={`${t("footer.inp_placeholder")}`}
+                placeholder={`${t("main.footer.inp_placeholder")}`}
                 className={styles.footer_input}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -97,7 +97,7 @@ const Footer = () => {
             </div>
           </div>
           <div className={styles.footer_section}>
-            <p className={styles.text}>{t("footer.contact")}</p>
+            <p className={styles.text}>{t("main.footer.contact")}</p>
             <div className={styles.contact}>
               <p className={styles.text}>info@agrosoft.uz</p>
               <p className={styles.text}>+998 99 887 92 45</p>
@@ -106,11 +106,11 @@ const Footer = () => {
         </div>
         <div className={styles.footer_bottom}>
           <div className={styles.footer_section}>
-            <h4 className={styles.title}>{t("footer.why_agrosoft")}</h4>
-            <p className={styles.text}>{t("footer.desc")}</p>
+            <h4 className={styles.title}>{t("main.footer.why_agrosoft")}</h4>
+            <p className={styles.text}>{t("main.footer.desc")}</p>
 
             <p className={styles.footer_info}>
-              AgroSoft © {new Date().getFullYear()}. {t("footer.reserved")}
+              AgroSoft © {new Date().getFullYear()}. {t("main.footer.reserved")}
             </p>
           </div>
           <div className={styles.footer_links_wrapper}>

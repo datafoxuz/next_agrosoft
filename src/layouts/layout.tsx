@@ -7,28 +7,25 @@ import { SessionProvider } from "next-auth/react";
 import styles from "./layout.module.scss";
 
 const Layout = ({ children, session }: LayoutProps) => {
-  const { asPath } = useRouter();
-  const [isShowFooter, setIsShowFooter] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (asPath == "/login") {
-      setIsShowFooter(false);
-    }
-
-    if (asPath == "/registration") {
-      setIsShowFooter(false);
-    }
-  }, [asPath]);
+  const { pathname } = useRouter();
 
   return (
     <div className={styles.container}>
       <SessionProvider session={session}>
         <Navbar
-          isStatic={asPath !== "/"}
-          auth={asPath == "/login" || asPath == "/registration"}
+          isStatic={pathname !== "/"}
+          auth={
+            pathname == "/login" ||
+            pathname == "/registration" ||
+            pathname == "/new-password"
+          }
         />
         <div>{children}</div>
-        {isShowFooter ? <Footer /> : null}
+        {pathname == "/login" ||
+        pathname == "/registration" ||
+        pathname == "/new-password" ? null : (
+          <Footer />
+        )}
       </SessionProvider>
     </div>
   );

@@ -57,16 +57,16 @@ const Weather = ({
 
                 <div className={styles.info_list}>
                   <p>
-                    {t("weather.humidity")} {weatherData.data.humidity}%{" "}
+                    {t("main.weather.humidity")} {weatherData.data.humidity}%{" "}
                   </p>
                   <p>
-                    {t("weather.wind")}{" "}
+                    {t("main.weather.wind")}{" "}
                     {Math.floor(weatherData.data.wind_speed)}km/h
                   </p>
                 </div>
               </div>
               <p className={styles.link} onClick={() => handleClick()}>
-                {t("weather.full_info")} <EastIcon />
+                {t("main.weather.full_info")} <EastIcon />
               </p>
             </div>
 
@@ -103,12 +103,12 @@ const Weather = ({
                 </div>
 
                 <div className={styles.info_list}>
-                  <p>{t("weather.humidity")} 52% </p>
-                  <p>{t("weather.wind")} 13 km/h</p>
+                  <p>{t("main.weather.humidity")} 52% </p>
+                  <p>{t("main.weather.wind")} 13 km/h</p>
                 </div>
               </div>
               <p className={styles.link} onClick={() => handleClick()}>
-                {t("weather.full_info")} <EastIcon />
+                {t("main.weather.full_info")} <EastIcon />
               </p>
             </div>
 

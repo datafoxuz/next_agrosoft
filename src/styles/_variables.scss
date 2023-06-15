@@ -206,6 +206,10 @@ $small_smartphone_width: 320px;
     padding: 32px;
   }
 
+  @media screen and (max-width: $default_tablet_width) {
+    border-radius: 70px;
+  }
+
   h3 {
     @extend %snavbar-title;
     margin-bottom: 32px;

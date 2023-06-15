@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { authProps } from "../data";
 import { signIn, useSession } from "next-auth/react";
+import { useTranslation } from "next-i18next";
 
 import styles from "../auth.module.scss";
 
@@ -16,6 +17,7 @@ interface inpProps {
 }
 
 const Login = ({ tabId, setTabId }: authProps) => {
+  const { t } = useTranslation("common");
   //states===========================================
   const [user, setUser] = useState<inpProps>({
     username: "fayzulloevasadbek@gmail.com",
@@ -59,7 +61,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
     } else {
       setIsError({
         username: username.length < 13,
-        password: password.length < 13,
+        password: password.length < 4,
       });
     }
   };
@@ -96,12 +98,12 @@ const Login = ({ tabId, setTabId }: authProps) => {
 
   return (
     <div className={styles.modal}>
-      <h3 className={styles.title}>Kirish</h3>
+      <h3 className={styles.title}>{t("auth.login")}</h3>
       <form onSubmit={(e) => handleLogin(e, user.username, user.password)}>
         <input
           name="username"
           type="text"
-          placeholder="Login yoki telefon raqamingiz"
+          placeholder={`${t("auth.username_inp")}`}
           className={`${styles.input} ${styles.username_inp}`}
           value={user.username}
           data-err={isError.username}
@@ -109,9 +111,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
         />
 
         {isError.username ? (
-          <p className={styles.error_msg}>
-            Username kamida 13 ta harfdan iborat bo'lishi kerak
-          </p>
+          <p className={styles.error_msg}>{t("auth.username_er_msg")}</p>
         ) : null}
 
         {/* =========================================== */}
@@ -119,7 +119,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
           <input
             name="password"
             type={`${isShowPass ? "text" : "password"}`}
-            placeholder="Parol"
+            placeholder={`${t("auth.pass_inp")}`}
             className={`${styles.input} ${styles.password_inp}`}
             value={user.password}
             data-err={isError.password}
@@ -135,41 +135,34 @@ const Login = ({ tabId, setTabId }: authProps) => {
         </div>
 
         {isError.password ? (
-          <p className={styles.error_msg}>
-            Password kamida 4 ta harfdan iborat bo'lishi kerak
-          </p>
+          <p className={styles.error_msg}>{t("auth.pass_err_msg")}</p>
         ) : null}
 
         {/* =========================================== */}
 
         <p className={styles.reset_pass} onClick={() => setTabId(tabId + 1)}>
-          Parolni unutdim
+          {t("auth.forgot_pass")}
         </p>
 
         <div className={styles.buttons_wrapper}>
           {isLoading ? (
             <>
               <button type="button" className={styles.load_button}>
-                Tizimga kirish
+                {t("auth.login")}
               </button>
 
               <button type="button" className={styles.load_button}>
-                Ro’yxatdan o’tish
+                {t("auth.signup")}
               </button>
             </>
           ) : (
             <>
-              <button
-                type="submit"
-                // onClick={(e) => handleLogin(user.username, user.password)}
-              >
-                Tizimga kirish
-              </button>
+              <button type="submit">{t("auth.login")}</button>
               <button
                 type="button"
                 onClick={() => router.push("/registration")}
               >
-                Ro’yxatdan o’tish
+                {t("auth.signup")}
               </button>
             </>
           )}

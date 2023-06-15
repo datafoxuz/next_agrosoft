@@ -21,6 +21,7 @@ import ArrowIcon from "@/assets/icons/NavbarIcons/ArrowIcons/ArrowIcon";
 import logo from "@/assets/icons/NavbarIcons/logo.svg";
 import logo_white from "@/assets/icons/logo_white.svg";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useTranslation } from "next-i18next";
 
 //style
 import styles from "./navbar.module.scss";
@@ -33,6 +34,7 @@ const Navbar = ({
   auth?: boolean;
 }) => {
   const { data, status }: { data: any; status: string } = useSession();
+  const { t } = useTranslation("common");
   const { weatherData } = useMyContext();
 
   const router = useRouter();
@@ -135,13 +137,14 @@ const Navbar = ({
               <span>
                 {generateName(
                   data?.user?.data.user.name,
-                  data?.user?.data.user.lastname
+                  data?.user?.data.user.lastname,
+                  t("main_topics.default_name")
                 )}
               </span>
             </Link>
           ) : (
             <Link href="/login" className={styles.login_link}>
-              Login
+              {t("auth.login")}
             </Link>
           )}
 
@@ -159,7 +162,7 @@ const Navbar = ({
               }
             >
               <HamburgerIcon active={open.burgerMenu} />
-              <p>Menyu</p>
+              <p>{t("main.menu")}</p>
             </div>
 
             {open.burgerMenu && (

@@ -1,4 +1,8 @@
-export function generateName(name: string | null, surname: string | null) {
+export function generateName(
+  name: string | null,
+  surname: string | null,
+  fName: string
+) {
   let fullname;
   if (name && surname) {
     fullname = `${name.slice(0, 1)} ${surname}`;
@@ -7,7 +11,7 @@ export function generateName(name: string | null, surname: string | null) {
   } else if (name && !surname) {
     fullname = `${name}`;
   } else {
-    fullname = `Ism Familiya`;
+    fullname = fName;
   }
 
   return fullname;

@@ -19,8 +19,8 @@ const Diseases = ({ data }: { data: data }) => {
   return (
     <div className={styles.container}>
       <div className={styles.main_diseases}>
-        <h2 className={styles.diseases_title}>{t("diseases.title")}</h2>
-        <p className={styles.diseases_text}>{t("diseases.small_text")}</p>
+        <h2 className={styles.diseases_title}>{t("main.diseases.title")}</h2>
+        <p className={styles.diseases_text}>{t("main.diseases.small_text")}</p>
 
         <div
           className={styles.diseases_grid}

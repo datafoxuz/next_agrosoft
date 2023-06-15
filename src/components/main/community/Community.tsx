@@ -22,8 +22,10 @@ const Community = ({ data }: { data: data }) => {
   return (
     <div className={styles.container}>
       <div className={styles.main_community}>
-        <h3 className={styles.community_title}>{t("community.title")}</h3>
-        <p className={styles.community_text}>{t("community.small_text")}</p>
+        <h3 className={styles.community_title}>{t("main.community.title")}</h3>
+        <p className={styles.community_text}>
+          {t("main.community.small_text")}
+        </p>
         <Image
           src={cotton.src}
           alt="cotton image"

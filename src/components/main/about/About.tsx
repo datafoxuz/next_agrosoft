@@ -8,8 +8,8 @@ const About = () => {
   return (
     <div className={styles.container}>
       <div className={styles.main_about}>
-        <h2 className={styles.about_title}>{t("about.title")}</h2>
-        <p className={styles.about_text}>{t("about.desc")}</p>
+        <h2 className={styles.about_title}>{t("main.about.title")}</h2>
+        <p className={styles.about_text}>{t("main.about.desc")}</p>
       </div>
     </div>
   );

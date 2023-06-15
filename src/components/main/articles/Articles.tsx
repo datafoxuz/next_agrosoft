@@ -26,7 +26,7 @@ const Articles = ({ data }: { data: data }) => {
         height={350}
       />
       <div className={styles.articles_left_section}>
-        <h2 className={styles.articles_title}>{t("blogs.title")}</h2>
+        <h2 className={styles.articles_title}>{t("main.blogs.title")}</h2>
         <button
           className={styles.articles__top_button}
           onClick={() => handleNavigate("/blogs")}

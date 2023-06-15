@@ -6,63 +6,84 @@
     "market": "Agromarket",
     "about": "About Us",
     "weather": "Weather information",
-    "news": "News"
+    "news": "News",
+    "default_name": "Full name"
   },
 
   "buttons": {
     "read_all": "Read All",
     "view_diseases": "View all diseases",
     "enter_market": "Enter the market",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "continue": "Continue",
+    "back": "Go back"
   },
 
-  "hero": {
-    "title": "YOUR AGRO ASSISTANT!",
-    "small_title": "All agro-information in one place!",
-    "download": "Download it"
+  "main": {
+    "menu": "Menu",
+
+    "hero": {
+      "title": "YOUR AGRO ASSISTANT!",
+      "small_title": "All agro-information in one place!",
+      "download": "Download it"
+    },
+
+    "weather": {
+      "humidity": "Humidity:",
+      "wind": "Wind:",
+      "full_info": "Full information"
+    },
+
+    "about": {
+      "title": "ABOUT THE PROJECT",
+      "desc": "This web portal is created to cover important news and useful articles in the field of agriculture. Providing the visitors of the site with quality and useful information is our main goal."
+    },
+
+    "blogs": {
+      "title": "Latest blogs"
+    },
+
+    "community": {
+      "title": "AGRO Community",
+      "small_text": "Heated discussions, questions and answers"
+    },
+
+    "diseases": {
+      "title": "AGRICULTURAL DISEASES",
+      "small_text": "With more than 123 disease diagnoses"
+    },
+
+    "market": {
+      "title": "AGROMARKET",
+      "small_text": "Large marketplace with 500+ different products",
+      "main_title": "MAJOR WHOLESALERS"
+    },
+
+    "news": {
+      "title": "Latest news"
+    },
+
+    "footer": {
+      "title": "Keep up with the latest news",
+      "contact": "Contact:",
+      "inp_placeholder": "Enter your email",
+      "why_agrosoft": "Why Agrosoft?",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit i",
+      "reserved": "All rights reserved"
+    }
   },
 
-  "weather": {
-    "humidity": "Humidity:",
-    "wind": "Wind:",
-    "full_info": "Full information"
-  },
-
-  "about": {
-    "title": "ABOUT THE PROJECT",
-    "desc": "This web portal is created to cover important news and useful articles in the field of agriculture. Providing the visitors of the site with quality and useful information is our main goal."
-  },
-
-  "blogs": {
-    "title": "Latest blogs"
-  },
-
-  "community": {
-    "title": "AGRO Community",
-    "small_text": "Heated discussions, questions and answers"
-  },
-
-  "diseases": {
-    "title": "AGRICULTURAL DISEASES",
-    "small_text": "With more than 123 disease diagnoses"
-  },
-
-  "market": {
-    "title": "AGROMARKET",
-    "small_text": "Large marketplace with 500+ different products",
-    "main_title": "MAJOR WHOLESALERS"
-  },
-
-  "news": {
-    "title": "Latest news"
-  },
-
-  "footer": {
-    "title": "Keep up with the latest news",
-    "contact": "Contact:",
-    "inp_placeholder": "Enter your email",
-    "why_agrosoft": "Why Agrosoft?",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit i",
-    "reserved": "All rights reserved"
+  "auth": {
+    "login": "Log in",
+    "signup": "Signup",
+    "username_inp": "Your login or phone number",
+    "username_err_msg": "Username must be at least 13 characters long",
+    "pass_inp": "Password",
+    "pass_err_msg": "Password must contain at least 4 letters",
+    "forgot_pass": "Forgot password",
+    "new_pass": "New password",
+    "enter_pass": "Enter your password",
+    "enter_pass_again": "Re-enter password",
+    "restore_pass": "Restore Password"
   }
 }
