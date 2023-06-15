@@ -7,6 +7,7 @@ import { ParsedUrlQuery } from "querystring";
 
 import styles from "./articles.module.scss";
 import { searchDatas } from "@/lib/searchData";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const index = ({ blogs }: { blogs: data }) => {
   const siteWay: siteWayTypes[] = [
@@ -34,7 +35,13 @@ const index = ({ blogs }: { blogs: data }) => {
   );
 };
 
-export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
+export async function getServerSideProps({
+  query,
+  locale,
+}: {
+  query: ParsedUrlQuery;
+  locale: string;
+}) {
   const page = query.page || 1;
   const search = query.search || "";
   let blogsData;
@@ -50,6 +57,7 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
   return {
     props: {
       blogs: blogsData,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }

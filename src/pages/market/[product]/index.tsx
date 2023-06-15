@@ -2,6 +2,7 @@ import { Collections, SNavbar } from "@/components";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
@@ -49,25 +50,19 @@ const index = ({ products }: { products: data }) => {
 
 export async function getServerSideProps({
   params,
+  locale,
 }: {
   params: { product: string };
+  locale: string;
 }) {
-  try {
-    const products = await fetchData(`/marketplace/${params.product}`);
+  const products = await fetchData(`/marketplace/${params.product}`);
 
-    return {
-      props: {
-        products,
-      },
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      props: {
-        products: undefined, // Set article to undefined in case of an error
-      },
-    };
-  }
+  return {
+    props: {
+      products,
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }
 
 export default index;

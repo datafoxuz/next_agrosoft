@@ -11,6 +11,7 @@ import styles from "./weather.module.scss";
 
 import sun from "@/assets/icons/sun_orange.svg";
 import { weatherDataExample } from "@/data";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const WeatherPage = ({
   regions,
@@ -19,8 +20,8 @@ const WeatherPage = ({
   regions: any;
   districts: any;
 }) => {
+  //States==============================================================
   const { weatherData, locationInfo } = useMyContext();
-
   const [regionItem, setRegionItem] = useState<string>(
     locationInfo ? locationInfo.regionNmae : regions ? regions.data[0].name : ""
   );
@@ -48,6 +49,8 @@ const WeatherPage = ({
       url: "/weather",
     },
   ];
+
+  //Functions========================================================
 
   function handleChangeLocation() {
     localStorage.setItem(
@@ -245,7 +248,13 @@ const WeatherPage = ({
   );
 };
 
-export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
+export async function getServerSideProps({
+  query,
+  locale,
+}: {
+  query: ParsedUrlQuery;
+  locale: string;
+}) {
   const { regionId } = query;
   let regionsData;
   let districtData;
@@ -274,6 +283,7 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
     props: {
       regions: regionsData,
       districts: districtData,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }

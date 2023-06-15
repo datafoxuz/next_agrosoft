@@ -3,6 +3,7 @@ import { card, data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
 import { searchDatas } from "@/lib/searchData";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
 
@@ -31,7 +32,13 @@ const index = ({ diseasess }: { diseasess: data }) => {
   );
 };
 
-export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
+export async function getServerSideProps({
+  query,
+  locale,
+}: {
+  query: ParsedUrlQuery;
+  locale: string;
+}) {
   const page = query.page || 1;
   const search = query.search || "";
   let diseasesData;
@@ -47,6 +54,7 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
   return {
     props: {
       diseasess: diseasesData,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }

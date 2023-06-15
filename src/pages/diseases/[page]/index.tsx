@@ -2,6 +2,7 @@ import { InternalPage, SNavbar } from "@/components";
 import { card } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -35,25 +36,19 @@ const index = ({ disease }: { disease: card }) => {
 
 export async function getServerSideProps({
   params,
+  locale,
 }: {
   params: { page: string };
+  locale: string;
 }) {
-  try {
-    const { data } = await fetchData(`/deceases/${params.page}`);
+  const { data } = await fetchData(`/deceases/${params.page}`);
 
-    return {
-      props: {
-        disease: data,
-      },
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      props: {
-        disease: undefined, // Set diseases to undefined in case of an error
-      },
-    };
-  }
+  return {
+    props: {
+      disease: data,
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }
 
 export default index;

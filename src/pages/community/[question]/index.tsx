@@ -2,6 +2,7 @@ import { InternalPage, SNavbar } from "@/components";
 import { card } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -33,25 +34,18 @@ const index = ({ question }: { question: card }) => {
 
 export async function getServerSideProps({
   params,
+  locale,
 }: {
   params: { question: string };
+  locale: string;
 }) {
-  try {
-    const { data } = await fetchData(`/community/${params.question}`);
-
-    return {
-      props: {
-        question: data,
-      },
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      props: {
-        question: undefined, // Set article to undefined in case of an error
-      },
-    };
-  }
+  const { data } = await fetchData(`/community/${params.question}`);
+  return {
+    props: {
+      question: data,
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }
 
 export default index;

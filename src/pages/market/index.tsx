@@ -3,6 +3,7 @@ import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
 import { searchDatas } from "@/lib/searchData";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
 
@@ -44,7 +45,13 @@ const index = ({ categories }: { categories: data }) => {
   );
 };
 
-export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
+export async function getServerSideProps({
+  query,
+  locale,
+}: {
+  query: ParsedUrlQuery;
+  locale: string;
+}) {
   const search = query.search || "";
 
   let categoriesData;
@@ -58,6 +65,7 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
   return {
     props: {
       categories: categoriesData,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }

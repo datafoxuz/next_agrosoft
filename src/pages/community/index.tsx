@@ -3,6 +3,7 @@ import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
 import { searchDatas } from "@/lib/searchData";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
 
@@ -50,7 +51,13 @@ const index = ({ communities }: { communities: data }) => {
   );
 };
 
-export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
+export async function getServerSideProps({
+  query,
+  locale,
+}: {
+  query: ParsedUrlQuery;
+  locale: string;
+}) {
   const page = query.page || 1;
   const search = query.search || "";
   let communitiesData;
@@ -66,6 +73,7 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
   return {
     props: {
       communities: communitiesData,
+      ...(await serverSideTranslations(locale, ["common"])),
     },
   };
 }
