@@ -2,11 +2,14 @@ import { SNavbar } from "@/components";
 import React, { useState } from "react";
 import SEO from "@/layouts/seo/seo";
 import { useTranslation } from "next-i18next";
-
+// import { AddintionalInfo, MyProducts, PersonalInfo, Saved } from "./components";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { MyProducts, OtherInfo, PersonalInfo, Saved } from "./components";
 
 import styles from "./profile.module.scss";
+import PersonalInfo from "./components/personalInfo/PersonalInfo";
+import AddintionalInfo from "./components/addintionalInfo/AddintionalInfo";
+import Saved from "./components/mySaved/Saved";
+import MyProducts from "./components/myProducts/MyProducts";
 
 const index = () => {
   const { t } = useTranslation("common");
@@ -68,7 +71,7 @@ const index = () => {
           {tabId == 1 ? (
             <PersonalInfo />
           ) : tabId == 2 ? (
-            <OtherInfo />
+            <AddintionalInfo />
           ) : tabId == 3 ? (
             <Saved />
           ) : tabId == 4 ? (

@@ -6,7 +6,7 @@ import styles from "./filterdrawer.module.scss";
 
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
-const SortDrawer = () => {
+const FilterDrawer = () => {
   const [tabId, setTabId] = useState(1);
 
   //navigate
@@ -88,4 +88,4 @@ const SortDrawer = () => {
   );
 };
 
-export default SortDrawer;
+export default FilterDrawer;
