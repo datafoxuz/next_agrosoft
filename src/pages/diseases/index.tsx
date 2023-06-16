@@ -3,27 +3,35 @@ import { card, data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
 import { searchDatas } from "@/lib/searchData";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
 
 const index = ({ diseasess }: { diseasess: data }) => {
+  const { t } = useTranslation("common");
+
   const siteWay = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Agro Kasalliklar",
+      title: t("main_topics.diseases"),
       url: "/diseases",
     },
   ];
 
   return (
-    <SEO metaTitle="Diseases">
-      <SNavbar siteWay={siteWay} title="Agro Kasalliklar" filter article />
+    <SEO metaTitle={`${t("main_topics.diseases")} - AgroSoft`}>
+      <SNavbar
+        siteWay={siteWay}
+        title={`${t("main_topics.diseases")}`}
+        filter
+        article
+      />
 
-      {diseasess.data.length ? (
+      {diseasess.data?.length ? (
         <Collections data={diseasess.data} meta={diseasess.meta} />
       ) : (
         <NotFound />

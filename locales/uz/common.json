@@ -8,7 +8,8 @@
     "about": "Biz haqimizda",
     "weather": "Ob-havo ma’lumotlari",
     "news": "Yangiliklar",
-    "default_name": "Ism Familiya"
+    "default_name": "Ism Familiya",
+    "acc_info": "Shaxsiy hisob"
   },
 
   "buttons": {
@@ -27,7 +28,10 @@
     "cancel": "Bekor qilish",
     "save": "Saqlab qo'yish",
     "share": "Ulashish",
-    "write_answer": "Javob yozish"
+    "write_answer": "Javob yozish",
+    "filter": "Filterni qo'llash",
+    "save_changes": "O’zgarishlarni saqlash",
+    "change": "O’zgartirish"
   },
 
   "main": {
@@ -106,6 +110,23 @@
       "item_1": "Eng so'ngilari",
       "item_2": "Eng yaxshilari",
       "item_3": "Eng mashhurlari"
+    },
+    "sort_modal_2": {
+      "title": "Sotib olish"
+    },
+
+    "filter": {
+      "title": "Filter",
+      "category": "Kategoriya",
+      "location": "Manzil",
+      "price": "Narx",
+      "min_price": "Eng arzon narxi",
+      "max_price": "Eng qimmat narxi",
+      "weight": "Og'irlik",
+      "min_weight": "Eng yengil",
+      "max_weight": "Eng og'ir",
+      "price_is_negotiable": "Narxi kelishilgan holda",
+      "clear": "Filterni tozalash"
     }
   },
 
@@ -114,5 +135,53 @@
       "title": "Savolingizni yozing",
       "write_question_inp": "Sarlavha"
     }
+  },
+
+  "inner_page": {
+    "question": "Savol",
+    "answers": "Javoblar",
+    "no_content_txt": "Javoblar hali mavjud emas",
+    "about_us": "Biz haqimizda",
+    "author": "Muallif",
+    "tell": "Tel",
+    "country": "Davlat",
+    "region": "Viloyat",
+    "price": "Narx",
+    "similar_articles": "O'xshash maqolalar"
+  },
+
+  "card": {
+    "per_kg": "kg uchun"
+  },
+
+  "account": {
+    "personal_info": {
+      "title": "Shaxsiy maʼlumotlar",
+      "phone": "Telefon",
+      "email": "Elektron pochta"
+    },
+
+    "other_info": {
+      "title": "Boshqa maʼlumotlar",
+      "profession": "Kasbi",
+      "farms_territory": "Fermer xo‘jaliklari hududi (gektarlarda)"
+    },
+
+    "saved": {
+      "title": "Saqlanganlar",
+      "blog": "Maqolalar",
+      "new": "Yangilik",
+      "products": "Mahsulotlar"
+    },
+
+    "my_products": {
+      "title": "Mahsulotlarim"
+    }
+  },
+
+  "weather": {
+    "title": "Ob havo",
+    "by_hour": "Soat bo’yicha",
+    "by_day": "Boshqa kunlar"
   }
 }

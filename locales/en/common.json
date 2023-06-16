@@ -8,7 +8,8 @@
     "about": "About Us",
     "weather": "Weather information",
     "news": "News",
-    "default_name": "Full name"
+    "default_name": "Full name",
+    "acc_info": "Personal account"
   },
 
   "buttons": {
@@ -27,7 +28,10 @@
     "cancel": "Cancel",
     "save": "Save",
     "share": "Share",
-    "write_answer": "Write answer"
+    "write_answer": "Write answer",
+    "filter": "Apply filter",
+    "save_changes": "Save changes",
+    "change": "Change"
   },
 
   "main": {
@@ -106,6 +110,23 @@
       "item_1": "Latest",
       "item_2": "Best of",
       "item_3": "Most Popular"
+    },
+    "sort_modal_2": {
+      "title": "Purchase"
+    },
+
+    "filter": {
+      "title": "Filter",
+      "category": "Category",
+      "location": "Location",
+      "price": "Price",
+      "min_price": "Min price",
+      "max_price": "Max price",
+      "weight": "Weight",
+      "min_weight": "Min weight",
+      "max_weight": "Max weight",
+      "price_is_negotiable": "Price is negotiable",
+      "clear": "Clear filter"
     }
   },
 
@@ -114,5 +135,53 @@
       "title": "Type your question",
       "write_question_inp": "Title"
     }
+  },
+
+  "inner_page": {
+    "question": "Question",
+    "answers": "Answers",
+    "no_content_txt": "The answers are not yet available",
+    "about_us": "About us",
+    "author": "Author",
+    "tell": "Tel",
+    "country": "Country",
+    "region": "Region",
+    "price": "Price",
+    "similar_articles": "Similar articles"
+  },
+
+  "card": {
+    "per_kg": "per kg"
+  },
+
+  "account": {
+    "personal_info": {
+      "title": "Personal Information",
+      "phone": "Phone",
+      "email": "Email"
+    },
+
+    "other_info": {
+      "title": "Other Information",
+      "profession": "Profession",
+      "farms_territory": "Territory of farms (in hectares)"
+    },
+
+    "saved": {
+      "title": "Saved",
+      "blog": "Articles",
+      "new": "New",
+      "products": "Products"
+    },
+
+    "my_products": {
+      "title": "My Products"
+    }
+  },
+
+  "weather": {
+    "title": "Weather",
+    "by_hour": "By the hour",
+    "by_day": "Other days"
   }
 }

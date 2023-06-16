@@ -103,7 +103,7 @@ const SecondNavbar = ({
                       }))
                     }
                   >
-                    Sotib olish
+                    {t("second_navbar.sort_modal_2.title")}
                     <ArrowBackIosNewIcon className={styles.icon} />
                   </button>
                   {isOpen.buy ? <FilterMenu active={isOpen.buy} /> : null}
@@ -114,7 +114,7 @@ const SecondNavbar = ({
                     className={styles.filter_button}
                     onClick={() => handleClick(state, setState)}
                   >
-                    Filter
+                    {t("second_navbar.filter.title")}
                     <Image
                       src={filterImage.src}
                       alt="filter black icon"

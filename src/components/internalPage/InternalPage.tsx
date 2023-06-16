@@ -36,7 +36,7 @@ const InternalPage = ({
     <div className={styles.internal}>
       {about && (
         <div className={`${styles.internal_top} ${styles.section}`}>
-          <h3 className={styles.hidden_title}>Biz haqimizda</h3>
+          <h3 className={styles.hidden_title}>{t("inner_page.about_us")}</h3>
 
           <button type="button" className={styles.top_button}>
             {t("buttons.contact")}
@@ -74,7 +74,7 @@ const InternalPage = ({
               {/* <CardActions data={data} /> */}
               <div className={styles.section}>
                 <div className={styles.question}>
-                  <h3 className={styles.title}>Savol:</h3>
+                  <h3 className={styles.title}>{t("inner_page.question")}:</h3>
                   <h5 className={`${styles.description} ${styles.question}`}>
                     {data.body}
                   </h5>
@@ -85,7 +85,7 @@ const InternalPage = ({
                     className={styles.answer_head_section}
                     data-column={isWriteAns.active}
                   >
-                    <h3 className={styles.title}>Javoblar</h3>
+                    <h3 className={styles.title}>{t("inner_page.answers")}</h3>
                     <div className={styles.answer_write}>
                       {isWriteAns.active ? (
                         <Write state={isWriteAns} setState={setIsWriteAns} />
@@ -110,7 +110,7 @@ const InternalPage = ({
                   {data.answers_count && data.answers_count > 0 ? (
                     [1, 2, 3].map((item, index) => <Answer />)
                   ) : (
-                    <p>Javoblar xali mavjud emas.</p>
+                    <p>{t("inner_page.no_content_txt")}</p>
                   )}
                 </div>
               </div>
@@ -124,27 +124,31 @@ const InternalPage = ({
                 <div className={styles.infos_wrapper}>
                   {data.author_name && (
                     <p className={styles.infos}>
-                      Muallif: <span>{data.author_name}</span>
+                      {t("inner_page.author")}: <span>{data.author_name}</span>
                     </p>
                   )}
                   {data.author_phone && (
                     <p className={styles.infos}>
-                      Tell: <span>{data.author_phone}</span>
+                      {t("inner_page.tell")}: <span>{data.author_phone}</span>
                     </p>
                   )}
                   {data.country_name && (
                     <p className={styles.infos}>
-                      Davlat: <span>{data.country_name}</span>
+                      {t("inner_page.country")}:{" "}
+                      <span>{data.country_name}</span>
                     </p>
                   )}
                   {data.region_name && (
                     <p className={styles.infos}>
-                      Viloyat: <span>{data.region_name}</span>
+                      {t("inner_page.region")}: <span>{data.region_name}</span>
                     </p>
                   )}
                   {data.high_price && (
                     <p className={styles.infos}>
-                      Narxi: <span>{data.high_price} USD per/kg</span>
+                      {t("inner_page.price")}:{" "}
+                      <span>
+                        {data.high_price} USD {t("card.per_kg")}
+                      </span>
                     </p>
                   )}
                 </div>
@@ -154,7 +158,7 @@ const InternalPage = ({
               {arr.length ? (
                 <div className={styles.liked}>
                   <h2 className={`${styles.title} ${styles.liked_title}`}>
-                    O’xshash maqolalar
+                    {t("inner_page.similar_articles")}
                   </h2>
                   {/* <Collections data={arr} /> */}
                 </div>

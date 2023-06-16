@@ -3,31 +3,33 @@ import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
 import { searchDatas } from "@/lib/searchData";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
 
 const index = ({ categories }: { categories: data }) => {
+  const { t } = useTranslation("common");
   const [market, setMarket] = useState<questionTypes>({
     active: false,
   });
 
   const siteWay = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Agromarket",
+      title: t("main_topics.market"),
       url: "/market",
     },
   ];
 
   return (
-    <SEO metaTitle="Agromarket">
+    <SEO metaTitle={`${t("main_topics.market")}`}>
       <SNavbar
         siteWay={siteWay}
-        title="Agromarket"
+        title={`${t("main_topics.market")}`}
         filter
         market
         state={market}

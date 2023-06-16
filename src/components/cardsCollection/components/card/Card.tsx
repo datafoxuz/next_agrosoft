@@ -2,12 +2,14 @@ import { card } from "@/data/interfaces";
 import { useRouter } from "next/router";
 import React from "react";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 import styles from "./card.module.scss";
 
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
 const Card = ({ item }: { item: card }) => {
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   function handleCardClick(slug: string) {
@@ -41,7 +43,9 @@ const Card = ({ item }: { item: card }) => {
 
       <p className={styles.title}>{item.title}</p>
       {item.high_price && (
-        <div className={styles.price}>{item.high_price} USD / per kg</div>
+        <div className={styles.price}>
+          {item.high_price} USD / {t("card.per_kg")}
+        </div>
       )}
     </div>
   );

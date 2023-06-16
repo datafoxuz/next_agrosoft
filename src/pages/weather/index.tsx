@@ -6,12 +6,13 @@ import WeatherLayout from "@/layouts/weather/WeatherLayout";
 import { useMyContext } from "@/hooks/useMyContext";
 import { ParsedUrlQuery } from "querystring";
 import { DailyAndHourlyWeatherType } from "@/data/interfaces";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { weatherDataExample } from "@/data";
 
 import styles from "./weather.module.scss";
 
 import sun from "@/assets/icons/sun_orange.svg";
-import { weatherDataExample } from "@/data";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const WeatherPage = ({
   regions,
@@ -20,6 +21,7 @@ const WeatherPage = ({
   regions: any;
   districts: any;
 }) => {
+  const { t } = useTranslation("common");
   //States==============================================================
   const { weatherData, locationInfo } = useMyContext();
   const [regionItem, setRegionItem] = useState<string>(
@@ -41,11 +43,11 @@ const WeatherPage = ({
 
   const siteWay = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Ob havo",
+      title: t("weather.title"),
       url: "/weather",
     },
   ];
@@ -61,8 +63,12 @@ const WeatherPage = ({
 
   return (
     <WeatherLayout>
-      <SEO metaTitle="Weather">
-        <SNavbar siteWay={siteWay} title="Ob havo ma’lumotlari" account />
+      <SEO metaTitle={`${t("weather.title")} - AgroSoft`}>
+        <SNavbar
+          siteWay={siteWay}
+          title={`${t("main_topics.weather")}`}
+          account
+        />
 
         {weatherData && weatherData.data ? (
           <div className={styles.weather}>
@@ -95,14 +101,22 @@ const WeatherPage = ({
                   °C /{Math.floor(weatherData?.data?.hottest_degree)}
                   °C
                 </p>
-                <p>{weatherData?.data?.humidity}% Humidity</p>
-                <p>{weatherData?.data?.wind_speed} km/h Wind speed</p>
+                <p>
+                  {t("main.weather.humidity")}
+                  {weatherData?.data?.humidity}%
+                </p>
+                <p>
+                  {t("main.weather.wind")}
+                  {weatherData?.data?.wind_speed} km/h
+                </p>
               </div>
             </div>
 
             <div className={styles.right_section}>
               <div className={styles.content}>
-                <h3 className={styles.title}>Lokatsiya</h3>
+                <h3 className={styles.title}>
+                  {t("second_navbar.filter.location")}
+                </h3>
                 <div className={styles.wrapper}>
                   <FilterSelect
                     item={regionItem}
@@ -116,12 +130,12 @@ const WeatherPage = ({
                     data={districts.data}
                   />
                   <button type="button" onClick={() => handleChangeLocation()}>
-                    O’zgartirish
+                    {t("buttons.change")}
                   </button>
                 </div>
               </div>
               <div className={styles.content}>
-                <h3 className={styles.title}>Soat bo’yicha</h3>
+                <h3 className={styles.title}>{t("weather.by_hour")}</h3>
                 <div className={styles.cards_wrapper}>
                   {weatherData?.data?.hourly
                     .slice(0, 12)
@@ -143,7 +157,7 @@ const WeatherPage = ({
                 </div>
               </div>
               <div className={styles.content}>
-                <h3 className={styles.title}>Boshqa kunlar</h3>
+                <h3 className={styles.title}>{t("weather.by_day")}</h3>
                 <div className={styles.cards_wrapper}>
                   {weatherData?.data?.daily.map(
                     (item: DailyAndHourlyWeatherType, index: number) => (
