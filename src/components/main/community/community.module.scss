@@ -20,6 +20,11 @@
     padding-inline: 50px;
   }
 
+  @media screen and (max-width: 400px) {
+    border-radius: 120px;
+    padding-top: 88px;
+  }
+
   .top_cotton_img {
     position: absolute;
     right: 0%;

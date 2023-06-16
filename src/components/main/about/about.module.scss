@@ -20,6 +20,10 @@
     margin-bottom: 80px;
   }
 
+  @media screen and (max-width: 400px) {
+    border-radius: 120px;
+  }
+
   .about_title {
     font-family: Montserrat;
     font-size: 32px;
@@ -32,11 +36,16 @@
     @media screen and (max-width: variables.$high_res_tablet_width) {
       font-size: 24px;
     }
+
+    @media screen and (max-width: 400px) {
+      line-height: 24px;
+    }
   }
 
   .about_text {
     color: #2f3330;
     @extend %main-text-16;
     line-height: 150%;
+    font-weight: 400;
   }
 }

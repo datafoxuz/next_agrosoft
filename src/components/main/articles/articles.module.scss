@@ -16,6 +16,11 @@
     margin-bottom: 113px;
   }
 
+  @media screen and (max-width: 400px) {
+    gap: 0;
+    margin-bottom: 118px;
+  }
+
   .articles_left_section {
     margin-left: 155px;
 
@@ -44,6 +49,10 @@
     margin-top: 36px;
     @media screen and (max-width: variables.$high_res_tablet_width) {
       display: block;
+    }
+
+    @media screen and (max-width: 400px) {
+      margin-top: 11px;
     }
   }
 

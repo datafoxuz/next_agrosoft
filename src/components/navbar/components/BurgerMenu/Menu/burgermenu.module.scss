@@ -16,6 +16,10 @@
     right: 2%;
   }
 
+  @media screen and (max-width: 400px) {
+    top: -222%;
+  }
+
   .menu_item {
     font-weight: 700;
     font-size: 12px;

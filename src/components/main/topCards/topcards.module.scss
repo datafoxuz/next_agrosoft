@@ -18,6 +18,12 @@
     width: 300px;
   }
 
+  @media screen and (max-width: 400px) {
+    width: 240px;
+    margin-top: -80px;
+    margin-bottom: 68px;
+  }
+
   .top_card {
     text-align: center;
     margin-left: -30px;
@@ -46,6 +52,12 @@
       @media screen and (max-width: variables.$default_tablet_width) {
         width: 200px;
         height: 200px;
+      }
+
+      @media screen and (max-width: 400px) {
+        width: 141px;
+        height: 150px;
+        margin-bottom: 10px;
       }
     }
 

@@ -117,6 +117,7 @@
     left: 50%;
     transform: translate(-50%);
     cursor: pointer;
+    border: 3px solid #008843;
 
     @media only screen and (max-width: variables.$small_laptop_width) {
       padding-inline: 18px;
