@@ -2,20 +2,22 @@ import { InternalPage, SNavbar } from "@/components";
 import { card } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React from "react";
 
 const index = ({ question }: { question: card }) => {
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   const siteWay = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Agro jamiyat",
+      title: t("main_topics.community"),
       url: "/community",
     },
     {

@@ -1,23 +1,25 @@
-import { MOTION_CONFIGS, SORT_MOTION_CONFIGS } from "@/data";
+import { SORT_MOTION_CONFIGS } from "@/data";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
+import { useTranslation } from "next-i18next";
 
 import styles from "./filtermenu.module.scss";
 
 const FilterMenu = ({ active }: { active: boolean }) => {
+  const { t } = useTranslation("common");
   const [selectId, setSelectId] = useState<number>(0);
 
   const filters = [
     {
-      title: "Eng so`ngilari",
+      title: t("second_navbar.sort_modal.item_1"),
       activeTab: 1,
     },
     {
-      title: "Eng yaxshilar",
+      title: t("second_navbar.sort_modal.item_2"),
       activeTab: 2,
     },
     {
-      title: "Eng mashhurlari",
+      title: t("second_navbar.sort_modal.item_3"),
       activeTab: 3,
     },
   ];

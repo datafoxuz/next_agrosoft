@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { SNavbar } from "@/components";
 import SEO from "@/layouts/seo/seo";
@@ -6,13 +6,16 @@ import { useSession } from "next-auth/react";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
 import { baseUrl } from "@/data";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import styles from "@/components/write/write.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 
 const create = () => {
+  const { data }: { data: any; status: string } = useSession();
+  const { t } = useTranslation("common");
   const router = useRouter();
-  const { data, status }: { data: any; status: string } = useSession();
 
   //states
   const [title, setTitle] = useState<string>("");
@@ -32,15 +35,15 @@ const create = () => {
 
   const siteWay = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Agro jamiyat",
+      title: t("main_topics.community"),
       url: "/community",
     },
     {
-      title: "Savol yozish",
+      title: t("buttons.write_question"),
       url: "/community/create",
     },
   ];
@@ -174,17 +177,21 @@ const create = () => {
   //JSX=============================================
 
   return (
-    <SEO metaTitle="Savol yozish">
-      <SNavbar siteWay={siteWay} title="Savolingizni yozing" create />
+    <SEO metaTitle={`${t("buttons.write_question")} - AgroSoft`}>
+      <SNavbar
+        siteWay={siteWay}
+        title={`${t("community.create.title")}`}
+        create
+      />
 
       <div className={styles.write} data-type={true} data-create={true}>
         <div className={styles.quiz_title_wrapper}>
-          <h3 className={styles.title}>Savol yozish</h3>
+          <h3 className={styles.title}>{t("buttons.write_question")}</h3>
 
           <input
             type="text"
             className={styles.input}
-            placeholder="Sarlavha"
+            placeholder={`${t("community.create.write_question_inp")}`}
             data-err={isEmpty.title}
             value={title}
             onChange={(e) => {
@@ -216,7 +223,7 @@ const create = () => {
             >
               <div className={styles.add_file}>
                 <AddIcon />
-                Asosiy rasmni qo’yish
+                {t("buttons.set_main_img")}
               </div>
             </label>
           )}
@@ -233,7 +240,7 @@ const create = () => {
 
         <textarea
           className={styles.textarea}
-          placeholder="Savolingizni yozing"
+          placeholder={`${t("buttons.write_question")}`}
           value={desc}
           data-err={isEmpty.desc}
           onChange={(e) => {
@@ -265,7 +272,7 @@ const create = () => {
             >
               <div className={styles.add_file}>
                 <AddIcon />
-                Rasm qo'shish
+                {t("buttons.add_img")}
               </div>
             </label>
           )}
@@ -285,13 +292,13 @@ const create = () => {
                 type="button"
                 className={`${styles.button} ${styles.load_btn}`}
               >
-                Tasdiqlash
+                {t("buttons.confirm")}
               </button>
               <button
                 type="button"
                 className={`${styles.cancel_button} ${styles.load_btn}`}
               >
-                Bekor qilish
+                {t("buttons.cancel")}
               </button>
             </div>
           ) : (
@@ -301,14 +308,14 @@ const create = () => {
                 className={styles.button}
                 onClick={() => createQuiestionHandler()}
               >
-                Tasdiqlash
+                {t("buttons.confirm")}
               </button>
               <button
                 type="button"
                 className={styles.cancel_button}
                 onClick={() => handleCancel()}
               >
-                Bekor qilish
+                {t("buttons.cancel")}
               </button>
             </div>
           )}
@@ -317,5 +324,13 @@ const create = () => {
     </SEO>
   );
 };
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
+}
 
 export default create;

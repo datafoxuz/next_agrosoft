@@ -5,6 +5,8 @@ import SiteWay from "../siteWay/SiteWay";
 import SortDrawer from "../sortDrawer/SortDrawer";
 import Image from "next/image";
 import { handleChange, handleClick, shortenString } from "./utils/navbarUtils";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 import styles from "./secondnavbar.module.scss";
 
@@ -14,7 +16,6 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SearchIcon from "@mui/icons-material/Search";
-import { useRouter } from "next/router";
 
 const SecondNavbar = ({
   siteWay,
@@ -45,6 +46,7 @@ const SecondNavbar = ({
   account?: boolean;
   create?: boolean;
 }) => {
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState<{
@@ -78,7 +80,7 @@ const SecondNavbar = ({
               <div className={styles.input_wrapper}>
                 <input
                   type="text"
-                  placeholder="Kalit so’zni yozing"
+                  placeholder={`${t("second_navbar.big_inp_placeholder")}`}
                   className={styles.input}
                   value={searchVal}
                   onChange={(e) =>
@@ -137,7 +139,7 @@ const SecondNavbar = ({
                       }))
                     }
                   >
-                    Saralash
+                    {t("second_navbar.sort_modal.title")}
                     <Image
                       src={filterImage.src}
                       alt="filter black icon"
@@ -146,7 +148,9 @@ const SecondNavbar = ({
                       height={18}
                     />
                   </button>
-                  {isOpen ? <FilterMenu active={isOpen.filter2} /> : null}
+                  {isOpen.filter2 ? (
+                    <FilterMenu active={isOpen.filter2} />
+                  ) : null}
                 </div>
               ))}
 
@@ -162,7 +166,7 @@ const SecondNavbar = ({
                     }))
                   }
                 >
-                  Saralash
+                  {t("second_navbar.sort_modal.title")}
                   <Image
                     src={filterImage.src}
                     alt="filter black icon"
@@ -181,7 +185,7 @@ const SecondNavbar = ({
                 className={styles.add_button}
                 onClick={() => router.push("/community/create")}
               >
-                Savol yozish
+                {t("buttons.write_question")}
               </button>
             )}
 
@@ -191,7 +195,7 @@ const SecondNavbar = ({
                 className={styles.add_button}
                 onClick={() => handleClick(state, setState)}
               >
-                Mahsulot qo’shish
+                {t("buttons.add_product")}
               </button>
             )}
 
@@ -201,7 +205,7 @@ const SecondNavbar = ({
                 className={styles.add_button}
                 onClick={() => handleClick(state, setState)}
               >
-                Biz bilan bog’laning
+                {t("buttons.contact")}
               </button>
             )}
           </div>
@@ -248,7 +252,7 @@ const SecondNavbar = ({
               <div className={styles.input_wrapper}>
                 <input
                   type="text"
-                  placeholder="Qidirish"
+                  placeholder={`${t("second_nacbar.small_inp_placeholder")}`}
                   className={styles.input}
                   value={searchVal}
                   onChange={(e) =>

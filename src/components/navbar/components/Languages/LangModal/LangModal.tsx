@@ -12,14 +12,21 @@ import Image from "next/image";
 const LangModal = ({
   active,
   setValue,
+  setOpen,
 }: {
   active: boolean;
   setValue: (v: LangTypes) => void;
+  setOpen: (v: openObjTypes) => void;
 }) => {
   const router = useRouter();
 
   function handleClick(label: string, value: string, flagSt: string) {
-    setValue({ value: label, active: false, flag: flagSt });
+    setValue({ value: label, flag: flagSt });
+    setOpen({
+      weatherModal: false,
+      burgerMenu: false,
+      languagesModal: false,
+    });
     router.replace(router.route, router.asPath, {
       locale: value || "uz",
     });

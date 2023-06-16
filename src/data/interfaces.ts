@@ -132,7 +132,6 @@ export interface DailyAndHourlyWeatherType {
 }
 
 export interface LangTypes {
-  active: boolean;
   value: string;
   config?: string;
   flag?: string;

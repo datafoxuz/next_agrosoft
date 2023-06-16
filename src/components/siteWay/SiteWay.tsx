@@ -18,7 +18,7 @@ const SiteWay = ({
 }) => {
   return (
     <div className={styles.siteway} data-product={product}>
-      {siteWay?.map((item, index) => (
+      {siteWay.map((item, index) => (
         <Link key={index} href={item.url} className={styles.link}>
           {item.title}
           <Image

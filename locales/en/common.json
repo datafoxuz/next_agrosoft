@@ -1,5 +1,6 @@
 {
   "main_topics": {
+    "main_page": "Main Page",
     "blogs": "Blogs",
     "community": "Community",
     "diseases": "Diseases",
@@ -16,7 +17,17 @@
     "enter_market": "Enter the market",
     "subscribe": "Subscribe",
     "continue": "Continue",
-    "back": "Go back"
+    "back": "Go back",
+    "write_question": "Write a question",
+    "add_product": "Add Product",
+    "contact": "Contact us",
+    "set_main_img": "Set main image",
+    "add_img": "Add image",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "share": "Share",
+    "write_answer": "Write answer"
   },
 
   "main": {
@@ -85,5 +96,23 @@
     "enter_pass": "Enter your password",
     "enter_pass_again": "Re-enter password",
     "restore_pass": "Restore Password"
+  },
+
+  "second_navbar": {
+    "big_inp_placeholder": "Type keyword",
+    "small_inp_placeholder": "Search",
+    "sort_modal": {
+      "title": "Sort",
+      "item_1": "Latest",
+      "item_2": "Best of",
+      "item_3": "Most Popular"
+    }
+  },
+
+  "community": {
+    "create": {
+      "title": "Type your question",
+      "write_question_inp": "Title"
+    }
   }
 }

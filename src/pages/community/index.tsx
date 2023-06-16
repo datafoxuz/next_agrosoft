@@ -3,11 +3,13 @@ import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
 import { searchDatas } from "@/lib/searchData";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
 
 const index = ({ communities }: { communities: data }) => {
+  const { t } = useTranslation("common");
   const [question, setQuestion] = useState<questionTypes>({
     active: false,
     title: "",
@@ -18,20 +20,20 @@ const index = ({ communities }: { communities: data }) => {
 
   const siteWay = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Agro jamiyat",
+      title: t("main_topics.community"),
       url: "/community",
     },
   ];
 
   return (
-    <SEO metaTitle="Community">
+    <SEO metaTitle={`${t("main_topics.community")} - AgroSoft`}>
       <SNavbar
         siteWay={siteWay}
-        title="Agrojamiyat"
+        title={`${t("main_topics.community")}`}
         community
         filter
         state={question}

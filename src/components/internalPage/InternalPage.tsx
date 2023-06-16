@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Collections, NotFound, Write } from "@/components";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
+import { card, questionTypes } from "@/data/interfaces";
 
 import styles from "./internalPage.module.scss";
 
@@ -8,7 +10,6 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 
 import ShareIcon from "@mui/icons-material/Share";
 import Answer from "./Answer/Answer";
-import { card, questionTypes } from "@/data/interfaces";
 import image from "@/assets/images/community.png";
 
 const InternalPage = ({
@@ -20,6 +21,7 @@ const InternalPage = ({
   about?: boolean;
   data?: card;
 }) => {
+  const { t } = useTranslation("common");
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
     active: false,
     title: "",
@@ -37,7 +39,7 @@ const InternalPage = ({
           <h3 className={styles.hidden_title}>Biz haqimizda</h3>
 
           <button type="button" className={styles.top_button}>
-            Biz bilan bog’laning
+            {t("buttons.contact")}
           </button>
         </div>
       )}
@@ -56,11 +58,12 @@ const InternalPage = ({
             {!about && (
               <div className={styles.events}>
                 <button>
-                  <TurnedInNotIcon className={styles.icon} /> Saqlab qo’yish
+                  <TurnedInNotIcon className={styles.icon} />{" "}
+                  {t("buttons.save")}
                 </button>
                 <button>
                   <ShareIcon className={styles.icon} />
-                  Ulashish
+                  {t("buttons.share")}
                 </button>
               </div>
             )}
@@ -97,7 +100,7 @@ const InternalPage = ({
                             }))
                           }
                         >
-                          Javob yozish
+                          {t("buttons.write_answer")}
                         </button>
                       )}
                     </div>

@@ -7,10 +7,15 @@ import { useRouter } from "next/router";
 import styles from "../../navbar.module.scss";
 import { LangTypes } from "@/data/interfaces";
 
-const Languages = () => {
+const Languages = ({
+  open,
+  setOpen,
+}: {
+  open: openObjTypes;
+  setOpen: (v: openObjTypes) => void;
+}) => {
   const { locale } = useRouter();
   const [lang, setLang] = useState<LangTypes>({
-    active: false,
     value: locale == "ru" ? "Рус" : locale == "en" ? "Eng" : "Uzb",
   });
 
@@ -19,17 +24,24 @@ const Languages = () => {
       <div
         className={styles.languages}
         onClick={() =>
-          setLang((prevState) => ({
-            ...prevState,
-            active: !prevState.active,
-          }))
+          setOpen({
+            weatherModal: false,
+            burgerMenu: false,
+            languagesModal: !open.languagesModal,
+          })
         }
       >
         <p className={styles.text}>{lang.value}</p>
-        <ArrowIcon active={lang.active} />
+        <ArrowIcon active={open.languagesModal} />
       </div>
 
-      {lang.active && <LangModal active={lang.active} setValue={setLang} />}
+      {open.languagesModal && (
+        <LangModal
+          active={open.languagesModal}
+          setValue={setLang}
+          setOpen={setOpen}
+        />
+      )}
     </div>
   );
 };

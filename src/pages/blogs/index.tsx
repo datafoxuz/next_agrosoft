@@ -4,27 +4,34 @@ import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
 import { data, siteWayTypes } from "@/data/interfaces";
 import { ParsedUrlQuery } from "querystring";
+import { useTranslation } from "next-i18next";
 
 import styles from "./articles.module.scss";
 import { searchDatas } from "@/lib/searchData";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const index = ({ blogs }: { blogs: data }) => {
+  const { t } = useTranslation("common");
   const siteWay: siteWayTypes[] = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Agro maqolalar",
+      title: t("main_topics.blogs"),
       url: "/blogs",
     },
   ];
 
   return (
-    <SEO metaTitle="Blogs - AgroSoft">
+    <SEO metaTitle={`${t("main_topics.blogs")} - AgroSoft`}>
       <div className={styles.articles}>
-        <SNavbar siteWay={siteWay} title="Agro maqolalar" filter article />
+        <SNavbar
+          siteWay={siteWay}
+          title={`${t("main_topics.blogs")}`}
+          filter
+          article
+        />
         {blogs?.data?.length ? (
           <Collections data={blogs.data} meta={blogs.meta} />
         ) : (

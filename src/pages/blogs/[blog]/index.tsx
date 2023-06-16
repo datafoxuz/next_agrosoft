@@ -2,17 +2,19 @@ import { InternalPage, SNavbar } from "@/components";
 import { card, data, sitewayProps } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
 const index = ({ blog }: { blog: card }) => {
+  const { t } = useTranslation("common");
   const siteWay: sitewayProps[] = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Agro maqolalar",
+      title: t("main_topics.blogs"),
       url: "/blogs",
     },
     {

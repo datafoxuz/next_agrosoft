@@ -1,5 +1,6 @@
 {
   "main_topics": {
+    "main_page": "Bosh sahifa",
     "blogs": "Agro maqolalar",
     "community": "Agro jamiyat",
     "diseases": "Agrokasalliklar",
@@ -16,7 +17,17 @@
     "enter_market": "Marketga kirish",
     "subscribe": "Obuna bo'lish",
     "continue": "Davom etish",
-    "back": "Orqaga qaytish"
+    "back": "Orqaga qaytish",
+    "write_question": "Savol yozish",
+    "add_product": "Mahsulot qo'shish",
+    "contact": "Biz bilan bog’laning",
+    "set_main_img": "Asosiy rasmni qo’yish",
+    "add_img": "Rasm qo'shish",
+    "confirm": "Tasdiqlash",
+    "cancel": "Bekor qilish",
+    "save": "Saqlab qo'yish",
+    "share": "Ulashish",
+    "write_answer": "Javob yozish"
   },
 
   "main": {
@@ -85,5 +96,23 @@
     "enter_pass": "Parolni kiriting",
     "enter_pass_again": "Parolni qaytadan kiriting",
     "restore_pass": "Parolni tiklash"
+  },
+
+  "second_navbar": {
+    "big_inp_placeholder": "Kalit so'zni yozing",
+    "small_inp_placeholder": "Qidirish",
+    "sort_modal": {
+      "title": "Saralash",
+      "item_1": "Eng so'ngilari",
+      "item_2": "Eng yaxshilari",
+      "item_3": "Eng mashhurlari"
+    }
+  },
+
+  "community": {
+    "create": {
+      "title": "Savolingizni yozing",
+      "write_question_inp": "Sarlavha"
+    }
   }
 }

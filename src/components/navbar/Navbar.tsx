@@ -1,27 +1,19 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  BurgerMenu,
-  DownloadLinks,
-  Languages,
-  WeatherModal,
-} from "./components";
+import { BurgerMenu, DownloadLinks, Languages, Weather } from "./components";
 import { openObjTypes } from "./data";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { generateName } from "@/utils/helperFunctions";
 import WeatherLayout from "@/layouts/weather/WeatherLayout";
-import { useMyContext } from "@/hooks/useMyContext";
+import { useTranslation } from "next-i18next";
 
 //icons
-import HamburgerIcon from "@/assets/icons/HamburgerIcon/HamburgerIcon";
-import temperature from "@/assets/icons/NavbarIcons/sun_yellow.svg";
-import ArrowIcon from "@/assets/icons/NavbarIcons/ArrowIcons/ArrowIcon";
+
 import logo from "@/assets/icons/NavbarIcons/logo.svg";
 import logo_white from "@/assets/icons/logo_white.svg";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useTranslation } from "next-i18next";
 
 //style
 import styles from "./navbar.module.scss";
@@ -35,7 +27,6 @@ const Navbar = ({
 }) => {
   const { data, status }: { data: any; status: string } = useSession();
   const { t } = useTranslation("common");
-  const { weatherData } = useMyContext();
 
   const router = useRouter();
 
@@ -49,63 +40,7 @@ const Navbar = ({
     <WeatherLayout>
       <div className={styles.navbar} data-static={isStatic} data-auth={auth}>
         <div className={styles.section}>
-          <div className={styles.modal_wrapper}>
-            <div
-              className={styles.temperature}
-              onClick={() =>
-                setOpen({
-                  weatherModal: !open.weatherModal,
-                  burgerMenu: false,
-                  languagesModal: false,
-                })
-              }
-            >
-              {weatherData && weatherData.data ? (
-                <>
-                  <Image
-                    src={weatherData?.data?.weather_icon_url}
-                    alt="sun icon for temperature button"
-                    className={styles.icon}
-                    width={32}
-                    height={32}
-                  />
-                  <div>
-                    <p>
-                      {Math.floor(weatherData.data.current_degree)}
-                      <span>°C</span>
-                    </p>
-                    <ArrowIcon active={open.weatherModal} />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Image
-                    src={temperature.src}
-                    alt="sun icon for temperature button"
-                    className={styles.icon}
-                    width={32}
-                    height={32}
-                  />
-                  <div>
-                    <p>
-                      12
-                      <span>°C</span>
-                    </p>
-                    <ArrowIcon active={open.weatherModal} />
-                  </div>
-                </>
-              )}
-            </div>
-
-            {open.weatherModal && (
-              <WeatherModal
-                active={open.weatherModal}
-                setOpen={setOpen}
-                open={open}
-              />
-            )}
-          </div>
-
+          <Weather open={open} setOpen={setOpen} />
           <DownloadLinks />
         </div>
 
@@ -148,27 +83,8 @@ const Navbar = ({
             </Link>
           )}
 
-          <Languages />
-
-          <div className={styles.modal_wrapper}>
-            <div
-              className={styles.burger_menu}
-              onClick={() =>
-                setOpen({
-                  weatherModal: false,
-                  burgerMenu: !open.burgerMenu,
-                  languagesModal: false,
-                })
-              }
-            >
-              <HamburgerIcon active={open.burgerMenu} />
-              <p>{t("main.menu")}</p>
-            </div>
-
-            {open.burgerMenu && (
-              <BurgerMenu active={open.burgerMenu} setOpen={setOpen} />
-            )}
-          </div>
+          <Languages open={open} setOpen={setOpen} />
+          <BurgerMenu open={open} setOpen={setOpen} />
         </div>
       </div>
     </WeatherLayout>

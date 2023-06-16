@@ -17,7 +17,7 @@ export const MOTION_CONFIGS = {
 export const SORT_MOTION_CONFIGS = {
   layout: true,
   animate: { opacity: 1, y: "60%" },
-  initial: { opacity: 0, y: "90%" },
+  initial: { opacity: 0, y: "70%" },
   exit: { y: 0, opacity: 0 },
 };
 

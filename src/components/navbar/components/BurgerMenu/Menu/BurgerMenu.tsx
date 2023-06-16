@@ -5,9 +5,9 @@ import {
   openObjTypes,
   languagesData,
   languagesObj,
-} from "../../data";
+} from "../../../data";
 import { AnimatePresence, motion } from "framer-motion";
-import { MOTION_CONFIGS } from "@/data";
+import { MOTION_CONFIGS, SORT_MOTION_CONFIGS } from "@/data";
 import { generateName } from "@/utils/helperFunctions";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
@@ -69,29 +69,28 @@ const BurgerMenu = ({
   return (
     <AnimatePresence>
       {active ? (
-        <motion.div className={styles.menu} {...MOTION_CONFIGS}>
-          {
-            <div className={styles.auth_link}>
-              {true ? (
-                <Link
-                  href="/account"
-                  className={`${styles.menu_item} ${styles.ava_section}`}
-                >
-                  <span>
-                    {generateName(
-                      data?.user?.data.user.name,
-                      data?.user?.data.user.lastname
-                    )}
-                  </span>
-                  <AccountCircleIcon className={styles.icon} />
-                </Link>
-              ) : (
-                <Link href="/login" className={styles.menu_item}>
-                  Kirish
-                </Link>
-              )}
-            </div>
-          }
+        <motion.div className={styles.menu} {...SORT_MOTION_CONFIGS}>
+          <div className={styles.auth_link}>
+            {true ? (
+              <Link
+                href="/account"
+                className={`${styles.menu_item} ${styles.ava_section}`}
+              >
+                <span>
+                  {generateName(
+                    data?.user?.data.user.name,
+                    data?.user?.data.user.lastname,
+                    t("main_topics.default_name")
+                  )}
+                </span>
+                <AccountCircleIcon className={styles.icon} />
+              </Link>
+            ) : (
+              <Link href="/login" className={styles.menu_item}>
+                Kirish
+              </Link>
+            )}
+          </div>
           {routes.map((item: routeObj, index: number) => (
             <Link
               href={item.url}

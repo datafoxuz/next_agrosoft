@@ -1,5 +1,6 @@
 {
   "main_topics": {
+    "main_page": "Главная страница",
     "blogs": "Статьи",
     "community": "Общество",
     "diseases": "Болезни",
@@ -16,7 +17,17 @@
     "enter_market": "Выйти на маркет",
     "subscribe": "Подписаться",
     "continue": "Продолжать",
-    "back": "Назад"
+    "back": "Назад",
+    "write_question": "Написать вопрос",
+    "add_product": "Добавить товар",
+    "contact": "Свяжитесь с нами",
+    "set_main_img": "Установить основное изображение",
+    "add_img": "Добавить изображение",
+    "confirm": "Подтвердить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "share": "Поделиться",
+    "write_answer": "Написать ответ"
   },
 
   "main": {
@@ -85,5 +96,23 @@
     "enter_pass": "Введите свой пароль",
     "enter_pass_again": "Введите пароль еще раз",
     "restore_pass": "Восстановить пароль"
+  },
+
+  "second_navbar": {
+    "big_inp_placeholder": "Введите ключевое слово",
+    "small_inp_placeholder": "Поиск",
+    "sort_modal": {
+      "title": "Сортировать",
+      "item_1": "Последний",
+      "item_2": "Лучшее из",
+      "item_3": "Самый популярный"
+    }
+  },
+
+  "community": {
+    "create": {
+      "title": "Введите свой вопрос",
+      "write_question_inp": "Название"
+    }
   }
 }
