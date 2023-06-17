@@ -105,6 +105,10 @@ $small_smartphone_width: 320px;
   @media screen and (max-width: $high_res_tablet_width) {
     font-size: 24px;
   }
+
+  @media screen and (max-width: $default_tablet_width) {
+    line-height: 120%;
+  }
 }
 
 %snavbar-title {

@@ -13,7 +13,7 @@
   margin-bottom: 236px;
 
   @media screen and (max-width: variables.$high_res_tablet_width) {
-    margin-bottom: 113px;
+    margin-bottom: 133px;
   }
 
   @media screen and (max-width: variables.$default_tablet_width) {
@@ -23,6 +23,7 @@
   @media screen and (max-width: 400px) {
     border-radius: 120px;
     padding-top: 88px;
+    padding-bottom: 90px;
   }
 
   .top_cotton_img {

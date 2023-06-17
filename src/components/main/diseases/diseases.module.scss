@@ -12,6 +12,10 @@
     margin-bottom: 113px;
   }
 
+  @media screen and (max-width: 400px) {
+    margin-bottom: 78px;
+  }
+
   .diseases_title {
     @extend %medium-title;
     color: #2f3330;
@@ -52,6 +56,7 @@
 
     @media only screen and (max-width: variables.$default_tablet_width) {
       grid-template-columns: repeat(2, 1fr);
+      row-gap: 29px;
     }
 
     &[data-length="true"] {
