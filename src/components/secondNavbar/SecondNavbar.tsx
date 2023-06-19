@@ -252,7 +252,7 @@ const SecondNavbar = ({
               <div className={styles.input_wrapper}>
                 <input
                   type="text"
-                  placeholder={`${t("second_nacbar.small_inp_placeholder")}`}
+                  placeholder={`${t("second_navbar.small_inp_placeholder")}`}
                   className={styles.input}
                   value={searchVal}
                   onChange={(e) =>

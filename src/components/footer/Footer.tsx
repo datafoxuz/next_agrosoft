@@ -130,7 +130,7 @@ const Footer = () => {
                 {t("main_topics.community")}
               </Link>
               <Link href="diseases" className={styles.link}>
-                {t("main_topics.diseasess")}
+                {t("main_topics.diseases")}
               </Link>
               <Link href="/blogs" className={styles.link}>
                 {t("main_topics.blogs")}
