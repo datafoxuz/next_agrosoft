@@ -52,15 +52,13 @@ const TopCards = () => {
             onClick={() => router.push(item.url)}
             key={index}
           >
-            <div className={styles.blur_load}>
-              <Image
-                src={item.image.srcs}
-                // alt={`image about ${item.title}`}
-                className={styles.card_image}
-                width={214}
-                height={228}
-              />
-            </div>
+            <Image
+              src={item.image.src}
+              alt={`image about ${item.title}`}
+              className={styles.card_image}
+              width={214}
+              height={228}
+            />
             <p className={styles.card_title}>{item.title}</p>
           </div>
         )

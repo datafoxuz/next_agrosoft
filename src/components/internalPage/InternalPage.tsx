@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Collections, NotFound, Write } from "@/components";
+import ErrorPage from "@/pages/_error";
+import Answer from "./Answer/Answer";
+
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { card, questionTypes } from "@/data/interfaces";
@@ -9,7 +12,6 @@ import styles from "./internalPage.module.scss";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 
 import ShareIcon from "@mui/icons-material/Share";
-import Answer from "./Answer/Answer";
 import image from "@/assets/images/community.png";
 
 const InternalPage = ({

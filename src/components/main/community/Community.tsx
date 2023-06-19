@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { card, data } from "@/data/interfaces";
+import FindError from "@/components/findError/FindError";
 import { useTranslation } from "next-i18next";
 
 import styles from "./community.module.scss";
@@ -19,7 +20,7 @@ const Community = ({ data }: { data: data }) => {
     router.push(path);
   }
 
-  return (
+  return data.status === 200 ? (
     <div className={styles.container}>
       <div className={styles.main_community}>
         <h3 className={styles.community_title}>{t("main.community.title")}</h3>
@@ -70,6 +71,8 @@ const Community = ({ data }: { data: data }) => {
         />
       </div>
     </div>
+  ) : (
+    <FindError statusCode={data.status} />
   );
 };
 

@@ -1,12 +1,13 @@
 import { Collections, NotFound, SNavbar } from "@/components";
-import { card, data } from "@/data/interfaces";
+import FindError from "@/components/findError/FindError";
+import { data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
-import { searchDatas } from "@/lib/searchData";
+import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
+import ErrorPage from "../_error";
 
 const index = ({ diseasess }: { diseasess: data }) => {
   const { t } = useTranslation("common");
@@ -22,7 +23,7 @@ const index = ({ diseasess }: { diseasess: data }) => {
     },
   ];
 
-  return (
+  return diseasess.status === 200 ? (
     <SEO metaTitle={`${t("main_topics.diseases")} - AgroSoft`}>
       <SNavbar
         siteWay={siteWay}
@@ -37,6 +38,8 @@ const index = ({ diseasess }: { diseasess: data }) => {
         <NotFound />
       )}
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -52,16 +55,16 @@ export async function getServerSideProps({
   let diseasesData;
 
   if (search.length) {
-    diseasesData = await searchDatas(`/decease-search?q=${search}`);
+    diseasesData = await request(`/decease-search?q=${search}`);
   } else {
-    diseasesData = await fetchData(
+    diseasesData = await request(
       `/deceases/get-deceases?page=${page}&per_page=10`
     );
   }
 
   return {
     props: {
-      diseasess: diseasesData,
+      diseasess: { ...diseasesData.data, status: diseasesData.response.status },
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

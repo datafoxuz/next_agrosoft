@@ -1,13 +1,14 @@
 import { InternalPage, SNavbar } from "@/components";
-import { card } from "@/data/interfaces";
+import { card, responseData } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
+import { request } from "@/lib/request";
+import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React from "react";
 
-const index = ({ question }: { question: card }) => {
+const index = ({ question }: { question: responseData }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -26,11 +27,13 @@ const index = ({ question }: { question: card }) => {
     },
   ];
 
-  return (
+  return question.status === 200 ? (
     <SEO metaTitle={`${router.query.question}`}>
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage questions data={question} />
+      <InternalPage questions data={question.data} />
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -41,13 +44,20 @@ export async function getServerSideProps({
   params: { question: string };
   locale: string;
 }) {
-  const { data } = await fetchData(`/community/${params.question}`);
-  return {
-    props: {
-      question: data,
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  const { data, response } = await request(`/community/${params.question}`);
+
+  if (response.status !== 404) {
+    return {
+      props: {
+        question: { ...data, status: response.status },
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  } else {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default index;

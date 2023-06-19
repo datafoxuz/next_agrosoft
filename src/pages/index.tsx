@@ -1,6 +1,7 @@
 import React from "react";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
+import { request } from "@/lib/request";
+
 import { data } from "@/data/interfaces";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -45,17 +46,20 @@ const Home = ({
 };
 
 export async function getServerSideProps({ locale }: { locale: string }) {
-  const blogsData = await fetchData("/blogs/get-latest-blogs");
-  const diseasesData = await fetchData("/deceases/get-popular-deceases");
-  const newsData = await fetchData("/articles/get-latest-articles");
-  const communitiesData = await fetchData("/community/latest-problems");
+  const blogsData = await request("/blogs/get-latest-blogs");
+  const diseasesData = await request("/deceases/get-popular-deceases");
+  const newsData = await request("/articles/get-latest-articles");
+  const communitiesData = await request("/community/latest-problems");
 
   return {
     props: {
-      blogs: blogsData,
-      diseases: diseasesData,
-      news: newsData,
-      communities: communitiesData,
+      blogs: { ...blogsData.data, status: blogsData.response.status },
+      diseases: { ...diseasesData.data, status: diseasesData.response.status },
+      news: { ...newsData.data, status: newsData.response.status },
+      communities: {
+        ...communitiesData.data,
+        status: communitiesData.response.status,
+      },
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

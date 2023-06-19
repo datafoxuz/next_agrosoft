@@ -10,6 +10,8 @@ import PersonalInfo from "./components/personalInfo/PersonalInfo";
 import AddintionalInfo from "./components/addintionalInfo/AddintionalInfo";
 import Saved from "./components/mySaved/Saved";
 import MyProducts from "./components/myProducts/MyProducts";
+import { fetchData } from "@/lib/fetchData";
+import NotFound from "../404";
 
 const index = () => {
   const { t } = useTranslation("common");
@@ -84,11 +86,22 @@ const index = () => {
 };
 
 export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  const data = await fetchData(`/users/about-me`);
+
+  console.log(data?.response.status);
+
+  if (data?.response.status === 200) {
+    return {
+      props: {
+        user: data.data,
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  } else {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default index;

@@ -2,6 +2,8 @@ import { InternalPage, SNavbar } from "@/components";
 import { card } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { fetchData } from "@/lib/fetchData";
+import { request } from "@/lib/request";
+import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
@@ -30,11 +32,13 @@ const index = ({ data }: { data: card }) => {
     },
   ];
 
-  return (
+  return data.status === 200 ? (
     <SEO metaTitle={`${data?.seo?.title ? data?.seo?.title : data?.title}`}>
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={data} />
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -45,13 +49,22 @@ export async function getServerSideProps({
   params: { card: string };
   locale: string;
 }) {
-  const { data } = await fetchData(`/marketplace/product/${params.card}`);
-  return {
-    props: {
-      data,
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  const { data, response } = await request(
+    `/marketplace/product/${params.card}`
+  );
+
+  if (response.status !== 404) {
+    return {
+      props: {
+        data: { ...data, status: response.status },
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  } else {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default index;

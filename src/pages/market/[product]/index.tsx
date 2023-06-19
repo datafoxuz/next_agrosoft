@@ -1,7 +1,8 @@
 import { Collections, SNavbar } from "@/components";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
+import { request } from "@/lib/request";
+import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
@@ -30,7 +31,7 @@ const index = ({ products }: { products: data }) => {
     },
   ];
 
-  return (
+  return products.status === 200 ? (
     <SEO metaTitle={`${router.query.product}`}>
       <SNavbar
         siteWay={siteWay}
@@ -47,6 +48,8 @@ const index = ({ products }: { products: data }) => {
         product={open.active}
       />
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -57,14 +60,20 @@ export async function getServerSideProps({
   params: { product: string };
   locale: string;
 }) {
-  const products = await fetchData(`/marketplace/${params.product}`);
+  const products = await request(`/marketplace/${params.product}`);
 
-  return {
-    props: {
-      products,
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  if (products.response.status !== 404) {
+    return {
+      props: {
+        products: { ...products.data, status: products.response.status },
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  } else {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default index;

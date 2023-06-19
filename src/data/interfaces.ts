@@ -54,6 +54,14 @@ export interface card {
   url?: string;
   commentsNum?: string;
   answered?: boolean;
+  status: number;
+}
+
+export interface responseData {
+  success?: boolean;
+  status: number;
+  data: card;
+  message?: string;
 }
 
 export interface meta {
@@ -68,6 +76,7 @@ export interface data {
   data: card[];
   message: string;
   meta: meta;
+  status: number;
 }
 
 export interface siteWayTypes {

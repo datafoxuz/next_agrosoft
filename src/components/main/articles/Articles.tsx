@@ -2,7 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import SwiperCards from "@/components/swiper/SwiperCards";
 import Image from "next/image";
-import { card, data } from "@/data/interfaces";
+import FindError from "@/components/findError/FindError";
+import { data } from "@/data/interfaces";
 import { useTranslation } from "next-i18next";
 
 import styles from "./articles.module.scss";
@@ -16,7 +17,7 @@ const Articles = ({ data }: { data: data }) => {
     router.push(path);
   }
 
-  return (
+  return data.status == 200 ? (
     <div className={styles.main_l_articles}>
       <Image
         src={half_logo.src}
@@ -44,6 +45,8 @@ const Articles = ({ data }: { data: data }) => {
         {t("buttons.read_all")}
       </button>
     </div>
+  ) : (
+    <FindError statusCode={data.status} />
   );
 };
 

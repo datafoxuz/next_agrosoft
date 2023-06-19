@@ -1,14 +1,15 @@
 import { Collections, NotFound, SNavbar } from "@/components";
 import React from "react";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
+import { request } from "@/lib/request";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import { data, siteWayTypes } from "@/data/interfaces";
 import { ParsedUrlQuery } from "querystring";
 import { useTranslation } from "next-i18next";
+import ErrorPage from "../_error";
 
 import styles from "./articles.module.scss";
-import { searchDatas } from "@/lib/searchData";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const index = ({ blogs }: { blogs: data }) => {
   const { t } = useTranslation("common");
@@ -23,7 +24,7 @@ const index = ({ blogs }: { blogs: data }) => {
     },
   ];
 
-  return (
+  return blogs.status === 200 ? (
     <SEO metaTitle={`${t("main_topics.blogs")} - AgroSoft`}>
       <div className={styles.articles}>
         <SNavbar
@@ -39,6 +40,8 @@ const index = ({ blogs }: { blogs: data }) => {
         )}
       </div>
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -54,16 +57,16 @@ export async function getServerSideProps({
   let blogsData;
 
   if (search.length) {
-    blogsData = await searchDatas(`/blog-search?q=${search}`);
+    blogsData = await request(`/blog-search?q=${search}`);
   } else {
-    blogsData = await fetchData(
+    blogsData = await request(
       `/blogs/blogs-with-pagination?page=${page}&per_page=10`
     );
   }
 
   return {
     props: {
-      blogs: blogsData,
+      blogs: { ...blogsData.data, status: blogsData.response.status },
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

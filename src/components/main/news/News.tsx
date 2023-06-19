@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { card, data } from "@/data/interfaces";
 import { useTranslation } from "next-i18next";
+import FindError from "@/components/findError/FindError";
 
 import styles from "./news.module.scss";
 
@@ -14,13 +15,13 @@ const News = ({ data }: { data: data }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
-  const newCard: card[] = data?.data?.slice(0, 2);
+  const newCard: card[] = data.status == 200 ? data.data.slice(0, 2) : [];
 
   function handleNavigate(path: string) {
     router.push(path);
   }
 
-  return (
+  return data.status === 200 ? (
     <div className={styles.container}>
       <div className={styles.main_news}>
         <h2 className={styles.news_title}>{t("main.news.title")}</h2>
@@ -46,6 +47,7 @@ const News = ({ data }: { data: data }) => {
                 </p>
               </div>
             ))}
+
             <button
               type="button"
               className={styles.news_button}
@@ -57,6 +59,8 @@ const News = ({ data }: { data: data }) => {
         </div>
       </div>
     </div>
+  ) : (
+    <FindError statusCode={data.status} />
   );
 };
 

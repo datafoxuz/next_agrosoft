@@ -1,11 +1,11 @@
 import { Collections, SNavbar } from "@/components";
-import { card, data } from "@/data/interfaces";
+import { data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
-import { searchDatas } from "@/lib/searchData";
+import { request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
+import ErrorPage from "../_error";
 
 const index = ({ articles }: { articles: data }) => {
   const siteWay = [
@@ -19,11 +19,13 @@ const index = ({ articles }: { articles: data }) => {
     },
   ];
 
-  return (
+  return articles.status === 200 ? (
     <SEO metaTitle="News - AgroSoft">
       <SNavbar siteWay={siteWay} title="Yangiliklar" filter article />
       <Collections data={articles.data} meta={articles.meta} />
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -38,16 +40,16 @@ export async function getServerSideProps({
   const searchVal = query.search || "";
   let articlesData;
   if (searchVal.length) {
-    articlesData = await searchDatas(`/articles-search?q=${searchVal}`);
+    articlesData = await request(`/articles-search?q=${searchVal}`);
   } else {
-    articlesData = await fetchData(
+    articlesData = await request(
       `/articles/articles-with-pagination?page=${page}&per_page=10`
     );
   }
 
   return {
     props: {
-      articles: articlesData,
+      articles: { ...articlesData.data, status: articlesData.response.status },
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

@@ -1,12 +1,13 @@
 import { InternalPage, SNavbar } from "@/components";
-import { card } from "@/data/interfaces";
+import { responseData } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
+import { request } from "@/lib/request";
+import ErrorPage from "@/pages/_error";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React from "react";
 
-const index = ({ article }: { article: card }) => {
+const index = ({ article }: { article: responseData }) => {
   const router = useRouter();
   const siteWay = [
     {
@@ -18,20 +19,22 @@ const index = ({ article }: { article: card }) => {
       url: "/news",
     },
     {
-      title: `${article.title}`,
-      url: `/news/${article.slug}`,
+      title: `${article?.data?.title}`,
+      url: `/news/${article?.data?.slug}`,
     },
   ];
 
-  return (
+  return article.status === 200 ? (
     <SEO
       metaTitle={`${
-        article.seo?.title ? article.seo?.title : router.query.new
+        article.data?.seo?.title ? article.data?.seo?.title : router.query.new
       }`}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={article} />
+      <InternalPage data={article.data} />
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -42,14 +45,20 @@ export async function getServerSideProps({
   params: { new: string };
   locale: string;
 }) {
-  const { data } = await fetchData(`/article/${params.new}`);
+  const { data, response } = await request(`/article/${params.new}`);
 
-  return {
-    props: {
-      article: data,
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  if (response.status !== 404) {
+    return {
+      props: {
+        article: { ...data, status: response.status },
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  } else {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default index;

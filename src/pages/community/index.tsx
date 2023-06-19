@@ -1,12 +1,13 @@
 import { Collections, NotFound, SNavbar } from "@/components";
-import { data, questionTypes } from "@/data/interfaces";
+import FindError from "@/components/findError/FindError";
+import { data, questionTypes, responseData } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
-import { searchDatas } from "@/lib/searchData";
+import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
+import ErrorPage from "../_error";
 
 const index = ({ communities }: { communities: data }) => {
   const { t } = useTranslation("common");
@@ -29,7 +30,7 @@ const index = ({ communities }: { communities: data }) => {
     },
   ];
 
-  return (
+  return communities.status === 200 ? (
     <SEO metaTitle={`${t("main_topics.community")} - AgroSoft`}>
       <SNavbar
         siteWay={siteWay}
@@ -50,6 +51,8 @@ const index = ({ communities }: { communities: data }) => {
         <NotFound />
       )}
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -65,16 +68,19 @@ export async function getServerSideProps({
   let communitiesData;
 
   if (search.length) {
-    communitiesData = await searchDatas(`/community-search?q=${search}`);
+    communitiesData = await request(`/community-search?q=${search}`);
   } else {
-    communitiesData = await fetchData(
+    communitiesData = await request(
       `/community/index?page=${page}&per_page=10`
     );
   }
 
   return {
     props: {
-      communities: communitiesData,
+      communities: {
+        ...communitiesData.data,
+        status: communitiesData.response.status,
+      },
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

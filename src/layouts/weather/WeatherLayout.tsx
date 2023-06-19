@@ -24,7 +24,7 @@ const WeatherLayout = ({ children }: LayoutProps) => {
           const data = await fetchData(
             `/weather?lat=${latitude}&long=${longitude}`
           );
-          setWeatherData(data);
+          setWeatherData(data?.data);
         }
       } catch (error) {
         console.error("Error fetching weather data:", error);

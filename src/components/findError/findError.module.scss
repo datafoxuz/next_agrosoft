@@ -1,0 +1,7 @@
+@use "../../styles/variables" as variables;
+
+.error_message {
+  @extend %container;
+  text-align: center;
+  margin-bottom: 100px;
+}

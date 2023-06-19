@@ -1,12 +1,13 @@
 import { InternalPage, SNavbar } from "@/components";
-import { card, data, sitewayProps } from "@/data/interfaces";
+import { responseData, sitewayProps } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
+import { request } from "@/lib/request";
+import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 
-const index = ({ blog }: { blog: card }) => {
+const index = ({ blog }: { blog: responseData }) => {
   const { t } = useTranslation("common");
   const siteWay: sitewayProps[] = [
     {
@@ -18,16 +19,22 @@ const index = ({ blog }: { blog: card }) => {
       url: "/blogs",
     },
     {
-      title: `${blog.title}`,
-      url: `/blogs/${blog.slug}`,
+      title: `${blog?.data?.title}`,
+      url: `/blogs/${blog?.data?.slug}`,
     },
   ];
 
-  return (
-    <SEO metaTitle={`${blog.seo?.title ? blog.seo?.title : blog.title}`}>
+  return blog.status === 200 ? (
+    <SEO
+      metaTitle={`${
+        blog.data.seo?.title ? blog.data.seo?.title : blog.data.title
+      }`}
+    >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={blog} />
+      <InternalPage data={blog.data} />
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -38,13 +45,20 @@ export async function getServerSideProps({
   params: { blog: string };
   locale: string;
 }) {
-  const { data } = await fetchData(`/blog/${params.blog}`);
-  return {
-    props: {
-      blog: data,
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  const { data, response } = await request(`/blog/${params.blog}`);
+
+  if (response.status !== 404) {
+    return {
+      props: {
+        blog: { ...data, status: response.status },
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
+  } else {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default index;

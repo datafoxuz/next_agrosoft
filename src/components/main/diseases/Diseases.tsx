@@ -1,12 +1,13 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import FindError from "@/components/findError/FindError";
 import { useTranslation } from "next-i18next";
+import { card, data } from "@/data/interfaces";
 
 import styles from "./diseases.module.scss";
 
 import diseases from "@/assets/images/diseases.png";
-import { card, data } from "@/data/interfaces";
 
 const Diseases = ({ data }: { data: data }) => {
   const { t } = useTranslation("common");
@@ -16,7 +17,7 @@ const Diseases = ({ data }: { data: data }) => {
     router.push(path);
   }
 
-  return (
+  return data.status === 200 ? (
     <div className={styles.container}>
       <div className={styles.main_diseases}>
         <h2 className={styles.diseases_title}>{t("main.diseases.title")}</h2>
@@ -53,6 +54,8 @@ const Diseases = ({ data }: { data: data }) => {
         </button>
       </div>
     </div>
+  ) : (
+    <FindError statusCode={data.status} />
   );
 };
 

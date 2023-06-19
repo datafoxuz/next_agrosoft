@@ -1,12 +1,12 @@
 import { AddProduct, Collections, NotFound, SNavbar } from "@/components";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
-import { searchDatas } from "@/lib/searchData";
+import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
+import ErrorPage from "../_error";
 
 const index = ({ categories }: { categories: data }) => {
   const { t } = useTranslation("common");
@@ -25,7 +25,7 @@ const index = ({ categories }: { categories: data }) => {
     },
   ];
 
-  return (
+  return categories.status === 200 ? (
     <SEO metaTitle={`${t("main_topics.market")}`}>
       <SNavbar
         siteWay={siteWay}
@@ -44,6 +44,8 @@ const index = ({ categories }: { categories: data }) => {
         <NotFound />
       )}
     </SEO>
+  ) : (
+    <ErrorPage />
   );
 };
 
@@ -59,14 +61,17 @@ export async function getServerSideProps({
   let categoriesData;
 
   if (search.length) {
-    categoriesData = await searchDatas(`/marketplace-search?q=${search}`);
+    categoriesData = await request(`/marketplace-search?q=${search}`);
   } else {
-    categoriesData = await fetchData(`/marketplace/categories`);
+    categoriesData = await request(`/marketplace/categories`);
   }
 
   return {
     props: {
-      categories: categoriesData,
+      categories: {
+        ...categoriesData.data,
+        status: categoriesData.response.status,
+      },
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };
