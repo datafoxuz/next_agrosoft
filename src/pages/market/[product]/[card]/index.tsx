@@ -38,7 +38,7 @@ const index = ({ data }: { data: card }) => {
       <InternalPage data={data} />
     </SEO>
   ) : (
-    <ErrorPage />
+    <ErrorPage status={data.status}/>
   );
 };
 

@@ -34,7 +34,7 @@ const index = ({ article }: { article: responseData }) => {
       <InternalPage data={article.data} />
     </SEO>
   ) : (
-    <ErrorPage />
+    <ErrorPage status={article.status}/>
   );
 };
 

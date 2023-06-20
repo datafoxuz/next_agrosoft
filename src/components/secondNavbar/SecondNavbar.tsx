@@ -7,6 +7,8 @@ import Image from "next/image";
 import { handleChange, handleClick, shortenString } from "./utils/navbarUtils";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import {handleNavigate } from "@/utils/helperFunctions";
 
 import styles from "./secondnavbar.module.scss";
 
@@ -46,6 +48,7 @@ const SecondNavbar = ({
   account?: boolean;
   create?: boolean;
 }) => {
+  const { data, status }: { data: any; status: string } = useSession();
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -183,7 +186,7 @@ const SecondNavbar = ({
               <button
                 type="button"
                 className={styles.add_button}
-                onClick={() => router.push("/community/create")}
+                onClick={() => handleNavigate(status, "/community/create", router)}
               >
                 {t("buttons.write_question")}
               </button>

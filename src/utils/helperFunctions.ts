@@ -1,3 +1,5 @@
+import { NextRouter } from "next/router";
+
 export function generateName(
   name: string | null,
   surname: string | null,
@@ -15,4 +17,12 @@ export function generateName(
   }
 
   return fullname;
+}
+
+export function handleNavigate(status: string, currUrl:string, router: NextRouter,){
+  if(status === "authenticated"){
+    router.push(currUrl)
+  }else{
+    router.push("/login")
+  }
 }

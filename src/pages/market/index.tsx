@@ -45,7 +45,7 @@ const index = ({ categories }: { categories: data }) => {
       )}
     </SEO>
   ) : (
-    <ErrorPage />
+    <ErrorPage status={categories.status}/>
   );
 };
 

@@ -12,6 +12,13 @@
     flex-direction: column;
     gap: 30px;
 
+    .status_num{
+      font-size: 100px;
+      color: #008842;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
     .title {
       font-weight: 800;
       font-size: 26px;

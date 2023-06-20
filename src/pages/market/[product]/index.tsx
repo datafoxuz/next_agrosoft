@@ -49,7 +49,7 @@ const index = ({ products }: { products: data }) => {
       />
     </SEO>
   ) : (
-    <ErrorPage />
+    <ErrorPage status={products.status}/>
   );
 };
 

@@ -24,17 +24,19 @@ const index = ({ blog }: { blog: responseData }) => {
     },
   ];
 
+  
+
   return blog.status === 200 ? (
     <SEO
       metaTitle={`${
-        blog.data.seo?.title ? blog.data.seo?.title : blog.data.title
+        blog?.data?.seo?.title ? blog.data.seo?.title : blog?.data?.title
       }`}
     >
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={blog.data} />
     </SEO>
   ) : (
-    <ErrorPage />
+    <ErrorPage status={blog.status} />
   );
 };
 

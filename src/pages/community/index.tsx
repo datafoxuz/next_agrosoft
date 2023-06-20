@@ -1,8 +1,8 @@
 import { Collections, NotFound, SNavbar } from "@/components";
-import FindError from "@/components/findError/FindError";
 import { data, questionTypes, responseData } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
@@ -52,7 +52,7 @@ const index = ({ communities }: { communities: data }) => {
       )}
     </SEO>
   ) : (
-    <ErrorPage />
+    <ErrorPage status={communities.status}/>
   );
 };
 

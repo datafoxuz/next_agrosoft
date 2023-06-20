@@ -39,7 +39,7 @@ const index = ({ diseasess }: { diseasess: data }) => {
       )}
     </SEO>
   ) : (
-    <ErrorPage />
+    <ErrorPage status={diseasess.status}/>
   );
 };
 

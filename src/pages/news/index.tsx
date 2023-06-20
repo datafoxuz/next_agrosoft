@@ -25,7 +25,7 @@ const index = ({ articles }: { articles: data }) => {
       <Collections data={articles.data} meta={articles.meta} />
     </SEO>
   ) : (
-    <ErrorPage />
+    <ErrorPage status={articles.status}/>
   );
 };
 

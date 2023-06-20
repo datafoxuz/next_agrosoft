@@ -3,11 +3,11 @@ import React from "react";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import ErrorPage from "../_error";
 
 import { data, siteWayTypes } from "@/data/interfaces";
 import { ParsedUrlQuery } from "querystring";
 import { useTranslation } from "next-i18next";
-import ErrorPage from "../_error";
 
 import styles from "./articles.module.scss";
 
@@ -41,7 +41,7 @@ const index = ({ blogs }: { blogs: data }) => {
       </div>
     </SEO>
   ) : (
-    <ErrorPage />
+    <ErrorPage status={blogs.status}/>
   );
 };
 

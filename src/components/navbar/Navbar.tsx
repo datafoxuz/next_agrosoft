@@ -66,7 +66,7 @@ const Navbar = ({
         </div>
 
         <div className={`${styles.section} ${styles.r_section}`}>
-          {status == "authenticated" ? (
+          {status === "authenticated" ? (
             <Link href="/account" className={styles.ava_section}>
               <AccountCircleIcon />
               <span>
