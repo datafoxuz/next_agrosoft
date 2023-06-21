@@ -1,4 +1,4 @@
-@use "../../styles/variables" as variables;
+@use "../../../styles/variables" as variables;
 
 $margin-botton: 24px;
 
@@ -22,6 +22,37 @@ $margin-botton: 24px;
     @extend %add-form-input;
   }
 
+  .label {
+    width: fit-content;
+
+    &[data-err="false"] {
+      .add_file {
+        color: #ea1a39;
+      }
+    }
+  }
+
+  .add_file {
+    @extend %button;
+    @extend %add-file-button;
+    border-radius: 120px;
+    cursor: pointer;
+    padding: 10px 12px !important;
+
+    .icon {
+      transform: rotate(45deg);
+    }
+  }
+
+  .error_msg {
+    @extend %err_message;
+    margin: 0;
+  }
+
+  .file_input {
+    @extend %file_input;
+  }
+
   textarea {
     @extend %textarea;
     margin-bottom: $margin-botton;
@@ -29,6 +60,10 @@ $margin-botton: 24px;
 
   button {
     @extend %button;
+  }
+
+  .load_btn {
+    @extend %load-button;
   }
 
   .input_wrapper {

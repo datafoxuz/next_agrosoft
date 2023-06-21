@@ -196,7 +196,7 @@ const SecondNavbar = ({
               <button
                 type="button"
                 className={styles.add_button}
-                onClick={() => handleClick(state, setState)}
+                onClick={() => handleNavigate(status, "/market/add", router)}
               >
                 {t("buttons.add_product")}
               </button>

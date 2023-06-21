@@ -25,7 +25,7 @@ const Navbar = ({
   isStatic?: boolean;
   auth?: boolean;
 }) => {
-  const { data, status }: { data: any; status: string } = useSession();
+  const { data:session }: { data: any; status: string } = useSession();
   const { t } = useTranslation("common");
 
   const router = useRouter();
@@ -66,13 +66,13 @@ const Navbar = ({
         </div>
 
         <div className={`${styles.section} ${styles.r_section}`}>
-          {status === "authenticated" ? (
+          {session ? (
             <Link href="/account" className={styles.ava_section}>
               <AccountCircleIcon />
               <span>
                 {generateName(
-                  data?.user?.data.user.name,
-                  data?.user?.data.user.lastname,
+                  session?.user?.data.user.name,
+                  session?.user?.data.user.lastname,
                   t("main_topics.default_name")
                 )}
               </span>

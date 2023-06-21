@@ -63,7 +63,7 @@ const options = {
 
   pages: {
     signIn: "/login",
-    error: "/login", // Modify this with your own error page path
+    error: "/error", // Modify this with your own error page path
   },
 };
 

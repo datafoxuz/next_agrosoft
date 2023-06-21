@@ -108,6 +108,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
           value={user.username}
           data-err={isError.username}
           onChange={(e) => handleChangeUserInp(e.target.value)}
+          required
         />
 
         {isError.username ? (
@@ -124,6 +125,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
             value={user.password}
             data-err={isError.password}
             onChange={(e) => handleChangePassInp(e.target.value)}
+            required
           />
           <Image
             onClick={() => setIsShowPass(!isShowPass)}

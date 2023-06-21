@@ -121,17 +121,15 @@
           border-radius: 50%;
           background-color: #e6f3ec;
           margin-bottom: 16px;
-
-          .image {
-            width: 84px;
-            height: 84px;
-          }
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
         }
         .image_label {
           font-weight: 600;
           @extend %main-text-16;
           color: #03a679;
-
+          cursor: pointer;
           text-align: center;
         }
 
@@ -198,6 +196,10 @@
 
           .cancel_button {
             @extend %cancel-button;
+          }
+
+          .load_btn{
+            @extend %load-button;
           }
         }
       }

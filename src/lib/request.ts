@@ -1,6 +1,6 @@
 import { baseUrl } from "@/data";
 
-type Method = "GET" | "POST";
+type Method = "GET" | "POST" | "PUT";
 
 async function request(
   url: string,

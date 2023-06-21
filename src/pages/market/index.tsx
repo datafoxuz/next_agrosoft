@@ -1,18 +1,15 @@
-import { AddProduct, Collections, NotFound, SNavbar } from "@/components";
+import { Collections, NotFound, SNavbar } from "@/components";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ParsedUrlQuery } from "querystring";
-import React, { useState } from "react";
+import React from "react";
 import ErrorPage from "../_error";
 
 const index = ({ categories }: { categories: data }) => {
   const { t } = useTranslation("common");
-  const [market, setMarket] = useState<questionTypes>({
-    active: false,
-  });
 
   const siteWay = [
     {
@@ -32,13 +29,9 @@ const index = ({ categories }: { categories: data }) => {
         title={`${t("main_topics.market")}`}
         filter
         market
-        state={market}
-        setState={setMarket}
       />
 
-      {market.active ? (
-        <AddProduct state={market} setState={setMarket} />
-      ) : categories.data.length ? (
+      {categories.data.length ? (
         <Collections data={categories.data} meta={categories.meta} market />
       ) : (
         <NotFound />
