@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Collections, NotFound, Write } from "@/components";
-import ErrorPage from "@/pages/_error";
+import { Write } from "@/components";
 import Answer from "./Answer/Answer";
 
 import Image from "next/image";
@@ -12,7 +11,7 @@ import styles from "./internalPage.module.scss";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 
 import ShareIcon from "@mui/icons-material/Share";
-import image from "@/assets/images/community.png";
+import defaultImage from "@/assets/images/default_image.png"
 
 const InternalPage = ({
   questions = false,
@@ -27,9 +26,8 @@ const InternalPage = ({
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
     active: false,
     title: "",
-    titleFile: null,
+    file: null,
     desc: "",
-    descFile: null,
   });
 
   const arr = [];
@@ -50,7 +48,7 @@ const InternalPage = ({
         <>
           <div className={`${styles.image_wrapper} ${styles.section}`}>
             <Image
-              src={data.image ? data.image : image.src}
+              src={data.image ? data.image : defaultImage.src}
               alt="about image"
               className={styles.image}
               width={680}
@@ -90,7 +88,7 @@ const InternalPage = ({
                     <h3 className={styles.title}>{t("inner_page.answers")}</h3>
                     <div className={styles.answer_write}>
                       {isWriteAns.active ? (
-                        <Write state={isWriteAns} setState={setIsWriteAns} />
+                        <Write state={isWriteAns} setState={setIsWriteAns} questionId={data.id}/>
                       ) : (
                         <button
                           type="button"

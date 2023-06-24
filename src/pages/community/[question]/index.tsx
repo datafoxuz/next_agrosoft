@@ -27,6 +27,8 @@ const index = ({ question }: { question: responseData }) => {
     },
   ];
 
+
+
   return question.status === 200 ? (
     <SEO metaTitle={`${router.query.question}`}>
       <SNavbar siteWay={siteWay} innerPage />
@@ -44,6 +46,7 @@ export async function getServerSideProps({
   params: { question: string };
   locale: string;
 }) {
+
   const { data, response } = await request(`/community/${params.question}`);
 
   if (response.status !== 404) {

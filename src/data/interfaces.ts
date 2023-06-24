@@ -19,9 +19,8 @@ export interface cardTypes {
 export interface questionTypes {
   active: boolean;
   title?: string;
-  titleFile?: null | StaticImageData;
+  file?: null | File;
   desc?: string;
-  descFile?: null | StaticImageData;
 }
 
 export interface seo {

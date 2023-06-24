@@ -2,15 +2,16 @@ import { Collections, NotFound, SNavbar } from "@/components";
 import { data, questionTypes, responseData } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
-import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
 import ErrorPage from "../_error";
 
 const index = ({ communities }: { communities: data }) => {
   const { t } = useTranslation("common");
+  const router = useRouter()
   const [question, setQuestion] = useState<questionTypes>({
     active: false,
     title: "",
@@ -29,6 +30,8 @@ const index = ({ communities }: { communities: data }) => {
       url: "/community",
     },
   ];
+
+
 
   return communities.status === 200 ? (
     <SEO metaTitle={`${t("main_topics.community")} - AgroSoft`}>

@@ -165,6 +165,7 @@ const create = () => {
             placeholder={`${t("community.create.write_question_inp")}`}
             data-err={isEmpty.title}
             value={title}
+            required
             onChange={(e) => {
               setTitle(e.target.value);
               setIsEmpty((prevState) => ({
@@ -206,6 +207,7 @@ const create = () => {
             type="file"
             className={styles.file_input}
             defaultValue=""
+            required
           />
         </div>
 
@@ -214,6 +216,7 @@ const create = () => {
           placeholder={`${t("buttons.write_question")}`}
           value={desc}
           data-err={isEmpty.desc}
+          required
           onChange={(e) => {
             setDesc(e.target.value);
             setIsEmpty((prevState) => ({
@@ -255,6 +258,7 @@ const create = () => {
             type="file"
             className={styles.file_input}
             defaultValue=""
+            required
           />
 
           {isLoading ? (

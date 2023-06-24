@@ -13,6 +13,7 @@ const Card = ({ item }: { item: card }) => {
   const router = useRouter();
 
   function handleCardClick(slug: string) {
+    console.log(slug)
     if (router.query.page) {
       router.push(`${router.pathname}/${slug}`);
     } else {
