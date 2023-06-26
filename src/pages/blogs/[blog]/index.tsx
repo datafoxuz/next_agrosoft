@@ -33,7 +33,7 @@ const index = ({ blog }: { blog: responseData }) => {
       }`}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={blog.data} />
+      <InternalPage data={blog.data} similar={blog.similar}/>
     </SEO>
   ) : (
     <ErrorPage status={blog.status} />
