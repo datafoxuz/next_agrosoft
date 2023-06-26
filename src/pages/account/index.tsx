@@ -72,7 +72,7 @@ const index = ({user, status}: {user:any, status: number}) => {
           </div>
 
           {tabId == 1 ? (
-            <PersonalInfo user={user}/>
+            <PersonalInfo />
           ) : tabId == 2 ? (
             <AddintionalInfo />
           ) : tabId == 3 ? (

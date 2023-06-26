@@ -12,6 +12,7 @@ import styles from "../auth.module.scss";
 import passwordOn from "@/assets/icons/Auth/password_on.svg";
 import passwordOff from "@/assets/icons/Auth/password_off.svg";
 import { useMyContext } from "@/hooks/useMyContext";
+import { toast } from "react-toastify";
 
 interface inpProps {
   username: string;
@@ -36,6 +37,9 @@ const Login = ({ tabId, setTabId }: authProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { setUser } = useMyContext();
+
+
+
   //functions===================================================
 
   const handleLogin = async (
@@ -52,17 +56,18 @@ const Login = ({ tabId, setTabId }: authProps) => {
       const {data, response} = await request(`/auth/login`, "POST", JSON.stringify({username, password}), false)
 
 
+      setIsLoading(false);
       if (response && response.status === 200) {
-        setIsLoading(false);
         router.push("/");
         setUser(data)
         localStorage.setItem("userToken", data.data.token)
+        localStorage.setItem("userData", data)
         setCookie(null, 'userToken', data.data.token, {
           maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
           path: '/', // The path where the cookie is valid (e.g., the root path)
         });
       }else{
-
+        toast.error(`Error status: ${response.status}`)
       }
     } else {
       setIsError({

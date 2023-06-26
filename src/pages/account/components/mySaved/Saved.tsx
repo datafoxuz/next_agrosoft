@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FilterDrawer from "../filterDrawer/filterDrawer";
 import CardsCollection from "@/components/cardsCollection/CardsCollection";
-import { cardsForExample } from "@/data";
 import { useTranslation } from "next-i18next";
 
 import styles from "../../profile.module.scss";
@@ -51,13 +50,13 @@ const Saved = () => {
       </div>
 
       {contentTab == "a" ? (
-        <CardsCollection data={cardsForExample} account />
+        <CardsCollection data={[]} account />
       ) : contentTab == "b" ? (
         <p>Cards</p>
       ) : contentTab == "c" ? (
-        <CardsCollection data={cardsForExample} account />
+        <CardsCollection data={[]} account />
       ) : (
-        <CardsCollection data={cardsForExample} account />
+        <CardsCollection data={[]} account />
       )}
     </div>
   );

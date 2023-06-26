@@ -8,8 +8,7 @@ import styles from "../../weather.module.scss";
 const LeftSection = ({ weatherData }: { weatherData: WeatherData }) => {
   const { t } = useTranslation("common");
   return (
-    <div className={styles.weather}>
-      <div className={styles.left_section}>
+    <div className={styles.left_section}>
         <p className={styles.date}>
           {weatherData?.data?.time.split(",")[0]}, {new Date().getFullYear()}
         </p>
@@ -47,7 +46,6 @@ const LeftSection = ({ weatherData }: { weatherData: WeatherData }) => {
           </p>
         </div>
       </div>
-    </div>
   );
 };
 

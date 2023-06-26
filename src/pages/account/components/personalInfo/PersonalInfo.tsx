@@ -5,60 +5,63 @@ import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { imageUpload } from "@/utils/helperFunctions";
 import { useRouter } from "next/router";
+import { useMyContext } from "@/hooks/useMyContext";
 
 import styles from "../../profile.module.scss";
 
 import defaultImg from "@/assets/images/default_image.png";
 
-const PersonalInfo = ({ user }: { user: any }) => {
-  const { data }: { data: any; status: string } = useSession();
+const PersonalInfo = () => {
+  const {setUser, user} = useMyContext();
   const { t } = useTranslation("common");
-  const router = useRouter()
+  const router = useRouter();
 
   //states ======================
   const [fname, setFName] = useState<string>(
-    user.data.firstname ? user.data.firstname : ""
+    user?.data.firstname ? user.data.firstname : ""
   );
   const [lname, setLName] = useState<string>(
-    user.data.lastname ? user.data.lastname : ""
+    user?.data.lastname ? user.data.lastname : ""
   );
   const [phone, setPhone] = useState<string>(
-    user.data.phone ? user.data.phone : ""
+    user?.data.phone ? user.data.phone : ""
   );
   const [email, setEmail] = useState<string>(
-    user.data.email ? user.data.email : ""
+    user?.data.email ? user.data.email : ""
   );
   const [image, setImage] = useState<File | undefined | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function updateInfo(mainId: number) {
     let body: {
+      firstname: string;
+      lastname: string;
       photo_file_id: number;
       phone: string;
       email: string;
     } = {
+      firstname: fname,
+      lastname: lname,
       photo_file_id: mainId,
       phone,
       email,
     };
 
-    const { response } = await request(
+    const { response, data } = await request(
       `/users/update`,
       "PUT",
       JSON.stringify(body),
       false,
       {
-        Authorization: `Bearer ${data?.user?.data.token}`,
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       }
     );
 
-    if (response.status == 200) {
-      setFName("");
-      setLName("");
+    if (response.status === 200) {
       setImage(null);
       setIsLoading(false);
       toast.success("Foydalanuvchi ma'lumotlari yangilandi.");
-      
+      setUser(data)
     } else {
       setIsLoading(false);
       toast.error(`Error status: ${response.status}`);
@@ -72,7 +75,9 @@ const PersonalInfo = ({ user }: { user: any }) => {
       await imageUpload(image).then((mainId) => updateInfo(mainId));
     }else{
       setIsLoading(true);
-      updateInfo(user.data.photo_id)
+      if(user){
+        updateInfo(user.data.photo_id)
+      }
     }
   }
 
@@ -94,8 +99,8 @@ const PersonalInfo = ({ user }: { user: any }) => {
           style={{
             backgroundImage: image
               ? `url(${URL.createObjectURL(image)})`
-              : user.data.photo
-              ? user.data.photo
+              : user?.data.photo
+              ? `url(${user.data.photo})`
               : `url(${defaultImg.src})`,
           }}
         ></div>

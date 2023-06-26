@@ -89,29 +89,29 @@ export async function getServerSideProps({
   locale: string;
 }) {
   const { regionId } = query;
-  let regionsData;
-  let districtData;
+  let regionsData = null;
+  let districtData = null;
 
-  await fetch(`https://agrosoft.uz/api/v1/1/regions`)
-    .then((res) => res.json())
-    .then((data) => {
-      regionsData = data;
-    });
+  // await fetch(`https://agrosoft.uz/api/v1/1/regions`)
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     regionsData = data;
+  //   });
 
-  await fetch(
-    regionId
-      ? `https://agrosoft.uz/api/v1/site/data/${regionId}/districts`
-      : `https://agrosoft.uz/api/v1/site/data/1/districts`
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      districtData = data;
-    });
+  // await fetch(
+  //   regionId
+  //     ? `https://agrosoft.uz/api/v1/site/data/${regionId}/districts`
+  //     : `https://agrosoft.uz/api/v1/site/data/1/districts`
+  // )
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     districtData = data;
+  //   });
 
   return {
     props: {
-      regions: regionsData,
-      districts: districtData,
+      // regions: regionsData,
+      // districts: districtData,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

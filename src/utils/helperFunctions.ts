@@ -7,11 +7,12 @@ export function generateName(
   fName: string
 ) {
   let fullname;
+  let cuttedName = surname && surname?.length > 6 ? `${surname?.slice(0, 6)}...` : surname
   if (name && surname) {
-    fullname = `${name.slice(0, 1)} ${surname}`;
-  } else if (!name && surname) {
-    fullname = `${surname}`;
-  } else if (name && !surname) {
+    fullname = `${name.slice(0, 1)} ${cuttedName}`;
+  } else if (!name && cuttedName) {
+    fullname = `${cuttedName}`;
+  } else if (name && !cuttedName) {
     fullname = `${name}`;
   } else {
     fullname = fName;
