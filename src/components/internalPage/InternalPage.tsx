@@ -17,10 +17,12 @@ const InternalPage = ({
   questions = false,
   about,
   data,
+  similar = [],
 }: {
   questions?: boolean;
   about?: boolean;
   data?: card;
+  similar?: []
 }) => {
   const { t } = useTranslation("common");
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
@@ -29,8 +31,6 @@ const InternalPage = ({
     file: null,
     desc: "",
   });
-
-  const arr = [];
 
   return (
     <div className={styles.internal}>
@@ -155,12 +155,12 @@ const InternalPage = ({
                 <h5 className={styles.description}>{data.body}</h5>
               </div>
 
-              {arr.length ? (
+              {similar.length ? (
                 <div className={styles.liked}>
                   <h2 className={`${styles.title} ${styles.liked_title}`}>
                     {t("inner_page.similar_articles")}
                   </h2>
-                  {/* <Collections data={arr} /> */}
+                  <Collections data={similar} similar/>
                 </div>
               ) : null}
             </>

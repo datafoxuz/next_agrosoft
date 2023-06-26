@@ -14,6 +14,7 @@ const CardsCollection = ({
   community = false,
   account = false,
   product = false,
+  similar = false
 }: {
   data: card[];
   meta?: meta;
@@ -21,6 +22,7 @@ const CardsCollection = ({
   account?: boolean;
   market?: boolean;
   product?: boolean;
+  similar?: boolean
 }) => {
   const router = useRouter();
 
@@ -41,6 +43,7 @@ const CardsCollection = ({
       className={styles.collections}
       data-account={account}
       data-community={community}
+      data-similar={similar}
     >
       <div className={styles.cards_grid}>
         {data.map((item: card, index: number) =>

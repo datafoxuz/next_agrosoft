@@ -15,8 +15,6 @@ export type routeObj = {
   url: string;
 };
 
-type routesType = routeObj[];
-
 export type languagesObj = {
   title: string;
   config: string;
