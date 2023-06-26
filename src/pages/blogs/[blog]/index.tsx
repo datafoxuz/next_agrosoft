@@ -24,7 +24,7 @@ const index = ({ blog }: { blog: responseData }) => {
     },
   ];
 
-  
+  console.log(blog.similar)
 
   return blog.status === 200 ? (
     <SEO

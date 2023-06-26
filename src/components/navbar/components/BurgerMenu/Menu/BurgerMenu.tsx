@@ -7,10 +7,11 @@ import {
   languagesObj,
 } from "../../../data";
 import { AnimatePresence, motion } from "framer-motion";
-import { MOTION_CONFIGS, SORT_MOTION_CONFIGS } from "@/data";
+import { SORT_MOTION_CONFIGS } from "@/data";
 import { generateName } from "@/utils/helperFunctions";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
+import { useMyContext } from "@/hooks/useMyContext";
 
 import styles from "./burgermenu.module.scss";
 
@@ -25,6 +26,7 @@ const BurgerMenu = ({
   setOpen: (v: openObjTypes) => void;
 }) => {
   const { data }: { data: any } = useSession();
+  const {user} = useMyContext()
   const { t } = useTranslation("common");
 
   const routes: routeObj[] = [

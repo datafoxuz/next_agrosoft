@@ -8,19 +8,22 @@ import styles from "./card.module.scss";
 
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
-const Card = ({ item }: { item: card }) => {
+const Card = ({ item, similar = false }: { item: card; similar?: boolean }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
   function handleCardClick(slug: string) {
-    console.log(slug)
-    if (router.query.page) {
-      router.push(`${router.pathname}/${slug}`);
+    if (similar) {
+      router.push(`/${router.pathname.split("/")[1]}/${slug}`);
     } else {
-      if (!router.query.product) {
-        router.push(`/${router.pathname}/${slug}`);
+      if (router.query.page) {
+        router.push(`${router.pathname}/${slug}`);
       } else {
-        router.push(`/market/${router.query.product}/${slug}`);
+        if (!router.query.product) {
+          router.push(`/${router.pathname}/${slug}`);
+        } else {
+          router.push(`/market/${router.query.product}/${slug}`);
+        }
       }
     }
   }
@@ -37,7 +40,7 @@ const Card = ({ item }: { item: card }) => {
 
       {item.country_name && (
         <div className={styles.location}>
-          <FmdGoodOutlinedIcon className={styles.icon} />{" "}
+          <FmdGoodOutlinedIcon className={styles.icon} />
           {item.region_name && item.region_name}, {item.country_name}
         </div>
       )}

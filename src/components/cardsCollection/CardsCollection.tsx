@@ -50,7 +50,7 @@ const CardsCollection = ({
           community ? (
             <CommunityCard data={item} key={index} />
           ) : (
-            <Card item={item} key={index} />
+            <Card item={item} key={index} similar/>
           )
         )}
       </div>
