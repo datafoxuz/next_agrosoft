@@ -31,6 +31,15 @@
     }
   }
 
+  &[data-similar="true"]{
+    .cards_grid{
+      display: flex;
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        flex-wrap: wrap;
+      }
+    }
+  }
+
   .cards_grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);

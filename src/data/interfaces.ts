@@ -1,5 +1,37 @@
 import { StaticImageData } from "next/image";
 
+
+
+export interface User {
+  address: string | null;
+      componay_name: string | null;
+      country_id: number | null;
+      created_at: string;
+      deleted_at: string | null;
+      email: string;
+      email_verified_at: string;
+      firstname: string | null;
+      id: number;
+      lastname: string | null;
+      name: string | null;
+      phone: string | null;
+      photo_file_id: number | null;
+      profession: string | null;
+      region_id: string | null;
+      role: string;
+      status: string;
+      territory: string | null;
+      updated_at: string | null;
+      username: string | null;
+}
+
+export interface FullUserData {
+  data: User;
+  message: string;
+  success: boolean;
+}
+
+
 export interface sitewayProps {
   title: string;
   url: string;
@@ -61,6 +93,7 @@ export interface responseData {
   status: number;
   data: card;
   message?: string;
+  similar: []
 }
 
 export interface meta {
@@ -120,6 +153,8 @@ export type LocationInfoType = {
 };
 
 export interface MainContextType {
+  user: FullUserData | null;
+  setUser: React.Dispatch<React.SetStateAction<null>>;
   weatherData: WeatherData | null;
   setWeatherData: React.Dispatch<React.SetStateAction<null>>;
   locationInfo: LocationInfoType | null;
