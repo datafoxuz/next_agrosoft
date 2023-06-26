@@ -89,9 +89,8 @@ const Write = ({
       ...state,
       active: !state.active,
     });
+    console.log('cancel')
   }
-
-
 
   return (
     <div className={styles.write} data-type={quiz}>
