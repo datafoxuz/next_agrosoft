@@ -1,17 +1,14 @@
-import React, { FormEvent, useContext, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { authProps } from "../data";
-import { request } from "@/lib/request";
+import { signIn, useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
-import { setCookie } from 'nookies';
-
 
 import styles from "../auth.module.scss";
 
 import passwordOn from "@/assets/icons/Auth/password_on.svg";
 import passwordOff from "@/assets/icons/Auth/password_off.svg";
-import { useMyContext } from "@/hooks/useMyContext";
 
 interface inpProps {
   username: string;
@@ -22,8 +19,10 @@ interface inpProps {
 const Login = ({ tabId, setTabId }: authProps) => {
   const { t } = useTranslation("common");
   //states===========================================
-  const [username, setUsername] = useState<string>("fayzulloevasadbek@gmail.com")
-  const [password, setPassword] = useState<string>("password")
+  const [user, setUser] = useState<inpProps>({
+    username: "fayzulloevasadbek@gmail.com",
+    password: "password",
+  });
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
   const [isError, setIsError] = useState<{
     username: boolean;
@@ -35,7 +34,6 @@ const Login = ({ tabId, setTabId }: authProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { setUser } = useMyContext();
   //functions===================================================
 
   const handleLogin = async (
@@ -49,20 +47,16 @@ const Login = ({ tabId, setTabId }: authProps) => {
       setIsLoading(true);
       setIsError({ username: false, password: false });
       // Sign in using the provided credentials
-      const {data, response} = await request(`/auth/login`, "POST", JSON.stringify({username, password}), false)
+      const result = await signIn("credentials", {
+        username: user.username,
+        password: user.password,
+        redirect: true,
+        callbackUrl: "/",
+      });
 
-
-      if (response && response.status === 200) {
+      if (result && !result.error) {
         setIsLoading(false);
         router.push("/");
-        setUser(data)
-        localStorage.setItem("userToken", data.data.token)
-        setCookie(null, 'userToken', data.data.token, {
-          maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
-          path: '/', // The path where the cookie is valid (e.g., the root path)
-        });
-      }else{
-
       }
     } else {
       setIsError({
@@ -73,9 +67,12 @@ const Login = ({ tabId, setTabId }: authProps) => {
   };
 
   function handleChangeUserInp(value: string) {
-    setUsername(value)
+    setUser((prevstate) => ({
+      ...prevstate,
+      username: value,
+    }));
 
-    if (username.length >= 13) {
+    if (user.username.length >= 13) {
       setIsError((prevstate) => ({
         ...prevstate,
         username: false,
@@ -84,9 +81,12 @@ const Login = ({ tabId, setTabId }: authProps) => {
   }
 
   function handleChangePassInp(value: string) {
-    setPassword(value)
+    setUser((prevstate) => ({
+      ...prevstate,
+      password: value,
+    }));
 
-    if (password.length >= 4) {
+    if (user.password.length >= 4) {
       setIsError((prevstate) => ({
         ...prevstate,
         password: false,
@@ -99,20 +99,20 @@ const Login = ({ tabId, setTabId }: authProps) => {
   return (
     <div className={styles.modal}>
       <h3 className={styles.title}>{t("auth.login")}</h3>
-      <form onSubmit={(e) => handleLogin(e, username, password)}>
+      <form onSubmit={(e) => handleLogin(e, user.username, user.password)}>
         <input
           name="username"
           type="text"
           placeholder={`${t("auth.username_inp")}`}
           className={`${styles.input} ${styles.username_inp}`}
-          value={username}
+          value={user.username}
           data-err={isError.username}
           onChange={(e) => handleChangeUserInp(e.target.value)}
           required
         />
 
         {isError.username ? (
-          <p className={styles.error_msg}>{t("auth.username_err_msg")}</p>
+          <p className={styles.error_msg}>{t("auth.username_er_msg")}</p>
         ) : null}
 
         {/* =========================================== */}
@@ -122,7 +122,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
             type={`${isShowPass ? "text" : "password"}`}
             placeholder={`${t("auth.pass_inp")}`}
             className={`${styles.input} ${styles.password_inp}`}
-            value={password}
+            value={user.password}
             data-err={isError.password}
             onChange={(e) => handleChangePassInp(e.target.value)}
             required

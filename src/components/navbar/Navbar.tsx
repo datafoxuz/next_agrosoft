@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { BurgerMenu, DownloadLinks, Languages, Weather } from "./components";
 import { openObjTypes } from "./data";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useMyContext } from "@/hooks/useMyContext";
+import { useSession } from "next-auth/react";
 import { generateName } from "@/utils/helperFunctions";
 import WeatherLayout from "@/layouts/weather/WeatherLayout";
 import { useTranslation } from "next-i18next";
-import { request } from "@/lib/request";
-import { setCookie } from "nookies";
-
 
 //icons
 
 import logo from "@/assets/icons/NavbarIcons/logo.svg";
 import logo_white from "@/assets/icons/logo_white.svg";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 //style
 import styles from "./navbar.module.scss";
 
@@ -27,8 +25,9 @@ const Navbar = ({
   isStatic?: boolean;
   auth?: boolean;
 }) => {
+  const { data:session }: { data: any; status: string } = useSession();
   const { t } = useTranslation("common");
-  const {setUser, user} = useMyContext()
+
   const router = useRouter();
 
   const [open, setOpen] = useState<openObjTypes>({
@@ -36,32 +35,6 @@ const Navbar = ({
     languagesModal: false,
     burgerMenu: false,
   });
-
-  // check token with about-me api
-  useEffect(() => {
-    const userToken = localStorage.getItem("userToken");
-
-  
-    request("/users/about-me", "GET", null, false, {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${userToken}`
-    })
-    .then(({response, data}) => {
-      if(response.status === 200){
-        setUser(data)
-        setCookie(null, 'userToken', userToken ? userToken : "", {
-          maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
-          path: '/', // The path where the cookie is valid (e.g., the root path)
-        });
-      }else{
-        setCookie(null, 'userToken', '', {
-          maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
-          path: '/', // The path where the cookie is valid (e.g., the root path)
-        });
-      }
-    });
-  }, []);
-  
 
   return (
     <WeatherLayout>
@@ -93,13 +66,13 @@ const Navbar = ({
         </div>
 
         <div className={`${styles.section} ${styles.r_section}`}>
-          {user?.success ? (
+          {session ? (
             <Link href="/account" className={styles.ava_section}>
               <AccountCircleIcon />
               <span>
                 {generateName(
-                  user.data.firstname,
-                  user.data.lastname,
+                  session?.user?.data.user.name,
+                  session?.user?.data.user.lastname,
                   t("main_topics.default_name")
                 )}
               </span>

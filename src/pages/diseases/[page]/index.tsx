@@ -34,7 +34,7 @@ const index = ({ disease }: { disease: responseData }) => {
       }`}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={disease.data} similar={disease.similar}/>
+      <InternalPage data={disease.data} />
     </SEO>
   ) : (
     <ErrorPage status={disease.status}/>
