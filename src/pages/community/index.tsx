@@ -15,9 +15,8 @@ const index = ({ communities }: { communities: data }) => {
   const [question, setQuestion] = useState<questionTypes>({
     active: false,
     title: "",
-    titleFile: null,
+    file: null,
     desc: "",
-    descFile: null,
   });
 
   const siteWay = [
