@@ -24,7 +24,6 @@ const index = ({ article }: { article: responseData }) => {
     },
   ];
 
-
   return article.status === 200 ? (
     <SEO
       metaTitle={`${
@@ -32,7 +31,7 @@ const index = ({ article }: { article: responseData }) => {
       }`}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={article.data} similar={article.similar}/>
+      <InternalPage data={article.data} />
     </SEO>
   ) : (
     <ErrorPage status={article.status}/>
@@ -46,7 +45,7 @@ export async function getServerSideProps({
   params: { new: string };
   locale: string;
 }) {
-  const { data, response } = await request(`/articles/${params.new}/show`);
+  const { data, response } = await request(`/article/${params.new}`);
 
   if (response.status !== 404) {
     return {

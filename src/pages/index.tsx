@@ -29,7 +29,6 @@ const Home = ({
   news: data;
   communities: data;
 }) => {
-
   return (
     <SEO>
       <div className={styles.main}>
