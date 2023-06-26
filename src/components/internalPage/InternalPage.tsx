@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Write } from "@/components";
+import { Collections, Write } from "@/components";
 import Answer from "./Answer/Answer";
 
 import Image from "next/image";
