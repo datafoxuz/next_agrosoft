@@ -1,17 +1,20 @@
-import { SNavbar } from "@/components";
 import React, { useState } from "react";
 import SEO from "@/layouts/seo/seo";
 import { useTranslation } from "next-i18next";
-import PersonalInfo from "./components/personalInfo/PersonalInfo";
-import AddintionalInfo from "./components/addintionalInfo/AddintionalInfo";
-import Saved from "./components/mySaved/Saved";
-import MyProducts from "./components/myProducts/MyProducts";
 import { request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import ErrorPage from "../_error";
 import { parseCookies } from "nookies";
+import dynamic from "next/dynamic";
 
 import styles from "./profile.module.scss";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
+const MyProducts = dynamic(() => import("./components/myProducts/MyProducts"))
+const Saved = dynamic(() => import("./components/mySaved/Saved"))
+const PersonalInfo = dynamic(() => import("./components/personalInfo/PersonalInfo"))
+const AddintionalInfo = dynamic(() => import("./components/addintionalInfo/AddintionalInfo"))
+const ErrorPage = dynamic(() => import("../_error"))
+
 
 const index = ({ status }: { status: number }) => {
   const { t } = useTranslation("common");

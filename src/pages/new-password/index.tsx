@@ -1,9 +1,11 @@
-import { NewPassword } from "@/components/auth";
 import AuthLayout from "@/layouts/auth/layout";
 import SEO from "@/layouts/seo/seo";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const NewPassword = dynamic(() => import("@/components/auth/NewPassword/NewPassword"))
 
 const index = () => {
   const { t } = useTranslation("common");

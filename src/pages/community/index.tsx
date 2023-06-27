@@ -1,17 +1,20 @@
-import { Collections, NotFound, SNavbar } from "@/components";
 import { data, questionTypes, responseData } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
-import ErrorPage from "../_error";
+import dynamic from "next/dynamic";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
+const Collections = dynamic(() => import("@/components/cardsCollection/CardsCollection"))
+const NotFound = dynamic(() => import("@/components/notFound/NotFound"))
+const ErrorPage = dynamic(() => import("../_error"))
+
 
 const index = ({ communities }: { communities: data }) => {
   const { t } = useTranslation("common");
-  const router = useRouter()
   const [question, setQuestion] = useState<questionTypes>({
     active: false,
     title: "",

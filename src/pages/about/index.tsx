@@ -1,8 +1,11 @@
-import { InternalPage, SNavbar } from "@/components";
 import SEO from "@/layouts/seo/seo";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
+const InternalPage = dynamic(() => import("@/components/internalPage/InternalPage"))
 
 const index = () => {
   const { t } = useTranslation("common");

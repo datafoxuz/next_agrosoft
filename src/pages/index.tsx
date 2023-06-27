@@ -4,17 +4,18 @@ import { request } from "@/lib/request";
 
 import { data } from "@/data/interfaces";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 
-import {
-  About,
-  Articles,
-  Community,
-  Diseases,
-  Hero,
-  Market,
-  News,
-  TopCards,
-} from "@/components/main";
+const About = dynamic(() => import("@/components/main/about/About"));
+const Articles = dynamic(() => import("@/components/main/articles/Articles"));
+const Community = dynamic(
+  () => import("@/components/main/community/Community")
+);
+const Diseases = dynamic(() => import("@/components/main/diseases/Diseases"));
+const Hero = dynamic(() => import("@/components/main/hero/Hero"));
+const Market = dynamic(() => import("@/components/main/market/Market"));
+const News = dynamic(() => import("@/components/main/news/News"));
+const TopCards = dynamic(() => import("@/components/main/topCards/TopCards"));
 
 import styles from "@/styles/home.module.scss";
 
@@ -29,7 +30,6 @@ const Home = ({
   news: data;
   communities: data;
 }) => {
-
   return (
     <SEO>
       <div className={styles.main}>

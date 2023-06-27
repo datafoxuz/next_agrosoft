@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { SNavbar } from "@/components";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
@@ -9,9 +8,13 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { parseCookies } from "nookies";
 import ErrorPage from "../_error";
+import dynamic from "next/dynamic";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
 
 import styles from "@/components/write/write.module.scss";
 import AddIcon from "@mui/icons-material/Add";
+
 
 const create = ({ status }: { status: number }) => {
   const { t } = useTranslation("common");

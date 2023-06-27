@@ -1,12 +1,18 @@
-import { Collections, NotFound, SNavbar } from "@/components";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
-import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"));
+const Collections = dynamic(
+  () => import("@/components/cardsCollection/CardsCollection")
+);
+const NotFound = dynamic(() => import("@/components/notFound/NotFound"));
+const ErrorPage = dynamic(() => import("@/pages/_error"));
 
 const index = ({ products }: { products: data }) => {
   const { t } = useTranslation("common");

@@ -1,13 +1,18 @@
-import { Collections, NotFound, SNavbar } from "@/components";
-import FindError from "@/components/findError/FindError";
 import { data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
-import ErrorPage from "../_error";
+
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
+const Collections = dynamic(() => import("@/components/cardsCollection/CardsCollection"))
+const NotFound = dynamic(() => import("@/components/notFound/NotFound"))
+const ErrorPage = dynamic(() => import("../_error"))
+
 
 const index = ({ diseasess }: { diseasess: data }) => {
   const { t } = useTranslation("common");

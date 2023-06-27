@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { BurgerMenu, DownloadLinks, Languages, Weather } from "./components";
 import { openObjTypes } from "./data";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -10,6 +9,13 @@ import WeatherLayout from "@/layouts/weather/WeatherLayout";
 import { useTranslation } from "next-i18next";
 import { request } from "@/lib/request";
 import { setCookie } from "nookies";
+import dynamic from "next/dynamic";
+
+
+const BurgerMenu = dynamic(() => import("./components/BurgerMenu/Burger"))
+const DownloadLinks = dynamic(() => import("./components/DownloadLinks/DownloadLinks"))
+const Languages = dynamic(() => import("./components/Languages/Languages"))
+const Weather = dynamic(() => import("./components/Weather/Weather"))
 
 
 //icons

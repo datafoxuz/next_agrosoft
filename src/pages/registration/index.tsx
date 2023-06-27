@@ -1,9 +1,11 @@
-import { RegisterModal } from "@/components/auth";
 import AuthLayout from "@/layouts/auth/layout";
 import SEO from "@/layouts/seo/seo";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const RegisterModal = dynamic(() => import("@/components/auth/Register/Register"))
 
 const index = () => {
   const { t } = useTranslation("common");

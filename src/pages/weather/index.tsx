@@ -1,4 +1,3 @@
-import { SNavbar } from "@/components";
 import React, { useState } from "react";
 import SEO from "@/layouts/seo/seo";
 import WeatherLayout from "@/layouts/weather/WeatherLayout";
@@ -6,10 +5,12 @@ import { useMyContext } from "@/hooks/useMyContext";
 import { ParsedUrlQuery } from "querystring";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import RealPage from "./components/realPage/RealPage";
 import { districtTypes } from "@/data/interfaces";
+import dynamic from "next/dynamic";
 
-import Template from "./components/template/Template";
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
+const RealPage = dynamic(() => import("./components/realPage/RealPage"))
+const Template = dynamic(() => import("./components/template/Template"))
 
 const WeatherPage = ({
   regions,

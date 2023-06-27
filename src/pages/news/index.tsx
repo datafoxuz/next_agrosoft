@@ -1,11 +1,17 @@
-import { Collections, SNavbar } from "@/components";
 import { data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
-import ErrorPage from "../_error";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"));
+const Collections = dynamic(
+  () => import("@/components/cardsCollection/CardsCollection")
+);
+const NotFound = dynamic(() => import("@/components/notFound/NotFound"));
+const ErrorPage = dynamic(() => import("../_error"));
 
 const index = ({ articles }: { articles: data }) => {
   const siteWay = [
@@ -22,10 +28,14 @@ const index = ({ articles }: { articles: data }) => {
   return articles.status === 200 ? (
     <SEO metaTitle="News - AgroSoft">
       <SNavbar siteWay={siteWay} title="Yangiliklar" filter article />
-      <Collections data={articles.data} meta={articles.meta} />
+      {articles.data.length ? (
+        <Collections data={articles.data} meta={articles.meta} />
+      ) : (
+        <NotFound />
+      )}
     </SEO>
   ) : (
-    <ErrorPage status={articles.status}/>
+    <ErrorPage status={articles.status} />
   );
 };
 

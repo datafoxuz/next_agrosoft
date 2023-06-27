@@ -1,15 +1,21 @@
-import { Collections, NotFound, SNavbar } from "@/components";
 import React from "react";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import ErrorPage from "../_error";
+import dynamic from "next/dynamic";
 
 import { data, siteWayTypes } from "@/data/interfaces";
 import { ParsedUrlQuery } from "querystring";
 import { useTranslation } from "next-i18next";
 
 import styles from "./articles.module.scss";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
+const Collections = dynamic(() => import("@/components/cardsCollection/CardsCollection"))
+const NotFound = dynamic(() => import("@/components/notFound/NotFound"))
+
+
 
 const index = ({ blogs }: { blogs: data }) => {
   const { t } = useTranslation("common");

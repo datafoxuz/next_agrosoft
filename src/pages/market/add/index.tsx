@@ -1,6 +1,4 @@
 import React, { FormEvent, useState } from "react";
-import { questionTypes } from "@/data/interfaces";
-import { FilterSelect, SNavbar } from "@/components";
 import { useTranslation } from "next-i18next";
 import SEO from "@/layouts/seo/seo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -8,17 +6,15 @@ import { request } from "@/lib/request";
 import { toast } from "react-toastify";
 import { imageUpload } from "@/utils/helperFunctions";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
+const FilterSelect = dynamic(() => import("@/components/filterSelect/FilterSelect"))
 
 import styles from "./add.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 
-const AddProduct = ({
-  state,
-  setState,
-}: {
-  state: questionTypes;
-  setState: (v: questionTypes) => void;
-}) => {
+const AddProduct = () => {
   const { t } = useTranslation("common");
   const router = useRouter();
 

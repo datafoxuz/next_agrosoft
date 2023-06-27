@@ -1,11 +1,14 @@
-import { InternalPage, SNavbar } from "@/components";
 import { responseData, sitewayProps } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
+const InternalPage = dynamic(() => import("@/components/internalPage/InternalPage"))
 
 const index = ({ blog }: { blog: responseData }) => {
   const { t } = useTranslation("common");

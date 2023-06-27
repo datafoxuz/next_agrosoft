@@ -1,9 +1,12 @@
-import { LoginModal, ResetPass } from "@/components/auth";
 import AuthLayout from "@/layouts/auth/layout";
 import SEO from "@/layouts/seo/seo";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
+
+const LoginModal = dynamic(() => import("@/components/auth/Login/Login"))
+const ResetPass = dynamic(() => import("@/components/auth/ResetPass/ResetPass"))
 
 const index = () => {
   const { t } = useTranslation("common");

@@ -1,5 +1,4 @@
 import { questionTypes, sitewayProps } from "@/data/interfaces";
-import { FilterMenu } from "./components";
 import React, { useState } from "react";
 import SiteWay from "../siteWay/SiteWay";
 import SortDrawer from "../sortDrawer/SortDrawer";
@@ -9,6 +8,9 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useMyContext } from "@/hooks/useMyContext";
 import {handleNavigate } from "@/utils/helperFunctions";
+import dynamic from "next/dynamic";
+
+const FilterMenu = dynamic(() => import(("./components/filterManu/FilterMenu")))
 
 import styles from "./secondnavbar.module.scss";
 
@@ -109,7 +111,7 @@ const SecondNavbar = ({
                     {t("second_navbar.sort_modal_2.title")}
                     <ArrowBackIosNewIcon className={styles.icon} />
                   </button>
-                  {isOpen.buy ? <FilterMenu active={isOpen.buy} /> : null}
+                  {isOpen.buy ? <FilterMenu /> : null}
                 </div>
                 <div className={styles.filter_btn_wrapper}>
                   <button
@@ -152,7 +154,7 @@ const SecondNavbar = ({
                     />
                   </button>
                   {isOpen.filter2 ? (
-                    <FilterMenu active={isOpen.filter2} />
+                    <FilterMenu/>
                   ) : null}
                 </div>
               ))}
@@ -178,7 +180,7 @@ const SecondNavbar = ({
                     height={18}
                   />
                 </button>
-                {isOpen.filter2 ? <FilterMenu active={isOpen.filter2} /> : null}
+                {isOpen.filter2 ? <FilterMenu /> : null}
               </div>
             )}
 

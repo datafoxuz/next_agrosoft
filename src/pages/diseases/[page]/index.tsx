@@ -1,13 +1,17 @@
-import { InternalPage, SNavbar } from "@/components";
-import { card, responseData } from "@/data/interfaces";
+import { responseData } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { fetchData } from "@/lib/fetchData";
 import { request } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";
+
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"));
+const InternalPage = dynamic(
+  () => import("@/components/internalPage/InternalPage")
+);
 
 const index = ({ disease }: { disease: responseData }) => {
   const { t } = useTranslation("common");
@@ -34,10 +38,10 @@ const index = ({ disease }: { disease: responseData }) => {
       }`}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={disease.data} similar={disease.similar}/>
+      <InternalPage data={disease.data} similar={disease.similar} />
     </SEO>
   ) : (
-    <ErrorPage status={disease.status}/>
+    <ErrorPage status={disease.status} />
   );
 };
 
