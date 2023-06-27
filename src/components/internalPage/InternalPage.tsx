@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Collections, Write } from "@/components";
 import Answer from "./Answer/Answer";
-
+import { RWebShare } from "react-web-share";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { card, questionTypes } from "@/data/interfaces";
@@ -11,7 +11,8 @@ import styles from "./internalPage.module.scss";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 
 import ShareIcon from "@mui/icons-material/Share";
-import defaultImage from "@/assets/images/default_image.png"
+import defaultImage from "@/assets/images/default_image.png";
+import { useRouter } from "next/router";
 
 const InternalPage = ({
   questions = false,
@@ -22,9 +23,10 @@ const InternalPage = ({
   questions?: boolean;
   about?: boolean;
   data?: card;
-  similar?: []
+  similar?: [];
 }) => {
   const { t } = useTranslation("common");
+  const router = useRouter()
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
     active: false,
     title: "",
@@ -61,10 +63,19 @@ const InternalPage = ({
                   <TurnedInNotIcon className={styles.icon} />{" "}
                   {t("buttons.save")}
                 </button>
-                <button>
-                  <ShareIcon className={styles.icon} />
-                  {t("buttons.share")}
-                </button>
+                <RWebShare
+                  data={{
+                    text: data.body,
+                    url: `https://agrosoft.uz/${router.asPath}`,
+                    title: data.title,
+                  }}
+                  onClick={() => console.log("shared successfully!")}
+                >
+                  <button>
+                    <ShareIcon className={styles.icon} />
+                    {t("buttons.share")}
+                  </button>
+                </RWebShare>
               </div>
             )}
           </div>
@@ -88,7 +99,11 @@ const InternalPage = ({
                     <h3 className={styles.title}>{t("inner_page.answers")}</h3>
                     <div className={styles.answer_write}>
                       {isWriteAns.active ? (
-                        <Write state={isWriteAns} setState={setIsWriteAns} questionId={data.id}/>
+                        <Write
+                          state={isWriteAns}
+                          setState={setIsWriteAns}
+                          questionId={data.id}
+                        />
                       ) : (
                         <button
                           type="button"
@@ -160,7 +175,7 @@ const InternalPage = ({
                   <h2 className={`${styles.title} ${styles.liked_title}`}>
                     {t("inner_page.similar_articles")}
                   </h2>
-                  <Collections data={similar} similar/>
+                  <Collections data={similar} similar />
                 </div>
               ) : null}
             </>
