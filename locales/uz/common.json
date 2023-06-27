@@ -9,7 +9,9 @@
     "weather": "Ob-havo ma’lumotlari",
     "news": "Yangiliklar",
     "default_name": "Ism Familiya",
-    "acc_info": "Shaxsiy hisob"
+    "acc_info": "Shaxsiy hisob",
+    "question_created": "Savol muvofaqqiyatli yaratildi",
+    "answer_created": "Javob muvofaqqiyatli yaratildi"
   },
 
   "buttons": {
@@ -183,5 +185,10 @@
     "title": "Ob havo",
     "by_hour": "Soat bo’yicha",
     "by_day": "Boshqa kunlar"
+  },
+
+  "error": {
+    "page_not_found": "Sahifa topilmadi",
+    "server_error": "Serverda xatolik yuz berdi"
   }
 }

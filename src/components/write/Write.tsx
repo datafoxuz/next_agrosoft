@@ -21,21 +21,29 @@ const Write = ({
   quiz?: boolean;
   questionId: number
 }) => {
-  const { data }: { data: any; status: string } = useSession();
   const { t } = useTranslation("common");
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isEmpty, setIsEmpty] = useState<{desc: boolean}>({
+    desc: false
+  })
 
   const createQuiestionHandler = async () => {
-    if (state.desc && state.file) {
+    if (state.desc?.length && state.file) {
       setIsLoading(true);
       await imageUpload(state.file).then((mainImgId) =>
         handleWriteAns(mainImgId)
       );
+    }else{
+      setIsEmpty({
+        desc: !state.desc?.length,
+      });
     }
   };
 
 
   async function handleWriteAns(imgId: number) {
+    const userToken = localStorage.getItem("userToken");
+
     let body: {
       text: string | undefined;
       file_id: number;
@@ -52,7 +60,7 @@ const Write = ({
       JSON.stringify(body),
       false,
       {
-        Authorization: `Bearer ${data?.user.data.token}`,
+        Authorization: `Bearer ${userToken}`,
       }
     );
 
@@ -63,7 +71,7 @@ const Write = ({
         file: null,
         active: false
       })
-      toast.success("Javob yaratildi!");
+      toast.success(t("main_topics.answer_created"));
 
     } else {
       setIsLoading(false);
@@ -97,10 +105,13 @@ const Write = ({
       {quiz ? (
         <div className={styles.quiz_title_wrapper}>
           <h3 className={styles.title}>{t("main_topics.write_question")}</h3>
-          <input type="text" className={styles.input} placeholder="Sarlavha" required value={state.title} onChange={(e) => setState({
-            ...state,
-            title: e.target.value
-          })} />
+          <input type="text" className={styles.input} placeholder="Sarlavha" data-err={isEmpty.desc} required value={state.title} onChange={(e) => {
+            setState({
+              ...state,
+              title: e.target.value
+            })
+            
+          }} />
           <button type="button" className={styles.add_file}>
             <AddIcon />
             {t("buttons.set_main_img")}
@@ -108,10 +119,13 @@ const Write = ({
         </div>
       ) : null}
 
-      <textarea className={styles.textarea} placeholder="Javobingizni yozing" required value={state.desc} onChange={(e) => setState({
-        ...state,
-        desc: e.target.value
-      })} />
+      <textarea className={styles.textarea} placeholder="Javobingizni yozing" data-err={isEmpty.desc} required value={state.desc} onChange={(e) => {
+        setState({
+          ...state,
+          desc: e.target.value
+        })
+        setIsEmpty({desc: e.target.value.length < 1})
+      }} />
 
       <div className={styles.button_wrapper}>
         {state.file ? (

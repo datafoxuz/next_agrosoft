@@ -1,4 +1,4 @@
-import { Collections, SNavbar } from "@/components";
+import { Collections, NotFound, SNavbar } from "@/components";
 import { data, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
@@ -42,14 +42,18 @@ const index = ({ products }: { products: data }) => {
         state={open}
         setState={setOpen}
       />
-      <Collections
-        data={products.data}
-        meta={products.meta}
-        product={open.active}
-      />
+      {products.data.length ? (
+        <Collections
+          data={products.data}
+          meta={products.meta}
+          product={open.active}
+        />
+      ) : (
+        <NotFound />
+      )}
     </SEO>
   ) : (
-    <ErrorPage status={products.status}/>
+    <ErrorPage status={products.status} />
   );
 };
 

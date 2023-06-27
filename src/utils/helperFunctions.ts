@@ -1,4 +1,5 @@
 import { baseUrl } from "@/data";
+import { FullUserData, User } from "@/data/interfaces";
 import { NextRouter } from "next/router";
 
 export function generateName(
@@ -7,7 +8,7 @@ export function generateName(
   fName: string
 ) {
   let fullname;
-  let cuttedName = surname && surname?.length > 6 ? `${surname?.slice(0, 6)}...` : surname
+  let cuttedName = surname && surname?.length > 12 ? `${surname?.slice(0, 12)}...` : surname
   if (name && surname) {
     fullname = `${name.slice(0, 1)} ${cuttedName}`;
   } else if (!name && cuttedName) {
@@ -21,8 +22,8 @@ export function generateName(
   return fullname;
 }
 
-export function handleNavigate(status: string, currUrl:string, router: NextRouter,){
-  if(status === "authenticated"){
+export function handleNavigate(user: FullUserData | null, currUrl:string, router: NextRouter,){
+  if(user && user.success){
     router.push(currUrl)
   }else{
     router.push("/login")

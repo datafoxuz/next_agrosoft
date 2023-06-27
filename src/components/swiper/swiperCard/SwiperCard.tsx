@@ -24,7 +24,7 @@ const SwiperCard = ({
   return (
     <div
       className={styles.card}
-      onClick={() => router.push(`/blogs/${data.slug}`)}
+      onClick={() => router.push(`/news/${data.slug}`)}
     >
       <Image
         src={data?.image ? data.image : ""}

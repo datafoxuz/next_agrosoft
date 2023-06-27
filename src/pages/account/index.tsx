@@ -13,10 +13,9 @@ import { parseCookies } from "nookies";
 
 import styles from "./profile.module.scss";
 
-const index = ({user, status}: {user:any, status: number}) => {
+const index = ({ status }: { status: number }) => {
   const { t } = useTranslation("common");
   const [tabId, setTabId] = useState<number>(1);
-
 
   const siteWay = [
     {
@@ -48,7 +47,7 @@ const index = ({user, status}: {user:any, status: number}) => {
     },
   ];
 
-  return  status === 200 ?(
+  return status === 200 ? (
     <SEO metaTitle={`${t("main_topics.acc_info")}`}>
       <div className={styles.profile}>
         <SNavbar
@@ -83,12 +82,19 @@ const index = ({user, status}: {user:any, status: number}) => {
         </div>
       </div>
     </SEO>
-  ) : <ErrorPage status={status}/>;
+  ) : (
+    <ErrorPage status={status} />
+  );
 };
 
-export async function getServerSideProps({ locale, req }: { locale: string, req: any }) {
-  const cookies = parseCookies({req});
-
+export async function getServerSideProps({
+  locale,
+  req,
+}: {
+  locale: string;
+  req: any;
+}) {
+  const cookies = parseCookies({ req });
 
   const userData = await request(`/users/about-me`, "GET", null, false, {
     Authorization: `Bearer ${cookies.userToken}`,

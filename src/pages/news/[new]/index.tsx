@@ -3,19 +3,21 @@ import { responseData } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React from "react";
 
 const index = ({ article }: { article: responseData }) => {
+  const {t} = useTranslation("common")
   const router = useRouter();
   const siteWay = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Yangiliklar",
+      title: t("main_topics.news"),
       url: "/news",
     },
     {

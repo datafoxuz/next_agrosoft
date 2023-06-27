@@ -77,6 +77,7 @@ const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyPress={handleKeyPress}
+                required
               />
               {isLoading ? (
                 <button

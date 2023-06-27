@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { SNavbar } from "@/components";
 import SEO from "@/layouts/seo/seo";
-import { useSession } from "next-auth/react";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
 import { imageUpload } from "@/utils/helperFunctions";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { parseCookies } from "nookies";
+import ErrorPage from "../_error";
 
 import styles from "@/components/write/write.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 
-const create = () => {
-  const { data }: { data: any; status: string } = useSession();
+const create = ({ status }: { status: number }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -51,9 +50,8 @@ const create = () => {
 
   //main functions =========================================================
 
-
-
   const createQuestion = async (mainId: number, scndId?: number) => {
+    const userToken = localStorage.getItem("userToken");
     let body: {
       title: string;
       body: string;
@@ -75,7 +73,7 @@ const create = () => {
       JSON.stringify(body),
       false,
       {
-        Authorization: `Bearer ${data?.user.data.token}`,
+        Authorization: `Bearer ${userToken}`,
       }
     );
 
@@ -85,7 +83,7 @@ const create = () => {
       setMainImage(null);
       setSecondImage(null);
       setIsLoading(false);
-      toast.success("Savol yaratildi!");
+      toast.success(t("main_topics.question_created"));
     } else {
       setIsLoading(false);
       toast.error(`Error status: ${response.status}`);
@@ -148,7 +146,7 @@ const create = () => {
 
   //JSX=============================================
 
-  return (
+  return status === 200 ? (
     <SEO metaTitle={`${t("buttons.write_question")} - AgroSoft`}>
       <SNavbar
         siteWay={siteWay}
@@ -298,19 +296,28 @@ const create = () => {
         </div>
       </div>
     </SEO>
+  ) : (
+    <ErrorPage status={status} />
   );
 };
 
-export async function getStaticProps({ locale, req }: { locale: string, req: any }) {
-  const cookies = parseCookies({req});
-
+export async function getServerSideProps({
+  locale,
+  req,
+}: {
+  locale: string;
+  req: any;
+}) {
+  const cookies = parseCookies({ req });
 
   const userData = await request(`/users/about-me`, "GET", null, false, {
     Authorization: `Bearer ${cookies.userToken}`,
   });
-  if (userData.response.status === 200) {
+
+  if (userData.response.status !== 401) {
     return {
       props: {
+        status: userData.response.status,
         ...(await serverSideTranslations(locale, ["common"])),
       },
     };
