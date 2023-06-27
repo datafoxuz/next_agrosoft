@@ -190,5 +190,14 @@
   "error": {
     "page_not_found": "Page not found",
     "server_error": "An error occurred on the server"
+  },
+
+  "add_product": {
+    "title": "Add Product",
+    "buy": "Buy",
+    "sell": "Sell",
+    "about_product": "About the product",
+    "product_name": "Product Name",
+    "confirm_text": "By confirming, I agree to the Terms and conditions"
   }
 }

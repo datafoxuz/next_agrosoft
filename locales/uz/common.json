@@ -190,5 +190,14 @@
   "error": {
     "page_not_found": "Sahifa topilmadi",
     "server_error": "Serverda xatolik yuz berdi"
+  },
+
+  "add_product": {
+    "title": "Mahsulot qo'shish",
+    "buy": "Sotib olish",
+    "sell": "Sotish",
+    "about_product": "Mahsulot haqida",
+    "product_name": "Mahsulot nomi",
+    "confirm_text": "Tasdiqlash orqali men shartlarga roziman"
   }
 }

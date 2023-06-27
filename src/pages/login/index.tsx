@@ -1,7 +1,6 @@
 import { LoginModal, ResetPass } from "@/components/auth";
 import AuthLayout from "@/layouts/auth/layout";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useState } from "react";

@@ -2,7 +2,6 @@ import Layout from "@/layouts/layout";
 import NProgress from "nprogress";
 import Router from "next/router";
 import type { AppProps } from "next/app";
-import { SessionProvider } from "next-auth/react";
 import { MainContextProvider } from "@/context";
 import { appWithTranslation } from "next-i18next";
 import { ToastContainer } from "react-toastify";
@@ -24,11 +23,9 @@ Router.events.on("routeChangeError", () => NProgress.done());
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <MainContextProvider>
-      <SessionProvider session={session}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </SessionProvider>
       <ToastContainer />
     </MainContextProvider>
   );

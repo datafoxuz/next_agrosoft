@@ -1,7 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { request } from "@/lib/request";
-import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { imageUpload } from "@/utils/helperFunctions";
 import { useRouter } from "next/router";

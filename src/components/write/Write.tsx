@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "next-i18next";
 import { questionTypes } from "@/data/interfaces";
-import { useSession } from "next-auth/react";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
 
@@ -28,11 +27,14 @@ const Write = ({
   })
 
   const createQuiestionHandler = async () => {
-    if (state.desc?.length && state.file) {
+    if (state.desc?.length) {
       setIsLoading(true);
-      await imageUpload(state.file).then((mainImgId) =>
-        handleWriteAns(mainImgId)
-      );
+      if(state.file){
+        await imageUpload(state.file).then((mainImgId) =>
+          handleWriteAns(mainImgId)
+        );
+      }
+      handleWriteAns()
     }else{
       setIsEmpty({
         desc: !state.desc?.length,
@@ -41,18 +43,21 @@ const Write = ({
   };
 
 
-  async function handleWriteAns(imgId: number) {
+  async function handleWriteAns(imgId?: number) {
     const userToken = localStorage.getItem("userToken");
 
     let body: {
       text: string | undefined;
-      file_id: number;
+      file_id?: number;
       problem_id: number
     } = {
       text: state.desc,
-      file_id: imgId,
       problem_id: questionId,
     };
+
+    if(imgId){
+      body = {...body, file_id: imgId}
+    }
 
     const { response } = await request(
       `/community/write-answer`,
@@ -97,27 +102,10 @@ const Write = ({
       ...state,
       active: !state.active,
     });
-    console.log('cancel')
   }
 
   return (
     <div className={styles.write} data-type={quiz}>
-      {quiz ? (
-        <div className={styles.quiz_title_wrapper}>
-          <h3 className={styles.title}>{t("main_topics.write_question")}</h3>
-          <input type="text" className={styles.input} placeholder="Sarlavha" data-err={isEmpty.desc} required value={state.title} onChange={(e) => {
-            setState({
-              ...state,
-              title: e.target.value
-            })
-            
-          }} />
-          <button type="button" className={styles.add_file}>
-            <AddIcon />
-            {t("buttons.set_main_img")}
-          </button>
-        </div>
-      ) : null}
 
       <textarea className={styles.textarea} placeholder="Javobingizni yozing" data-err={isEmpty.desc} required value={state.desc} onChange={(e) => {
         setState({
@@ -161,7 +149,6 @@ const Write = ({
           type="file"
           className={styles.file_input}
           defaultValue=""
-          required
         />
 
         {

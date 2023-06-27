@@ -9,7 +9,6 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { SORT_MOTION_CONFIGS } from "@/data";
 import { generateName } from "@/utils/helperFunctions";
-import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { useMyContext } from "@/hooks/useMyContext";
 
@@ -25,7 +24,6 @@ const BurgerMenu = ({
   active: boolean;
   setOpen: (v: openObjTypes) => void;
 }) => {
-  const { data }: { data: any } = useSession();
   const {user} = useMyContext()
   const { t } = useTranslation("common");
 
@@ -73,15 +71,15 @@ const BurgerMenu = ({
       {active ? (
         <motion.div className={styles.menu} {...SORT_MOTION_CONFIGS}>
           <div className={styles.auth_link}>
-            {true ? (
+            {user?.success ? (
               <Link
                 href="/account"
                 className={`${styles.menu_item} ${styles.ava_section}`}
               >
                 <span>
                   {generateName(
-                    data?.user?.data.user.name,
-                    data?.user?.data.user.lastname,
+                    user?.data.firstname,
+                    user?.data.lastname,
                     t("main_topics.default_name")
                   )}
                 </span>

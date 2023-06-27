@@ -38,6 +38,7 @@ const LangModal = ({
         <motion.div className={styles.language_menu} {...MOTION_CONFIGS}>
           {languagesData.map((item: languagesObj, index: number) => (
             <div
+              key={index}
               className={styles.lang_item}
               onClick={() => handleClick(item.title, item.config, item.config)}
             >

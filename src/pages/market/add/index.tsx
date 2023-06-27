@@ -5,7 +5,6 @@ import { useTranslation } from "next-i18next";
 import SEO from "@/layouts/seo/seo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { request } from "@/lib/request";
-import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { imageUpload } from "@/utils/helperFunctions";
 import { useRouter } from "next/router";
@@ -20,7 +19,6 @@ const AddProduct = ({
   state: questionTypes;
   setState: (v: questionTypes) => void;
 }) => {
-  const { data }: { data: any; status: string } = useSession();
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -51,8 +49,8 @@ const AddProduct = ({
     },
     {
       title: t("buttons.add_product"),
-      url: router.pathname
-    }
+      url: router.pathname,
+    },
   ];
 
   const addProduct = async (mainId: number) => {
@@ -77,6 +75,7 @@ const AddProduct = ({
       is_negotiable: isNegotiable,
       main_image_id: mainId,
     };
+    const userToken = localStorage.getItem("userToken");
 
     const { response } = await request(
       `/marketplace/create-product`,
@@ -84,12 +83,12 @@ const AddProduct = ({
       JSON.stringify(body),
       false,
       {
-        Authorization: `Bearer ${data?.user.data.token}`,
+        Authorization: `Bearer ${userToken}`,
       }
     );
 
     if (response.status == 200) {
-      handleClearInputs()
+      handleClearInputs();
       toast.success("Savol yaratildi!");
     } else {
       setIsLoading(false);
@@ -107,9 +106,9 @@ const AddProduct = ({
 
   //helper functions
 
-  function handleBack(){
-    router.push("/market")
-    handleClearInputs()
+  function handleBack() {
+    router.push("/market");
+    handleClearInputs();
   }
 
   const handleSetImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,7 +120,7 @@ const AddProduct = ({
     console.log(event.target.files && event.target.files.length > 0);
   };
 
-  function handleClearInputs(){
+  function handleClearInputs() {
     setName("");
     setDesc("");
     setImage(null);
@@ -136,12 +135,9 @@ const AddProduct = ({
 
   return (
     <SEO metaTitle={`${t("buttons.add_product")} - AgroSoft`}>
-      <SNavbar
-        siteWay={siteWay}
-        title={`${t("main_topics.market")}`}
-      />
+      <SNavbar siteWay={siteWay} title={`${t("main_topics.market")}`} />
       <div className={styles.add_product}>
-        <h3 className={styles.main_title}>Mahsulot qo’shish</h3>
+        <h3 className={styles.main_title}>{t("add_product.title")}</h3>
         <div className={styles.checkbox_wrapper}>
           <div
             className={styles.checkbox}
@@ -149,7 +145,7 @@ const AddProduct = ({
             onClick={() => setCategory(1)}
           >
             <span className={styles.circle}></span>
-            <p className={styles.text}>Sotish</p>
+            <p className={styles.text}>{t("add_product.sell")}</p>
           </div>
           <div
             className={styles.checkbox}
@@ -157,25 +153,25 @@ const AddProduct = ({
             onClick={() => setCategory(2)}
           >
             <span className={styles.circle}></span>
-            <p className={styles.text}>Sotib olish</p>
+            <p className={styles.text}>{t("add_product.buy")}</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className={styles.about}>
-            <h3 className={styles.title}>Mahsulot haqida</h3>
+            <h3 className={styles.title}>{t("add_product.about_product")}</h3>
             <input
               type="text"
               name="name"
               className={styles.input}
-              placeholder="Write your product name"
+              placeholder={`${t("add_product.product_name")}`}
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <textarea
               className={styles.textarea}
-              placeholder="Description"
+              placeholder={`${t("add_product.about_product")}`}
               name="description"
               required
               value={desc}
@@ -185,7 +181,7 @@ const AddProduct = ({
             <div className={styles.input_wrapper}>
               <input
                 type="number"
-                placeholder="Narx"
+                placeholder={`${t("second_navbar.filter.price")}`}
                 name="price"
                 className={styles.price}
                 required
@@ -224,16 +220,18 @@ const AddProduct = ({
           </div>
 
           <div className={styles.category}>
-            <h3 className={styles.title}>Kategoriya</h3>
-            <FilterSelect item={item} setItem={setItem} strData={data} mb />
+            <h3 className={styles.title}>
+              {t("second_navbar.filter.category")}
+            </h3>
+            <FilterSelect item={item} setItem={setItem} strData={[""]} mb />
           </div>
 
           <div className={styles.price}>
-            <h3 className={styles.title}>Narx</h3>
+            <h3 className={styles.title}>{t("second_navbar.filter.price")}</h3>
             <div className={styles.input_wrapper}>
               <input
                 type="number"
-                placeholder="Min price"
+                placeholder={`${t("second_navbar.filter.min_price")}`}
                 name="price"
                 required
                 value={lowPrice}
@@ -241,7 +239,7 @@ const AddProduct = ({
               />
               <input
                 type="number"
-                placeholder="Max price"
+                placeholder={`${t("second_navbar.filter.max_price")}`}
                 name="price"
                 required
                 value={highPrice}
@@ -256,16 +254,20 @@ const AddProduct = ({
                 checked={isNegotiable}
                 onChange={(e) => setIsNegotiable(e.target.checked)}
               />
-              <label htmlFor="price">Price is negotiable</label>
+              <label htmlFor="price">
+                {t("second_navbar.filter.price_is_negotiable")}
+              </label>
             </div>
           </div>
 
           <div className={styles.weight}>
-            <h3 className={styles.title}>Weight (KG)</h3>
+            <h3 className={styles.title}>
+              {t("second_navbar.filter.weight")} (KG)
+            </h3>
             <div className={styles.input_wrapper}>
               <input
                 type="number"
-                placeholder="Min weight"
+                placeholder={`${t("second_navbar.filter.min_weight")}`}
                 name="weight"
                 required
                 value={lowWeight}
@@ -273,7 +275,7 @@ const AddProduct = ({
               />
               <input
                 type="number"
-                placeholder="Max weight"
+                placeholder={`${`${t("second_navbar.filter.max_price")}`}`}
                 name="weight"
                 required
                 value={highWeight}
@@ -283,11 +285,13 @@ const AddProduct = ({
           </div>
 
           <div className={styles.location}>
-            <h3 className={styles.title}>Location</h3>
+            <h3 className={styles.title}>{`${t(
+              "second_navbar.filter.location"
+            )}`}</h3>
 
             <div className={styles.input_wrapper}>
-              <FilterSelect item={item} setItem={setItem} strData={data} />
-              <FilterSelect item={item} setItem={setItem} strData={data} />
+              <FilterSelect item={item} setItem={setItem} strData={[""]} />
+              <FilterSelect item={item} setItem={setItem} strData={[""]} />
             </div>
           </div>
 
@@ -295,33 +299,31 @@ const AddProduct = ({
             {isLoading ? (
               <>
                 <button type="button" className={styles.load_btn}>
-                  Tasdiqlash
+                  {`${t("buttons.confirm")}`}
                 </button>
                 <button
                   type="button"
                   className={`${styles.cancel_button} ${styles.load_btn}`}
                 >
-                  Bekor qilish
+                  {`${t("buttons.cancel")}`}
                 </button>
               </>
             ) : (
               <>
-                <button type="submit">Tasdiqlash</button>
+                <button type="submit">{`${t("buttons.confirm")}`}</button>
                 <button
                   type="button"
                   className={styles.cancel_button}
                   onClick={() => handleBack()}
                 >
-                  Bekor qilish
+                  {`${t("buttons.cancel")}`}
                 </button>
               </>
             )}
           </div>
         </form>
 
-        <p className={styles.agree_text}>
-          By confirming, I agree to the <span>Terms and conditions</span>
-        </p>
+        <p className={styles.agree_text}>{t("add_product.confirm_text")}</p>
       </div>
     </SEO>
   );
