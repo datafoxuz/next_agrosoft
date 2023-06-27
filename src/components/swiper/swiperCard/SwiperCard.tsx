@@ -14,17 +14,27 @@ interface swiperProps {
 const SwiperCard = ({
   cardDate,
   data,
+  single = false
 }: {
   data: card;
   item?: swiperProps;
   cardDate?: string;
+  single?: boolean
 }) => {
   const router = useRouter();
+
+  function handleClick(slug: string){
+    if(single){
+      router.push(`/news/${data.slug}`)
+    }else{
+      router.push(`/blogs/${data.slug}`)
+    }
+  }
 
   return (
     <div
       className={styles.card}
-      onClick={() => router.push(`/news/${data.slug}`)}
+      onClick={() => handleClick(data.slug)}
     >
       <Image
         src={data?.image ? data.image : ""}

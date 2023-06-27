@@ -27,7 +27,7 @@ const News = ({ data }: { data: data }) => {
         <h2 className={styles.news_title}>{t("main.news.title")}</h2>
         <div className={styles.new_wrapper}>
           {newCard?.length ? (
-            <SwiperCard cardDate="12.04.2023" data={newCard[0]} />
+            <SwiperCard cardDate="12.04.2023" data={newCard[0]} single/>
           ) : null}
           <div className={styles.news_section}>
             {data.data.slice(0, 3).map((item, index) => (

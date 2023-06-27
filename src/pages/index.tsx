@@ -40,7 +40,7 @@ const Home = ({
         <Community data={communities} />
         <Diseases data={diseases} />
         <Market />
-        <News data={news} />
+        <News data={news}/>
       </div>
     </SEO>
   );
