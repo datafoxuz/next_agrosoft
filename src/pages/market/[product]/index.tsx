@@ -38,7 +38,7 @@ const index = ({ products }: { products: data }) => {
   ];
 
   return products.status === 200 ? (
-    <SEO metaTitle={`${router.query.product}`}>
+    <SEO metaTitle={products.seo.title} metaDescription={products.seo.descriptions} metaKeywords={products.seo.keyword}>
       <SNavbar
         siteWay={siteWay}
         title={`${router.query.product}`}

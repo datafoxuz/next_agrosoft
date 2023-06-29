@@ -38,10 +38,10 @@ const CardActions = ({
         />
         <h5>{data.created_at}</h5>
       </div>
-      <div className={styles.answer_info} data-checked={data.is_answered}>
+      <div className={styles.answer_info} data-checked={data.answers_count}>
         <Image
           src={
-            data.is_answered == 1
+            data.answers_count
               ? `${verification.src}`
               : `${verificationDis.src}`
           }
@@ -50,7 +50,8 @@ const CardActions = ({
           width={13}
           height={13}
         />
-        <h5>{data.is_answered ? `Answered` : `Not answered`}</h5>
+        <h5>{data.answers_count 
+          ? `Answered` : `Not answered`}</h5>
       </div>
     </div>
   );

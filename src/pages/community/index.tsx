@@ -36,7 +36,7 @@ const index = ({ communities }: { communities: data }) => {
 
 
   return communities.status === 200 ? (
-    <SEO metaTitle={`${t("main_topics.community")} - AgroSoft`}>
+    <SEO metaTitle={communities.seo.title} metaDescription={communities.seo.descriptions} metaKeywords={communities.seo.keyword}>
       <SNavbar
         siteWay={siteWay}
         title={`${t("main_topics.community")}`}

@@ -29,7 +29,7 @@ const index = ({ diseasess }: { diseasess: data }) => {
   ];
 
   return diseasess.status === 200 ? (
-    <SEO metaTitle={`${t("main_topics.diseases")} - AgroSoft`}>
+    <SEO metaTitle={diseasess.seo.title} metaDescription={diseasess.seo.descriptions} metaKeywords={diseasess.seo.keyword}>
       <SNavbar
         siteWay={siteWay}
         title={`${t("main_topics.diseases")}`}

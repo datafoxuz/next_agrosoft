@@ -34,12 +34,13 @@ const InternalPage = ({
     desc: "",
   });
 
+  console.log(data)
+
   return (
     <div className={styles.internal}>
       {about && (
         <div className={`${styles.internal_top} ${styles.section}`}>
           <h3 className={styles.hidden_title}>{t("inner_page.about_us")}</h3>
-
           <button type="button" className={styles.top_button}>
             {t("buttons.contact")}
           </button>
@@ -47,7 +48,7 @@ const InternalPage = ({
       )}
 
       {data && (
-        <SEO>
+        <SEO metaTitle={data.seo?.title} metaDescription={data.seo?.description} author={data.seo?.author}>
           <div className={`${styles.image_wrapper} ${styles.section}`}>
             <Image
               src={data.image ? data.image : defaultImage.src}
