@@ -32,9 +32,9 @@ const index = ({ article }: { article: responseData }) => {
 
   return article.status === 200 ? (
     <SEO
-      metaTitle={article.seo.title}
-      metaDescription={article.seo.description}
-      author={article.seo.author}
+      metaTitle={article.seo?.title}
+      metaDescription={article.seo?.description}
+      author={article.seo?.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={article.data} similar={article.similar}/>
