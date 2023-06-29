@@ -30,6 +30,7 @@ const Home = ({
   news: data;
   communities: data;
 }) => {
+
   return (
     <SEO>
       <div className={styles.main}>
@@ -47,10 +48,10 @@ const Home = ({
 };
 
 export async function getServerSideProps({ locale }: { locale: string }) {
-  const blogsData = await request("/blogs/get-latest-blogs");
-  const diseasesData = await request("/deceases/get-popular-deceases");
-  const newsData = await request("/articles/get-latest-articles");
-  const communitiesData = await request("/community/latest-problems");
+  const blogsData = await request("/blogs/get-latest-blogs", "GET", null, false, locale);
+  const diseasesData = await request("/deceases/get-popular-deceases", "GET", null, false, locale);
+  const newsData = await request("/articles/get-latest-articles", "GET", null, false, locale);
+  const communitiesData = await request("/community/latest-problems", "GET", null, false, locale);
 
   return {
     props: {

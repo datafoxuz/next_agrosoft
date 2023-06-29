@@ -78,6 +78,7 @@ const AddProduct = () => {
       "POST",
       JSON.stringify(body),
       false,
+      router.locale,
       {
         Authorization: `Bearer ${userToken}`,
       }

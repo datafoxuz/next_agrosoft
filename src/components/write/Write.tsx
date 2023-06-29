@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 import { questionTypes } from "@/data/interfaces";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 import styles from "./write.module.scss";
 
@@ -21,6 +22,7 @@ const Write = ({
   questionId: number
 }) => {
   const { t } = useTranslation("common");
+  const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isEmpty, setIsEmpty] = useState<{desc: boolean}>({
     desc: false
@@ -64,6 +66,7 @@ const Write = ({
       "POST",
       JSON.stringify(body),
       false,
+      router.locale,
       {
         Authorization: `Bearer ${userToken}`,
       }

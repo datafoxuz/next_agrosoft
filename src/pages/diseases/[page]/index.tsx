@@ -33,9 +33,9 @@ const index = ({ disease }: { disease: responseData }) => {
 
   return disease.status === 200 ? (
     <SEO
-      metaTitle={`${
-        disease?.data.seo?.title ? disease?.data.seo?.title : disease.data.title
-      }`}
+      metaTitle={disease.seo.title}
+      metaDescription={disease.seo.description}
+      author={disease.seo.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={disease.data} similar={disease.similar} />
@@ -52,7 +52,7 @@ export async function getServerSideProps({
   params: { page: string };
   locale: string;
 }) {
-  const { data, response } = await request(`/deceases/${params.page}`);
+  const { data, response } = await request(`/deceases/${params.page}`, "GET", null, false, locale);
 
   if (response.status !== 404) {
     return {

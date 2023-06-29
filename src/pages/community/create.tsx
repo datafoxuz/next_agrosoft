@@ -75,6 +75,7 @@ const create = ({ status }: { status: number }) => {
       "POST",
       JSON.stringify(body),
       false,
+      router.locale,
       {
         Authorization: `Bearer ${userToken}`,
       }
@@ -313,7 +314,7 @@ export async function getServerSideProps({
 }) {
   const cookies = parseCookies({ req });
 
-  const userData = await request(`/users/about-me`, "GET", null, false, {
+  const userData = await request(`/users/about-me`, "GET", null, false, locale, {
     Authorization: `Bearer ${cookies.userToken}`,
   });
 

@@ -51,6 +51,7 @@ const PersonalInfo = () => {
       "PUT",
       JSON.stringify(body),
       false,
+      router.locale,
       {
         Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       }

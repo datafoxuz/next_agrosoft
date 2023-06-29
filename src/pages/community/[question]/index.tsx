@@ -34,12 +34,12 @@ const index = ({ question }: { question: responseData }) => {
 
 
   return question.status === 200 ? (
-    <SEO metaTitle={`${router.query.question}`}>
+    <SEO metaTitle={question.seo.title} metaDescription={question.seo.description} author={question.seo.author}>
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage questions data={question.data} />
     </SEO>
   ) : (
-    <ErrorPage status={question.status}/>
+    <ErrorPage status={question.status} />
   );
 };
 
@@ -51,7 +51,7 @@ export async function getServerSideProps({
   locale: string;
 }) {
 
-  const { data, response } = await request(`/community/${params.question}`);
+  const { data, response } = await request(`/community/${params.question}`, "GET", null, false, locale);
 
   if (response.status !== 404) {
     return {

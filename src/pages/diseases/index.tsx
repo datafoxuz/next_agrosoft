@@ -60,10 +60,10 @@ export async function getServerSideProps({
   let diseasesData;
 
   if (search.length) {
-    diseasesData = await request(`/decease-search?q=${search}`);
+    diseasesData = await request(`/decease-search?q=${search}`, "GET", null, false, locale);
   } else {
     diseasesData = await request(
-      `/deceases/get-deceases?page=${page}&per_page=10`
+      `/deceases/get-deceases?page=${page}&per_page=10`, "GET", null, false, locale
     );
   }
 

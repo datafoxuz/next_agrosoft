@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
   i18n,
   images: {
-    domains: ["agrosoft.uz", "agro-life.uz", "cdn.agrosoft.uz"],
+    domains: ["agrosoft.uz", "agro-life.uz", "cdn.agrosoft.uz", "cnt0.www.uz"],
   },
 };
 

@@ -60,9 +60,9 @@ export async function getServerSideProps({
   let categoriesData;
 
   if (search.length) {
-    categoriesData = await request(`/marketplace-search?q=${search}`);
+    categoriesData = await request(`/marketplace-search?q=${search}`, "GET", null, false, locale);
   } else {
-    categoriesData = await request(`/marketplace/categories`);
+    categoriesData = await request(`/marketplace/categories`, "GET", null, false, locale);
   }
 
   return {
