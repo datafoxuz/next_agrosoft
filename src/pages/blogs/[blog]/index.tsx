@@ -29,9 +29,9 @@ const index = ({ blog }: { blog: responseData }) => {
 
   return blog.status === 200 ? (
     <SEO
-      metaTitle={blog.seo.title}
-      metaDescription={blog.seo.description}
-      author={blog.seo.author}
+      metaTitle={blog.seo?.title}
+      metaDescription={blog.seo?.description}
+      author={blog.seo?.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={blog.data} similar={blog.similar}/>

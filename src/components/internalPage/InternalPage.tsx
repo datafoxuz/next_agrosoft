@@ -34,8 +34,6 @@ const InternalPage = ({
     desc: "",
   });
 
-  console.log(data)
-
   return (
     <div className={styles.internal}>
       {about && (
