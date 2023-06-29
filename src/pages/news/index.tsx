@@ -26,7 +26,7 @@ const index = ({ articles }: { articles: data }) => {
   ];
 
   return articles.status === 200 ? (
-    <SEO metaTitle="News - AgroSoft">
+    <SEO metaTitle={articles.seo.title} metaDescription={articles.seo.descriptions} metaKeywords={articles.seo.keyword}>
       <SNavbar siteWay={siteWay} title="Yangiliklar" filter article />
       {articles.data.length ? (
         <Collections data={articles.data} meta={articles.meta} />

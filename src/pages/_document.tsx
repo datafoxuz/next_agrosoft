@@ -32,11 +32,11 @@ export default function Document() {
                 dataLayer.push(arguments);
             }
             gtag('js', new Date());
-            gtag('config', 'UA-253078599-1');
+            gtag('config', 'G-JWRJEZ358E');
               `
           }
         </Script>
-        <Script strategy='lazyOnload' src="https://www.googletagmanager.com/gtag/js?id=UA-253078599-1" />
+        <Script strategy='lazyOnload' src="https://www.googletagmanager.com/gtag/js?id=G-JWRJEZ358E" />
 
         <Script type="text/javascript">
           top_js = "1.0";
