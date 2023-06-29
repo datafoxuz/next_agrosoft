@@ -35,7 +35,7 @@ const index = ({ data }: { data: card }) => {
   ];
 
   return data.status === 200 ? (
-    <SEO metaTitle={`${data?.seo?.title ? data?.seo?.title : data?.title}`}>
+    <SEO metaTitle={data.seo?.title} metaDescription={data.seo?.description} author={data.seo?.author}>
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={data} />
     </SEO>
@@ -52,7 +52,7 @@ export async function getServerSideProps({
   locale: string;
 }) {
   const { data, response } = await request(
-    `/marketplace/product/${params.card}`
+    `/marketplace/product/${params.card}`, "GET", null, false, locale
   );
 
   if (response.status !== 404) {

@@ -47,25 +47,27 @@ const Navbar = ({
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
 
-  
-    request("/users/about-me", "GET", null, false, {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${userToken}`
-    })
-    .then(({response, data}) => {
-      if(response.status === 200){
-        setUser(data)
-        setCookie(null, 'userToken', userToken ? userToken : "", {
-          maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
-          path: '/', // The path where the cookie is valid (e.g., the root path)
-        });
-      }else{
-        setCookie(null, 'userToken', '', {
-          maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
-          path: '/', // The path where the cookie is valid (e.g., the root path)
-        });
-      }
-    });
+    if(userToken){
+      request("/users/about-me", "GET", null, false, router.locale, {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userToken}`
+      })
+      .then(({response, data}) => {
+        if(response.status === 200){
+          setUser(data)
+          setCookie(null, 'userToken', userToken ? userToken : "", {
+            maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
+            path: '/', // The path where the cookie is valid (e.g., the root path)
+          });
+        }else{
+          setCookie(null, 'userToken', '', {
+            maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
+            path: '/', // The path where the cookie is valid (e.g., the root path)
+          });
+        }
+      });
+    }
+    
   }, []);
   
 

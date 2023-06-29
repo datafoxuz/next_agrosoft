@@ -93,6 +93,13 @@ export interface responseData {
   data: card;
   message?: string;
   similar: [];
+  seo: {
+    author: string;
+    description: string;
+    image: string;
+    robots: string;
+    title: string
+  }
 }
 
 export interface meta {
@@ -108,6 +115,11 @@ export interface data {
   message: string;
   meta: meta;
   status: number;
+  seo: {
+    title: string;
+    keyword: string;
+    descriptions: string
+  }
 }
 
 export interface siteWayTypes {

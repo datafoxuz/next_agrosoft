@@ -27,13 +27,11 @@ const index = ({ blog }: { blog: responseData }) => {
     },
   ];
 
-  console.log(blog.similar)
-
   return blog.status === 200 ? (
     <SEO
-      metaTitle={`${
-        blog?.data?.seo?.title ? blog.data.seo?.title : blog?.data?.title
-      }`}
+      metaTitle={blog.seo.title}
+      metaDescription={blog.seo.description}
+      author={blog.seo.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={blog.data} similar={blog.similar}/>
@@ -50,7 +48,7 @@ export async function getServerSideProps({
   params: { blog: string };
   locale: string;
 }) {
-  const { data, response } = await request(`/blog/${params.blog}`);
+  const { data, response } = await request(`/blog/${params.blog}`, "GET", null, false, locale);
 
   if (response.status !== 404) {
     return {

@@ -5,14 +5,14 @@ import { RWebShare } from "react-web-share";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { card, questionTypes } from "@/data/interfaces";
+import SEO from "@/layouts/seo/seo";
+import { useRouter } from "next/router";
 
 import styles from "./internalPage.module.scss";
 
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
-
 import ShareIcon from "@mui/icons-material/Share";
 import defaultImage from "@/assets/images/default_image.png";
-import { useRouter } from "next/router";
 
 const InternalPage = ({
   questions = false,
@@ -34,6 +34,8 @@ const InternalPage = ({
     desc: "",
   });
 
+  console.log(data)
+
   return (
     <div className={styles.internal}>
       {about && (
@@ -47,7 +49,7 @@ const InternalPage = ({
       )}
 
       {data && (
-        <>
+        <SEO>
           <div className={`${styles.image_wrapper} ${styles.section}`}>
             <Image
               src={data.image ? data.image : defaultImage.src}
@@ -180,7 +182,7 @@ const InternalPage = ({
               ) : null}
             </>
           )}
-        </>
+        </SEO>
       )}
     </div>
   );

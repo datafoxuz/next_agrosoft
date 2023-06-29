@@ -7,8 +7,10 @@ async function request(
   method: Method = "GET",
   body?: BodyInit | null,
   returnNull = false,
+  locale?: string | null,
   headers: Record<string, string> = {
     "Content-Type": "application/json",
+    "Accept-Language": locale ? locale : ""
   }
 ): Promise<{ response: Response; data: any }> {
   try {

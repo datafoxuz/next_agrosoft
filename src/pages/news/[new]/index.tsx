@@ -32,9 +32,9 @@ const index = ({ article }: { article: responseData }) => {
 
   return article.status === 200 ? (
     <SEO
-      metaTitle={`${
-        article.data?.seo?.title ? article.data?.seo?.title : router.query.new
-      }`}
+      metaTitle={article.seo.title}
+      metaDescription={article.seo.description}
+      author={article.seo.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={article.data} similar={article.similar}/>
@@ -51,7 +51,7 @@ export async function getServerSideProps({
   params: { new: string };
   locale: string;
 }) {
-  const { data, response } = await request(`/articles/${params.new}/show`);
+  const { data, response } = await request(`/articles/${params.new}/show`, "GET", null, false, locale);
 
   if (response.status !== 404) {
     return {

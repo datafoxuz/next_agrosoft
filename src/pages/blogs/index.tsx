@@ -30,8 +30,9 @@ const index = ({ blogs }: { blogs: data }) => {
     },
   ];
 
+
   return blogs.status === 200 ? (
-    <SEO metaTitle={`${t("main_topics.blogs")} - AgroSoft`}>
+    <SEO metaTitle={`${blogs.seo.title}`} metaDescription={`${blogs.seo.descriptions}`} metaKeywords={`${blogs.seo.keyword}`}>
       <div className={styles.articles}>
         <SNavbar
           siteWay={siteWay}
@@ -63,10 +64,10 @@ export async function getServerSideProps({
   let blogsData;
 
   if (search.length) {
-    blogsData = await request(`/blog-search?q=${search}`);
+    blogsData = await request(`/blog-search?q=${search}`, "GET", null, false, locale);
   } else {
     blogsData = await request(
-      `/blogs/blogs-with-pagination?page=${page}&per_page=10`
+      `/blogs/blogs-with-pagination?page=${page}&per_page=10`, "GET", null, false, locale
     );
   }
 
