@@ -1,6 +1,7 @@
 import React from "react";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
+import Head from "next/head";
 
 import { data } from "@/data/interfaces";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -31,8 +32,26 @@ const Home = ({
   communities: data;
 }) => {
 
+
   return (
     <SEO>
+      <Head>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
+
+      <script 
+        dangerouslySetInnerHTML={{
+          __html:  `
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+              dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+            `
+        }}
+      />
+      </Head>
+
       <div className={styles.main}>
         <Hero />
         <TopCards />
