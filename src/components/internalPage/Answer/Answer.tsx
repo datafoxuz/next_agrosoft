@@ -1,25 +1,23 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { answerType } from "@/data/interfaces";
 
 import styles from "./answer.module.scss";
 
 import image from "@/assets/images/community.png";
 
-const Answer = () => {
+const Answer = ({ data }: { data: answerType }) => {
   const images = [image, image];
 
   return (
     <div className={styles.answer}>
       <div className={styles.text_section}>
-        <p className={styles.description}>
-          Bin packing, or the placement of objects of certain weights into
-          different bins subject to certain constraints
-        </p>
+        <p className={styles.description}>{data.text}</p>
 
-        {images.length ? (
+        {data.images?.length ? (
           <div className={styles.images}>
-            {images.map((item, index) => (
+            {data.images.map((item, index) => (
               <Image
                 src={item.src}
                 alt="answer image"
