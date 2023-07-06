@@ -4,7 +4,7 @@ import Answer from "./Answer/Answer";
 import { RWebShare } from "react-web-share";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
-import { card, questionTypes } from "@/data/interfaces";
+import { answerType, card, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { useRouter } from "next/router";
 import { request } from "@/lib/request";
@@ -77,8 +77,6 @@ const InternalPage = ({
   }
 
 
-
-
   return (
     <div className={styles.internal}>
       {about && (
@@ -91,7 +89,11 @@ const InternalPage = ({
       )}
 
       {data && (
-        <SEO metaTitle={data.seo?.title} metaDescription={data.seo?.description} author={data.seo?.author}>
+        <SEO
+          metaTitle={data.seo?.title}
+          metaDescription={data.seo?.description}
+          author={data.seo?.author}
+        >
           <div className={`${styles.image_wrapper} ${styles.section}`}>
             <Image
               src={data.image ? data.image : defaultImage.src}
@@ -167,7 +169,11 @@ const InternalPage = ({
                 </div>
                 <div className={styles.answer_list}>
                   {data.answers_count && data.answers_count > 0 ? (
-                    [1, 2, 3].map((item, index) => <Answer />)
+                    data.answers?.data.map(
+                      (item: answerType, index: number) => (
+                        <Answer key={index} data={item} />
+                      )
+                    )
                   ) : (
                     <p>{t("inner_page.no_content_txt")}</p>
                   )}

@@ -1,22 +1,178 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- UZ -->
   <url>
-    <loc>https://agrosoft.uz/ru/blogs</loc>
-    <lastmod>2023-06-17</lastmod>
+    <loc>https://agrosoft.uz/uz/</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/"/>
+    <lastmod>2023-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.agrosoft.uz/uz/blogs</loc>
-    <lastmod>2023-06-17</lastmod>
+    <loc>https://agrosoft.uz/uz/blogs</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/blogs"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/blogs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/blogs"/>
+    <lastmod>2023-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://agrosoft.uz/blogs</loc>
-    <lastmod>2023-06-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://agrosoft.uz/uz/community</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/community"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/community"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/community"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
-  <!-- Add more URLs for your app's pages here -->
+  <url>
+    <loc>https://agrosoft.uz/uz/diseases</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/diseases"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/diseases"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/diseases"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/uz/market</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/market"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/market"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/market"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/uz/weather</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/weather"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/weather"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/weather"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- RU -->
+  <url>
+    <loc>https://agrosoft.uz/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/ru/blogs</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/blogs"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/blogs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/blogs"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/ru/community</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/community"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/community"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/community"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/ru/diseases</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/diseases"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/diseases"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/diseases"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/ru/market</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/market"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/market"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/market"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/ru/weather</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/weather"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/weather"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/weather"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- EN -->
+  <url>
+    <loc>https://agrosoft.uz/en/</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/en/blogs</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/blogs"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/blogs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/blogs"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/en/community</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/community"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/community"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/community"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/en/diseases</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/diseases"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/diseases"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/diseases"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/en/market</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/market"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/market"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/market"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrosoft.uz/en/weather</loc>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://agrosoft.uz/uz/weather"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://agrosoft.uz/ru/weather"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrosoft.uz/en/weather"/>
+    <lastmod>2023-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Add more URLs for each language version of your website here -->
+
 </urlset>

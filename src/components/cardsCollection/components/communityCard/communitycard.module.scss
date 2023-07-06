@@ -22,18 +22,25 @@
     width: 220px;
     height: 137px;
     border-radius: 144px;
-    flex: 4;
     object-fit: cover;
     object-position: center;
+
+    @media screen and (max-width: variables.$default_laptop_width) {
+      flex: 4;
+    }
 
     @media screen and (max-width: variables.$small_tablet_width) {
       width: 330px;
       height: 205px;
+      flex: auto;
     }
   }
 
   .card_infos {
-    flex: 6;
+    @media screen and (max-width: variables.$default_laptop_width) {
+      flex: 6;
+    }
+
     .description {
       width: 349px;
       @extend %main-text-16;
@@ -43,6 +50,11 @@
       @media screen and (max-width: variables.$small_laptop_width) {
         width: 100%;
       }
+    }
+
+    @media screen and (max-width: variables.$small_tablet_width) {
+      flex: auto;
+      height: fit-content;
     }
   }
 }

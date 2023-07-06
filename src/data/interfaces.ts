@@ -22,7 +22,7 @@ export interface User {
   territory: string | null;
   updated_at: string | null;
   username: string | null;
-  photo_id: number
+  photo_id: number;
 }
 
 export interface FullUserData {
@@ -85,6 +85,9 @@ export interface card {
   commentsNum?: string;
   answered?: boolean;
   status: number;
+  answers?: {
+    data: answerType[];
+  };
 }
 
 export interface responseData {
@@ -98,8 +101,8 @@ export interface responseData {
     description: string;
     image: string;
     robots: string;
-    title: string
-  }
+    title: string;
+  };
 }
 
 export interface meta {
@@ -118,8 +121,8 @@ export interface data {
   seo: {
     title: string;
     keyword: string;
-    descriptions: string
-  }
+    descriptions: string;
+  };
 }
 
 export interface siteWayTypes {
@@ -195,4 +198,14 @@ export interface districtTypes {
   districtName: string;
   lang: string;
   lat: string;
+}
+
+export interface answerType {
+  created_at: string;
+  id: number;
+  problem_id: number;
+  text: string;
+  updated_at: string;
+  user_id: number;
+  images: StaticImageData[];
 }
