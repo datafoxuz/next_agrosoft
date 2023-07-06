@@ -7,12 +7,16 @@ import { useTranslation } from "next-i18next";
 import { card, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { useRouter } from "next/router";
+import { request } from "@/lib/request";
+import { toast } from "react-toastify";
+import { useMyContext } from "@/hooks/useMyContext";
 
 import styles from "./internalPage.module.scss";
 
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import ShareIcon from "@mui/icons-material/Share";
 import defaultImage from "@/assets/images/default_image.png";
+
 
 const InternalPage = ({
   questions = false,
@@ -25,8 +29,10 @@ const InternalPage = ({
   data?: card;
   similar?: [];
 }) => {
+  const { user } = useMyContext()
   const { t } = useTranslation("common");
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
     active: false,
     title: "",
@@ -34,7 +40,44 @@ const InternalPage = ({
     desc: "",
   });
 
-  console.log(data)
+  async function handleSave(id: number, name: string) {
+    if (user && user.success) {
+      setIsLoading(true)
+      const userToken = localStorage.getItem("userToken");
+      let body: {
+        module_name: string,
+        module_id: number
+      } = {
+        module_name: name,
+        module_id: id
+      }
+
+      const { response } = await request(
+        `/saved-modules/add`,
+        "POST",
+        JSON.stringify(body),
+        false,
+        router.locale,
+        {
+          Authorization: `Bearer ${userToken}`,
+        }
+      );
+
+      if (response.status == 200) {
+        setIsLoading(false);
+        toast.success("Muvofaqiyatli saqlandi");
+      } else {
+        setIsLoading(false);
+        toast.error(`Error status: ${response.status}`);
+      }
+    } else {
+      router.push("/login")
+    }
+
+  }
+
+
+
 
   return (
     <div className={styles.internal}>
@@ -60,7 +103,7 @@ const InternalPage = ({
 
             {!about && (
               <div className={styles.events}>
-                <button>
+                <button className={`${isLoading ? styles.load_button : ""}`} type="button" onClick={() => handleSave(data.id, data.title)}>
                   <TurnedInNotIcon className={styles.icon} />{" "}
                   {t("buttons.save")}
                 </button>

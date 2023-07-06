@@ -31,6 +31,8 @@ const index = ({ disease }: { disease: responseData }) => {
     },
   ];
 
+  console.log(disease)
+
   return disease.status === 200 ? (
     <SEO
       metaTitle={disease.seo?.title}

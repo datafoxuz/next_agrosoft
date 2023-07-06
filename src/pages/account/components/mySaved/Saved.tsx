@@ -2,31 +2,42 @@ import React, { useState } from "react";
 import FilterDrawer from "../filterDrawer/filterDrawer";
 import CardsCollection from "@/components/cardsCollection/CardsCollection";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { data } from "@/data/interfaces";
+import { NotFound } from "@/components";
 
 import styles from "../../profile.module.scss";
 
-const Saved = () => {
+const Saved = ({ data }: { data: data }) => {
   const { t } = useTranslation("common");
-  const [contentTab, setContentTab] = useState<string>("a");
+  const [contentTab, setContentTab] = useState<string>("blogs");
+  const router = useRouter()
 
   const contentTabLinks = [
     {
       title: t("account.saved.blog"),
-      id: "a",
+      type: "blogs",
     },
     {
       title: t("main_topics.news"),
-      id: "b",
+      type: "news",
     },
     {
       title: t("main_topics.diseases"),
-      id: "c",
+      type: "diseases",
     },
     {
       title: t("account.saved.products"),
-      id: "d",
+      type: "products",
     },
   ];
+
+  function handleChangeTab(type: string) {
+    setContentTab(type)
+    router.push(
+      `${router.pathname}?type=${type}`
+    );
+  }
 
   return (
     <div className={styles.content}>
@@ -37,9 +48,9 @@ const Saved = () => {
           {contentTabLinks.map((item) => (
             <h3
               className={styles.title}
-              key={item.id}
-              data-active={item.id == contentTab}
-              onClick={() => setContentTab(item.id)}
+              key={item.type}
+              data-active={item.type == contentTab}
+              onClick={() => handleChangeTab(item.type)}
             >
               {item.title}
             </h3>
@@ -49,15 +60,13 @@ const Saved = () => {
         <FilterDrawer />
       </div>
 
-      {contentTab == "a" ? (
-        <CardsCollection data={[]} account />
-      ) : contentTab == "b" ? (
-        <p>Cards</p>
-      ) : contentTab == "c" ? (
-        <CardsCollection data={[]} account />
-      ) : (
-        <CardsCollection data={[]} account />
-      )}
+      {
+        data.data && data.data.length ? (
+          <CardsCollection data={data.data} account />
+        ) : (
+          <NotFound />
+        )
+      }
     </div>
   );
 };

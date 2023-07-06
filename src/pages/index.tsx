@@ -36,20 +36,42 @@ const Home = ({
   return (
     <SEO>
       <Head>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
 
-      <script 
-        dangerouslySetInnerHTML={{
-          __html:  `
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-              dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                  dataLayer.push(arguments);
+              }
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
             `
-        }}
-      />
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "AgroSoft",
+                "url": "https://agrosoft.uz",
+                "sameAs": [
+                  "https://www.facebook.com/agrosoftuz",
+                  "https://www.t.me/agrosoftuz",
+                  "https://www.instagram.com/agrosoftuz",
+                  "https://www.linkedin.com/in/agrosoftuz/",
+                  "https://www.tumblr.com/agrosoftuz",
+                  "https://medium.com/@agrosoftuz"
+                ]
+              }
+            `
+          }}
+        />
       </Head>
 
       <div className={styles.main}>
@@ -60,7 +82,7 @@ const Home = ({
         <Community data={communities} />
         <Diseases data={diseases} />
         <Market />
-        <News data={news}/>
+        <News data={news} />
       </div>
     </SEO>
   );

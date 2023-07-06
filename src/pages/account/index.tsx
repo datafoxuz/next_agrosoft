@@ -5,6 +5,8 @@ import { request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { parseCookies } from "nookies";
 import dynamic from "next/dynamic";
+import { ParsedUrlQuery } from "querystring";
+import { data } from "@/data/interfaces";
 
 import styles from "./profile.module.scss";
 
@@ -16,7 +18,7 @@ const AddintionalInfo = dynamic(() => import("./components/addintionalInfo/Addin
 const ErrorPage = dynamic(() => import("../_error"))
 
 
-const index = ({ status }: { status: number }) => {
+const index = ({ status, saved }: { status: number, saved: data }) => {
   const { t } = useTranslation("common");
   const [tabId, setTabId] = useState<number>(1);
 
@@ -50,6 +52,8 @@ const index = ({ status }: { status: number }) => {
     },
   ];
 
+  console.log(saved)
+
   return status === 200 ? (
     <SEO metaTitle={`${t("main_topics.acc_info")}`}>
       <div className={styles.profile}>
@@ -78,7 +82,7 @@ const index = ({ status }: { status: number }) => {
           ) : tabId == 2 ? (
             <AddintionalInfo />
           ) : tabId == 3 ? (
-            <Saved />
+            <Saved data={saved} />
           ) : tabId == 4 ? (
             <MyProducts />
           ) : null}
@@ -93,9 +97,11 @@ const index = ({ status }: { status: number }) => {
 export async function getServerSideProps({
   locale,
   req,
+  query
 }: {
   locale: string;
   req: any;
+  query: ParsedUrlQuery
 }) {
   const cookies = parseCookies({ req });
 
@@ -103,12 +109,17 @@ export async function getServerSideProps({
     Authorization: `Bearer ${cookies.userToken}`,
   });
 
+  const mySaved = await request(`/saved-modules/getByModule?module_name=${query.type}`, "GET", null, false, locale, {
+    Authorization: `Bearer ${cookies.userToken}`,
+  })
+
   if (userData?.response.status !== 401) {
     return {
       props: {
         user: userData.data,
         status: userData?.response.status,
         ...(await serverSideTranslations(locale, ["common"])),
+        saved: mySaved.data
       },
     };
   } else {
