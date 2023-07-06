@@ -61,8 +61,8 @@ const Saved = ({ data }: { data: data }) => {
       </div>
 
       {
-        data.data && data.data.length ? (
-          <CardsCollection data={data.data} account />
+        data?.data && data?.data.length ? (
+          <CardsCollection data={data?.data} account />
         ) : (
           <NotFound />
         )
