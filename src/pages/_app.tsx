@@ -26,7 +26,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <MainContextProvider>
       <Layout>
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} strategy="afterInteractive" />
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=G-JWRJEZ358E`} strategy="afterInteractive" />
 
         <Script id="google-analytics" strategy="afterInteractive">
           {`
@@ -35,7 +35,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
               dataLayer.push(arguments);
             }
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+            gtag('config', 'G-JWRJEZ358E');
           `}
         </Script>
         <Component {...pageProps} />
