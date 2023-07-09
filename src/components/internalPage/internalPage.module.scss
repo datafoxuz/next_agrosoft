@@ -41,9 +41,10 @@
     .image {
       width: 100%;
       border-radius: 144px;
+      object-fit: cover;
 
-      @media screen and (max-width: 400px) {
-        height: fit-content;
+      @media screen and (max-width: variables.$high_res_smartphone_width) {
+        height: 250px;
       }
     }
 

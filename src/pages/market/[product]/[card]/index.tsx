@@ -37,10 +37,10 @@ const index = ({ data }: { data: card }) => {
   return data.status === 200 ? (
     <SEO metaTitle={data.seo?.title} metaDescription={data.seo?.description} author={data.seo?.author}>
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={data} />
+      <InternalPage data={data} type="products" />
     </SEO>
   ) : (
-    <ErrorPage status={data.status}/>
+    <ErrorPage status={data.status} />
   );
 };
 

@@ -23,11 +23,13 @@ const InternalPage = ({
   about,
   data,
   similar = [],
+  type = "",
 }: {
   questions?: boolean;
   about?: boolean;
   data?: card;
   similar?: [];
+  type?: string
 }) => {
   const { user } = useMyContext()
   const { t } = useTranslation("common");
@@ -76,7 +78,7 @@ const InternalPage = ({
 
   }
 
-
+  console.log(data)
   return (
     <div className={styles.internal}>
       {about && (
@@ -105,7 +107,7 @@ const InternalPage = ({
 
             {!about && (
               <div className={styles.events}>
-                <button className={`${isLoading ? styles.load_button : ""}`} type="button" onClick={() => handleSave(data.id, data.title)}>
+                <button className={`${isLoading ? styles.load_button : ""}`} type="button" onClick={() => handleSave(data.id, type)}>
                   <TurnedInNotIcon className={styles.icon} />{" "}
                   {t("buttons.save")}
                 </button>

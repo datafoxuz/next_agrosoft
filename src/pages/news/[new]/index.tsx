@@ -37,7 +37,7 @@ const index = ({ article }: { article: responseData }) => {
       author={article.seo?.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={article.data} similar={article.similar}/>
+      <InternalPage data={article.data} similar={article.similar} type="articles"/>
     </SEO>
   ) : (
     <ErrorPage status={article.status}/>

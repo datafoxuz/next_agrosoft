@@ -31,8 +31,6 @@ const index = ({ disease }: { disease: responseData }) => {
     },
   ];
 
-  console.log(disease)
-
   return disease.status === 200 ? (
     <SEO
       metaTitle={disease.seo?.title}
@@ -40,7 +38,7 @@ const index = ({ disease }: { disease: responseData }) => {
       author={disease.seo?.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={disease.data} similar={disease.similar} />
+      <InternalPage data={disease.data} similar={disease.similar} type="deceases" />
     </SEO>
   ) : (
     <ErrorPage status={disease.status} />

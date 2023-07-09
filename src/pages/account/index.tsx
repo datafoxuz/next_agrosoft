@@ -113,6 +113,7 @@ export async function getServerSideProps({
     Authorization: `Bearer ${cookies.userToken}`,
   })
 
+
   if (userData?.response.status !== 401) {
     return {
       props: {

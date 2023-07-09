@@ -20,11 +20,11 @@ const Saved = ({ data }: { data: data }) => {
     },
     {
       title: t("main_topics.news"),
-      type: "news",
+      type: "articles",
     },
     {
       title: t("main_topics.diseases"),
-      type: "diseases",
+      type: "deceases",
     },
     {
       title: t("account.saved.products"),
