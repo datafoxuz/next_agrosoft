@@ -29,7 +29,7 @@ const TopCards = () => {
       title: t("main_topics.community"),
     },
     {
-      url: "/diseases",
+      url: "/deceases",
       image: diseases,
       title: t("main_topics.diseases"),
     },

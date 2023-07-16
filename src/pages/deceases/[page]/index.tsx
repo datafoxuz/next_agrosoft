@@ -23,11 +23,11 @@ const index = ({ disease }: { disease: responseData }) => {
     },
     {
       title: t("main_topics.diseases"),
-      url: "/diseases",
+      url: "/deceases",
     },
     {
       title: `${disease?.data?.title}`,
-      url: `/diseases/${router.query.page}`,
+      url: `/deceases/${router.query.page}`,
     },
   ];
 

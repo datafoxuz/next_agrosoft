@@ -28,6 +28,7 @@ const index = ({ categories }: { categories: data }) => {
     },
   ];
 
+
   return categories.status === 200 ? (
     <SEO metaTitle={categories.seo.title} metaDescription={categories.seo.descriptions} metaKeywords={categories.seo.keyword}>
       <SNavbar

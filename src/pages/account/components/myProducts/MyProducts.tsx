@@ -9,7 +9,7 @@ const MyProducts = () => {
   return (
     <div className={styles.content}>
       <h3 className={styles.title}>{t("account.my_products.title")}</h3>
-      <CardsCollection data={[]} account />
+      <CardsCollection data={[]} account="product" />
     </div>
   );
 };

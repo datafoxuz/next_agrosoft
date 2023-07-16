@@ -31,6 +31,9 @@ const AddProduct = () => {
   const [isNegotiable, setIsNegotiable] = useState<boolean>(false);
   const [image, setImage] = useState<File | null | undefined>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [countryId, setCountryId] = useState<number>(1)
+  const [regionId, setRegion] = useState<number>(1)
+
 
   const dataSc: string[] = ["bir", "ikki", "uch"];
 
@@ -60,6 +63,11 @@ const AddProduct = () => {
       high_amount: string;
       is_negotiable: boolean;
       main_image_id: number;
+      amount_type_id: number;
+      category_id: number,
+      country_id: number;
+      region_id: number;
+      type_id: number
     } = {
       name,
       description: desc,
@@ -70,6 +78,11 @@ const AddProduct = () => {
       high_amount: highWeight,
       is_negotiable: isNegotiable,
       main_image_id: mainId,
+      amount_type_id: 1,
+      category_id: category,
+      country_id: 1,
+      region_id: 1,
+      type_id: 1
     };
     const userToken = localStorage.getItem("userToken");
 
@@ -95,7 +108,7 @@ const AddProduct = () => {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (image) {
+    if (image && name && desc && price && lowPrice && highPrice && lowWeight && highWeight && isNegotiable && category && countryId && regionId) {
       setIsLoading(true);
       await imageUpload(image).then((id) => addProduct(id));
     }
@@ -114,7 +127,6 @@ const AddProduct = () => {
       setImage(file);
     }
 
-    console.log(event.target.files && event.target.files.length > 0);
   };
 
   function handleClearInputs() {

@@ -24,7 +24,7 @@ const BurgerMenu = ({
   active: boolean;
   setOpen: (v: openObjTypes) => void;
 }) => {
-  const {user} = useMyContext()
+  const { user } = useMyContext()
   const { t } = useTranslation("common");
 
   const routes: routeObj[] = [
@@ -46,7 +46,7 @@ const BurgerMenu = ({
     },
     {
       title: t("main_topics.diseases"),
-      url: "/diseases",
+      url: "/deceases",
     },
     {
       title: t("main_topics.blogs"),

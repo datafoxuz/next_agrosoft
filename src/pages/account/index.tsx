@@ -52,7 +52,6 @@ const index = ({ status, saved }: { status: number, saved: data }) => {
     },
   ];
 
-  console.log(saved)
 
   return status === 200 ? (
     <SEO metaTitle={`${t("main_topics.acc_info")}`}>
@@ -109,7 +108,7 @@ export async function getServerSideProps({
     Authorization: `Bearer ${cookies.userToken}`,
   });
 
-  const mySaved = await request(`/saved-modules/getByModule?module_name=${query.type}`, "GET", null, false, locale, {
+  const mySaved = await request(`/saved-modules/getByModule?module_name=${query.type == "news" ? "articles" : query.type ? query.type : "blogs"}`, "GET", null, false, locale, {
     Authorization: `Bearer ${cookies.userToken}`,
   })
 

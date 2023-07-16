@@ -2,6 +2,7 @@ import React from "react";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import { data } from "@/data/interfaces";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -26,16 +27,22 @@ const Home = ({
   diseases,
   news,
   communities,
+  settings
 }: {
   blogs: data;
   diseases: data;
   news: data;
   communities: data;
+  settings: any
 }) => {
-
+  const { locale } = useRouter();
 
   return (
-    <SEO>
+    <SEO metaTitle={locale ? settings.data[5].value[locale] : ""}
+      metaDescription={locale ? settings.data[6].value[locale] : ""}
+      author={locale ? settings.data[2].value[locale] : ""}
+      metaKeywords={locale ? settings.data[7].value[locale] : ""}
+    >
       <Head>
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} strategy="afterInteractive" />
 
@@ -89,6 +96,7 @@ export async function getServerSideProps({ locale }: { locale: string }) {
   const diseasesData = await request("/deceases/get-popular-deceases", "GET", null, false, locale);
   const newsData = await request("/articles/get-latest-articles", "GET", null, false, locale);
   const communitiesData = await request("/community/latest-problems", "GET", null, false, locale);
+  const settingsData = await request("/settings", "GET", null, false, locale)
 
   return {
     props: {
@@ -99,6 +107,7 @@ export async function getServerSideProps({ locale }: { locale: string }) {
         ...communitiesData.data,
         status: communitiesData.response.status,
       },
+      settings: settingsData.data,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

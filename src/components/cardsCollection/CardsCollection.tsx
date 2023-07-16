@@ -12,14 +12,15 @@ const CardsCollection = ({
   data,
   meta,
   community = false,
-  account = false,
+  account = "",
   product = false,
   similar = false
+
 }: {
   data: card[];
   meta?: meta;
   community?: boolean;
-  account?: boolean;
+  account?: string;
   market?: boolean;
   product?: boolean;
   similar?: boolean
@@ -38,10 +39,12 @@ const CardsCollection = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+
+
   return (
     <div
       className={styles.collections}
-      data-account={account}
+      data-account={!account == false}
       data-community={community}
       data-similar={similar}
     >
@@ -50,7 +53,7 @@ const CardsCollection = ({
           community ? (
             <CommunityCard data={item} key={index} />
           ) : (
-            <Card item={item} key={index} similar/>
+            <Card item={item} key={index} similar account={account} />
           )
         )}
       </div>

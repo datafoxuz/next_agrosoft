@@ -8,12 +8,15 @@ import styles from "./card.module.scss";
 
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 
-const Card = ({ item, similar = false }: { item: card; similar?: boolean }) => {
+const Card = ({ item, similar = false, account = "", }: { item: card; similar?: boolean, account?: string }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
+
   function handleCardClick(slug: string) {
-    if (similar) {
+    if (!account == false) {
+      router.push(`${account}/${slug}`);
+    } else if (similar) {
       router.push(`/${router.pathname.split("/")[1]}/${slug}`);
     } else {
       if (router.query.page) {

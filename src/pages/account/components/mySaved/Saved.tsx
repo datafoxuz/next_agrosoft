@@ -20,7 +20,7 @@ const Saved = ({ data }: { data: data }) => {
     },
     {
       title: t("main_topics.news"),
-      type: "articles",
+      type: "news",
     },
     {
       title: t("main_topics.diseases"),
@@ -62,7 +62,7 @@ const Saved = ({ data }: { data: data }) => {
 
       {
         data?.data && data?.data.length ? (
-          <CardsCollection data={data?.data} account />
+          <CardsCollection data={data?.data} account={contentTab} />
         ) : (
           <NotFound />
         )

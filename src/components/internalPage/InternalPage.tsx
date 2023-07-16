@@ -68,7 +68,11 @@ const InternalPage = ({
       if (response.status == 200) {
         setIsLoading(false);
         toast.success("Muvofaqiyatli saqlandi");
-      } else {
+      } else if (response.status == 500) {
+        setIsLoading(false);
+        toast.warning("Bu mahsulot avval saqlangan!")
+      }
+      else {
         setIsLoading(false);
         toast.error(`Error status: ${response.status}`);
       }
@@ -78,7 +82,6 @@ const InternalPage = ({
 
   }
 
-  console.log(data)
   return (
     <div className={styles.internal}>
       {about && (

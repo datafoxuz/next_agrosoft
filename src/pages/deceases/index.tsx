@@ -24,7 +24,7 @@ const index = ({ diseasess }: { diseasess: data }) => {
     },
     {
       title: t("main_topics.diseases"),
-      url: "/diseases",
+      url: "/deceases",
     },
   ];
 
@@ -44,7 +44,7 @@ const index = ({ diseasess }: { diseasess: data }) => {
       )}
     </SEO>
   ) : (
-    <ErrorPage status={diseasess.status}/>
+    <ErrorPage status={diseasess.status} />
   );
 };
 
