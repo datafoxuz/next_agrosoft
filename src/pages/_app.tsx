@@ -62,9 +62,13 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         
         </Script>
         
-      <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=873501004292423&ev=PageView&noscript=1"
-      /></noscript>
+        <noscript>
+          <img 
+          height="1" 
+          width="1" 
+          style={{display:none}}
+          src="https://www.facebook.com/tr?id=873501004292423&ev=PageView&noscript=1"
+        /></noscript>
         <Script src={`https://www.googletagmanager.com/gtag/js?id=G-JWRJEZ358E`} strategy="afterInteractive" />
 
         <Script id="google-analytics" strategy="afterInteractive">
