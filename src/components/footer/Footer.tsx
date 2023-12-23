@@ -101,7 +101,7 @@ const Footer = () => {
             <p className={styles.text}>{t("main.footer.contact")}</p>
             <div className={styles.contact}>
               <p className={styles.text}>info@agrosoft.uz</p>
-              <p className={styles.text}>+998 99 887 92 45</p>
+              <p className={styles.text}>+998 99 675 55 76</p>
             </div>
           </div>
         </div>
