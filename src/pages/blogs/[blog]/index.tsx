@@ -48,7 +48,7 @@ export async function getServerSideProps({
   params: { blog: string };
   locale: string;
 }) {
-  const { data, response } = await request(`/blog/${params.blog}`, "GET", null, false, locale);
+  const { data, response } = await request(`/blogs/${params.blog}`, "GET", null, false, locale);
 
   if (response.status !== 404) {
     return {
