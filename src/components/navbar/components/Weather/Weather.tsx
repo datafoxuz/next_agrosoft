@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { openObjTypes } from "../../data";
 import { useMyContext } from "@/hooks/useMyContext";
 import Image from "next/image";
@@ -17,8 +17,33 @@ const Weather = ({
   setOpen: (v: openObjTypes) => void;
 }) => {
   const { weatherData } = useMyContext();
+  const weatherRef = useRef<any>(null);
+
+  const handleClickOutside = (event: any) => {
+    if (weatherRef.current && !weatherRef.current.contains(event.target)) {
+      // Click occurred outside the Weather component
+      setOpen({
+        weatherModal: false,
+        burgerMenu: open.burgerMenu,
+        languagesModal: open.languagesModal,
+      });
+    }
+  };
+
+  // Add event listener when the component mounts
+  useEffect(() => {
+    if (open.weatherModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    // Remove event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className={styles.modal_wrapper}>
+    <div className={styles.modal_wrapper} ref={weatherRef}>
       <div
         className={styles.temperature}
         onClick={() =>

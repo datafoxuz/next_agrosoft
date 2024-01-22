@@ -10,15 +10,35 @@ import { data } from "@/data/interfaces";
 
 import styles from "./profile.module.scss";
 
-const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
-const MyProducts = dynamic(() => import("./components/myProducts/MyProducts"))
-const Saved = dynamic(() => import("./components/mySaved/Saved"))
-const PersonalInfo = dynamic(() => import("./components/personalInfo/PersonalInfo"))
-const AddintionalInfo = dynamic(() => import("./components/addintionalInfo/AddintionalInfo"))
-const ErrorPage = dynamic(() => import("../_error"))
+const SNavbar = dynamic(
+  () => import("@/components/secondNavbar/SecondNavbar"),
+  { ssr: false }
+);
+const MyProducts = dynamic(() => import("./components/myProducts/MyProducts"), {
+  ssr: false,
+});
+const Saved = dynamic(() => import("./components/mySaved/Saved"), {
+  ssr: false,
+});
+const PersonalInfo = dynamic(
+  () => import("./components/personalInfo/PersonalInfo"),
+  { ssr: false }
+);
+const AddintionalInfo = dynamic(
+  () => import("./components/addintionalInfo/AddintionalInfo"),
+  { ssr: false }
+);
+const ErrorPage = dynamic(() => import("../_error"));
 
-
-const index = ({ status, saved }: { status: number, saved: data }) => {
+const index = ({
+  user,
+  status,
+  saved,
+}: {
+  user: data;
+  status: number;
+  saved: data;
+}) => {
   const { t } = useTranslation("common");
   const [tabId, setTabId] = useState<number>(1);
 
@@ -51,7 +71,6 @@ const index = ({ status, saved }: { status: number, saved: data }) => {
       tabId: 4,
     },
   ];
-
 
   return status === 200 ? (
     <SEO metaTitle={`${t("main_topics.acc_info")}`}>
@@ -96,22 +115,37 @@ const index = ({ status, saved }: { status: number, saved: data }) => {
 export async function getServerSideProps({
   locale,
   req,
-  query
+  query,
 }: {
   locale: string;
   req: any;
-  query: ParsedUrlQuery
+  query: ParsedUrlQuery;
 }) {
   const cookies = parseCookies({ req });
 
-  const userData = await request(`/users/about-me`, "GET", null, false, locale, {
-    Authorization: `Bearer ${cookies.userToken}`,
-  });
+  const userData = await request(
+    `/users/about-me`,
+    "GET",
+    null,
+    false,
+    locale,
+    {
+      Authorization: `Bearer ${cookies.userToken}`,
+    }
+  );
 
-  const mySaved = await request(`/saved-modules/getByModule?module_name=${query.type == "news" ? "articles" : query.type ? query.type : "blogs"}`, "GET", null, false, locale, {
-    Authorization: `Bearer ${cookies.userToken}`,
-  })
-
+  const mySaved = await request(
+    `/saved-modules/getByModule?module_name=${
+      query.type == "news" ? "articles" : query.type ? query.type : "blogs"
+    }`,
+    "GET",
+    null,
+    false,
+    locale,
+    {
+      Authorization: `Bearer ${cookies.userToken}`,
+    }
+  );
 
   if (userData?.response.status !== 401) {
     return {
@@ -119,7 +153,7 @@ export async function getServerSideProps({
         user: userData.data,
         status: userData?.response.status,
         ...(await serverSideTranslations(locale, ["common"])),
-        saved: mySaved.data
+        saved: mySaved.data,
       },
     };
   } else {

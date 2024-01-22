@@ -184,7 +184,14 @@
         .button_wrapper {
           display: flex;
           flex-wrap: wrap;
+          justify-content: space-between !important;
           gap: 24px;
+
+          .two_buttons{
+            display: flex;
+            gap: 16px;
+            
+          }
 
           @media screen and (max-width: variables.$small_laptop_width) {
             justify-content: center;
@@ -207,6 +214,8 @@
           }
         }
       }
+
     }
   }
+
 }

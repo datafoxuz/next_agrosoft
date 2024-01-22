@@ -7,10 +7,11 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { districtTypes } from "@/data/interfaces";
 import dynamic from "next/dynamic";
+import { request } from "@/lib/request";
 
-const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
-const RealPage = dynamic(() => import("./components/realPage/RealPage"))
-const Template = dynamic(() => import("./components/template/Template"))
+const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"));
+const RealPage = dynamic(() => import("./components/realPage/RealPage"));
+const Template = dynamic(() => import("./components/template/Template"));
 
 const WeatherPage = ({
   regions,
@@ -93,26 +94,19 @@ export async function getServerSideProps({
   let regionsData = null;
   let districtData = null;
 
-  // await fetch(`https://agrosoft.uz/api/v1/1/regions`)
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     regionsData = data;
-  //   });
-
-  // await fetch(
-  //   regionId
-  //     ? `https://agrosoft.uz/api/v1/site/data/${regionId}/districts`
-  //     : `https://agrosoft.uz/api/v1/site/data/1/districts`
-  // )
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     districtData = data;
-  //   });
+  regionsData = await request(`/data/1/regions`, "GET", null, false, locale);
+  districtData = await request(
+    regionId ? `/data/${regionId}/districts` : `/data/1/districts`,
+    "GET",
+    null,
+    false,
+    locale
+  );
 
   return {
     props: {
-      // regions: regionsData,
-      // districts: districtData,
+      regions: regionsData.data,
+      districts: districtData.data,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

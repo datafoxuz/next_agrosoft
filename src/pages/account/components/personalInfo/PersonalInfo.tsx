@@ -1,4 +1,5 @@
-import React, { FormEvent, useState } from "react";
+"use client";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
@@ -9,27 +10,28 @@ import { useMyContext } from "@/hooks/useMyContext";
 import styles from "../../profile.module.scss";
 
 import defaultImg from "@/assets/images/default_image.png";
+import LogoutModal from "@/components/logoutModal/LogoutModal";
 
 const PersonalInfo = () => {
-  const {setUser, user} = useMyContext();
+  const { setUser, user } = useMyContext();
   const { t } = useTranslation("common");
   const router = useRouter();
 
   //states ======================
-  const [fname, setFName] = useState<string>(
-    user?.data.firstname ? user.data.firstname : ""
-  );
-  const [lname, setLName] = useState<string>(
-    user?.data.lastname ? user.data.lastname : ""
-  );
-  const [phone, setPhone] = useState<string>(
-    user?.data.phone ? user.data.phone : ""
-  );
-  const [email, setEmail] = useState<string>(
-    user?.data.email ? user.data.email : ""
-  );
+  const [fname, setFName] = useState<string>("");
+  const [lname, setLName] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [image, setImage] = useState<File | undefined | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    setFName(user?.data.firstname ? user.data.firstname : "");
+    setLName(user?.data.lastname ? user.data.lastname : "");
+    setPhone(user?.data.phone ? user.data.phone : "");
+    setEmail(user?.data.email ? user.data.email : "");
+  }, [user]);
 
   async function updateInfo(mainId: number) {
     let body: {
@@ -61,7 +63,7 @@ const PersonalInfo = () => {
       setImage(null);
       setIsLoading(false);
       toast.success("Foydalanuvchi ma'lumotlari yangilandi.");
-      setUser(data)
+      setUser(data);
     } else {
       setIsLoading(false);
       toast.error(`Error status: ${response.status}`);
@@ -73,10 +75,10 @@ const PersonalInfo = () => {
     if (image) {
       setIsLoading(true);
       await imageUpload(image).then((mainId) => updateInfo(mainId));
-    }else{
+    } else {
       setIsLoading(true);
-      if(user){
-        updateInfo(user.data.photo_id)
+      if (user) {
+        updateInfo(user.data.photo_id);
       }
     }
   }
@@ -94,18 +96,18 @@ const PersonalInfo = () => {
       <h3 className={styles.title}>{t("account.personal_info.title")}</h3>
 
       <div className={styles.image_container}>
-        <div
-          className={styles.account_image}
-          style={{
-            backgroundImage: image
-              ? `url(${URL.createObjectURL(image)})`
-              : user?.data.photo
-              ? `url(${user.data.photo})`
-              : `url(${defaultImg.src})`,
-          }}
-        ></div>
         <label className={styles.image_label} htmlFor="imageUpload">
-          {t("buttons.add_img")}
+          <div
+            className={styles.account_image}
+            style={{
+              backgroundImage: image
+                ? `url(${URL.createObjectURL(image)})`
+                : user?.data.photo
+                ? `url(${user.data.photo})`
+                : `url(${defaultImg.src})`,
+            }}
+          ></div>
+          <p>{t("buttons.add_img")}</p>
         </label>
         <input
           id="imageUpload"
@@ -159,17 +161,25 @@ const PersonalInfo = () => {
 
         {isLoading ? (
           <div className={styles.button_wrapper}>
-            <button type="button" className={styles.load_btn}>{t("buttons.save_changes")}</button>
-            <button type="button" className={`${styles.cancel_button} ${styles.load_btn}`}>
+            <button type="button" className={styles.load_btn}>
+              {t("buttons.save_changes")}
+            </button>
+            <button
+              type="button"
+              className={`${styles.cancel_button} ${styles.load_btn}`}
+            >
               {t("buttons.cancel")}
             </button>
           </div>
         ) : (
           <div className={styles.button_wrapper}>
-            <button type="submit">{t("buttons.save_changes")}</button>
-            <button type="button" className={styles.cancel_button}>
-              {t("buttons.cancel")}
-            </button>
+            <div className={styles.two_buttons}>
+              <button type="submit">{t("buttons.save_changes")}</button>
+              <button type="button" className={styles.cancel_button}>
+                {t("buttons.cancel")}
+              </button>
+            </div>
+            <LogoutModal isOpen={isShowModal} setIsOpen={setIsShowModal} />
           </div>
         )}
       </form>

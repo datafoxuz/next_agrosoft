@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 import { authProps } from "../data";
 import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
-import { setCookie } from 'nookies';
-
+import { setCookie } from "nookies";
 
 import styles from "../auth.module.scss";
 
@@ -23,8 +22,8 @@ interface inpProps {
 const Login = ({ tabId, setTabId }: authProps) => {
   const { t } = useTranslation("common");
   //states===========================================
-  const [username, setUsername] = useState<string>("fayzulloevasadbek@gmail.com")
-  const [password, setPassword] = useState<string>("password")
+  const [username, setUsername] = useState<string>();
+  const [password, setPassword] = useState<string>();
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
   const [isError, setIsError] = useState<{
     username: boolean;
@@ -38,49 +37,53 @@ const Login = ({ tabId, setTabId }: authProps) => {
 
   const { setUser } = useMyContext();
 
-
-
   //functions===================================================
 
   const handleLogin = async (
     e: FormEvent<HTMLFormElement>,
-    username: string,
-    password: string
+    username: string | undefined,
+    password: string | undefined
   ) => {
     e.preventDefault();
 
-    if (username.length > 13 && password.length > 4) {
-      setIsLoading(true);
-      setIsError({ username: false, password: false });
-      // Sign in using the provided credentials
-      const {data, response} = await request(`/auth/login`, "POST", JSON.stringify({username, password}), false)
+    if (username && password) {
+      if (username.length > 13 && password.length > 4) {
+        setIsLoading(true);
+        setIsError({ username: false, password: false });
+        // Sign in using the provided credentials
+        const { data, response } = await request(
+          `/auth/login`,
+          "POST",
+          JSON.stringify({ username, password }),
+          false
+        );
 
-
-      setIsLoading(false);
-      if (response && response.status === 200) {
-        router.push("/");
-        setUser(data)
-        localStorage.setItem("userToken", data.data.token)
-        localStorage.setItem("userData", data)
-        setCookie(null, 'userToken', data.data.token, {
-          maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
-          path: '/', // The path where the cookie is valid (e.g., the root path)
+        setIsLoading(false);
+        if (response && response.status === 200) {
+          router.push("/");
+          setUser(data);
+          localStorage.setItem("userToken", data.data.token);
+          localStorage.setItem("userData", JSON.stringify(data));
+          setCookie(null, "userToken", data.data.token, {
+            maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
+            path: "/", // The path where the cookie is valid (e.g., the root path)
+          });
+        } else {
+          toast.error(`Error status: ${response.status}`);
+        }
+      } else {
+        setIsError({
+          username: username.length < 13,
+          password: password.length < 4,
         });
-      }else{
-        toast.error(`Error status: ${response.status}`)
       }
-    } else {
-      setIsError({
-        username: username.length < 13,
-        password: password.length < 4,
-      });
     }
   };
 
   function handleChangeUserInp(value: string) {
-    setUsername(value)
+    setUsername(value);
 
-    if (username.length >= 13) {
+    if (username && username.length >= 13) {
       setIsError((prevstate) => ({
         ...prevstate,
         username: false,
@@ -89,9 +92,9 @@ const Login = ({ tabId, setTabId }: authProps) => {
   }
 
   function handleChangePassInp(value: string) {
-    setPassword(value)
+    setPassword(value);
 
-    if (password.length >= 4) {
+    if (password && password.length >= 4) {
       setIsError((prevstate) => ({
         ...prevstate,
         password: false,

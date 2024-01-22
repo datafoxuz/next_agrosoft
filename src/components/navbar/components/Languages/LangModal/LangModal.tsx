@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { languagesData, languagesObj, openObjTypes } from "../../../data";
 import { AnimatePresence, motion } from "framer-motion";
 import { MOTION_CONFIGS } from "@/data";
@@ -13,12 +13,39 @@ const LangModal = ({
   active,
   setValue,
   setOpen,
+  open,
 }: {
   active: boolean;
   setValue: (v: LangTypes) => void;
   setOpen: (v: openObjTypes) => void;
+  open: openObjTypes;
 }) => {
   const router = useRouter();
+
+  const langRef = useRef<any>(null);
+
+  const handleClickOutside = (event: any) => {
+    if (langRef.current && !langRef.current.contains(event.target)) {
+      // Click occurred outside the Weather component
+      setOpen({
+        weatherModal: open.weatherModal,
+        burgerMenu: open.weatherModal,
+        languagesModal: false,
+      });
+    }
+  };
+
+  // Add event listener when the component mounts
+  useEffect(() => {
+    if (open.languagesModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    // Remove event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   function handleClick(label: string, value: string, flagSt: string) {
     setValue({ value: label, flag: flagSt });
@@ -35,7 +62,11 @@ const LangModal = ({
   return (
     <AnimatePresence>
       {active ? (
-        <motion.div className={styles.language_menu} {...MOTION_CONFIGS}>
+        <motion.div
+          className={styles.language_menu}
+          {...MOTION_CONFIGS}
+          ref={langRef}
+        >
           {languagesData.map((item: languagesObj, index: number) => (
             <div
               key={index}

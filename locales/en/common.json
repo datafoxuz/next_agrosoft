@@ -33,7 +33,8 @@
     "write_answer": "Write answer",
     "filter": "Apply filter",
     "save_changes": "Save changes",
-    "change": "Change"
+    "change": "Change",
+    "exit": "Exit"
   },
 
   "main": {
@@ -101,7 +102,8 @@
     "new_pass": "New password",
     "enter_pass": "Enter your password",
     "enter_pass_again": "Re-enter password",
-    "restore_pass": "Restore Password"
+    "restore_pass": "Restore Password",
+    "logout_title": "Are you sure you want to log out of your personal page?"
   },
 
   "second_navbar": {

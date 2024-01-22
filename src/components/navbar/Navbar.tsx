@@ -11,18 +11,18 @@ import { request } from "@/lib/request";
 import { setCookie } from "nookies";
 import dynamic from "next/dynamic";
 
-
-const BurgerMenu = dynamic(() => import("./components/BurgerMenu/Burger"))
-const DownloadLinks = dynamic(() => import("./components/DownloadLinks/DownloadLinks"))
-const Languages = dynamic(() => import("./components/Languages/Languages"))
-const Weather = dynamic(() => import("./components/Weather/Weather"))
-
+const BurgerMenu = dynamic(() => import("./components/BurgerMenu/Burger"));
+const DownloadLinks = dynamic(
+  () => import("./components/DownloadLinks/DownloadLinks")
+);
+const Languages = dynamic(() => import("./components/Languages/Languages"));
+const Weather = dynamic(() => import("./components/Weather/Weather"));
 
 //icons
 
 import logo from "@/assets/icons/NavbarIcons/logo.svg";
 import logo_white from "@/assets/icons/logo_white.svg";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 //style
 import styles from "./navbar.module.scss";
 
@@ -34,7 +34,7 @@ const Navbar = ({
   auth?: boolean;
 }) => {
   const { t } = useTranslation("common");
-  const {setUser, user} = useMyContext()
+  const { setUser, user } = useMyContext();
   const router = useRouter();
 
   const [open, setOpen] = useState<openObjTypes>({
@@ -47,29 +47,28 @@ const Navbar = ({
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
 
-    if(userToken){
+    if (userToken) {
       request("/users/about-me", "GET", null, false, router.locale, {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userToken}`
-      })
-      .then(({response, data}) => {
-        if(response.status === 200){
-          setUser(data)
-          setCookie(null, 'userToken', userToken ? userToken : "", {
+        Authorization: `Bearer ${userToken}`,
+      }).then(({ response, data }) => {
+        if (response.status === 200) {
+          console.log(data.data);
+
+          setUser(data);
+          setCookie(null, "userToken", userToken ? userToken : "", {
             maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
-            path: '/', // The path where the cookie is valid (e.g., the root path)
+            path: "/", // The path where the cookie is valid (e.g., the root path)
           });
-        }else{
-          setCookie(null, 'userToken', '', {
+        } else {
+          setCookie(null, "userToken", "", {
             maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
-            path: '/', // The path where the cookie is valid (e.g., the root path)
+            path: "/", // The path where the cookie is valid (e.g., the root path)
           });
         }
       });
     }
-    
   }, []);
-  
 
   return (
     <WeatherLayout>

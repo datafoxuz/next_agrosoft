@@ -40,6 +40,7 @@ const Languages = ({
           active={open.languagesModal}
           setValue={setLang}
           setOpen={setOpen}
+          open={open}
         />
       )}
     </div>

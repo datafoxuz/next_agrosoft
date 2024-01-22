@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   routeObj,
@@ -20,11 +20,13 @@ import Image from "next/image";
 const BurgerMenu = ({
   active,
   setOpen,
+  open,
 }: {
   active: boolean;
   setOpen: (v: openObjTypes) => void;
+  open: openObjTypes;
 }) => {
-  const { user } = useMyContext()
+  const { user } = useMyContext();
   const { t } = useTranslation("common");
 
   const routes: routeObj[] = [
@@ -66,10 +68,39 @@ const BurgerMenu = ({
     });
   }
 
+  const burgerRef = useRef<any>(null);
+
+  const handleClickOutside = (event: any) => {
+    if (burgerRef.current && !burgerRef.current.contains(event.target)) {
+      // Click occurred outside the Weather component
+      setOpen({
+        weatherModal: open.weatherModal,
+        burgerMenu: false,
+        languagesModal: open.languagesModal,
+      });
+    }
+  };
+
+  // Add event listener when the component mounts
+  useEffect(() => {
+    if (open.burgerMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    // Remove event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <AnimatePresence>
       {active ? (
-        <motion.div className={styles.menu} {...SORT_MOTION_CONFIGS}>
+        <motion.div
+          className={styles.menu}
+          {...SORT_MOTION_CONFIGS}
+          ref={burgerRef}
+        >
           <div className={styles.auth_link}>
             {user?.success ? (
               <Link

@@ -48,7 +48,7 @@ const Diseases = ({ data }: { data: data }) => {
         <button
           type="button"
           className={styles.diseases_button}
-          onClick={() => handleNavigate(`/diseases`)}
+          onClick={() => handleNavigate(`/deceases`)}
         >
           {t("buttons.view_diseases")}
         </button>

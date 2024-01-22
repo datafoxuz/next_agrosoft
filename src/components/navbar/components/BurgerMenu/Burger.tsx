@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { openObjTypes } from "../../data";
 import BurgerMenu from "./Menu/BurgerMenu";
 import { useTranslation } from "next-i18next";
@@ -15,6 +15,7 @@ const Burger = ({
   setOpen: (v: openObjTypes) => void;
 }) => {
   const { t } = useTranslation("common");
+
   return (
     <div className={styles.modal_wrapper}>
       <div
@@ -32,7 +33,7 @@ const Burger = ({
       </div>
 
       {open.burgerMenu && (
-        <BurgerMenu active={open.burgerMenu} setOpen={setOpen} />
+        <BurgerMenu active={open.burgerMenu} setOpen={setOpen} open={open} />
       )}
     </div>
   );

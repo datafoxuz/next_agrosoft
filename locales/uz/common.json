@@ -33,7 +33,8 @@
     "write_answer": "Javob yozish",
     "filter": "Filterni qo'llash",
     "save_changes": "O’zgarishlarni saqlash",
-    "change": "O’zgartirish"
+    "change": "O’zgartirish",
+    "exit": "Chiqish"
   },
 
   "main": {
@@ -101,7 +102,8 @@
     "new_pass": "Parol o'rnating",
     "enter_pass": "Parolni kiriting",
     "enter_pass_again": "Parolni qaytadan kiriting",
-    "restore_pass": "Parolni tiklash"
+    "restore_pass": "Parolni tiklash",
+    "logout_title": "Shaxsiy sahifangizdan chiqmoqchi ekanligingizga aminmisiz?"
   },
 
   "second_navbar": {

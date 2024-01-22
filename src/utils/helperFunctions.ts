@@ -33,10 +33,11 @@ export function handleNavigate(user: FullUserData | null, currUrl:string, router
 export const imageUpload = (file: File) => {
   return new Promise<number>(async (resolve, reject) => {
     const formData = new FormData();
-    formData.append("file", file, file.name);
+    formData.append("file", file);
 
+    
     try {
-      const response = await fetch(`${baseUrl}/file/upload`, {
+      const response = await fetch(`https://cdn.agrosoft.uz/api/v1/site/file/upload`, {
         method: "POST",
         headers: {
           Authorization:

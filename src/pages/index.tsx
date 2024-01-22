@@ -9,16 +9,33 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import Script from "next/script";
 
-const About = dynamic(() => import("@/components/main/about/About"));
-const Articles = dynamic(() => import("@/components/main/articles/Articles"));
+const About = dynamic(() => import("@/components/main/about/About"), {
+  ssr: false,
+});
+const Articles = dynamic(() => import("@/components/main/articles/Articles"), {
+  ssr: false,
+});
 const Community = dynamic(
-  () => import("@/components/main/community/Community")
+  () => import("@/components/main/community/Community"),
+  {
+    ssr: false,
+  }
 );
-const Diseases = dynamic(() => import("@/components/main/diseases/Diseases"));
-const Hero = dynamic(() => import("@/components/main/hero/Hero"));
-const Market = dynamic(() => import("@/components/main/market/Market"));
-const News = dynamic(() => import("@/components/main/news/News"));
-const TopCards = dynamic(() => import("@/components/main/topCards/TopCards"));
+const Diseases = dynamic(() => import("@/components/main/diseases/Diseases"), {
+  ssr: false,
+});
+const Hero = dynamic(() => import("@/components/main/hero/Hero"), {
+  ssr: false,
+});
+const Market = dynamic(() => import("@/components/main/market/Market"), {
+  ssr: false,
+});
+const News = dynamic(() => import("@/components/main/news/News"), {
+  ssr: false,
+});
+const TopCards = dynamic(() => import("@/components/main/topCards/TopCards"), {
+  ssr: false,
+});
 
 import styles from "@/styles/home.module.scss";
 
@@ -27,24 +44,28 @@ const Home = ({
   diseases,
   news,
   communities,
-  settings
+  settings,
 }: {
   blogs: data;
   diseases: data;
   news: data;
   communities: data;
-  settings: any
+  settings: any;
 }) => {
   const { locale } = useRouter();
 
   return (
-    <SEO metaTitle={locale ? settings.data[5].value[locale] : ""}
+    <SEO
+      metaTitle={locale ? settings.data[5].value[locale] : ""}
       metaDescription={locale ? settings.data[6].value[locale] : ""}
       author={locale ? settings.data[2].value[locale] : ""}
       metaKeywords={locale ? settings.data[7].value[locale] : ""}
     >
       <Head>
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} strategy="afterInteractive" />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+          strategy="afterInteractive"
+        />
 
         <Script id="google-analytics" strategy="afterInteractive">
           {`
@@ -57,7 +78,11 @@ const Home = ({
           `}
         </Script>
 
-        <Script id="schema-org" type="application/ld+json" strategy="afterInteractive">
+        <Script
+          id="schema-org"
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
           {`
             {
               "@context": "https://schema.org",
@@ -75,7 +100,6 @@ const Home = ({
             }
           `}
         </Script>
-        
       </Head>
 
       <div className={styles.main}>
@@ -93,11 +117,35 @@ const Home = ({
 };
 
 export async function getServerSideProps({ locale }: { locale: string }) {
-  const blogsData = await request("/blogs/get-latest-blogs", "GET", null, false, locale);
-  const diseasesData = await request("/deceases/get-popular-deceases", "GET", null, false, locale);
-  const newsData = await request("/articles/get-latest-articles", "GET", null, false, locale);
-  const communitiesData = await request("/community/latest-problems", "GET", null, false, locale);
-  const settingsData = await request("/settings", "GET", null, false, locale)
+  const blogsData = await request(
+    "/blogs/get-latest-blogs",
+    "GET",
+    null,
+    false,
+    locale
+  );
+  const diseasesData = await request(
+    "/deceases/get-popular-deceases",
+    "GET",
+    null,
+    false,
+    locale
+  );
+  const newsData = await request(
+    "/articles/get-latest-articles",
+    "GET",
+    null,
+    false,
+    locale
+  );
+  const communitiesData = await request(
+    "/community/latest-problems",
+    "GET",
+    null,
+    false,
+    locale
+  );
+  const settingsData = await request("/settings", "GET", null, false, locale);
 
   return {
     props: {
