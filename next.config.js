@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const { i18n } = require("./next-i18next.config.js");
+const { i18n } = require("./next-i18next.config");
 
 const nextConfig = {
   reactStrictMode: true,
@@ -7,12 +7,12 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/robots.txt',
-        destination: '/robots.txt',
+        source: "/robots.txt",
+        destination: "/robots.txt",
       },
       {
-        source: '/sitemap.txt',
-        destination: '/sitemap.txt',
+        source: "/sitemap.txt",
+        destination: "/sitemap.txt",
       },
     ];
   },
