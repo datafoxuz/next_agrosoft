@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import CardActions from "./cardActions/CardActions";
 import Image from "next/image";
-import notfound from "@/assets/images/notfound.png"
+import notfound from "@/assets/images/not_found.png"
 import styles from "./communitycard.module.scss";
 
 const CommunityCard = ({ data }: { data: card }) => {
