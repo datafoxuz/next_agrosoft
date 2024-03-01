@@ -1,6 +1,6 @@
 import { card } from "@/data/interfaces";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import CardActions from "./cardActions/CardActions";
 import Image from "next/image";
 import notfound from "@/assets/images/notfound.png"
@@ -13,7 +13,7 @@ const CommunityCard = ({ data }: { data: card }) => {
   const handleImageError = () => {
     setImageError(true);
   };
-  
+
   return (
     <div
       className={styles.card}
