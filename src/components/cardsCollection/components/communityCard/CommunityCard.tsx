@@ -13,14 +13,14 @@ const CommunityCard = ({ data }: { data: card }) => {
   const handleImageError = () => {
     setImageError(true);
   };
-
+  const imageSrc = data.image || notfound;
   return (
     <div
       className={styles.card}
       onClick={() => router.push(`${router.pathname}/${data.slug}`)}
     >
       <Image
-        src={imageError ? notfound : data.image}
+        src={imageError ? notfound : imageSrc}
         alt={`image about ${data.title}`}
         className={styles.image}
         width={220}
