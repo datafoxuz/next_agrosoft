@@ -8,18 +8,24 @@ import styles from "./communitycard.module.scss";
 
 const CommunityCard = ({ data }: { data: card }) => {
   const router = useRouter();
+  const [imageError, setImageError] = useState(false);
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+  
   return (
     <div
       className={styles.card}
       onClick={() => router.push(`${router.pathname}/${data.slug}`)}
     >
       <Image
-        src={data.image ? data.image : notfound}
+        src={imageError ? notfound : data.image}
         alt={`image about ${data.title}`}
         className={styles.image}
         width={220}
         height={137}
+        onError={handleImageError}
       />
       <div className={styles.card_infos}>
         <h3 className={styles.description}>{data.title}</h3>
