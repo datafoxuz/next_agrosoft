@@ -56,11 +56,11 @@ const Home = ({
 
   return (
     <SEO
-      metaTitle={locale ? settings.data[5].value[locale] : ""}
-      metaDescription={locale ? settings.data[6].value[locale] : ""}
-      author={locale ? settings.data[2].value[locale] : ""}
-      metaKeywords={locale ? settings.data[7].value[locale] : ""}
-    >
+      metaTitle={locale ? settings.data.find((item: { name: string; }) => item.name === "metaTitle")?.value[locale] : ""}
+      metaDescription={locale ? settings.data.find((item: { name: string; }) => item.name === "metaDescription")?.value[locale] : ""}
+      author={locale ? settings.data.find((item: { name: string; }) => item.name === "author")?.value[locale] : ""}
+      metaKeywords={locale ? settings.data.find((item: { name: string; }) => item.name === "metaKeywords")?.value[locale] : ""}
+      >
       <Head>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
