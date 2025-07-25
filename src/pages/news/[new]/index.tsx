@@ -28,9 +28,11 @@ const index = ({ article }: { article: responseData }) => {
       url: `/news/${article?.data?.slug}`,
     },
   ];
+  if(!article.success) return (
+    <ErrorPage/>
+  );
 
-
-  return article.status === 200 ? (
+  return (
     <SEO
       metaTitle={article.seo?.title}
       metaDescription={article.seo?.description}
@@ -39,8 +41,6 @@ const index = ({ article }: { article: responseData }) => {
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={article.data} similar={article.similar} type="articles"/>
     </SEO>
-  ) : (
-    <ErrorPage status={article.status}/>
   );
 };
 

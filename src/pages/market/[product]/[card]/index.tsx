@@ -1,7 +1,6 @@
 import { card } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
-import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
@@ -33,14 +32,14 @@ const index = ({ data }: { data: card }) => {
       url: `/market/${router.query.product}/${data?.slug}`,
     },
   ];
-
-  return data.status === 200 ? (
+  // if(!data.success) return  (
+  //   <ErrorPage />
+  // );
+  return (
     <SEO metaTitle={data.seo?.title} metaDescription={data.seo?.description} author={data.seo?.author}>
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={data} type="products" />
     </SEO>
-  ) : (
-    <ErrorPage status={data.status} />
   );
 };
 

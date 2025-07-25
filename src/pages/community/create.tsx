@@ -301,7 +301,7 @@ const create = ({ status }: { status: number }) => {
       </div>
     </SEO>
   ) : (
-    <ErrorPage status={status} />
+    <ErrorPage />
   );
 };
 

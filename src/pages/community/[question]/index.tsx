@@ -32,14 +32,12 @@ const index = ({ question }: { question: responseData }) => {
   ];
 
 
-
-  return question.status === 200 ? (
+  if(!question.success) return (<ErrorPage  />);
+  return (
     <SEO metaTitle={question.seo?.title} metaDescription={question.seo?.description} author={question.seo?.author}>
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage questions data={question.data} />
     </SEO>
-  ) : (
-    <ErrorPage status={question.status} />
   );
 };
 

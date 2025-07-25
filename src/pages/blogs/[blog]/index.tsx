@@ -26,8 +26,8 @@ const index = ({ blog }: { blog: responseData }) => {
       url: `/blogs/${blog?.data?.slug}`,
     },
   ];
-
-  return blog.status === 200 ? (
+  if(!blog.success) return (<ErrorPage />);
+  return (
     <SEO
       metaTitle={blog.seo?.title}
       metaDescription={blog.seo?.description}
@@ -36,8 +36,6 @@ const index = ({ blog }: { blog: responseData }) => {
       <SNavbar siteWay={siteWay} innerPage />
       <InternalPage data={blog.data} similar={blog.similar} type="blogs" />
     </SEO>
-  ) : (
-    <ErrorPage status={blog.status} />
   );
 };
 
