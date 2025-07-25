@@ -108,7 +108,7 @@ const index = ({
       </div>
     </SEO>
   ) : (
-    <ErrorPage status={status} />
+    <ErrorPage />
   );
 };
 
