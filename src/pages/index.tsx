@@ -3,7 +3,7 @@ import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { data } from "@/data/interfaces";
+import { ArticlesApiResponse, CommunityApiResponse, data } from "@/data/interfaces";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import Script from "next/script";
@@ -27,8 +27,8 @@ interface SettingsItem {
 interface HomeProps {
   blogs: data;
   diseases: data;
-  news: data;
-  communities: data;
+  news: ArticlesApiResponse;
+  communities: CommunityApiResponse;
   settings: {
     data: {
       settings: SettingsItem[];
@@ -133,10 +133,7 @@ export async function getServerSideProps({ locale }: { locale: string }) {
         blogs: { ...blogsData.data, status: blogsData.response.status },
         diseases: { ...diseasesData.data, status: diseasesData.response.status },
         news: { ...newsData.data, status: newsData.response.status },
-        communities: {
-          ...communitiesData.data,
-          status: communitiesData.response.status,
-        },
+        communities: {...communitiesData.data, status: communitiesData.response.status},
         settings: settingsData.data,
         ...(await serverSideTranslations(locale, ["common"])),
       },
