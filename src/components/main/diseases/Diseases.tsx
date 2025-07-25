@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 
 import { data } from "@/data/interfaces";
-import { DeceaseItem } from "@/data/interfaces/deceases";
+import { deceaseItem } from "@/data/interfaces/deceases";
 
 import styles from "./diseases.module.scss";
 import diseases from "@/assets/images/diseases.png";
@@ -27,7 +27,7 @@ const Diseases = ({ data }: { data: data }) => {
           className={styles.diseases_grid}
           data-length={data?.data?.length == 8}
         >
-          {data?.data?.deceases?.map((item: DeceaseItem, index: number) => (
+          {data?.data?.deceases?.map((item: deceaseItem, index: number) => (
             <div
               className={styles.card}
               key={index}
