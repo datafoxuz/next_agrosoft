@@ -17,7 +17,7 @@ const Articles = ({ data }: { data: data }) => {
     router.push(path);
   }
 
-  return data.status == 200 ? (
+  return (
     <div className={styles.main_l_articles}>
       <Image
         src={half_logo.src}
@@ -45,9 +45,8 @@ const Articles = ({ data }: { data: data }) => {
         {t("buttons.read_all")}
       </button>
     </div>
-  ) : (
-    <FindError statusCode={data.status} />
   );
+  
 };
 
 export default Articles;

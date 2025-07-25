@@ -1,12 +1,12 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import FindError from "@/components/findError/FindError";
 import { useTranslation } from "next-i18next";
-import { card, data } from "@/data/interfaces";
+
+import { data } from "@/data/interfaces";
+import { DeceaseItem } from "@/data/deceases";
 
 import styles from "./diseases.module.scss";
-
 import diseases from "@/assets/images/diseases.png";
 
 const Diseases = ({ data }: { data: data }) => {
@@ -17,7 +17,7 @@ const Diseases = ({ data }: { data: data }) => {
     router.push(path);
   }
 
-  return data.status === 200 ? (
+  return  (
     <div className={styles.container}>
       <div className={styles.main_diseases}>
         <h2 className={styles.diseases_title}>{t("main.diseases.title")}</h2>
@@ -27,7 +27,7 @@ const Diseases = ({ data }: { data: data }) => {
           className={styles.diseases_grid}
           data-length={data?.data?.length == 8}
         >
-          {data?.data?.map((item: card, index: number) => (
+          {data?.data?.deceases?.map((item: DeceaseItem, index: number) => (
             <div
               className={styles.card}
               key={index}
@@ -54,8 +54,6 @@ const Diseases = ({ data }: { data: data }) => {
         </button>
       </div>
     </div>
-  ) : (
-    <FindError statusCode={data.status} />
   );
 };
 

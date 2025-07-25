@@ -18,18 +18,14 @@ const SwiperCards = ({ data }: { data: data }) => {
       pagination={{
         clickable: true,
       }}
-      // autoplay={{
-      //   delay: 3000,
-      //   disableOnInteraction: false,
-      //   pauseOnMouseEnter: true,
-      // }}
+     
       navigation={true}
       modules={[FreeMode, Navigation, Autoplay]}
       className="mySwiper"
       loop={true}
       speed={500}
     >
-      {data?.data?.map((item: card, index: number) => (
+      {data?.data?.deceases?.map((item: card, index: number) => (
         <SwiperSlide className={styles.swiper_slide} key={index}>
           <SwiperCard data={item} />
         </SwiperSlide>

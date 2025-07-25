@@ -56,10 +56,10 @@ const Home = ({
 
   return (
     <SEO
-      metaTitle={locale ? settings.data.find((item: { name: string; }) => item.name === "metaTitle")?.value[locale] : ""}
-      metaDescription={locale ? settings.data.find((item: { name: string; }) => item.name === "metaDescription")?.value[locale] : ""}
-      author={locale ? settings.data.find((item: { name: string; }) => item.name === "author")?.value[locale] : ""}
-      metaKeywords={locale ? settings.data.find((item: { name: string; }) => item.name === "metaKeywords")?.value[locale] : ""}
+      metaTitle={locale ? settings.data.settings.find((item: { name: string; }) => item.name === "metaTitle")?.value[locale] : ""}
+      metaDescription={locale ? settings.data.settings.find((item: { name: string; }) => item.name === "metaDescription")?.value[locale] : ""}
+      author={locale ? settings.data.settings.find((item: { name: string; }) => item.name === "author")?.value[locale] : ""}
+      metaKeywords={locale ? settings.data.settings.find((item: { name: string; }) => item.name === "metaKeywords")?.value[locale] : ""}
       >
       <Head>
         <Script

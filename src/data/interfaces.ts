@@ -114,10 +114,7 @@ export interface meta {
 
 export interface data {
   success: boolean;
-  data: card[];
-  message: string;
-  meta: meta;
-  status: number;
+  data: any;
   seo: {
     title: string;
     keyword: string;
@@ -208,4 +205,40 @@ export interface answerType {
   updated_at: string;
   user_id: number;
   images: StaticImageData[];
+}
+
+export interface blog {
+  id: number;
+  title: string;
+  seo: seo;
+  slug: string;
+  image: string;
+}
+export interface seo{
+  title: string;
+  description: string;
+  author: string;
+  robots: string;
+}
+export interface community{
+  problems: communityProblem[],
+  seo: seo,
+  paginator: pagination,
+}
+export interface communityProblem {
+  id: number;
+  title: string;
+  slug: string;
+  image: string;
+  is_answered: number;
+  answers_count: number;
+  created_at: string;
+}
+export interface pagination {
+  current_page: number;
+  per_page: number;
+  has_more: boolean;
+  items_count: number,
+  total_count: number,
+  pages_count: number;
 }
