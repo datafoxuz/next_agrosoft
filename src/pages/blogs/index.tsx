@@ -5,7 +5,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import ErrorPage from "../_error";
 import dynamic from "next/dynamic";
 
-import { data, siteWayTypes } from "@/data/interfaces";
+import { siteWayTypes, BlogsApiResponse } from "@/data/interfaces";
 import { ParsedUrlQuery } from "querystring";
 import { useTranslation } from "next-i18next";
 
@@ -17,7 +17,7 @@ const NotFound = dynamic(() => import("@/components/notFound/NotFound"))
 
 
 
-const index = ({ blogs }: { blogs: data }) => {
+const index = ({ blogs }: { blogs: BlogsApiResponse }) => {
   const { t } = useTranslation("common");
   const siteWay: siteWayTypes[] = [
     {
@@ -30,9 +30,12 @@ const index = ({ blogs }: { blogs: data }) => {
     },
   ];
 
+  if(!blogs.success) return (
+    <ErrorPage />
+  );
 
-  return blogs.status === 200 ? (
-    <SEO metaTitle={`${blogs.seo.title}`} metaDescription={`${blogs.seo.descriptions}`} metaKeywords={`${blogs.seo.keyword}`}>
+  return (
+    <SEO metaTitle={`${blogs.data.seo.title}`} metaDescription={`${blogs.data.seo.description}`} metaKeywords={`${blogs.data.seo.keyword}`}>
       <div className={styles.articles}>
         <SNavbar
           siteWay={siteWay}
@@ -40,15 +43,21 @@ const index = ({ blogs }: { blogs: data }) => {
           filter
           article
         />
-        {blogs?.data?.length ? (
-          <Collections data={blogs.data} meta={blogs.meta} />
+        {blogs?.data?.blogs?.length ? (
+          <Collections 
+          data={blogs.data.blogs} 
+           meta={{
+                      currentPage: blogs.data.paginator.current_page,
+                      pageCount: blogs.data.paginator.pages_count,
+                      perPage: blogs.data.paginator.per_page,
+                      totalCount: blogs.data.paginator.total_count,
+                    }}
+           />
         ) : (
           <NotFound />
         )}
       </div>
     </SEO>
-  ) : (
-    <ErrorPage status={blogs.status}/>
   );
 };
 

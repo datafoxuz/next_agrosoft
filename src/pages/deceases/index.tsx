@@ -1,4 +1,5 @@
-import { data } from "@/data/interfaces";
+
+import { DeceasesApiResponse } from "@/data/interfaces/deceases";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
@@ -14,7 +15,7 @@ const NotFound = dynamic(() => import("@/components/notFound/NotFound"))
 const ErrorPage = dynamic(() => import("../_error"))
 
 
-const index = ({ diseasess }: { diseasess: data }) => {
+const index = ({ deceases }: { deceases: DeceasesApiResponse }) => {
   const { t } = useTranslation("common");
 
   const siteWay = [
@@ -27,9 +28,10 @@ const index = ({ diseasess }: { diseasess: data }) => {
       url: "/deceases",
     },
   ];
-
-  return diseasess.status === 200 ? (
-    <SEO metaTitle={diseasess.seo.title} metaDescription={diseasess.seo.descriptions} metaKeywords={diseasess.seo.keyword}>
+  
+  
+  return (
+    <SEO metaTitle={deceases.data.seo.title} metaDescription={deceases.data.seo.description} metaKeywords={deceases.data.seo.keyword}>
       <SNavbar
         siteWay={siteWay}
         title={`${t("main_topics.diseases")}`}
@@ -37,14 +39,18 @@ const index = ({ diseasess }: { diseasess: data }) => {
         article
       />
 
-      {diseasess.data?.length ? (
-        <Collections data={diseasess.data} meta={diseasess.meta} />
+      {deceases.data?.deceases?.length ? (
+        <Collections data={deceases.data.deceases} 
+          meta={{
+                  currentPage: deceases.data.paginator.current_page,
+                  pageCount: deceases.data.paginator.pages_count,
+                  perPage: deceases.data.paginator.per_page,
+                  totalCount: deceases.data.paginator.total_count,
+        }} />
       ) : (
         <NotFound />
       )}
     </SEO>
-  ) : (
-    <ErrorPage status={diseasess.status} />
   );
 };
 
@@ -57,19 +63,19 @@ export async function getServerSideProps({
 }) {
   const page = query.page || 1;
   const search = query.search || "";
-  let diseasesData;
+  let deceasesData;
 
   if (search.length) {
-    diseasesData = await request(`/decease-search?q=${search}`, "GET", null, false, locale);
+    deceasesData = await request(`/deceases/get-deceases?search=${search}`, "GET", null, false, locale);
   } else {
-    diseasesData = await request(
+    deceasesData = await request(
       `/deceases/get-deceases?page=${page}&per_page=10`, "GET", null, false, locale
     );
   }
 
   return {
     props: {
-      diseasess: { ...diseasesData.data, status: diseasesData.response.status },
+      deceases: { ...deceasesData.data, status: deceasesData.response.status },
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

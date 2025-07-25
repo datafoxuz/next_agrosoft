@@ -15,7 +15,7 @@ export interface communityProblem {
 
 export interface communityData {
   problems: communityProblem[];
-  seo: seo & { keyword: string; descriptions: string };
+  seo: seo;
   paginator: pagination;
 }
 

@@ -5,12 +5,12 @@ import { useTranslation } from "next-i18next";
 
 import styles from "./404/404.module.scss"
 
-const ErrorPage = ({ status }: { status: number }) => {
+const ErrorPage = () => {
   const {t} = useTranslation("common")
-  return <SEO metaTitle={`${status} - AgroSoft`}>
+  return <SEO metaTitle={`AgroSoft`}>
     <div className={styles.notFound}>
       <div className={styles.content}>
-        <h1 className={styles.status_num}>{status}</h1>
+        <h1 className={styles.status_num}></h1>
         <h2 className={styles.title}>{t("error.server_error")}!</h2>
       </div>
     </div>

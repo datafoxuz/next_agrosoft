@@ -3,14 +3,11 @@ import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { ApiResponse, pagination } from "@/data/interfaces";
 import { useTranslation } from "next-i18next";
-import FindError from "@/components/findError/FindError";
-
+import { ArticlesApiResponse, article } from "@/data/interfaces/articles";
 import styles from "./news.module.scss";
 
 import calendar from "@/assets/icons/calendar.svg";
-import { article } from "../../../data/interfaces/articles";
 
 
 

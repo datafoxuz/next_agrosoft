@@ -17,7 +17,7 @@ const CardsCollection = ({
   similar = false
 
 }: {
-  data: card[];
+  data: any[];
   meta?: meta;
   community?: boolean;
   account?: string;

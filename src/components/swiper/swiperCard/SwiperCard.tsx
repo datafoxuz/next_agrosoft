@@ -16,7 +16,7 @@ const SwiperCard = ({
   data,
   single = false
 }: {
-  data: card;
+  data: any;
   item?: swiperProps;
   cardDate?: string;
   single?: boolean

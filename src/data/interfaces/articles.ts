@@ -1,5 +1,5 @@
 import { seo,pagination } from "@/data/interfaces";
-
+import { ApiResponse } from "./apiResponse";
 
 export interface article {
     id: number;
@@ -12,7 +12,7 @@ export interface article {
     description: string;
 }
 export interface articleData {
-  problems: article[];
+  articles: article[];
   seo: seo;
   paginator: pagination;
 }

@@ -35,9 +35,11 @@ const index = ({ communities }: { communities: CommunityApiResponse }) => {
 
 
 
-  if (!communities.success) return null;
+  if (!communities.success) return (
+    <ErrorPage />
+  );
   return (
-    <SEO metaTitle={communities.data.seo.title} metaDescription={communities.data.seo.descriptions} metaKeywords={communities.data.seo.keyword}>
+    <SEO metaTitle={communities.data.seo.title} metaDescription={communities.data.seo.description} metaKeywords={communities.data.seo.keyword}>
       <SNavbar
         siteWay={siteWay}
         title={`${t("main_topics.community")}`}
