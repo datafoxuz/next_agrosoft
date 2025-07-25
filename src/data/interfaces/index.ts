@@ -2,7 +2,7 @@ export * from "./user";
 export * from "./card";
 export * from "./seo";
 export * from "./answer";
-export * from "./blog";
+export * from "./blogs";
 export * from "./community";
 export * from "./pagination";
 export * from "./weather";
