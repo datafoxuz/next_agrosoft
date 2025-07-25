@@ -1,4 +1,4 @@
-import { data, questionTypes, responseData } from "@/data/interfaces";
+import { CommunityApiResponse, communityData, questionTypes } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
@@ -13,7 +13,7 @@ const NotFound = dynamic(() => import("@/components/notFound/NotFound"))
 const ErrorPage = dynamic(() => import("../_error"))
 
 
-const index = ({ communities }: { communities: data }) => {
+const index = ({ communities }: { communities: CommunityApiResponse }) => {
   const { t } = useTranslation("common");
   const [question, setQuestion] = useState<questionTypes>({
     active: false,
@@ -35,8 +35,9 @@ const index = ({ communities }: { communities: data }) => {
 
 
 
-  return communities.status === 200 ? (
-    <SEO metaTitle={communities.seo.title} metaDescription={communities.seo.descriptions} metaKeywords={communities.seo.keyword}>
+  if (!communities.success) return null;
+  return (
+    <SEO metaTitle={communities.data.seo.title} metaDescription={communities.data.seo.descriptions} metaKeywords={communities.data.seo.keyword}>
       <SNavbar
         siteWay={siteWay}
         title={`${t("main_topics.community")}`}
@@ -46,18 +47,21 @@ const index = ({ communities }: { communities: data }) => {
         setState={setQuestion}
       />
 
-      {communities?.data?.length ? (
+      {communities.data.problems.length ? (
         <Collections
-          data={communities.data}
-          meta={communities.meta}
+          data={communities.data.problems as any}
+          meta={{
+            currentPage: communities.data.paginator.current_page,
+            pageCount: communities.data.paginator.pages_count,
+            perPage: communities.data.paginator.per_page,
+            totalCount: communities.data.paginator.total_count,
+          }}
           community
         />
       ) : (
         <NotFound />
       )}
     </SEO>
-  ) : (
-    <ErrorPage status={communities.status}/>
   );
 };
 
@@ -82,10 +86,7 @@ export async function getServerSideProps({
 
   return {
     props: {
-      communities: {
-        ...communitiesData.data,
-        status: communitiesData.response.status,
-      },
+      communities: communitiesData,
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

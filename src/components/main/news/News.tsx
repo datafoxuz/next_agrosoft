@@ -3,25 +3,29 @@ import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { card, data } from "@/data/interfaces";
+import { ApiResponse, pagination } from "@/data/interfaces";
 import { useTranslation } from "next-i18next";
 import FindError from "@/components/findError/FindError";
 
 import styles from "./news.module.scss";
 
 import calendar from "@/assets/icons/calendar.svg";
+import { article } from "../../../data/interfaces/articles";
 
-const News = ({ data }: { data: data }) => {
+
+
+const News = ({ data }: { data: ArticlesApiResponse }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
-  const newCard: card[] = data.status == 200 ? data.data.slice(0, 2) : [];
+  const newCard: article[] = data.success ? data.data.articles.slice(0, 2) : [];
 
   function handleNavigate(path: string) {
     router.push(path);
   }
+  if (!data.success) return null;
 
-  return data.status === 200 ? (
+  return data.success ? (
     <div className={styles.container}>
       <div className={styles.main_news}>
         <h2 className={styles.news_title}>{t("main.news.title")}</h2>
@@ -30,9 +34,9 @@ const News = ({ data }: { data: data }) => {
             <SwiperCard cardDate="12.04.2023" data={newCard[0]} single/>
           ) : null}
           <div className={styles.news_section}>
-            {data.data.slice(0, 3).map((item, index) => (
+            {data.data.articles.slice(0, 3).map((item, index) => (
               <div className={styles.news_list} key={index}>
-                <Link href={`/news/${item.slug}`} className={styles.news_item}>
+                <Link href={`/articles/${item.slug}`} className={styles.news_item}>
                   {item.title}
                 </Link>
                 <p className={styles.news_date}>
@@ -51,7 +55,7 @@ const News = ({ data }: { data: data }) => {
             <button
               type="button"
               className={styles.news_button}
-              onClick={() => handleNavigate("/news")}
+              onClick={() => handleNavigate("/articles")}
             >
               {t("buttons.read_all")}
             </button>
@@ -59,9 +63,7 @@ const News = ({ data }: { data: data }) => {
         </div>
       </div>
     </div>
-  ) : (
-    <FindError statusCode={data.status} />
-  );
+  ) : null;
 };
 
 export default News;

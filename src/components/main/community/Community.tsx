@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { card, community, communityProblem, data } from "@/data/interfaces";
+import {communityProblem, CommunityApiResponse } from "@/data/interfaces";
 import FindError from "@/components/findError/FindError";
 import { useTranslation } from "next-i18next";
 
@@ -12,13 +12,15 @@ import cotton from "@/assets/images/cotton.png";
 import comment from "@/assets/icons/comment.svg";
 import leaf_small from "@/assets/images/leaf_small.png";
 
-const Community = ({ data }: { data: data }) => {
+const Community = ({ data }: { data: CommunityApiResponse }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
   function handleNavigate(path: string) {
     router.push(path);
   }
+
+  if (!data.success) return null;
 
   return (
     <div className={styles.container}>
@@ -35,7 +37,7 @@ const Community = ({ data }: { data: data }) => {
           height={242}
         />
         <div className={styles.community_questions}>
-          {data?.data?.problems?.map((item: communityProblem, index: number) => (
+          {data.data.problems.map((item: communityProblem, index: number) => (
             <Link
               href={`/community/${item.slug}`}
               className={styles.question}

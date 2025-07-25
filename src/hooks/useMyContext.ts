@@ -1,6 +1,6 @@
 import { MainContext } from "@/context";
 import { MainContextType } from "@/data/interfaces";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 export const useMyContext = (): MainContextType => {
   const context = useContext(MainContext);

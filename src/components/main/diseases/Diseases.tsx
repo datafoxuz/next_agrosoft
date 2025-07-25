@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 
 import { data } from "@/data/interfaces";
-import { DeceaseItem } from "@/data/deceases";
+import { DeceaseItem } from "@/data/interfaces/deceases";
 
 import styles from "./diseases.module.scss";
 import diseases from "@/assets/images/diseases.png";
