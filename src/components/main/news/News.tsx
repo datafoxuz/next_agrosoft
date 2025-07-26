@@ -33,7 +33,7 @@ const News = ({ data }: { data: ArticlesApiResponse }) => {
           <div className={styles.news_section}>
             {data.data.articles.slice(0, 3).map((item, index) => (
               <div className={styles.news_list} key={index}>
-                <Link href={`/articles/${item.slug}`} className={styles.news_item}>
+                <Link href={`/news/${item.slug}`} className={styles.news_item}>
                   {item.title}
                 </Link>
                 <p className={styles.news_date}>

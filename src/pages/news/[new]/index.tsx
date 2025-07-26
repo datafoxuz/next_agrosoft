@@ -1,4 +1,4 @@
-import { responseData } from "@/data/interfaces";
+import { SingleArticlesApiResponse } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
@@ -11,7 +11,7 @@ import React from "react";
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
 const InternalPage = dynamic(() => import("@/components/internalPage/InternalPage"))
 
-const index = ({ article }: { article: responseData }) => {
+const index = ({ article }: { article: SingleArticlesApiResponse }) => {
   const {t} = useTranslation("common")
   const router = useRouter();
   const siteWay = [
@@ -24,8 +24,8 @@ const index = ({ article }: { article: responseData }) => {
       url: "/news",
     },
     {
-      title: `${article?.data?.title}`,
-      url: `/news/${article?.data?.slug}`,
+      title: `${article?.data?.article.title}`,
+      url: `/news/${article?.data?.article.slug}`,
     },
   ];
   if(!article.success) return (
@@ -34,12 +34,12 @@ const index = ({ article }: { article: responseData }) => {
 
   return (
     <SEO
-      metaTitle={article.seo?.title}
-      metaDescription={article.seo?.description}
-      author={article.seo?.author}
+      metaTitle={article.data.article.seo?.title}
+      metaDescription={article.data.article.seo?.description}
+      author={article.data.article.seo?.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={article.data} similar={article.similar} type="articles"/>
+      <InternalPage data={article.data.article} similar={article.data.similar} type="articles"/>
     </SEO>
   );
 };

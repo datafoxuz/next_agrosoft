@@ -27,8 +27,8 @@ const InternalPage = ({
 }: {
   questions?: boolean;
   about?: boolean;
-  data?: card;
-  similar?: [];
+  data?: any;
+  similar?: any[];
   type?: string
 }) => {
   const { user } = useMyContext()

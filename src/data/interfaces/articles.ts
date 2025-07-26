@@ -4,6 +4,7 @@ import { ApiResponse } from "./apiResponse";
 export interface article {
     id: number;
     title: string;
+    seo: seo;
     slug: string;
     image: string;
     created_at: string;
@@ -16,5 +17,11 @@ export interface articleData {
   seo: seo;
   paginator: pagination;
 }
-
+export interface singleArticleData {
+  article: article;
+  similar: article[];
+  seo: seo;
+  paginator: pagination;
+}
 export type ArticlesApiResponse = ApiResponse<articleData>;
+export type SingleArticlesApiResponse = ApiResponse<singleArticleData>;
