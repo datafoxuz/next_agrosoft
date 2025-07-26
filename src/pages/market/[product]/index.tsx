@@ -1,4 +1,5 @@
 import { data, questionTypes } from "@/data/interfaces";
+import { ProductsApiResponse } from "@/data/interfaces/products";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
@@ -14,7 +15,7 @@ const Collections = dynamic(
 const NotFound = dynamic(() => import("@/components/notFound/NotFound"));
 const ErrorPage = dynamic(() => import("@/pages/_error"));
 
-const index = ({ products }: { products: data }) => {
+const index = ({ products }: { products: ProductsApiResponse }) => {
   const { t } = useTranslation("common");
   const [open, setOpen] = useState<questionTypes>({
     active: false,
@@ -36,9 +37,11 @@ const index = ({ products }: { products: data }) => {
       url: `/market/${router.query.product}`,
     },
   ];
-
-  return products.status === 200 ? (
-    <SEO metaTitle={products.seo.title} metaDescription={products.seo.descriptions} metaKeywords={products.seo.keyword}>
+  if(!products.success) return (
+    <ErrorPage/>
+  );
+  return (
+    <SEO metaTitle={products.data.seo.title} metaDescription={products.data.seo.description} metaKeywords={products.data.seo.keyword}>
       <SNavbar
         siteWay={siteWay}
         title={`${router.query.product}`}
@@ -48,18 +51,21 @@ const index = ({ products }: { products: data }) => {
         state={open}
         setState={setOpen}
       />
-      {products.data.length ? (
+      {products.data.products.length ? (
         <Collections
-          data={products.data}
-          meta={products.meta}
+          data={products.data.products}
+          meta={{
+            currentPage: products.data.paginator.current_page,
+            pageCount: products.data.paginator.pages_count,
+            perPage: products.data.paginator.per_page,
+            totalCount: products.data.paginator.total_count,
+          }}
           product={open.active}
         />
       ) : (
         <NotFound />
       )}
     </SEO>
-  ) : (
-    <ErrorPage status={products.status} />
   );
 };
 

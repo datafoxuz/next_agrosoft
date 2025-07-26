@@ -27,9 +27,10 @@ const index = ({ categories }: { categories: data }) => {
       url: "/market",
     },
   ];
-
-
-  return categories.status === 200 ? (
+  if(!categories.success) return (
+    <ErrorPage/>
+  );
+  return (
     <SEO metaTitle={categories.seo.title} metaDescription={categories.seo.descriptions} metaKeywords={categories.seo.keyword}>
       <SNavbar
         siteWay={siteWay}
@@ -39,13 +40,19 @@ const index = ({ categories }: { categories: data }) => {
       />
 
       {categories.data.length ? (
-        <Collections data={categories.data} meta={categories.meta} market />
+        <Collections 
+          data={categories.data} 
+           meta={{
+                      currentPage: categories.data.paginator.current_page,
+                      pageCount: categories.data.paginator.pages_count,
+                      perPage: categories.data.paginator.per_page,
+                      totalCount: categories.data.paginator.total_count,
+                    }}
+          market />
       ) : (
         <NotFound />
       )}
     </SEO>
-  ) : (
-    <ErrorPage status={categories.status} />
   );
 };
 

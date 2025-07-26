@@ -1,4 +1,4 @@
-import { data } from "@/data/interfaces";
+import { ArticlesApiResponse, data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -13,7 +13,7 @@ const Collections = dynamic(
 const NotFound = dynamic(() => import("@/components/notFound/NotFound"));
 const ErrorPage = dynamic(() => import("../_error"));
 
-const index = ({ articles }: { articles: data }) => {
+const index = ({ articles }: { articles: ArticlesApiResponse }) => {
   const siteWay = [
     {
       title: "Bosh sahifa",
@@ -24,18 +24,24 @@ const index = ({ articles }: { articles: data }) => {
       url: "/news",
     },
   ];
-
-  return articles.status === 200 ? (
-    <SEO metaTitle={articles.seo.title} metaDescription={articles.seo.descriptions} metaKeywords={articles.seo.keyword}>
+  if(!articles.success) return (
+    <ErrorPage />
+  );
+  return (
+    <SEO metaTitle={articles.data.seo.title} metaDescription={articles.data.seo.description} metaKeywords={articles.data.seo.keyword}>
       <SNavbar siteWay={siteWay} title="Yangiliklar" filter article />
-      {articles.data.length ? (
-        <Collections data={articles.data} meta={articles.meta} />
+      {articles.data.articles.length ? (
+        <Collections data={articles.data.articles} 
+        meta={{
+            currentPage: articles.data.paginator.current_page,
+            pageCount: articles.data.paginator.pages_count,
+            perPage: articles.data.paginator.per_page,
+            totalCount: articles.data.paginator.total_count,
+         }} />
       ) : (
         <NotFound />
       )}
     </SEO>
-  ) : (
-    <ErrorPage status={articles.status} />
   );
 };
 
