@@ -13,4 +13,11 @@ export interface blogsData {
   seo: seo;
   paginator: pagination;
 }
+export interface singleBlogData {
+  blog: blog;
+  similar: blog[];
+  seo: seo;
+  paginator: pagination;
+}
 export type BlogsApiResponse = ApiResponse<blogsData>;
+export type SingleBlogsApiResponse = ApiResponse<singleBlogData>;

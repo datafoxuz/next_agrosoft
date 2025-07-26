@@ -1,4 +1,4 @@
-import { responseData, sitewayProps } from "@/data/interfaces";
+import { responseData, SingleBlogsApiResponse, sitewayProps } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
@@ -10,7 +10,7 @@ import React from "react";
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
 const InternalPage = dynamic(() => import("@/components/internalPage/InternalPage"))
 
-const index = ({ blog }: { blog: responseData }) => {
+const index = ({ blog }: { blog: SingleBlogsApiResponse }) => {
   const { t } = useTranslation("common");
   const siteWay: sitewayProps[] = [
     {
@@ -22,19 +22,19 @@ const index = ({ blog }: { blog: responseData }) => {
       url: "/blogs",
     },
     {
-      title: `${blog?.data?.title}`,
-      url: `/blogs/${blog?.data?.slug}`,
+      title: `${blog?.data?.blog.title}`,
+      url: `/blogs/${blog?.data?.blog.slug}`,
     },
   ];
   if(!blog.success) return (<ErrorPage />);
   return (
     <SEO
-      metaTitle={blog.seo?.title}
-      metaDescription={blog.seo?.description}
-      author={blog.seo?.author}
+      metaTitle={blog.data.blog.seo?.title}
+      metaDescription={blog.data.blog.seo?.description}
+      author={blog.data.blog.seo?.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={blog.data} similar={blog.similar} type="blogs" />
+      <InternalPage data={blog.data.blog} similar={blog.data.similar} type="blogs" />
     </SEO>
   );
 };
