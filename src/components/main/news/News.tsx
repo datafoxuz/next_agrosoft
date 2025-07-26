@@ -52,7 +52,7 @@ const News = ({ data }: { data: ArticlesApiResponse }) => {
             <button
               type="button"
               className={styles.news_button}
-              onClick={() => handleNavigate("/articles")}
+              onClick={() => handleNavigate("/news")}
             >
               {t("buttons.read_all")}
             </button>

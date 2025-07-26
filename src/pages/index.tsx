@@ -3,7 +3,7 @@ import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ArticlesApiResponse, BlogsApiResponse, CommunityApiResponse, data } from "@/data/interfaces";
+import { ArticlesApiResponse, BlogsApiResponse, CommunityApiResponse, data, DeceasesApiResponse } from "@/data/interfaces";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import Script from "next/script";
@@ -26,7 +26,7 @@ interface SettingsItem {
 
 interface HomeProps {
   blogs: BlogsApiResponse;
-  diseases: data;
+  diseases: DeceasesApiResponse;
   news: ArticlesApiResponse;
   communities: CommunityApiResponse;
   settings: {

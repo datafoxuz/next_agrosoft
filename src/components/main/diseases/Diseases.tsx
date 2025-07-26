@@ -4,12 +4,12 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 
 import { data } from "@/data/interfaces";
-import { deceaseItem } from "@/data/interfaces/deceases";
+import { deceaseItem, DeceasesApiResponse } from "@/data/interfaces/deceases";
 
 import styles from "./diseases.module.scss";
 import diseases from "@/assets/images/diseases.png";
 
-const Diseases = ({ data }: { data: data }) => {
+const Diseases = ({ data }: { data: DeceasesApiResponse }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -25,7 +25,7 @@ const Diseases = ({ data }: { data: data }) => {
 
         <div
           className={styles.diseases_grid}
-          data-length={data?.data?.length == 8}
+          data-length={data?.data?.deceases.length == 8}
         >
           {data?.data?.deceases?.map((item: deceaseItem, index: number) => (
             <div

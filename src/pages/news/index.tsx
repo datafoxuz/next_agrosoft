@@ -56,7 +56,7 @@ export async function getServerSideProps({
   const searchVal = query.search || "";
   let articlesData;
   if (searchVal.length) {
-    articlesData = await request(`/articles-search?q=${searchVal}`, "GET", null, false, locale);
+    articlesData = await request(`/articles-with-pagination?search=${searchVal}`, "GET", null, false, locale);
   } else {
     articlesData = await request(
       `/articles/articles-with-pagination?page=${page}&per_page=10`, "GET", null, false, locale
