@@ -8,6 +8,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { districtTypes } from "@/data/interfaces";
 import dynamic from "next/dynamic";
 import { request } from "@/lib/request";
+import { RegionsApiResponse } from "@/data/interfaces/regions";
+import { DistrictsApiResponse } from "@/data/interfaces/districts";
 
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"));
 const RealPage = dynamic(() => import("./components/realPage/RealPage"));
@@ -17,20 +19,20 @@ const WeatherPage = ({
   regions,
   districts,
 }: {
-  regions: any;
-  districts: any;
+  regions: RegionsApiResponse;
+  districts: DistrictsApiResponse;
 }) => {
   const { t } = useTranslation("common");
   //States==============================================================
   const { weatherData, locationInfo } = useMyContext();
   const [regionItem, setRegionItem] = useState<string>(
-    locationInfo ? locationInfo.regionNmae : regions ? regions.data[0].name : ""
+    locationInfo ? locationInfo.regionNmae : regions ? regions.data.regions[0].name : ""
   );
   const [districtItem, setDistrictItem] = useState<districtTypes>({
     districtName: locationInfo
       ? locationInfo.districtName
       : districts
-      ? districts.data[0].name
+      ? districts.data.districts[0].name
       : "",
     lang: locationInfo ? locationInfo.lang : "0",
     lat: locationInfo ? locationInfo.lat : "0",

@@ -88,7 +88,7 @@ export async function getServerSideProps({
 
   return {
     props: {
-      communities: communitiesData,
+      communities: { ...communitiesData.data, status: communitiesData.response.status },
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

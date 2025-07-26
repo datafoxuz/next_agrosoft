@@ -54,13 +54,13 @@ const Template = ({
             <FilterSelect
               item={regionItem}
               setItem={setRegionItem}
-              data={regions?.data}
+              data={regions?.data.regions}
               region
             />
             <FilterSelect
               item={districtItem?.districtName}
               setItem={setDistrictItem}
-              data={districts?.data}
+              data={districts?.data.districts}
             />
             <button type="button">O’zgartirish</button>
           </div>

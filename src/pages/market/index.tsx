@@ -1,4 +1,5 @@
 import { data } from "@/data/interfaces";
+import { MarketplaceCategoryApiResponse } from "@/data/interfaces/marketplace";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
@@ -14,7 +15,7 @@ const Collections = dynamic(
 const NotFound = dynamic(() => import("@/components/notFound/NotFound"));
 const ErrorPage = dynamic(() => import("../_error"));
 
-const index = ({ categories }: { categories: data }) => {
+const index = ({ categories }: { categories: MarketplaceCategoryApiResponse }) => {
   const { t } = useTranslation("common");
 
   const siteWay = [
@@ -31,7 +32,7 @@ const index = ({ categories }: { categories: data }) => {
     <ErrorPage/>
   );
   return (
-    <SEO metaTitle={categories.seo.title} metaDescription={categories.seo.descriptions} metaKeywords={categories.seo.keyword}>
+    <SEO metaTitle={categories.data.seo.title} metaDescription={categories.data.seo.description} metaKeywords={categories.data.seo.keyword}>
       <SNavbar
         siteWay={siteWay}
         title={`${t("main_topics.market")}`}
@@ -39,9 +40,9 @@ const index = ({ categories }: { categories: data }) => {
         market
       />
 
-      {categories.data.length ? (
+      {categories.data.categories.length ? (
         <Collections 
-          data={categories.data} 
+          data={categories.data.categories} 
            meta={{
                       currentPage: categories.data.paginator.current_page,
                       pageCount: categories.data.paginator.pages_count,
