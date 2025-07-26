@@ -3,20 +3,19 @@ import { useRouter } from "next/router";
 import SwiperCards from "@/components/swiper/SwiperCards";
 import Image from "next/image";
 import FindError from "@/components/findError/FindError";
-import { data } from "@/data/interfaces";
+import { BlogsApiResponse, data } from "@/data/interfaces";
 import { useTranslation } from "next-i18next";
 
 import styles from "./articles.module.scss";
 
 import half_logo from "@/assets/images/half_logo.png";
 
-const Articles = ({ data }: { data: data }) => {
+const Articles = ({ blogs }: { blogs: BlogsApiResponse }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
   function handleNavigate(path: string) {
     router.push(path);
   }
-
   return (
     <div className={styles.main_l_articles}>
       <Image
@@ -35,8 +34,7 @@ const Articles = ({ data }: { data: data }) => {
           {t("buttons.read_all")}
         </button>
       </div>
-
-      <SwiperCards data={data} />
+      <SwiperCards data={blogs?.data.blogs} />
 
       <button
         className={styles.articles__bottom_button}

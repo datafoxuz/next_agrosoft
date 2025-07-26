@@ -3,7 +3,7 @@ import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { ArticlesApiResponse, CommunityApiResponse, data } from "@/data/interfaces";
+import { ArticlesApiResponse, BlogsApiResponse, CommunityApiResponse, data } from "@/data/interfaces";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import Script from "next/script";
@@ -25,7 +25,7 @@ interface SettingsItem {
 }
 
 interface HomeProps {
-  blogs: data;
+  blogs: BlogsApiResponse;
   diseases: data;
   news: ArticlesApiResponse;
   communities: CommunityApiResponse;
@@ -108,7 +108,7 @@ const Home = ({ blogs, diseases, news, communities, settings }: HomeProps) => {
         <Hero />
         <TopCards />
         <About />
-        <Articles data={blogs} />
+        <Articles blogs={blogs} />
         <Community data={communities} />
         <Diseases data={diseases} />
         <Market />

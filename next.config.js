@@ -17,7 +17,12 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ["agrosoft.uz", "agro-life.uz", "cdn.agrosoft.uz", "cnt0.www.uz"],
+    domains: [
+      "agrosoft.uz",
+      "agro-life.uz",
+      "cdn.agrosoft.uz",
+      "api.agrosoft.uz",
+    ],
   },
 };
 
