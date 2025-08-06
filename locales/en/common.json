@@ -3,7 +3,7 @@
     "main_page": "Main Page",
     "blogs": "Blogs",
     "community": "Community",
-    "diseases": "Diseases",
+    "deceases": "Deceases",
     "market": "Agromarket",
     "about": "About Us",
     "weather": "Weather information",
@@ -16,7 +16,7 @@
 
   "buttons": {
     "read_all": "Read All",
-    "view_diseases": "View all diseases",
+    "view_deceases": "View all deceases",
     "enter_market": "Enter the market",
     "subscribe": "Subscribe",
     "continue": "Continue",
@@ -66,8 +66,8 @@
       "small_text": "Heated discussions, questions and answers"
     },
 
-    "diseases": {
-      "title": "AGRICULTURAL DISEASES",
+    "deceases": {
+      "title": "AGRICULTURAL DECEASES",
       "small_text": "With more than 123 disease diagnoses"
     },
 
@@ -86,7 +86,7 @@
       "contact": "Contact:",
       "inp_placeholder": "Enter your email",
       "why_agrosoft": "Why Agrosoft?",
-      "desc": "AgroSoft - AI-based solution that enables farmers to detect and treat plant diseases and pests early",
+      "desc": "AgroSoft - AI-based solution that enables farmers to detect and treat plant deceases and pests early",
       "reserved": "All rights reserved"
     }
   },

@@ -1,4 +1,4 @@
-import { responseData } from "@/data/interfaces";
+import { DeceaseApiResponse } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
@@ -8,11 +8,11 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"));
-const InternalPage = dynamic(
-  () => import("@/components/internalPage/InternalPage")
+const DeceaseInternalPage = dynamic(
+  () => import("@/components/internalPage/DeceaseInternalPage")
 );
 
-const index = ({ disease }: { disease: responseData }) => {
+const index = ({ decease }: { decease: DeceaseApiResponse }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
   const siteWay = [
@@ -25,19 +25,19 @@ const index = ({ disease }: { disease: responseData }) => {
       url: "/deceases",
     },
     {
-      title: `${disease?.data?.title}`,
+      title: `${decease?.data?.decease.name}`,
       url: `/deceases/${router.query.page}`,
     },
   ];
 
   return(
     <SEO
-      metaTitle={disease.seo?.title}
-      metaDescription={disease.seo?.description}
-      author={disease.seo?.author}
+      metaTitle={decease?.data.seo?.title}
+      metaDescription={decease?.data.seo?.description}
+      author={decease?.data.seo?.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={disease.data} similar={disease.similar} type="deceases" />
+      <DeceaseInternalPage decease={decease?.data.decease} similar={decease?.data.similar} />
     </SEO>
   );
 };
@@ -54,7 +54,7 @@ export async function getServerSideProps({
   if (response.status !== 404) {
     return {
       props: {
-        disease: { ...data, status: response.status },
+        decease: { ...data, status: response.status },
         ...(await serverSideTranslations(locale, ["common"])),
       },
     };

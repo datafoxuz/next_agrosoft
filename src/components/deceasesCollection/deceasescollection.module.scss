@@ -1,0 +1,74 @@
+@use "../../styles/variables" as variables;
+
+.collections {
+  padding-inline: 30px;
+  margin-bottom: 108px;
+  position: relative;
+
+  &[data-community="true"] {
+    .cards_grid {
+      grid-template-columns: repeat(2, 1fr);
+
+      @media screen and (max-width: variables.$default_laptop_width) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+  &[data-account="true"] {
+    @media screen and (max-width: variables.$small_laptop_width) {
+      margin-bottom: 0;
+    }
+    .cards_grid {
+      grid-template-columns: repeat(3, 1fr);
+
+      @media screen and (max-width: variables.$small_laptop_width) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media screen and (max-width: variables.$small_tablet_width) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+
+  &[data-similar="true"]{
+    .cards_grid{
+      display: flex;
+      @media screen and (max-width: variables.$high_res_tablet_width) {
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  .cards_grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 20px;
+    row-gap: 72px;
+    margin-bottom: 80px;
+    min-height: 300px;
+
+    @media only screen and (max-width: 1540px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media screen and (max-width: variables.$small_laptop_width) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (max-width: variables.$default_tablet_width) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      min-height: fit-content;
+    }
+
+    @media screen and (max-width: variables.$small_tablet_width) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+  }
+}

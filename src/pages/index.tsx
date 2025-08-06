@@ -11,7 +11,7 @@ import Script from "next/script";
 const About = dynamic(() => import("@/components/main/about/About"));
 const Articles = dynamic(() => import("@/components/main/articles/Articles"));
 const Community = dynamic(() => import("@/components/main/community/Community"));
-const Diseases = dynamic(() => import("@/components/main/diseases/Diseases"));
+const Deceases = dynamic(() => import("@/components/main/deceases/Deceases"));
 const Hero = dynamic(() => import("@/components/main/hero/Hero"));
 const Market = dynamic(() => import("@/components/main/market/Market"));
 const News = dynamic(() => import("@/components/main/news/News"));
@@ -26,7 +26,7 @@ interface SettingsItem {
 
 interface HomeProps {
   blogs: BlogsApiResponse;
-  diseases: DeceasesApiResponse;
+  deceases: DeceasesApiResponse;
   news: ArticlesApiResponse;
   communities: CommunityApiResponse;
   settings: {
@@ -36,7 +36,7 @@ interface HomeProps {
   };
 }
 
-const Home = ({ blogs, diseases, news, communities, settings }: HomeProps) => {
+const Home = ({ blogs, deceases, news, communities, settings }: HomeProps) => {
   const { locale } = useRouter();
   // Cache settings lookups
   const settingsMap = React.useMemo(() => {
@@ -110,7 +110,7 @@ const Home = ({ blogs, diseases, news, communities, settings }: HomeProps) => {
         <About />
         <Articles blogs={blogs} />
         <Community data={communities} />
-        <Diseases data={diseases} />
+        <Deceases data={deceases} />
         <Market />
         <News data={news} />
       </div>
@@ -120,7 +120,7 @@ const Home = ({ blogs, diseases, news, communities, settings }: HomeProps) => {
 
 export async function getServerSideProps({ locale }: { locale: string }) {
   try {
-    const [blogsData, diseasesData, newsData, communitiesData, settingsData] = await Promise.all([
+    const [blogsData, deceasesData, newsData, communitiesData, settingsData] = await Promise.all([
       request("/blogs/get-latest-blogs", "GET", null, false, locale),
       request("/deceases/get-popular-deceases", "GET", null, false, locale),
       request("/articles/get-latest-articles", "GET", null, false, locale),
@@ -131,7 +131,7 @@ export async function getServerSideProps({ locale }: { locale: string }) {
     return {
       props: {
         blogs: { ...blogsData.data, status: blogsData.response.status },
-        diseases: { ...diseasesData.data, status: diseasesData.response.status },
+        deceases: { ...deceasesData.data, status: deceasesData.response.status },
         news: { ...newsData.data, status: newsData.response.status },
         communities: {...communitiesData.data, status: communitiesData.response.status},
         settings: settingsData.data,
@@ -143,7 +143,7 @@ export async function getServerSideProps({ locale }: { locale: string }) {
     return {
       props: {
         blogs: {},
-        diseases: {},
+        deceases: {},
         news: {},
         communities: {},
         settings: { data: { settings: [] } },

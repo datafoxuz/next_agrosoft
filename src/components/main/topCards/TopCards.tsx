@@ -8,7 +8,7 @@ import styles from "./topcards.module.scss";
 
 import articles from "@/assets/images/articles.png";
 import community from "@/assets/images/community.png";
-import diseases from "@/assets/images/diseases.png";
+import deceases from "@/assets/images/deceases.png";
 import market from "@/assets/images/market.png";
 
 const TopCards = () => {
@@ -30,7 +30,7 @@ const TopCards = () => {
     },
     {
       url: "/deceases",
-      image: diseases,
+      image: deceases,
       title: t("main_topics.diseases"),
     },
     {

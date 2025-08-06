@@ -1,15 +1,14 @@
 import React from "react";
-import { useRouter } from "next/router";
 import Image from "next/image";
-import { useTranslation } from "next-i18next";
 
-import { data } from "@/data/interfaces";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import { deceaseItem, DeceasesApiResponse } from "@/data/interfaces/deceases";
 
-import styles from "./diseases.module.scss";
-import diseases from "@/assets/images/diseases.png";
+import styles from "./deceases.module.scss";
+import deceases from "@/assets/images/deceases.png";
 
-const Diseases = ({ data }: { data: DeceasesApiResponse }) => {
+const Deceases = ({ data }: { data: DeceasesApiResponse }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -31,16 +30,16 @@ const Diseases = ({ data }: { data: DeceasesApiResponse }) => {
             <div
               className={styles.card}
               key={index}
-              onClick={() => handleNavigate(`/diseases/${item.slug}`)}
+              onClick={() => handleNavigate(`/deceases/${item.slug}`)}
             >
               <Image
-                src={item.image ? item.image : diseases.src}
+                src={item.image ? item.image : deceases.src}
                 alt="diseasess image"
                 className={styles.image}
                 width={300}
                 height={300}
               />
-              <p className={styles.title}>{item.title}</p>
+              <p className={styles.title}>{item.name}</p>
             </div>
           ))}
         </div>
@@ -50,11 +49,11 @@ const Diseases = ({ data }: { data: DeceasesApiResponse }) => {
           className={styles.diseases_button}
           onClick={() => handleNavigate(`/deceases`)}
         >
-          {t("buttons.view_diseases")}
+          {t("buttons.view_deceases")}
         </button>
       </div>
     </div>
   );
 };
 
-export default Diseases;
+export default Deceases;

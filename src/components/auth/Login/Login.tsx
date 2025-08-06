@@ -32,8 +32,9 @@ const Login = ({ tabId, setTabId }: authProps) => {
     username: false,
     password: false,
   });
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const { setUser } = useMyContext();
 

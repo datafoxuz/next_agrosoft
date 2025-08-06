@@ -12,7 +12,6 @@ import React from "react";
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
 const Collections = dynamic(() => import("@/components/cardsCollection/CardsCollection"))
 const NotFound = dynamic(() => import("@/components/notFound/NotFound"))
-const ErrorPage = dynamic(() => import("../_error"))
 
 
 const index = ({ deceases }: { deceases: DeceasesApiResponse }) => {

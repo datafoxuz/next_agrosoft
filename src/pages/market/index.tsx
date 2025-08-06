@@ -69,17 +69,14 @@ export async function getServerSideProps({
   let categoriesData;
 
   if (search.length) {
-    categoriesData = await request(`/marketplace-search?q=${search}`, "GET", null, false, locale);
+    categoriesData = await request(`/marketplace/categories?search=${search}`, "GET", null, false, locale);
   } else {
     categoriesData = await request(`/marketplace/categories`, "GET", null, false, locale);
   }
 
   return {
     props: {
-      categories: {
-        ...categoriesData.data,
-        status: categoriesData.response.status,
-      },
+      categories: {...categoriesData.data, status: categoriesData.response.status},
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

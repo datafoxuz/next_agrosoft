@@ -21,7 +21,6 @@ export interface singleArticleData {
   article: article;
   similar: article[];
   seo: seo;
-  paginator: pagination;
 }
 export type ArticlesApiResponse = ApiResponse<articleData>;
 export type SingleArticlesApiResponse = ApiResponse<singleArticleData>;
