@@ -11,7 +11,7 @@
     "default_name": "Full name",
     "acc_info": "Personal account",
     "question_created": "Question created successfully",
-     "answer_created": "Answer created successfully"
+    "answer_created": "Answer created successfully"
   },
 
   "buttons": {
@@ -160,6 +160,8 @@
 
   "account": {
     "personal_info": {
+      "firstname": "Firstname",
+      "lastname": "Lastname",
       "title": "Personal Information",
       "phone": "Phone",
       "email": "Email"

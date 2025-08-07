@@ -11,7 +11,7 @@
     "default_name": "Имя Фамилия",
     "acc_info": "Персональный аккаунт",
     "question_created": "Вопрос успешно создан",
-     "answer_created": "Ответ успешно создан"
+    "answer_created": "Ответ успешно создан"
   },
 
   "buttons": {
@@ -160,6 +160,8 @@
 
   "account": {
     "personal_info": {
+      "firstname": "Имя",
+      "lastname": "Фамилия",
       "title": "Личная информация",
       "phone": "Телефон",
       "email": "Электронная почта"

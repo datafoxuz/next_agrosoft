@@ -135,8 +135,7 @@ export async function getServerSideProps({
   );
 
   const mySaved = await request(
-    `/saved-modules/getByModule?module_name=${
-      query.type == "news" ? "articles" : query.type ? query.type : "blogs"
+    `/saved-modules/getByModule?module_name=${query.type == "news" ? "articles" : query.type ? query.type : "blogs"
     }`,
     "GET",
     null,

@@ -24,7 +24,9 @@ export interface User {
 }
 
 export interface FullUserData {
-  data: User;
+  data: {
+    user: User
+  };
   message: string;
   success: boolean;
 }

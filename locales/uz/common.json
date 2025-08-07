@@ -160,6 +160,8 @@
 
   "account": {
     "personal_info": {
+      "firstname": "Ism",
+      "lastname": "Familiya",
       "title": "Shaxsiy maʼlumotlar",
       "phone": "Telefon",
       "email": "Elektron pochta"

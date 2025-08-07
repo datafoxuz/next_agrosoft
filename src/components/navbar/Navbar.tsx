@@ -105,8 +105,8 @@ const Navbar = ({
               <AccountCircleIcon />
               <span>
                 {generateName(
-                  user.data.firstname,
-                  user.data.lastname,
+                  user.data.user.firstname,
+                  user.data.user.lastname,
                   t("main_topics.default_name")
                 )}
               </span>

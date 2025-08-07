@@ -3,7 +3,6 @@ import React, { FormEvent, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
-import { imageUpload } from "@/utils/helperFunctions";
 import { useRouter } from "next/router";
 import { useMyContext } from "@/hooks/useMyContext";
 
@@ -18,69 +17,59 @@ const PersonalInfo = () => {
   const router = useRouter();
 
   //states ======================
-  const [fname, setFName] = useState<string>("");
-  const [lname, setLName] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [fname, setFName] = useState<string>();
+  const [lname, setLName] = useState<string>();
+  const [phone, setPhone] = useState<string>();
+  const [email, setEmail] = useState<string>();
   const [image, setImage] = useState<File | undefined | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
   useEffect(() => {
-    setFName(user?.data.firstname ? user.data.firstname : "");
-    setLName(user?.data.lastname ? user.data.lastname : "");
-    setPhone(user?.data.phone ? user.data.phone : "");
-    setEmail(user?.data.email ? user.data.email : "");
+    setFName(user?.data.user.firstname ? user.data.user.firstname : "");
+    setLName(user?.data.user.lastname ? user.data.user.lastname : "");
+    setPhone(user?.data.user.phone ? user.data.user.phone : "");
+    setEmail(user?.data.user.email ? user.data.user.email : "");
   }, [user]);
 
-  async function updateInfo(mainId: number) {
-    let body: {
-      firstname: string;
-      lastname: string;
-      photo_file_id: number;
-      phone: string;
-      email: string;
-    } = {
-      firstname: fname,
-      lastname: lname,
-      photo_file_id: mainId,
-      phone,
-      email,
-    };
+  async function updateInfo() {
 
-    const { response, data } = await request(
+    const {data, response} = await request(
       `/users/update`,
       "PUT",
-      JSON.stringify(body),
+      JSON.stringify({firstname: fname, lastname: lname, phone: phone, email}),
       false,
       router.locale,
       {
         Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        "Content-Type": "application/json"
       }
     );
+    setIsLoading(false);
 
     if (response.status === 200) {
       setImage(null);
-      setIsLoading(false);
+      
       toast.success("Foydalanuvchi ma'lumotlari yangilandi.");
-      setUser(data);
     } else {
-      setIsLoading(false);
       toast.error(`Error status: ${response.status}`);
     }
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (image) {
-      setIsLoading(true);
-      await imageUpload(image).then((mainId) => updateInfo(mainId));
-    } else {
-      setIsLoading(true);
-      if (user) {
-        updateInfo(user.data.photo_id);
-      }
-    }
+    setIsLoading(true);
+    updateInfo();
+
+    // if (image) {
+    //   setIsLoading(true);
+    //   await imageUpload(image).then((mainId) => updateInfo(mainId));
+    // } else {
+    //   setIsLoading(true);
+    //   if (user) {
+    //     updateInfo(user.data.user.photo_id);
+    //   }
+    // }
   }
 
   //helper functions==============================================================
@@ -102,8 +91,8 @@ const PersonalInfo = () => {
             style={{
               backgroundImage: image
                 ? `url(${URL.createObjectURL(image)})`
-                : user?.data.photo
-                ? `url(${user.data.photo})`
+                : user?.data.user.photo
+                ? `url(${user.data.user.photo})`
                 : `url(${defaultImg.src})`,
             }}
           ></div>
@@ -119,23 +108,23 @@ const PersonalInfo = () => {
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.input_label}>
-          <label>{t("main_topics.default_name")}</label>
+          <label>{t("account.personal_info.firstname")}</label>
           <input
-            name="name"
+            name="firstname"
             value={fname}
             onChange={(e) => setFName(e.target.value)}
             type="text"
-            placeholder="Raxmatov Shoxrux"
+            placeholder="Shoxrux"
           />
         </div>
         <div className={styles.input_label}>
-          <label>{t("main_topics.default_name")}</label>
+          <label>{t("account.personal_info.lastname")}</label>
           <input
-            name="name"
+            name="lastname"
             value={lname}
             onChange={(e) => setLName(e.target.value)}
             type="text"
-            placeholder="Raxmatov Shoxrux"
+            placeholder="Raxmatov"
           />
         </div>
         <div className={styles.input_label}>
@@ -145,7 +134,7 @@ const PersonalInfo = () => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             type="phone"
-            placeholder="+99897 888 99 33"
+            placeholder="+99890 000 00 00"
           />
         </div>
         <div className={styles.input_label}>

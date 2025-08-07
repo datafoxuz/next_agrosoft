@@ -1,5 +1,5 @@
 import { FullUserData } from "./user";
-import { WeatherData, DailyAndHourlyWeatherType } from "./weather";
+import { WeatherData } from "./weather";
 import { LocationInfoType } from "./location";
 
 export interface MainContextType {
