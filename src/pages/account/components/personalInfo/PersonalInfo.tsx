@@ -37,7 +37,7 @@ const PersonalInfo = () => {
     const {data, response} = await request(
       `/users/update`,
       "PUT",
-      JSON.stringify({firstname: fname, lastname: lname, phone: phone, email}),
+      JSON.stringify({firstname: fname, lastname: lname, phone: phone}),
       {
         locale: router.locale,
         headers: {
@@ -143,9 +143,9 @@ const PersonalInfo = () => {
           <input
             name="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
             type="email"
             placeholder="mygmail@gmail.com"
+            disabled
           />
         </div>
 
