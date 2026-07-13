@@ -14,7 +14,8 @@ export class ApiError extends Error {
     public status: number,
     public statusText: string,
     public url: string,
-    message: string
+    message: string,
+    public validationErrors?: Record<string, string>
   ) {
     super(message);
     this.name = "ApiError";
@@ -119,10 +120,11 @@ async function request<T = any>(
       // Handle non-OK responses
       if (!response.ok) {
         let errorMessage = `HTTP Error: ${response.status} ${response.statusText}`;
+        let validationErrors: Record<string, string> | undefined;
 
         try {
           const errorData = await response.json();
-          // Handle API error format: { success: false, error: { message, code } }
+          // Handle API error format: { success: false, error: { message, code }, meta: { validation_errors } }
           if (errorData.error?.message) {
             errorMessage = errorData.error.message;
           } else if (errorData.message) {
@@ -130,11 +132,16 @@ async function request<T = any>(
           } else if (typeof errorData === "string") {
             errorMessage = errorData;
           }
+          
+          // Extract validation errors from meta
+          if (errorData.meta?.validation_errors) {
+            validationErrors = errorData.meta.validation_errors;
+          }
         } catch {
           // If response body is not JSON, use status text
         }
 
-        throw new ApiError(response.status, response.statusText, fullUrl, errorMessage);
+        throw new ApiError(response.status, response.statusText, fullUrl, errorMessage, validationErrors);
       }
 
       // Parse response
@@ -157,7 +164,11 @@ async function request<T = any>(
           (data as any).error?.message ||
           (data as any).message ||
           "Unknown error occurred";
-        throw new ApiError(response.status, "API Error", fullUrl, errorMsg);
+        
+        // Extract validation errors from meta if present
+        const validationErrors = (data as any).meta?.validation_errors;
+        
+        throw new ApiError(response.status, "API Error", fullUrl, errorMsg, validationErrors);
       }
 
       return { response, data };

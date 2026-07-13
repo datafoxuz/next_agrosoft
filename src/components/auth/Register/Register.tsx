@@ -3,6 +3,7 @@ import React, { FormEvent, useState } from "react";
 import { useTranslation } from "next-i18next";
 import styles from "../auth.module.scss";
 import { request, ApiError } from "@/lib/request";
+import { parseValidationErrors } from "@/lib/errorHandler";
 import { toast } from "react-toastify";
 
 
@@ -14,13 +15,13 @@ const Register = () => {
   const [firstname, setFirstname] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [isError, setIsError] = useState<{
-    username: boolean;
-    firstname: boolean;
-    password: boolean;
+    username: { hasError: boolean; message: string };
+    firstname: { hasError: boolean; message: string };
+    password: { hasError: boolean; message: string };
   }>({
-    username: false,
-    firstname: false,
-    password: false,
+    username: { hasError: false, message: "" },
+    firstname: { hasError: false, message: "" },
+    password: { hasError: false, message: "" },
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const handleRegister = async (
@@ -31,7 +32,11 @@ const Register = () => {
   ) => {
     e.preventDefault();
     setIsLoading(true);
-    setIsError({ username: false, firstname: false, password: false });
+    setIsError({
+      username: { hasError: false, message: "" },
+      firstname: { hasError: false, message: "" },
+      password: { hasError: false, message: "" },
+    });
 
     try {
       const { data, response } = await request(
@@ -48,6 +53,25 @@ const Register = () => {
     } catch (error) {
       if (error instanceof ApiError) {
         toast.error(error.message);
+        
+        // Handle validation errors
+        if (error.validationErrors) {
+          const fieldErrors = parseValidationErrors(error.validationErrors);
+          setIsError({
+            username: {
+              hasError: !!fieldErrors.username,
+              message: fieldErrors.username || "",
+            },
+            firstname: {
+              hasError: !!fieldErrors.firstname,
+              message: fieldErrors.firstname || "",
+            },
+            password: {
+              hasError: !!fieldErrors.password,
+              message: fieldErrors.password || "",
+            },
+          });
+        }
       } else if (error instanceof Error) {
         toast.error(error.message);
       } else {
@@ -59,29 +83,25 @@ const Register = () => {
   };
   function handleChangeUserInp(value: string) {
     setUsername(value);
-
-    
-      setIsError((prevstate) => ({
-        ...prevstate,
-        username: false,
-      }));
-    
+    setIsError((prevstate) => ({
+      ...prevstate,
+      username: { hasError: false, message: "" },
+    }));
   }
 
   function handleChangeFirstnameInp(value: string) {
     setFirstname(value);
-
     setIsError((prevstate) => ({
       ...prevstate,
-      firstname: false,
+      firstname: { hasError: false, message: "" },
     }));
   }
+
   function handleChangePasswordInp(value: string) {
     setPassword(value);
-
     setIsError((prevstate) => ({
       ...prevstate,
-      password: false,
+      password: { hasError: false, message: "" },
     }));
   }
   return (
@@ -94,28 +114,39 @@ const Register = () => {
             type="text"
             placeholder={`${t("main_topics.default_name")}`}
             value={firstname}
-            data-err={isError.firstname}
+            data-err={isError.firstname.hasError}
             onChange={(e) => handleChangeFirstnameInp(e.target.value)}
             className={styles.input}
           />
+          {isError.firstname.hasError && (
+            <p className={styles.error_msg}>{isError.firstname.message}</p>
+          )}
+          
           <input
             name="username"
             type="text"
             value={username}
-            data-err={isError.username}
+            data-err={isError.username.hasError}
             placeholder={`${t("auth.username_inp")}`}
             onChange={(e) => handleChangeUserInp(e.target.value)}
             className={styles.input}
           />
+          {isError.username.hasError && (
+            <p className={styles.error_msg}>{isError.username.message}</p>
+          )}
+          
           <input
             name="password"
             type="text"
             value={password}
-            data-err={isError.password}
+            data-err={isError.password.hasError}
             placeholder={`${t("auth.pass_inp")}`}
             onChange={(e) => handleChangePasswordInp(e.target.value)}
             className={styles.input}
           />
+          {isError.password.hasError && (
+            <p className={styles.error_msg}>{isError.password.message}</p>
+          )}
         </div>
 
         <div className={styles.buttons_wrapper}>

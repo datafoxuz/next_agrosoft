@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { authProps } from "../data";
 import { request, ApiError } from "@/lib/request";
+import { parseValidationErrors } from "@/lib/errorHandler";
 import { useTranslation } from "next-i18next";
 import { setCookie } from "nookies";
 
@@ -26,11 +27,11 @@ const Login = ({ tabId, setTabId }: authProps) => {
   const [password, setPassword] = useState<string>();
   const [isShowPass, setIsShowPass] = useState<boolean>(false);
   const [isError, setIsError] = useState<{
-    username: boolean;
-    password: boolean;
+    username: { hasError: boolean; message: string };
+    password: { hasError: boolean; message: string };
   }>({
-    username: false,
-    password: false,
+    username: { hasError: false, message: "" },
+    password: { hasError: false, message: "" },
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -50,7 +51,10 @@ const Login = ({ tabId, setTabId }: authProps) => {
     if (username && password) {
       if (username.length > 13 && password.length > 4) {
         setIsLoading(true);
-        setIsError({ username: false, password: false });
+        setIsError({
+          username: { hasError: false, message: "" },
+          password: { hasError: false, message: "" },
+        });
         
         try {
           // Sign in using the provided credentials
@@ -74,6 +78,21 @@ const Login = ({ tabId, setTabId }: authProps) => {
         } catch (error) {
           if (error instanceof ApiError) {
             toast.error(error.message);
+            
+            // Handle validation errors
+            if (error.validationErrors) {
+              const fieldErrors = parseValidationErrors(error.validationErrors);
+              setIsError({
+                username: {
+                  hasError: !!fieldErrors.username,
+                  message: fieldErrors.username || "",
+                },
+                password: {
+                  hasError: !!fieldErrors.password,
+                  message: fieldErrors.password || "",
+                },
+              });
+            }
           } else if (error instanceof Error) {
             toast.error(error.message);
           } else {
@@ -84,8 +103,14 @@ const Login = ({ tabId, setTabId }: authProps) => {
         }
       } else {
         setIsError({
-          username: username.length < 13,
-          password: password.length < 4,
+          username: {
+            hasError: username.length < 13,
+            message: username.length < 13 ? "Username too short" : "",
+          },
+          password: {
+            hasError: password.length < 4,
+            message: password.length < 4 ? "Password too short" : "",
+          },
         });
       }
     }
@@ -93,24 +118,18 @@ const Login = ({ tabId, setTabId }: authProps) => {
 
   function handleChangeUserInp(value: string) {
     setUsername(value);
-
-    if (username && username.length >= 13) {
-      setIsError((prevstate) => ({
-        ...prevstate,
-        username: false,
-      }));
-    }
+    setIsError((prevstate) => ({
+      ...prevstate,
+      username: { hasError: false, message: "" },
+    }));
   }
 
   function handleChangePassInp(value: string) {
     setPassword(value);
-
-    if (password && password.length >= 4) {
-      setIsError((prevstate) => ({
-        ...prevstate,
-        password: false,
-      }));
-    }
+    setIsError((prevstate) => ({
+      ...prevstate,
+      password: { hasError: false, message: "" },
+    }));
   }
 
   //JSX=========================================
@@ -125,13 +144,13 @@ const Login = ({ tabId, setTabId }: authProps) => {
           placeholder={`${t("auth.username_inp")}`}
           className={`${styles.input} ${styles.username_inp}`}
           value={username}
-          data-err={isError.username}
+          data-err={isError.username.hasError}
           onChange={(e) => handleChangeUserInp(e.target.value)}
           required
         />
 
-        {isError.username ? (
-          <p className={styles.error_msg}>{t("auth.username_err_msg")}</p>
+        {isError.username.hasError ? (
+          <p className={styles.error_msg}>{isError.username.message || t("auth.username_err_msg")}</p>
         ) : null}
 
         {/* =========================================== */}
@@ -142,7 +161,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
             placeholder={`${t("auth.pass_inp")}`}
             className={`${styles.input} ${styles.password_inp}`}
             value={password}
-            data-err={isError.password}
+            data-err={isError.password.hasError}
             onChange={(e) => handleChangePassInp(e.target.value)}
             required
           />
@@ -155,10 +174,10 @@ const Login = ({ tabId, setTabId }: authProps) => {
           />
         </div>
 
-        {isError.password ? (
-          <p className={styles.error_msg}>{t("auth.pass_err_msg")}</p>
+        {isError.password.hasError ? (
+          <p className={styles.error_msg}>{isError.password.message || t("auth.pass_err_msg")}</p>
         ) : null}
-
+        
         {/* =========================================== */}
 
         <p className={styles.reset_pass} onClick={() => setTabId(tabId + 1)}>
