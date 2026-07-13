@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.uz.cyberbrains.agrolife",
+      "sha256_cert_fingerprints": [
+        "9B:38:5F:7F:6F:2D:DC:E5:E8:59:CA:3F:43:80:37:1C:DF:0F:33:D4:CD:82:2E:E1:82:7D:9F:FB:B5:81:31:43"
+      ]
+    }
+  }
+]
