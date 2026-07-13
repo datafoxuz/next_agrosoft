@@ -1,4 +1,4 @@
-import { responseData } from "@/data/interfaces";
+import { ResponseData } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
@@ -12,7 +12,7 @@ const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
 const CommunityInternalPage = dynamic(() => import("@/components/internalPage/CommunityInternalPage"));
 
 
-const index = ({ question }: { question: responseData }) => {
+const index = ({ question }: { question: ResponseData }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -32,14 +32,15 @@ const index = ({ question }: { question: responseData }) => {
   ];
 
 
-  if(!question.success) return (<ErrorPage  />);
-  return (
-    <SEO metaTitle={question.seo?.title} metaDescription={question.seo?.description} author={question.seo?.author}>
-      <SNavbar siteWay={siteWay} innerPage />
-      <CommunityInternalPage data={question.data} />
+  // if(!question.success) return (<ErrorPage  />);
+  // return (
+  //   <SEO metaTitle={question.seo?.title} metaDescription={question.seo?.description} author={question.seo?.author}>
+  //     <SNavbar siteWay={siteWay} innerPage />
+  //     <CommunityInternalPage data={question.data} />
+  //     <CommunityInternalPage data={question.data.problem} />
 
-    </SEO>
-  );
+  //   </SEO>
+  // );
 };
 
 export async function getServerSideProps({

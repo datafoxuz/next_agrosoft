@@ -1,4 +1,4 @@
-import { responseData, SingleBlogsApiResponse, sitewayProps } from "@/data/interfaces";
+import { SingleBlogsApiResponse, sitewayProps } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
