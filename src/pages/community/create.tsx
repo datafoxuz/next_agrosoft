@@ -63,7 +63,7 @@ const create = ({ status }: { status: number }) => {
     }
 
     try {
-      const response = await fetch(`/api/community/create`, {
+      const response = await fetch(`/api/v1/site/community/create`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${userToken}`,
