@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
-const InternalPage = dynamic(() => import("@/components/internalPage/InternalPage"))
+const AboutInternalPage = dynamic(() => import("@/components/internalPage/AboutInternalPage"));
 
 const index = () => {
   const { t } = useTranslation("common");
@@ -23,7 +23,7 @@ const index = () => {
   return (
     <SEO metaTitle="About">
       <SNavbar siteWay={siteWay} title={`${t("inner_page.about_us")}`} about />
-      <InternalPage about />
+      <AboutInternalPage />
     </SEO>
   );
 };

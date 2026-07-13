@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
-const InternalPage = dynamic(() => import("@/components/internalPage/InternalPage"))
+const ArticleInternalPage = dynamic(() => import("@/components/internalPage/ArticleInternalPage"));
 
 const index = ({ article }: { article: SingleArticlesApiResponse }) => {
   const {t} = useTranslation("common")
@@ -39,7 +39,8 @@ const index = ({ article }: { article: SingleArticlesApiResponse }) => {
       author={article.data.article.seo?.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={article.data.article} similar={article.data.similar} type="articles"/>
+      <ArticleInternalPage data={article.data.article} similar={article.data.similar} type="articles" />
+
     </SEO>
   );
 };

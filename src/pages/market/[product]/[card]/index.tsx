@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
-const InternalPage = dynamic(() => import("@/components/internalPage/InternalPage"))
+const ProductInternalPage = dynamic(() => import("@/components/internalPage/ProductInternalPage"));
 
 const index = ({ data }: { data: card }) => {
   const { t } = useTranslation("common");
@@ -38,7 +38,7 @@ const index = ({ data }: { data: card }) => {
   return (
     <SEO metaTitle={data.seo?.title} metaDescription={data.seo?.description} author={data.seo?.author}>
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={data} type="products" />
+      <ProductInternalPage data={data} />
     </SEO>
   );
 };

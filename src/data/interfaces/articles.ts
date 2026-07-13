@@ -11,6 +11,7 @@ export interface article {
     is_published: boolean;
     is_featured: boolean;
     description: string;
+    body?: string;
 }
 export interface articleData {
   articles: article[];

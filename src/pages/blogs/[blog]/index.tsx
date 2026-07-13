@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
-const InternalPage = dynamic(() => import("@/components/internalPage/InternalPage"))
+const ArticleInternalPage = dynamic(() => import("@/components/internalPage/ArticleInternalPage"));
 
 const index = ({ blog }: { blog: SingleBlogsApiResponse }) => {
   const { t } = useTranslation("common");
@@ -34,7 +34,7 @@ const index = ({ blog }: { blog: SingleBlogsApiResponse }) => {
       author={blog.data.blog.seo?.author}
     >
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage data={blog.data.blog} similar={blog.data.similar} type="blogs" />
+    <ArticleInternalPage data={blog.data.blog} similar={blog.data.similar} type="blogs" />
     </SEO>
   );
 };

@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
-const InternalPage = dynamic(() => import("@/components/internalPage/InternalPage"))
+const CommunityInternalPage = dynamic(() => import("@/components/internalPage/CommunityInternalPage"));
 
 
 const index = ({ question }: { question: responseData }) => {
@@ -36,7 +36,8 @@ const index = ({ question }: { question: responseData }) => {
   return (
     <SEO metaTitle={question.seo?.title} metaDescription={question.seo?.description} author={question.seo?.author}>
       <SNavbar siteWay={siteWay} innerPage />
-      <InternalPage questions data={question.data} />
+      <CommunityInternalPage data={question.data} />
+
     </SEO>
   );
 };

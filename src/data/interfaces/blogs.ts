@@ -6,6 +6,8 @@ export interface blog {
   seo: seo;
   slug: string;
   image: string;
+  body?: string;
+  created_at?: string;
 }
 
 export interface blogsData {
