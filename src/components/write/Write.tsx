@@ -49,7 +49,7 @@ const Write = ({
     }
 
     try {
-      const response = await fetch(`api.agrosoft.uz/api/v1/site/community/write-answer`, {
+      const response = await fetch(`https://api.agrosoft.uz/api/v1/site/community/write-answer`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${userToken}`,
