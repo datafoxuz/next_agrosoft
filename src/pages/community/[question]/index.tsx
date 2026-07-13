@@ -32,15 +32,14 @@ const index = ({ question }: { question: ResponseData }) => {
   ];
 
 
-  // if(!question.success) return (<ErrorPage  />);
-  // return (
-  //   <SEO metaTitle={question.seo?.title} metaDescription={question.seo?.description} author={question.seo?.author}>
-  //     <SNavbar siteWay={siteWay} innerPage />
-  //     <CommunityInternalPage data={question.data} />
-  //     <CommunityInternalPage data={question.data.problem} />
+  if(!question.success) return (<ErrorPage  />);
+  return (
+    <SEO metaTitle={question.data.problem?.title} metaDescription={question.data.problem?.body} >
+      <SNavbar siteWay={siteWay} innerPage />
+      <CommunityInternalPage data={question.data.problem} />
 
-  //   </SEO>
-  // );
+    </SEO>
+  );
 };
 
 export async function getServerSideProps({
