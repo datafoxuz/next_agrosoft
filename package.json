@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,scss,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,scss,json}\""
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -19,7 +22,6 @@
     "flag-icons": "^6.7.0",
     "framer-motion": "^10.12.4",
     "next": "13.3.1",
-    "next-auth": "^4.22.1",
     "next-i18next": "^13.3.0",
     "nookies": "^2.5.2",
     "nprogress": "^0.2.0",
@@ -33,10 +35,8 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@types/next-auth": "^3.15.0",
     "@types/node": "20.2.5",
     "@types/nprogress": "^0.2.0",
-    "@types/react": "18.2.8",
-    "prisma": "^4.15.0"
+    "@types/react": "18.2.8"
   }
 }
