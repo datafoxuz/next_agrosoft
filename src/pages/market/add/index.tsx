@@ -4,7 +4,6 @@ import SEO from "@/layouts/seo/seo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
-import { imageUpload } from "@/utils/helperFunctions";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 
@@ -52,58 +51,45 @@ const AddProduct = () => {
     },
   ];
 
-  const addProduct = async (mainId: number) => {
-    let body: {
-      name: string;
-      description: string;
-      price: string;
-      low_price: string;
-      high_price: string;
-      low_amount: string;
-      high_amount: string;
-      is_negotiable: boolean;
-      main_image_id: number;
-      amount_type_id: number;
-      category_id: number,
-      country_id: number;
-      region_id: number;
-      type_id: number
-    } = {
-      name,
-      description: desc,
-      price,
-      low_price: lowPrice,
-      high_price: highPrice,
-      low_amount: lowWeight,
-      high_amount: highWeight,
-      is_negotiable: isNegotiable,
-      main_image_id: mainId,
-      amount_type_id: 1,
-      category_id: category,
-      country_id: 1,
-      region_id: 1,
-      type_id: 1
-    };
+  const addProduct = async (image: File) => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("description", desc);
+    formData.append("price", price);
+    formData.append("low_price", lowPrice);
+    formData.append("high_price", highPrice);
+    formData.append("low_amount", lowWeight);
+    formData.append("high_amount", highWeight);
+    formData.append("is_negotiable", String(isNegotiable));
+    formData.append("amount_type_id", "1");
+    formData.append("category_id", String(category));
+    formData.append("country_id", String(countryId));
+    formData.append("region_id", String(regionId));
+    formData.append("type_id", "1");
+    formData.append("main_image", image);
+
     const userToken = localStorage.getItem("userToken");
 
-    const { response } = await request(
-      `/marketplace/create-product`,
-      "POST",
-      JSON.stringify(body),
-      {
-        locale: router.locale,
+    try {
+      const response = await fetch(`/api/marketplace/create-product`, {
+        method: "POST",
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
-      }
-    );
+        body: formData,
+      });
 
-    if (response.status == 200) {
-      handleClearInputs();
-      toast.success("Savol yaratildi!");
-    } else {
+      if (response.ok) {
+        handleClearInputs();
+        toast.success("Mahsulot qo'shildi!");
+      } else {
+        setIsLoading(false);
+        toast.error(`Error status: ${response.status}`);
+      }
+    } catch (error) {
       setIsLoading(false);
-      toast.error(`Error status: ${response.status}`);
+      toast.error("Failed to add product");
+      console.error("Error:", error);
     }
   };
 
@@ -111,7 +97,7 @@ const AddProduct = () => {
     e.preventDefault();
     if (image && name && desc && price && lowPrice && highPrice && lowWeight && highWeight && isNegotiable && category && countryId && regionId) {
       setIsLoading(true);
-      await imageUpload(image).then((id) => addProduct(id));
+      await addProduct(image);
     }
   }
 

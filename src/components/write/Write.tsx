@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import styles from "./write.module.scss";
 
 import AddIcon from "@mui/icons-material/Add";
-import { imageUpload } from "@/utils/helperFunctions";
 
 const Write = ({
   state,
@@ -31,13 +30,8 @@ const Write = ({
   const createQuiestionHandler = async () => {
     if (state.desc?.length) {
       setIsLoading(true);
-      if(state.file){
-        await imageUpload(state.file).then((mainImgId) =>
-          handleWriteAns(mainImgId)
-        );
-      }
-      handleWriteAns()
-    }else{
+      handleWriteAns();
+    } else {
       setIsEmpty({
         desc: !state.desc?.length,
       });
@@ -45,46 +39,41 @@ const Write = ({
   };
 
 
-  async function handleWriteAns(imgId?: number) {
+  async function handleWriteAns() {
     const userToken = localStorage.getItem("userToken");
-
-    let body: {
-      text: string | undefined;
-      file_id?: number;
-      problem_id: number
-    } = {
-      text: state.desc,
-      problem_id: questionId,
-    };
-
-    if(imgId){
-      body = {...body, file_id: imgId}
+    const formData = new FormData();
+    formData.append("text", state.desc || "");
+    formData.append("problem_id", String(questionId));
+    if (state.file) {
+      formData.append("file", state.file);
     }
 
-    const { response } = await request(
-      `/community/write-answer`,
-      "POST",
-      JSON.stringify(body),
-      {
-        locale: router.locale,
+    try {
+      const response = await fetch(`/api/community/write-answer`, {
+        method: "POST",
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
+        body: formData,
+      });
+
+      if (response.ok) {
+        setState({
+          ...state,
+          desc: "",
+          file: null,
+          active: false,
+        });
+        setIsLoading(false);
+        toast.success("Javob yaratildi");
+      } else {
+        setIsLoading(false);
+        toast.error(`Error status: ${response.status}`);
       }
-    );
-
-    if (response.status == 200) {
-      setState({
-        ...state,
-        desc: "",
-        file: null,
-        active: false
-      })
-      toast.success(t("main_topics.answer_created"));
-
-    } else {
+    } catch (error) {
       setIsLoading(false);
-      toast.error(`Error status: ${response.status}`);
+      toast.error("Failed to create answer");
+      console.error("Error:", error);
     }
   }
 

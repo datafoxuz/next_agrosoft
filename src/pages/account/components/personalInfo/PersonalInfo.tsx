@@ -33,27 +33,37 @@ const PersonalInfo = () => {
   }, [user]);
 
   async function updateInfo() {
+    const formData = new FormData();
+    formData.append("firstname", fname || "");
+    formData.append("lastname", lname || "");
+    formData.append("phone", phone || "");
+    if (image) {
+      formData.append("photo", image);
+    }
 
-    const {data, response} = await request(
-      `/users/update`,
-      "PUT",
-      JSON.stringify({firstname: fname, lastname: lname, phone: phone}),
-      {
-        locale: router.locale,
+    const userToken = localStorage.getItem("userToken");
+
+    try {
+      const response = await fetch(`/api/users/update`, {
+        method: "PUT",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-          "Content-Type": "application/json"
-        }
-      }
-    );
-    setIsLoading(false);
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: formData,
+      });
 
-    if (response.status === 200) {
-      setImage(null);
-      
-      toast.success("Foydalanuvchi ma'lumotlari yangilandi.");
-    } else {
-      toast.error(`Error status: ${response.status}`);
+      setIsLoading(false);
+
+      if (response.ok) {
+        setImage(null);
+        toast.success("Foydalanuvchi ma'lumotlari yangilandi.");
+      } else {
+        toast.error(`Error status: ${response.status}`);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to update profile");
+      console.error("Error:", error);
     }
   }
 
@@ -61,16 +71,6 @@ const PersonalInfo = () => {
     e.preventDefault();
     setIsLoading(true);
     updateInfo();
-
-    // if (image) {
-    //   setIsLoading(true);
-    //   await imageUpload(image).then((mainId) => updateInfo(mainId));
-    // } else {
-    //   setIsLoading(true);
-    //   if (user) {
-    //     updateInfo(user.data.user.photo_id);
-    //   }
-    // }
   }
 
   //helper functions==============================================================

@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { toast } from "react-toastify";
-import { imageUpload } from "@/utils/helperFunctions";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { parseCookies } from "nookies";
@@ -53,45 +52,40 @@ const create = ({ status }: { status: number }) => {
 
   //main functions =========================================================
 
-  const createQuestion = async (mainId: number, scndId?: number) => {
+  const createQuestion = async (mainImage: File, secondImage?: File) => {
     const userToken = localStorage.getItem("userToken");
-    let body: {
-      title: string;
-      body: string;
-      file_id: number;
-      images?: number[] | null;
-    } = {
-      title: title,
-      body: desc,
-      file_id: mainId,
-    };
-
-    if (scndId) {
-      body = { ...body, images: [scndId] };
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("body", desc);
+    formData.append("file", mainImage);
+    if (secondImage) {
+      formData.append("images", secondImage);
     }
 
-    const { response } = await request(
-      `/community/create`,
-      "POST",
-      JSON.stringify(body),
-      {
-        locale: router.locale,
+    try {
+      const response = await fetch(`/api/community/create`, {
+        method: "POST",
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
-      }
-    );
+        body: formData,
+      });
 
-    if (response.status == 200) {
-      setTitle("");
-      setDesc("");
-      setMainImage(null);
-      setSecondImage(null);
+      if (response.ok) {
+        setTitle("");
+        setDesc("");
+        setMainImage(null);
+        setSecondImage(null);
+        setIsLoading(false);
+        toast.success(t("main_topics.question_created"));
+      } else {
+        setIsLoading(false);
+        toast.error(`Error status: ${response.status}`);
+      }
+    } catch (error) {
       setIsLoading(false);
-      toast.success(t("main_topics.question_created"));
-    } else {
-      setIsLoading(false);
-      toast.error(`Error status: ${response.status}`);
+      toast.error("Failed to create question");
+      console.error("Error:", error);
     }
   };
 
@@ -103,17 +97,7 @@ const create = ({ status }: { status: number }) => {
         desc: desc.length < 1,
         image: !mainImage,
       });
-      if (secondImage) {
-        await imageUpload(mainImage).then((mainImgId) =>
-          imageUpload(secondImage).then((scndImgId) =>
-            createQuestion(mainImgId, scndImgId)
-          )
-        );
-      } else {
-        await imageUpload(mainImage).then((mainImgId) =>
-          createQuestion(mainImgId)
-        );
-      }
+      await createQuestion(mainImage, secondImage || undefined);
     } else {
       setIsEmpty({
         title: title.length < 1,
