@@ -56,7 +56,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
           `/auth/login`,
           "POST",
           JSON.stringify({ username, password }),
-          false
+          {}
         );
 
         setIsLoading(false);

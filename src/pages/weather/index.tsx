@@ -96,13 +96,12 @@ export async function getServerSideProps({
   let regionsData = null;
   let districtData = null;
 
-  regionsData = await request(`/data/1/regions`, "GET", null, false, locale);
+  regionsData = await request(`/data/1/regions`, "GET", null, { locale });
   districtData = await request(
     regionId ? `/data/${regionId}/districts` : `/data/1/districts`,
     "GET",
     null,
-    false,
-    locale
+    { locale }
   );
 
   return {

@@ -38,11 +38,12 @@ const PersonalInfo = () => {
       `/users/update`,
       "PUT",
       JSON.stringify({firstname: fname, lastname: lname, phone: phone, email}),
-      false,
-      router.locale,
       {
-        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        "Content-Type": "application/json"
+        locale: router.locale,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+          "Content-Type": "application/json"
+        }
       }
     );
     setIsLoading(false);

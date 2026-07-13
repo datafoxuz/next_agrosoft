@@ -70,6 +70,8 @@ interface RequestOptions {
   timeout?: number;
   retries?: number;
   returnNull?: boolean;
+  locale?: string | null;
+  headers?: Record<string, string>;
 }
 
 /**
@@ -85,16 +87,20 @@ async function request<T = any>(
     timeout = REQUEST_TIMEOUT,
     retries = RETRY_ATTEMPTS,
     returnNull = false,
+    locale,
+    headers: customHeaders = {},
   } = options;
 
-  const locale =
-    typeof window !== "undefined" && typeof navigator !== "undefined"
+  const resolvedLocale =
+    locale ||
+    (typeof window !== "undefined" && typeof navigator !== "undefined"
       ? navigator.language
-      : "en";
+      : "en");
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    "Accept-Language": locale,
+    "Accept-Language": resolvedLocale,
+    ...customHeaders,
   };
 
   const fullUrl = `${baseUrl}${url}`;

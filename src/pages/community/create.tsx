@@ -74,10 +74,11 @@ const create = ({ status }: { status: number }) => {
       `/community/create`,
       "POST",
       JSON.stringify(body),
-      false,
-      router.locale,
       {
-        Authorization: `Bearer ${userToken}`,
+        locale: router.locale,
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
       }
     );
 
@@ -314,8 +315,11 @@ export async function getServerSideProps({
 }) {
   const cookies = parseCookies({ req });
 
-  const userData = await request(`/users/about-me`, "GET", null, false, locale, {
-    Authorization: `Bearer ${cookies.userToken}`,
+  const userData = await request(`/users/about-me`, "GET", null, {
+    locale,
+    headers: {
+      Authorization: `Bearer ${cookies.userToken}`,
+    },
   });
 
   if (userData.response.status !== 401) {

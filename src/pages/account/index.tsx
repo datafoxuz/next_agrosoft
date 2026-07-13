@@ -127,10 +127,11 @@ export async function getServerSideProps({
     `/users/about-me`,
     "GET",
     null,
-    false,
-    locale,
     {
-      Authorization: `Bearer ${cookies.userToken}`,
+      locale,
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+      },
     }
   );
 
@@ -139,10 +140,11 @@ export async function getServerSideProps({
     }`,
     "GET",
     null,
-    false,
-    locale,
     {
-      Authorization: `Bearer ${cookies.userToken}`,
+      locale,
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+      },
     }
   );
 

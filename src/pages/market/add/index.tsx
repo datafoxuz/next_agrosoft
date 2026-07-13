@@ -90,10 +90,11 @@ const AddProduct = () => {
       `/marketplace/create-product`,
       "POST",
       JSON.stringify(body),
-      false,
-      router.locale,
       {
-        Authorization: `Bearer ${userToken}`,
+        locale: router.locale,
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
       }
     );
 

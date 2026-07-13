@@ -79,10 +79,10 @@ export async function getServerSideProps({
   let communitiesData;
 
   if (search.length) {
-    communitiesData = await request(`/community-search?q=${search}`, "GET", null, false, locale);
+    communitiesData = await request(`/community-search?q=${search}`, "GET", null, { locale });
   } else {
     communitiesData = await request(
-      `/community/index?page=${page}&per_page=10`, "GET", null, false, locale
+      `/community/index?page=${page}&per_page=10`, "GET", null, { locale }
     );
   }
 

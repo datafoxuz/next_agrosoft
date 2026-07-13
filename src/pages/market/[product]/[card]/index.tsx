@@ -51,7 +51,7 @@ export async function getServerSideProps({
   locale: string;
 }) {
   const { data, response } = await request(
-    `/marketplace/product/${params.card}`, "GET", null, false, locale
+    `/marketplace/product/${params.card}`, "GET", null, { locale }
   );
 
   if (response.status !== 404) {

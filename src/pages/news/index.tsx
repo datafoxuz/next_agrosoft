@@ -56,10 +56,10 @@ export async function getServerSideProps({
   const searchVal = query.search || "";
   let articlesData;
   if (searchVal.length) {
-    articlesData = await request(`/articles-with-pagination?search=${searchVal}`, "GET", null, false, locale);
+    articlesData = await request(`/articles-with-pagination?search=${searchVal}`, "GET", null, { locale });
   } else {
     articlesData = await request(
-      `/articles/articles-with-pagination?page=${page}&per_page=10`, "GET", null, false, locale
+      `/articles/articles-with-pagination?page=${page}&per_page=10`, "GET", null, { locale }
     );
   }
 

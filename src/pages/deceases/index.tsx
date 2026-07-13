@@ -65,10 +65,10 @@ export async function getServerSideProps({
   let deceasesData;
 
   if (search.length) {
-    deceasesData = await request(`/deceases/get-deceases?search=${search}`, "GET", null, false, locale);
+    deceasesData = await request(`/deceases/get-deceases?search=${search}`, "GET", null, { locale });
   } else {
     deceasesData = await request(
-      `/deceases/get-deceases?page=${page}&per_page=10`, "GET", null, false, locale
+      `/deceases/get-deceases?page=${page}&per_page=10`, "GET", null, { locale }
     );
   }
 

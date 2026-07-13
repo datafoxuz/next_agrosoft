@@ -121,11 +121,11 @@ const Home = ({ blogs, deceases, news, communities, settings }: HomeProps) => {
 export async function getServerSideProps({ locale }: { locale: string }) {
   try {
     const [blogsData, deceasesData, newsData, communitiesData, settingsData] = await Promise.all([
-      request("/blogs/get-latest-blogs", "GET", null, false, locale),
-      request("/deceases/get-popular-deceases", "GET", null, false, locale),
-      request("/articles/get-latest-articles", "GET", null, false, locale),
-      request("/community/latest-problems", "GET", null, false, locale),
-      request("/settings", "GET", null, false, locale),
+      request("/blogs/get-latest-blogs", "GET", null, { locale }),
+      request("/deceases/get-popular-deceases", "GET", null, { locale }),
+      request("/articles/get-latest-articles", "GET", null, { locale }),
+      request("/community/latest-problems", "GET", null, { locale }),
+      request("/settings", "GET", null, { locale }),
     ]);
 
     return {

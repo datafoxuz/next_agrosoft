@@ -65,10 +65,11 @@ const Write = ({
       `/community/write-answer`,
       "POST",
       JSON.stringify(body),
-      false,
-      router.locale,
       {
-        Authorization: `Bearer ${userToken}`,
+        locale: router.locale,
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
       }
     );
 

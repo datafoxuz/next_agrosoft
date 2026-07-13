@@ -48,9 +48,11 @@ const Navbar = ({
     const userToken = localStorage.getItem("userToken");
 
     if (userToken) {
-      request("/users/about-me", "GET", null, false, router.locale, {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${userToken}`,
+      request("/users/about-me", "GET", null, {
+        locale: router.locale,
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
       }).then(({ response, data }) => {
         if (response.status === 200) {
           console.log(data.data);

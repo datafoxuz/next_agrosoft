@@ -49,7 +49,7 @@ export async function getServerSideProps({
   params: { page: string };
   locale: string;
 }) {
-  const { data, response } = await request(`/deceases/${params.page}`, "GET", null, false, locale);
+  const { data, response } = await request(`/deceases/${params.page}`, "GET", null, { locale });
 
   if (response.status !== 404) {
     return {

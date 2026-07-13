@@ -73,10 +73,10 @@ export async function getServerSideProps({
   let blogsData;
 
   if (search.length) {
-    blogsData = await request(`/blog-search?q=${search}`, "GET", null, false, locale);
+    blogsData = await request(`/blog-search?q=${search}`, "GET", null, { locale });
   } else {
     blogsData = await request(
-      `/blogs/blogs-with-pagination?page=${page}&per_page=10`, "GET", null, false, locale
+      `/blogs/blogs-with-pagination?page=${page}&per_page=10`, "GET", null, { locale }
     );
   }
 

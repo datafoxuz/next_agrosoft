@@ -37,7 +37,7 @@ const Register = () => {
       `/auth/register`,
       "POST",
       JSON.stringify({ "username": username, "firstname": firstname, "password": password }),
-      false
+      {}
     );
 
     setIsLoading(false);
