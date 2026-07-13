@@ -63,7 +63,7 @@ const create = ({ status }: { status: number }) => {
     }
 
     try {
-      const response = await fetch(`https://api.agrosoft.com/api/v1/site/community/create`, {
+      const response = await fetch(`https://api.agrosoft.uz/api/v1/site/community/create`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${userToken}`,
