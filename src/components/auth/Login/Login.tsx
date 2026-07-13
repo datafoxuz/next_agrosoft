@@ -2,7 +2,7 @@ import React, { FormEvent, useContext, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { authProps } from "../data";
-import { request } from "@/lib/request";
+import { request, ApiError } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { setCookie } from "nookies";
 
@@ -51,26 +51,36 @@ const Login = ({ tabId, setTabId }: authProps) => {
       if (username.length > 13 && password.length > 4) {
         setIsLoading(true);
         setIsError({ username: false, password: false });
-        // Sign in using the provided credentials
-        const { data, response } = await request(
-          `/auth/login`,
-          "POST",
-          JSON.stringify({ username, password }),
-          {}
-        );
+        
+        try {
+          // Sign in using the provided credentials
+          const { data, response } = await request(
+            `/auth/login`,
+            "POST",
+            JSON.stringify({ username, password }),
+            {}
+          );
 
-        setIsLoading(false);
-        if (response && response.status === 200) {
-          router.push("/");
-          setUser(data);
-          localStorage.setItem("userToken", data.data.token);
-          localStorage.setItem("userData", JSON.stringify(data));
-          setCookie(null, "userToken", data.data.token, {
-            maxAge: 30 * 24 * 60 * 60, // Cookie expiration time in seconds (e.g., 30 days)
-            path: "/", // The path where the cookie is valid (e.g., the root path)
-          });
-        } else {
-          toast.error(`Error status: ${response.status}`);
+          if (response && response.status === 200) {
+            router.push("/");
+            setUser(data);
+            localStorage.setItem("userToken", data.data.token);
+            localStorage.setItem("userData", JSON.stringify(data));
+            setCookie(null, "userToken", data.data.token, {
+              maxAge: 30 * 24 * 60 * 60,
+              path: "/",
+            });
+          }
+        } catch (error) {
+          if (error instanceof ApiError) {
+            toast.error(error.message);
+          } else if (error instanceof Error) {
+            toast.error(error.message);
+          } else {
+            toast.error("An unexpected error occurred");
+          }
+        } finally {
+          setIsLoading(false);
         }
       } else {
         setIsError({

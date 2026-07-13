@@ -122,8 +122,14 @@ async function request<T = any>(
 
         try {
           const errorData = await response.json();
-          errorMessage =
-            errorData.message || errorData.error || errorMessage;
+          // Handle API error format: { success: false, error: { message, code } }
+          if (errorData.error?.message) {
+            errorMessage = errorData.error.message;
+          } else if (errorData.message) {
+            errorMessage = errorData.message;
+          } else if (typeof errorData === "string") {
+            errorMessage = errorData;
+          }
         } catch {
           // If response body is not JSON, use status text
         }
@@ -138,6 +144,20 @@ async function request<T = any>(
       } catch (parseError) {
         console.error(`Failed to parse response JSON from ${fullUrl}`);
         throw new Error(`Invalid JSON response from ${fullUrl}`);
+      }
+
+      // Check for API-level errors (success: false with error object)
+      if (
+        data &&
+        typeof data === "object" &&
+        "success" in data &&
+        data.success === false
+      ) {
+        const errorMsg =
+          (data as any).error?.message ||
+          (data as any).message ||
+          "Unknown error occurred";
+        throw new ApiError(response.status, "API Error", fullUrl, errorMsg);
       }
 
       return { response, data };

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
 import { useTranslation } from "next-i18next";
 import styles from "../auth.module.scss";
-import { request } from "@/lib/request";
+import { request, ApiError } from "@/lib/request";
 import { toast } from "react-toastify";
 
 
@@ -33,19 +33,28 @@ const Register = () => {
     setIsLoading(true);
     setIsError({ username: false, firstname: false, password: false });
 
-    const { data, response } = await request(
-      `/auth/register`,
-      "POST",
-      JSON.stringify({ "username": username, "firstname": firstname, "password": password }),
-      {}
-    );
+    try {
+      const { data, response } = await request(
+        `/auth/register`,
+        "POST",
+        JSON.stringify({ "username": username, "firstname": firstname, "password": password }),
+        {}
+      );
 
-    setIsLoading(false);
-    if (response && response.status === 200) {
-      router.push("/");
-
-    } else {
-      toast.error(`Error status: ${response.status}`);
+      if (response && response.status === 200) {
+        toast.success("Registration successful!");
+        router.push("/");
+      }
+    } catch (error) {
+      if (error instanceof ApiError) {
+        toast.error(error.message);
+      } else if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("An unexpected error occurred");
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
   function handleChangeUserInp(value: string) {
