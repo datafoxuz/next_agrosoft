@@ -41,8 +41,8 @@ const Answer = ({ data }: { data: answerType }) => {
         />
 
         <div className={styles.person_info}>
-          <Link href="/">Ahmad Bobojonov</Link>
-          <span>21 Apr, 16:00</span>
+          <Link href="/">{data.author_name}</Link>
+          <span>{data.created_at}</span>
         </div>
       </div>
     </div>

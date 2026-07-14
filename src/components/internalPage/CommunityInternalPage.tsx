@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SEO from "@/layouts/seo/seo";
 import { useTranslation } from "next-i18next";
-import { answerType, questionTypes, card } from "@/data/interfaces";
+import { answerType, questionTypes, communityProblemDetail, communityProblemInfo } from "@/data/interfaces";
 import Answer from "./Answer/Answer";
 import Write from "../write/Write";
 import Image from "next/image";
@@ -9,11 +9,7 @@ import defaultImage from "@/assets/images/default_image.png";
 
 import styles from "./internalPage.module.scss";
 
-interface QuestionData extends card {
-  answers?: { data: answerType[] };
-}
-
-const CommunityInternalPage = ({ data }: { data: QuestionData }) => {
+const CommunityInternalPage = ({ problem }: { problem: communityProblemInfo }) => {
   const { t } = useTranslation("common");
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
     active: false,
@@ -24,10 +20,10 @@ const CommunityInternalPage = ({ data }: { data: QuestionData }) => {
 
   return (
     <div className={styles.internal}>
-      <SEO metaTitle={data.seo?.title} metaDescription={data.seo?.description} author={data.seo?.author}>
+      <SEO metaTitle={problem?.title} metaDescription={problem?.body} author={problem?.author_name}>
         <div className={`${styles.image_wrapper} ${styles.section}`}>
           <Image
-            src={data.image ? data.image : defaultImage.src}
+            src={problem.image ? problem.image : defaultImage.src}
             alt="question image"
             className={styles.image}
             width={680}
@@ -35,12 +31,12 @@ const CommunityInternalPage = ({ data }: { data: QuestionData }) => {
           />
         </div>
 
-        <h2 className={styles.title}>{data.title}</h2>
+        <h2 className={styles.title}>{problem.title}</h2>
 
         <div className={styles.section}>
           <div className={styles.question}>
             <h3 className={styles.title}>{t("inner_page.question")}:</h3>
-            <h5 className={`${styles.description} ${styles.question}`}>{data.body}</h5>
+            <h5 className={`${styles.description} ${styles.question}`}>{problem.body}</h5>
           </div>
 
           <div className={styles.answer}>
@@ -48,7 +44,7 @@ const CommunityInternalPage = ({ data }: { data: QuestionData }) => {
               <h3 className={styles.title}>{t("inner_page.answers")}</h3>
               <div className={styles.answer_write}>
                 {isWriteAns.active ? (
-                  <Write state={isWriteAns} setState={setIsWriteAns} questionId={data.id} />
+                  <Write state={isWriteAns} setState={setIsWriteAns} questionId={problem.id} />
                 ) : (
                   <button
                     type="button"
@@ -65,8 +61,8 @@ const CommunityInternalPage = ({ data }: { data: QuestionData }) => {
           </div>
 
           <div className={styles.answer_list}>
-            {data.answers_count && data.answers_count > 0 ? (
-              data.answers?.data.map((item: answerType, index: number) => (
+            {problem.answers_count && problem.answers_count > 0 ? (
+              problem.answers?.map((item: answerType, index: number) => (
                 <Answer key={index} data={item} />
               ))
             ) : (

@@ -1,4 +1,4 @@
-import { ResponseData } from "@/data/interfaces";
+import { CommunityApiResponse, CommunityDetailApiResponse, communityProblemDetail, communityProblemInfo } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
@@ -12,7 +12,7 @@ const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
 const CommunityInternalPage = dynamic(() => import("@/components/internalPage/CommunityInternalPage"));
 
 
-const index = ({ question }: { question: ResponseData }) => {
+const index = ({ problem }: { problem: CommunityDetailApiResponse }) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -31,12 +31,11 @@ const index = ({ question }: { question: ResponseData }) => {
     },
   ];
 
-
-  if(!question.success) return (<ErrorPage  />);
+  // if(!problemResponse.success) return (<ErrorPage  />);
   return (
-    <SEO metaTitle={question.data.problem?.title} metaDescription={question.data.problem?.body} >
+    <SEO metaTitle={problem.data.problem.title} metaDescription={problem.data.problem?.body} >
       <SNavbar siteWay={siteWay} innerPage />
-      <CommunityInternalPage data={question.data.problem} />
+      <CommunityInternalPage problem={problem.data.problem} />
 
     </SEO>
   );
@@ -55,15 +54,16 @@ export async function getServerSideProps({
   if (response.status !== 404) {
     return {
       props: {
-        question: { ...data, status: response.status },
+        problem: { ...data, status: response.status},
         ...(await serverSideTranslations(locale, ["common"])),
       },
     };
-  } else {
-    return {
-      notFound: true,
-    };
+  } else{
+      return {
+            notFound: true,
+        };
   }
+  
 }
 
 export default index;
