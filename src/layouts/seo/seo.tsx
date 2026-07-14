@@ -18,6 +18,7 @@ const SEO = ({
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
         <title>{metaTitle}</title>
+        <meta name="yandex-verification" content="02886f372b8fcd60" />
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <meta name="keyword" content={metaKeywords} />
         <meta name="author" content={author} />
