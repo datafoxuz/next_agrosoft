@@ -21,7 +21,7 @@ const index = () => {
     },
   ];
   return (
-    <SEO metaTitle="About">
+    <SEO metaTitle="About" metaDescription="AgroSoft haqida sahifa" metaKeywords="agro fermer dehqonlar innovatsiya dastur">
       <SNavbar siteWay={siteWay} title={`${t("inner_page.about_us")}`} about />
       <AboutInternalPage />
     </SEO>

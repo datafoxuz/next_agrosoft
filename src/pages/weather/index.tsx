@@ -53,7 +53,7 @@ const WeatherPage = ({
 
   return (
     <WeatherLayout>
-      <SEO metaTitle={`${t("weather.title")} - AgroSoft`}>
+      <SEO metaTitle={`${t("weather.title")} - AgroSoft`} metaDescription="Uzbekistonda ob-havo ma'lumotlarini taqdim etuvchi sahifa fermerlar vadehqonlar uchun">
         <SNavbar
           siteWay={siteWay}
           title={`${t("main_topics.weather")}`}
