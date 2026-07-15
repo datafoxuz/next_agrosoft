@@ -8,7 +8,7 @@ import {
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 
-import styles from "../../weather.module.scss";
+import styles from "@/pages/weather/weather.module.scss";
 
 const RightSection = ({
   weatherData,

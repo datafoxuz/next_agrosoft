@@ -10,10 +10,10 @@ import dynamic from "next/dynamic";
 import { request } from "@/lib/request";
 import { RegionsApiResponse } from "@/data/interfaces/regions";
 import { DistrictsApiResponse } from "@/data/interfaces/districts";
+import RealPage from "@/components/weather/realPage/RealPage";
+import Template from "@/components/weather/template/Template";
 
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"));
-const RealPage = dynamic(() => import("./components/realPage/RealPage"));
-const Template = dynamic(() => import("./components/template/Template"));
 
 const WeatherPage = ({
   regions,

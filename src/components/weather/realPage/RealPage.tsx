@@ -2,8 +2,8 @@ import React from "react";
 import LeftSection from "../leftSection/LeftSection";
 import RightSection from "../rightSection/RightSection";
 import { WeatherData, districtTypes } from "@/data/interfaces";
+import styles from "@/pages/weather/weather.module.scss";
 
-import styles from "../../weather.module.scss";
 
 const RealPage = ({
   weatherData,

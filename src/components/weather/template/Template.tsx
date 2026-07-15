@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FilterSelect } from "@/components";
 import { WeatherData, districtTypes } from "@/data/interfaces";
 
-import styles from "../../weather.module.scss";
+import styles from "@/pages/weather/weather.module.scss";
 
 import sun from "@/assets/icons/sun_orange.svg";
 import { weatherDataExample } from "@/data";
