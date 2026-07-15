@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FilterSelect } from "@/components";
 import { useTranslation } from "next-i18next";
 
-import styles from "../../profile.module.scss";
+import styles from "@/pages/account/profile.module.scss";
 
 const AddintionalInfo = () => {
   const { t } = useTranslation("common");

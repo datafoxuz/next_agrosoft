@@ -2,7 +2,7 @@ import React from "react";
 import CardsCollection from "@/components/cardsCollection/CardsCollection";
 import { useTranslation } from "next-i18next";
 
-import styles from "../../profile.module.scss";
+import styles from "@/pages/account/profile.module.scss";
 
 const MyProducts = () => {
   const { t } = useTranslation("common");

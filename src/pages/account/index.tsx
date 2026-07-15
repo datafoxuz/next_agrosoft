@@ -14,18 +14,18 @@ const SNavbar = dynamic(
   () => import("@/components/secondNavbar/SecondNavbar"),
   { ssr: false }
 );
-const MyProducts = dynamic(() => import("./components/myProducts/MyProducts"), {
+const MyProducts = dynamic(() => import("../../components/account/myProducts/MyProducts"), {
   ssr: false,
 });
-const Saved = dynamic(() => import("./components/mySaved/Saved"), {
+const Saved = dynamic(() => import("../../components/account/mySaved/Saved"), {
   ssr: false,
 });
 const PersonalInfo = dynamic(
-  () => import("./components/personalInfo/PersonalInfo"),
+  () => import("../../components/account/personalInfo/PersonalInfo"),
   { ssr: false }
 );
 const AddintionalInfo = dynamic(
-  () => import("./components/addintionalInfo/AddintionalInfo"),
+  () => import("../../components/account/addintionalInfo/AddintionalInfo"),
   { ssr: false }
 );
 const ErrorPage = dynamic(() => import("../_error"));

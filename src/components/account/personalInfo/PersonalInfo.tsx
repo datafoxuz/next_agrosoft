@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useMyContext } from "@/hooks/useMyContext";
 
-import styles from "../../profile.module.scss";
+import styles from "@/pages/account/profile.module.scss";
 
 import defaultImg from "@/assets/images/default_image.png";
 import LogoutModal from "@/components/logoutModal/LogoutModal";

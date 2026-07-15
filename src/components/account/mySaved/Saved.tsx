@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { data } from "@/data/interfaces";
 import { NotFound } from "@/components";
 
-import styles from "../../profile.module.scss";
+import styles from "@/pages/account/profile.module.scss";
 
 const Saved = ({ data }: { data: data }) => {
   const { t } = useTranslation("common");
