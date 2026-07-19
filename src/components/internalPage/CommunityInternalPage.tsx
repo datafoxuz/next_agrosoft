@@ -1,137 +1,77 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
+import React, { useState } from "react";
+import SEO from "@/layouts/seo/seo";
+import { useTranslation } from "next-i18next";
+import { answerType, questionTypes, communityProblemDetail, communityProblemInfo } from "@/data/interfaces";
+import Answer from "./Answer/Answer";
+import Write from "../write/Write";
+import Image from "next/image";
 
-import { siteConfig } from "@/config/site.config";
-import { SeoProps } from "@/layouts/seo/seo.props";
+import styles from "./internalPage.module.scss";
 
-
-const SITE_URL = "https://agrosoft.uz";
-const DEFAULT_LOCALE = "uz";
-const SUPPORTED_LOCALES = ["uz", "ru", "en"];
-
-const SEO = ({
-  children,
-  author = siteConfig.author,
-  metaDescription = siteConfig.metaDescription,
-  metaKeywords = siteConfig.metaKeywords,
-  metaTitle = siteConfig.metaTitle,
-}: SeoProps) => {
-  const router = useRouter();
-
-  const currentLocale = router.locale || DEFAULT_LOCALE;
-
-  // Удаляем query-параметры и hash.
-  let currentPath = router.asPath
-    .split("?")[0]
-    .split("#")[0];
-
-  // Если язык уже присутствует в asPath, удаляем его.
-  currentPath = currentPath.replace(
-    /^\/(uz|ru|en)(?=\/|$)/,
-    "",
-  );
-
-  if (!currentPath || currentPath === "/") {
-    currentPath = "";
-  } else {
-    currentPath = `/${currentPath
-      .replace(/^\/+/, "")
-      .replace(/\/+$/, "")}`;
-  }
-
-  const makeLocalizedUrl = (locale: string) =>
-    `${SITE_URL}/${locale}${currentPath}`;
-
-  const canonicalUrl = makeLocalizedUrl(currentLocale);
-
-  const finalTitle =
-    metaTitle?.trim() ||
-    siteConfig.metaTitle?.trim() ||
-    "AgroSoft";
-
-  const finalDescription =
-    metaDescription?.trim() ||
-    siteConfig.metaDescription?.trim() ||
-    "AgroSoft — сельскохозяйственные новости, статьи, болезни растений и консультации специалистов.";
+const CommunityInternalPage = ({ problem }: { problem: communityProblemInfo }) => {
+  const { t } = useTranslation("common");
+  const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
+    active: false,
+    title: "",
+    file: null,
+    desc: "",
+  });
 
   return (
-    <>
-      <Head>
-        <meta charSet="utf-8" />
-
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=5"
-        />
-
-        <title>{finalTitle}</title>
-
-        <meta
-          name="description"
-          content={finalDescription}
-        />
-
-        {metaKeywords && (
-          <meta
-            name="keywords"
-            content={metaKeywords}
+    <div className={styles.internal}>
+      <SEO metaTitle={problem?.title} metaDescription={problem?.body} author={problem?.author_name}>
+        <div className={`${styles.image_wrapper} ${styles.section}`}>
+          <Image
+            src={problem.image}
+            alt="question image"
+            className={styles.image}
+            width={680}
+            height={382}
           />
-        )}
+        </div>
 
-        <meta name="author" content={author} />
+        <h2 className={styles.title}>{problem.title}</h2>
 
-        <meta
-          name="robots"
-          content="index, follow, max-image-preview:large"
-        />
+        <div className={styles.section}>
+          <div className={styles.question}>
+            <h3 className={styles.title}>{t("inner_page.question")}:</h3>
+            <h5 className={`${styles.description} ${styles.question}`}>{problem.body}</h5>
+          </div>
 
-        <meta
-          name="yandex-verification"
-          content="02886f372b8fcd60"
-        />
+          <div className={styles.answer}>
+            <div className={styles.answer_head_section} data-column={isWriteAns.active}>
+              <h3 className={styles.title}>{t("inner_page.answers")}</h3>
+              <div className={styles.answer_write}>
+                {isWriteAns.active ? (
+                  <Write state={isWriteAns} setState={setIsWriteAns} questionId={problem.id} />
+                ) : (
+                  <button
+                    type="button"
+                    className={`${styles.button} ${styles.write_ans}`}
+                    onClick={() =>
+                      setIsWriteAns((prev) => ({ ...prev, active: !prev.active }))
+                    }
+                  >
+                    {t("buttons.write_answer")}
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
 
-        {/* Основной адрес текущей страницы */}
-        <link
-          rel="canonical"
-          href={canonicalUrl}
-        />
-
-        {/* Языковые версии */}
-        {SUPPORTED_LOCALES.map((locale) => (
-          <link
-            key={locale}
-            rel="alternate"
-            hrefLang={locale}
-            href={makeLocalizedUrl(locale)}
-          />
-        ))}
-
-        <link
-          rel="alternate"
-          hrefLang="x-default"
-          href={makeLocalizedUrl(DEFAULT_LOCALE)}
-        />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={finalTitle} />
-        <meta
-          property="og:description"
-          content={finalDescription}
-        />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:site_name" content="AgroSoft" />
-
-        <link
-          rel="shortcut icon"
-          href="/favicon.ico"
-          type="image/x-icon"
-        />
-      </Head>
-
-      {children}
-    </>
+          <div className={styles.answer_list}>
+            {problem.answers_count && problem.answers_count > 0 ? (
+              problem.answers?.map((item: answerType, index: number) => (
+                <Answer key={index} data={item} />
+              ))
+            ) : (
+              <p>{t("inner_page.no_content_txt")}</p>
+            )}
+          </div>
+        </div>
+      </SEO>
+    </div>
   );
 };
 
-export default SEO;
+export default CommunityInternalPage;

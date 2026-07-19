@@ -1,48 +1,100 @@
-import { Html, Head, Main, NextScript } from 'next/document';
-import Image from 'next/image';
-import Script from 'next/script';
- 
-export default function Document() {
-  return (
-    <Html lang="uz">
-      <>
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+} from "next/document";
+import Script from "next/script";
+
+export default class MyDocument extends Document {
+  render() {
+    const locale =
+      this.props.__NEXT_DATA__.locale || "uz";
+
+    return (
+      <Html lang={locale}>
         <Head>
-          <Script id="counter-script">
+          <Script
+            id="counter-script"
+            strategy="beforeInteractive"
+          >
             {`
-            var top_js = "1.0";
-            var top_r = "id=47002&r=" + escape(document.referrer) + "&pg=" + escape(window.location.href);
-            document.cookie = "smart_top=1; path=/";
-            top_r += "&c=" + (document.cookie ? "Y" : "N");
+              (function () {
+                function sendCounter() {
+                  var topJs = "1.3";
 
-            top_js = "1.1";
-            top_r += "&j=" + (navigator.javaEnabled() ? "Y" : "N");
+                  var topR =
+                    "id=47002" +
+                    "&r=" + encodeURIComponent(document.referrer) +
+                    "&pg=" + encodeURIComponent(window.location.href);
 
-            top_js = "1.2";
-            top_r += "&wh=" + screen.width + 'x' + screen.height + "&px=" +
-            (((navigator.appName.substring(0, 3) == "Mic")) ? screen.colorDepth : screen.pixelDepth);
+                  document.cookie =
+                    "smart_top=1; path=/; SameSite=Lax";
 
-            top_js = "1.3";
+                  topR += "&c=" + (document.cookie ? "Y" : "N");
+                  topR += "&j=" +
+                    (navigator.javaEnabled &&
+                    navigator.javaEnabled()
+                      ? "Y"
+                      : "N");
 
-            var top_rat = "&col=340F6E&t=ffffff&p=BD6F6F";
-            top_r += "&js=" + top_js + "";
-            document.write('<img src="https://cnt0.www.uz/counter/collect?' + top_r + top_rat + '" width="0" height="0" alt="image" />');
-          `}
+                  topR +=
+                    "&wh=" +
+                    screen.width +
+                    "x" +
+                    screen.height +
+                    "&px=" +
+                    (screen.colorDepth || screen.pixelDepth || 0);
+
+                  var topRat =
+                    "&col=340F6E&t=ffffff&p=BD6F6F";
+
+                  topR += "&js=" + topJs;
+
+                  var counterImage =
+                    document.createElement("img");
+
+                  counterImage.src =
+                    "https://cnt0.www.uz/counter/collect?" +
+                    topR +
+                    topRat;
+
+                  counterImage.width = 0;
+                  counterImage.height = 0;
+                  counterImage.alt = "";
+                  counterImage.style.display = "none";
+
+                  document.body.appendChild(counterImage);
+                }
+
+                if (document.readyState === "loading") {
+                  document.addEventListener(
+                    "DOMContentLoaded",
+                    sendCounter
+                  );
+                } else {
+                  sendCounter();
+                }
+              })();
+            `}
           </Script>
         </Head>
 
-        <noscript>
-          <img
-            src="https://cnt0.www.uz/counter/collect?id=47002&pg=http%3A//uzinfocom.uz&col=340F6E&t=ffffff&p=BD6F6F"
-            alt="image"
-            width="0"
-            height="0"
-          />
-        </noscript>
-      </>
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+        <body>
+          <noscript>
+            <img
+              src="https://cnt0.www.uz/counter/collect?id=47002&pg=https%3A%2F%2Fagrosoft.uz&col=340F6E&t=ffffff&p=BD6F6F"
+              alt=""
+              width="0"
+              height="0"
+              style={{ display: "none" }}
+            />
+          </noscript>
+
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
