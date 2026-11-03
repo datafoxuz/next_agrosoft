@@ -28,20 +28,18 @@ const FilterSelect = ({
   function handleClickItem(
     name: string,
     id?: number,
-    lang?: string,
-    lat?: string
+    lat?: string,
+    long?: string
   ) {
     setIsOpen(false);
     if (region) {
       setItem(name);
       router.replace(`${router.pathname}?regionId=${id}`);
+    } else if (lat !== undefined || long !== undefined) {
+      // district: keep coordinates for the weather request
+      setItem({ districtName: name, lat, long });
     } else {
-      setItem((prevState: { name: string; lang: string; lat: string }) => ({
-        ...prevState,
-        name,
-        lang,
-        lat,
-      }));
+      setItem(name);
     }
   }
 
@@ -56,13 +54,13 @@ const FilterSelect = ({
         <div className={styles.list}>
           {data.map(
             (
-              e: { name: string; id: number; lang: string; lat: string },
+              e: { name: string; id: number; lat?: string; long?: string },
               index: number
             ) => (
               <p
                 className={styles.item}
                 key={index}
-                onClick={() => handleClickItem(e.name, e.id, e.lang, e.lat)}
+                onClick={() => handleClickItem(e.name, e.id, e.lat, e.long)}
               >
                 {e.name}
               </p>

@@ -7,6 +7,7 @@ import {
 } from "@/data/interfaces";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import { useMyContext } from "@/hooks/useMyContext";
 
 import styles from "@/pages/weather/weather.module.scss";
 
@@ -28,12 +29,21 @@ const RightSection = ({
   districts: any;
 }) => {
   const { t } = useTranslation("common");
+  const { setLocationInfo } = useMyContext();
 
   function handleChangeLocation() {
-    localStorage.setItem(
-      "location",
-      JSON.stringify({ ...districtItem, regionName: regionItem })
-    );
+    const location = {
+      districtName: districtItem.districtName,
+      lat: districtItem.lat,
+      long: districtItem.long,
+      regionName: regionItem,
+    };
+    try {
+      localStorage.setItem("location", JSON.stringify(location));
+    } catch {
+      // storage unavailable; still update for this session
+    }
+    setLocationInfo(location); // triggers a weather refetch
   }
 
   return (
@@ -86,7 +96,7 @@ const RightSection = ({
                 <h5>{Math.floor(item.max)}°</h5>
                 <Image
                   src={item.weather_icon_day}
-                  alt="weather icon"
+                  alt={item.weather_description || "weather icon"}
                   width={57}
                   height={57}
                 />

@@ -13,7 +13,6 @@
     "question_created": "Question created successfully",
     "answer_created": "Answer created successfully"
   },
-
   "buttons": {
     "read_all": "Read All",
     "view_deceases": "View all deceases",
@@ -36,51 +35,41 @@
     "change": "Change",
     "exit": "Exit"
   },
-
   "main": {
     "menu": "Menu",
-
     "hero": {
       "title": "YOUR AGRO ASSISTANT!",
       "small_title": "All agro-information in one place!",
       "download": "Download it"
     },
-
     "weather": {
       "humidity": "Humidity:",
       "wind": "Wind:",
       "full_info": "Full information"
     },
-
     "about": {
       "title": "ABOUT THE PROJECT",
       "desc": "This web portal is created to cover important news and useful articles in the field of agriculture. Providing the visitors of the site with quality and useful information is our main goal."
     },
-
     "blogs": {
       "title": "Latest blogs"
     },
-
     "community": {
       "title": "AGRO Community",
       "small_text": "Heated discussions, questions and answers"
     },
-
     "deceases": {
       "title": "AGRICULTURAL DECEASES",
       "small_text": "With more than 123 disease diagnoses"
     },
-
     "market": {
       "title": "AGROMARKET",
       "small_text": "Large marketplace with 500+ different products",
       "main_title": "MAJOR WHOLESALERS"
     },
-
     "news": {
       "title": "Latest news"
     },
-
     "footer": {
       "title": "Keep up with the latest news",
       "contact": "Contact:",
@@ -90,7 +79,6 @@
       "reserved": "All rights reserved"
     }
   },
-
   "auth": {
     "login": "Log in",
     "signup": "Signup",
@@ -105,7 +93,6 @@
     "restore_pass": "Restore Password",
     "logout_title": "Are you sure you want to log out of your personal page?"
   },
-
   "second_navbar": {
     "big_inp_placeholder": "Type keyword",
     "small_inp_placeholder": "Search",
@@ -118,7 +105,6 @@
     "sort_modal_2": {
       "title": "Purchase"
     },
-
     "filter": {
       "title": "Filter",
       "category": "Category",
@@ -133,14 +119,12 @@
       "clear": "Clear filter"
     }
   },
-
   "community": {
     "create": {
       "title": "Type your question",
       "write_question_inp": "Title"
     }
   },
-
   "inner_page": {
     "question": "Question",
     "answers": "Answers",
@@ -153,11 +137,9 @@
     "price": "Price",
     "similar_articles": "Similar articles"
   },
-
   "card": {
     "per_kg": "per kg"
   },
-
   "account": {
     "personal_info": {
       "firstname": "Firstname",
@@ -166,36 +148,30 @@
       "phone": "Phone",
       "email": "Email"
     },
-
     "other_info": {
       "title": "Other Information",
       "profession": "Profession",
       "farms_territory": "Territory of farms (in hectares)"
     },
-
     "saved": {
       "title": "Saved",
       "blog": "Articles",
       "new": "New",
       "products": "Products"
     },
-
     "my_products": {
       "title": "My Products"
     }
   },
-
   "weather": {
     "title": "Weather",
     "by_hour": "By the hour",
     "by_day": "Other days"
   },
-
   "error": {
     "page_not_found": "Page not found",
     "server_error": "An error occurred on the server"
   },
-
   "add_product": {
     "title": "Add Product",
     "buy": "Buy",
@@ -203,5 +179,46 @@
     "about_product": "About the product",
     "product_name": "Product Name",
     "confirm_text": "By confirming, I agree to the Terms and conditions"
+  },
+  "seo": {
+    "default": {
+      "title": "AgroSoft — agro assistant for farmers",
+      "description": "AgroSoft: plant disease detection, farming articles, farmers' forum, weather and agro marketplace — all agro information in one place."
+    },
+    "home": {
+      "title": "AgroSoft — your agro assistant",
+      "description": "Detect plant diseases and pests with artificial intelligence, get expert advice, and follow weather and farming articles."
+    },
+    "blogs": {
+      "title": "Agro articles — practical farming articles",
+      "description": "Practical articles and tips on greenhouses, vegetables, orchards and crop protection."
+    },
+    "news": {
+      "title": "Agriculture news",
+      "description": "Latest agriculture news from Uzbekistan and the world, subsidies and agri-tech."
+    },
+    "community": {
+      "title": "Agro community — farmers' Q&A forum",
+      "description": "Ask about crops, diseases and pests and get answers from experienced farmers and agronomists."
+    },
+    "deceases": {
+      "title": "Plant diseases — symptoms and treatment",
+      "description": "Diseases of tomato, cucumber, pepper and other crops: symptoms, causes and control measures."
+    },
+    "market": {
+      "title": "Agro marketplace — buy and sell farm products",
+      "description": "Buy and sell farm produce, seeds, fertilizers, pesticides and agricultural machinery."
+    },
+    "weather": {
+      "title": "Weather — forecast for farmers",
+      "description": "Hourly and daily weather for the regions of Uzbekistan: temperature, humidity and wind speed."
+    },
+    "about": {
+      "title": "About us — AgroSoft",
+      "description": "AgroSoft is an AI-based platform that helps farmers detect and treat plant diseases and pests early."
+    }
+  },
+  "footer": {
+    "developed_by": "Developed by"
   }
 }

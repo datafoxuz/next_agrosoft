@@ -39,7 +39,7 @@ const index = ({ communities }: { communities: CommunityApiResponse }) => {
     <ErrorPage />
   );
   return (
-    <SEO metaTitle={communities.data.seo.title} metaDescription={communities.data.seo.description} metaKeywords={communities.data.seo.keyword}>
+    <SEO metaTitle={t("seo.community.title")} metaDescription={t("seo.community.description")}>
       <SNavbar
         siteWay={siteWay}
         title={`${t("main_topics.community")}`}

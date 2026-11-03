@@ -11,7 +11,7 @@ const index = () => {
   const { t } = useTranslation("common");
 
   return (
-    <SEO metaTitle={`${t("auth.new_pass")}`}>
+    <SEO metaTitle={`${t("auth.new_pass")}`} noindex>
       <AuthLayout>
         <NewPassword />
       </AuthLayout>

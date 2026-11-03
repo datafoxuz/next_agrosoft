@@ -1,9 +1,8 @@
 import { ApiResponse } from "./apiResponse";
 
 export interface region {
+    id: number;
     name: string;
-    lang: string;
-    lat: string;
 }
 export interface regionsData {
     regions: region[];

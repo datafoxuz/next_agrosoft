@@ -3,9 +3,10 @@ export type Location = {
   longitude: number;
 } | null;
 
+/** Weather location saved by the user (localStorage "location"). */
 export type LocationInfoType = {
-  districtName: string;
-  lang: string;
-  lat: string;
-  regionNmae: string;
+  districtName?: string;
+  regionName?: string;
+  lat?: string | number;
+  long?: string | number;
 };

@@ -7,7 +7,7 @@ import styles from "./404/404.module.scss"
 
 const ErrorPage = () => {
   const {t} = useTranslation("common")
-  return <SEO metaTitle={`AgroSoft`}>
+  return <SEO metaTitle={`AgroSoft`} noindex>
     <div className={styles.notFound}>
       <div className={styles.content}>
         <h1 className={styles.status_num}></h1>

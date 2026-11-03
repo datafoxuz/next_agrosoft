@@ -22,7 +22,7 @@ const LeftSection = ({ weatherData }: { weatherData: WeatherData }) => {
           <h3 className={styles.weather_status}>
             <Image
               src={weatherData?.data?.weather_icon_url}
-              alt="yellow sun icon"
+              alt={weatherData?.data?.weather_status || "weather icon"}
               width={32}
               height={32}
             />
@@ -33,16 +33,15 @@ const LeftSection = ({ weatherData }: { weatherData: WeatherData }) => {
         <div className={styles.other_infos}>
           <p>
             {Math.floor(weatherData?.data?.coldest_degree)}
-            °C /{Math.floor(weatherData?.data?.hottest_degree)}
+            °C / {Math.floor(weatherData?.data?.hottest_degree)}
             °C
           </p>
           <p>
-            {t("main.weather.humidity")}
-            {weatherData?.data?.humidity}%
+            {t("main.weather.humidity")} {weatherData?.data?.humidity}%
           </p>
           <p>
-            {t("main.weather.wind")}
-            {weatherData?.data?.wind_speed} km/h
+            {t("main.weather.wind")}{" "}
+            {Math.round((weatherData?.data?.wind_speed ?? 0) * 3.6)} km/h
           </p>
         </div>
       </div>

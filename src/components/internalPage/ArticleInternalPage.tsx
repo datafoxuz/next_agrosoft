@@ -54,7 +54,8 @@ const ArticleInternalPage = ({
 
   const content = useMemo(() => {
     if ("body" in data && typeof data.body === "string") {
-      return data.body;
+      // The page already has an <h1> (title); demote headings inside the body.
+      return data.body.replace(/<(\/?)h1(\s|>)/gi, "<$1h2$2");
     }
 
     if ("description" in data && typeof data.description === "string") {
@@ -70,9 +71,11 @@ const ArticleInternalPage = ({
 
   const metaTitle = stripHtml(data.seo?.title || data.title);
 
-  const metaDescription = stripHtml(
-    data.seo?.description || plainContent
-  ).slice(0, 160);
+  // Body often starts with the title itself; don't repeat it in the description.
+  const bodyText = plainContent.startsWith(stripHtml(data.title))
+    ? plainContent.slice(stripHtml(data.title).length).trim()
+    : plainContent;
+  const metaDescription = stripHtml(data.seo?.description || bodyText).slice(0, 160);
 
   async function handleSave(): Promise<void> {
     if (!user?.success) {
@@ -131,6 +134,18 @@ const ArticleInternalPage = ({
         metaTitle={metaTitle}
         metaDescription={metaDescription}
         author={data.seo?.author}
+        image={data.image || undefined}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": type === "blogs" ? "BlogPosting" : "NewsArticle",
+          headline: metaTitle.slice(0, 110),
+          description: metaDescription,
+          image: data.image ? [data.image] : undefined,
+          inLanguage: router.locale || "uz",
+          mainEntityOfPage: `https://agrosoft.uz/${router.locale || "uz"}${router.asPath.split("?")[0]}`,
+          publisher: { "@type": "Organization", name: "AgroSoft", url: "https://agrosoft.uz" },
+        }}
       >
         <div className={`${styles.image_wrapper} ${styles.section}`}>
           <Image

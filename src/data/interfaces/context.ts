@@ -8,5 +8,5 @@ export interface MainContextType {
   weatherData: WeatherData | null;
   setWeatherData: React.Dispatch<React.SetStateAction<null>>;
   locationInfo: LocationInfoType | null;
-  setLocationInfo: React.Dispatch<React.SetStateAction<null>>;
+  setLocationInfo: React.Dispatch<React.SetStateAction<LocationInfoType | null>>;
 }

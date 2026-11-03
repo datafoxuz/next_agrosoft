@@ -1,5 +1,5 @@
 import { card } from "@/data/interfaces";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import React, { useState } from "react";
 import CardActions from "./cardActions/CardActions";
 import Image from "next/image";
@@ -7,7 +7,6 @@ import notfound from "@/assets/images/not_found.png"
 import styles from "./communitycard.module.scss";
 
 const CommunityCard = ({ data }: { data: card }) => {
-  const router = useRouter();
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
@@ -15,13 +14,14 @@ const CommunityCard = ({ data }: { data: card }) => {
   };
   const imageSrc = data.image || notfound;
   return (
-    <div
+    <Link
+      href={`/community/${data.slug}`}
       className={styles.card}
-      onClick={() => router.push(`${router.pathname}/${data.slug}`)}
+      style={{ color: "inherit", textDecoration: "none" }}
     >
       <Image
         src={imageError ? notfound : imageSrc}
-        alt={`image about ${data.title}`}
+        alt={data.title}
         className={styles.image}
         width={220}
         height={137}
@@ -31,7 +31,7 @@ const CommunityCard = ({ data }: { data: card }) => {
         <h3 className={styles.description}>{data.title}</h3>
         <CardActions data={data} inCallection />
       </div>
-    </div>
+    </Link>
   );
 };
 

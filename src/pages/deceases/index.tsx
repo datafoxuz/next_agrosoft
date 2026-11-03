@@ -30,7 +30,7 @@ const index = ({ deceases }: { deceases: DeceasesApiResponse }) => {
   
   
   return (
-    <SEO metaTitle={deceases.data.seo.title} metaDescription={deceases.data.seo.description} metaKeywords={deceases.data.seo.keyword}>
+    <SEO metaTitle={t("seo.deceases.title")} metaDescription={t("seo.deceases.description")}>
       <SNavbar
         siteWay={siteWay}
         title={`${t("main_topics.diseases")}`}

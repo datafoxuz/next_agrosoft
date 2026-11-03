@@ -75,9 +75,16 @@ const SecondNavbar = ({
         <SiteWay siteWay={siteWay} product />
         <div className={styles.s_navbar_wrapper}>
           <div className={styles.title_wrapper}>
-            <h3 className={styles.title} data-type={product}>
-              {shortenString(title, 20)}
-            </h3>
+            {innerPage ? (
+              <p className={styles.title} data-type={product}>
+                {shortenString(title, 20)}
+              </p>
+            ) : (
+              // Main page heading for list pages (detail pages render their own <h1>).
+              <h1 className={styles.title} data-type={product} title={title}>
+                {shortenString(title, 20)}
+              </h1>
+            )}
           </div>
 
           <div className={styles.filter_wrapper} data-type={product}>

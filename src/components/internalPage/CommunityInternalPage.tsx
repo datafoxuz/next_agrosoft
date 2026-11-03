@@ -19,23 +19,42 @@ const CommunityInternalPage = ({ problem }: { problem: communityProblemInfo }) =
 
   return (
     <div className={styles.internal}>
-      <SEO metaTitle={problem?.title} metaDescription={problem?.body} author={problem?.author_name}>
-        <div className={`${styles.image_wrapper} ${styles.section}`}>
-          <Image
-            src={problem.image}
-            alt="question image"
-            className={styles.image}
-            width={680}
-            height={382}
-          />
-        </div>
+      <SEO
+        metaTitle={problem?.title}
+        metaDescription={problem?.body}
+        author={problem?.author_name}
+        image={problem?.image || undefined}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "QAPage",
+          mainEntity: {
+            "@type": "Question",
+            name: problem?.title,
+            text: problem?.body || problem?.title,
+            answerCount: Number(problem?.answers_count ?? 0),
+            author: { "@type": "Person", name: problem?.author_name || "AgroSoft" },
+          },
+        }}
+      >
+        {problem.image ? (
+          <div className={`${styles.image_wrapper} ${styles.section}`}>
+            <Image
+              src={problem.image}
+              alt={problem.title}
+              className={styles.image}
+              width={680}
+              height={382}
+            />
+          </div>
+        ) : null}
 
-        <h2 className={styles.title}>{problem.title}</h2>
+        <h1 className={styles.title}>{problem.title}</h1>
 
         <div className={styles.section}>
           <div className={styles.question}>
             <h3 className={styles.title}>{t("inner_page.question")}:</h3>
-            <h5 className={`${styles.description} ${styles.question}`}>{problem.body}</h5>
+            <p className={`${styles.description} ${styles.question}`}>{problem.body}</p>
           </div>
 
           <div className={styles.answer}>

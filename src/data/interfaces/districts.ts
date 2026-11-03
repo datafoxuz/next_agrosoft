@@ -2,8 +2,10 @@ import { ApiResponse } from "./apiResponse";
 
 export interface district {
     name: string;
-    lang: string;
+    /** latitude */
     lat: string;
+    /** longitude */
+    long: string;
 }
 export interface districtsData {
     districts: district[];

@@ -10,7 +10,7 @@ import notfound from "@/assets/images/404.png";
 const NotFound = () => {
   const {t} = useTranslation("common")
   return (
-    <SEO metaTitle="404 - AgroSoft">
+    <SEO metaTitle="404 - AgroSoft" noindex>
       <div className={styles.notFound}>
         <div className={styles.content}>
           <Image

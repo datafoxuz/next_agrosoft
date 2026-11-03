@@ -6,6 +6,8 @@ export interface LangTypes {
 
 export interface districtTypes {
   districtName: string;
-  lang: string;
+  /** latitude */
   lat: string;
+  /** longitude */
+  long: string;
 }

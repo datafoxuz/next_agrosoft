@@ -9,21 +9,35 @@ import styles from "./internalPage.module.scss";
 
 const ProductInternalPage = ({ data }: { data: card }) => {
   const { t } = useTranslation("common");
+  const p = data as card & { name?: string; description?: string };
+  const title = p.title || p.name || "";
 
   return (
     <div className={styles.internal}>
-      <SEO metaTitle={data.seo?.title} metaDescription={data.seo?.description} author={data.seo?.author}>
+      <SEO
+        metaTitle={data.seo?.title || title}
+        metaDescription={data.seo?.description || p.description || p.body}
+        author={data.seo?.author}
+        image={data.image ? String(data.image) : undefined}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: title,
+          description: p.description || p.body || title,
+          image: data.image ? [String(data.image)] : undefined,
+        }}
+      >
         <div className={`${styles.image_wrapper} ${styles.section}`}>
           <Image
             src={data.image ? data.image : defaultImage.src}
-            alt="product image"
+            alt={title}
             className={styles.image}
             width={680}
             height={382}
           />
         </div>
 
-        <h2 className={styles.title}>{data.title}</h2>
+        <h1 className={styles.title}>{title}</h1>
 
         <div className={styles.section}>
           <div className={styles.infos_wrapper}>

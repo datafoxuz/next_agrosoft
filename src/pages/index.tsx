@@ -1,12 +1,11 @@
 import React from "react";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { ArticlesApiResponse, BlogsApiResponse, CommunityApiResponse, data, DeceasesApiResponse } from "@/data/interfaces";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
-import Script from "next/script";
 
 const About = dynamic(() => import("@/components/main/about/About"));
 const Articles = dynamic(() => import("@/components/main/articles/Articles"));
@@ -41,69 +40,48 @@ const Home = ({ blogs, deceases, news, communities, settings }: HomeProps) => {
   // Cache settings lookups
   const settingsMap = React.useMemo(() => {
     const map: Record<string, Record<string, string>> = {};
-    settings.data.settings.forEach((item) => {
+    (settings?.data?.settings ?? []).forEach((item) => {
       map[item.name] = item.value;
     });
     return map;
   }, [settings]);
 
-  const metaTitle = locale && settingsMap["metaTitle"] ? settingsMap["metaTitle"][locale] : "";
-  const metaDescription = locale && settingsMap["metaDescription"] ? settingsMap["metaDescription"][locale] : "";
-  const author = locale && settingsMap["author"] ? settingsMap["author"][locale] : "";
-  const metaKeywords = locale && settingsMap["metaKeywords"] ? settingsMap["metaKeywords"][locale] : "";
+  const { t } = useTranslation("common");
+  const pick = (key: string) =>
+    (locale && settingsMap[key] ? settingsMap[key][locale] : "") || "";
+
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "AgroSoft",
+      url: "https://agrosoft.uz",
+      logo: "https://agrosoft.uz/og-image.jpg",
+      email: "info@agrosoft.uz",
+      sameAs: [
+        "https://www.facebook.com/agrosoftuz",
+        "https://t.me/agrosoftuz",
+        "https://www.instagram.com/agrosoftuz",
+        "https://www.linkedin.com/in/agrosoftuz/",
+        "https://medium.com/@agrosoftuz",
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "AgroSoft",
+      url: `https://agrosoft.uz/${locale || "uz"}`,
+      inLanguage: locale || "uz",
+    },
+  ];
 
   return (
     <SEO
-      metaTitle={metaTitle}
-      metaDescription={metaDescription}
-      author={author}
-      metaKeywords={metaKeywords}
+      metaTitle={pick("metaTitle") || t("seo.home.title")}
+      metaDescription={pick("metaDescription") || t("seo.home.description")}
+      metaKeywords={pick("metaKeywords") || undefined}
+      jsonLd={jsonLd}
     >
-      <Head>
-        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-            strategy="afterInteractive"
-          />
-        )}
-
-        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag() {
-                dataLayer.push(arguments);
-              }
-              gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
-            `}
-          </Script>
-        )}
-
-        <Script
-          id="schema-org"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "AgroSoft",
-              "url": "https://agrosoft.uz",
-              "sameAs": [
-                "https://www.facebook.com/agrosoftuz",
-                "https://www.t.me/agrosoftuz",
-                "https://www.instagram.com/agrosoftuz",
-                "https://www.linkedin.com/in/agrosoftuz/",
-                "https://www.tumblr.com/agrosoftuz",
-                "https://medium.com/@agrosoftuz"
-              ]
-            }
-          `}
-        </Script>
-      </Head>
-
       <div className={styles.main}>
         <Hero />
         <TopCards />

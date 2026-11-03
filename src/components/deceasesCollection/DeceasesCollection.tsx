@@ -1,6 +1,8 @@
 import { card, deceaseItem, meta } from "@/data/interfaces";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
+import PaginationItem from "@mui/material/PaginationItem";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import styles from "./cardscollection.module.scss";
@@ -33,10 +35,6 @@ const DeceasesCollection = ({
     setCurrentPage(currentPageValue);
   }, [router.query.page]);
 
-  const handleChange = (event: ChangeEvent<unknown>, value: number) => {
-    router.push(`?page=${value}`);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
 
 
@@ -63,8 +61,14 @@ const DeceasesCollection = ({
           count={meta.pageCount}
           page={meta.currentPage}
           className={styles.pagination}
-          onChange={handleChange}
-        />
+          renderItem={(item) => (
+            <PaginationItem
+              component={Link}
+              href={item.page && item.page > 1 ? `${router.pathname.includes("[") ? router.asPath.split("?")[0] : router.pathname}?page=${item.page}` : (router.pathname.includes("[") ? router.asPath.split("?")[0] : router.pathname)}
+              {...item}
+            />
+          )}
+          />
       )}
     </div>
   );

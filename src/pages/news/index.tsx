@@ -2,6 +2,7 @@ import { ArticlesApiResponse, data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
 import { request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
@@ -14,13 +15,14 @@ const NotFound = dynamic(() => import("@/components/notFound/NotFound"));
 const ErrorPage = dynamic(() => import("../_error"));
 
 const index = ({ articles }: { articles: ArticlesApiResponse }) => {
+  const { t } = useTranslation("common");
   const siteWay = [
     {
-      title: "Bosh sahifa",
+      title: t("main_topics.main_page"),
       url: "/",
     },
     {
-      title: "Yangiliklar",
+      title: t("main_topics.news"),
       url: "/news",
     },
   ];
@@ -28,9 +30,9 @@ const index = ({ articles }: { articles: ArticlesApiResponse }) => {
     <ErrorPage />
   );
   return (
-    <SEO metaTitle={articles.data.seo.title} metaDescription={articles.data.seo.description} metaKeywords={articles.data.seo.keyword}>
-      <SNavbar siteWay={siteWay} title="Yangiliklar" filter article />
-      {articles.data.articles.length ? (
+    <SEO metaTitle={t("seo.news.title")} metaDescription={t("seo.news.description")}>
+      <SNavbar siteWay={siteWay} title={`${t("main_topics.news")}`} filter article />
+      {articles.data.articles.some((a) => a.title?.trim()) ? (
         <Collections data={articles.data.articles} 
         meta={{
             currentPage: articles.data.paginator.current_page,

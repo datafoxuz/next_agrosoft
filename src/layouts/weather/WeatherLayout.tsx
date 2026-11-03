@@ -1,39 +1,8 @@
-import React, { useEffect } from "react";
-import useUserLocation from "@/hooks/useUserLocation";
-import { fetchData } from "@/lib/fetchData";
-import { useMyContext } from "@/hooks/useMyContext";
+import React from "react";
 import { LayoutProps } from "../props";
 
+/** Weather data is loaded globally in MainContextProvider. */
 const WeatherLayout = ({ children }: LayoutProps) => {
-  const userLocation = useUserLocation();
-  const { setWeatherData, setLocationInfo } = useMyContext();
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedLocation = localStorage.getItem("location");
-      const parsedLocation = storedLocation ? JSON.parse(storedLocation) : null;
-      setLocationInfo(parsedLocation);
-    }
-  }, []);
-
-  useEffect(() => {
-    const fetchWeatherData = async () => {
-      try {
-        if (userLocation) {
-          const { latitude, longitude } = userLocation;
-          const data = await fetchData(
-            `/weather?lat=${latitude}&long=${longitude}`
-          );
-          setWeatherData(data?.data);
-        }
-      } catch (error) {
-        console.error("Error fetching weather data:", error);
-      }
-    };
-
-    fetchWeatherData();
-  }, [userLocation, setWeatherData]);
-
   return <div>{children}</div>;
 };
 

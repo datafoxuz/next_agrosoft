@@ -32,7 +32,7 @@ const index = ({ categories }: { categories: MarketplaceCategoryApiResponse }) =
     <ErrorPage/>
   );
   return (
-    <SEO metaTitle={categories.data.seo.title} metaDescription={categories.data.seo.description} metaKeywords={categories.data.seo.keyword}>
+    <SEO metaTitle={t("seo.market.title")} metaDescription={t("seo.market.description")}>
       <SNavbar
         siteWay={siteWay}
         title={`${t("main_topics.market")}`}

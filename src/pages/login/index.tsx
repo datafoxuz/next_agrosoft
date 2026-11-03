@@ -24,7 +24,7 @@ const index = () => {
   }
 
   return (
-    <SEO metaTitle={`${t("auth.login")}`}>
+    <SEO metaTitle={`${t("auth.login")}`} noindex>
       <AuthLayout>{mainContent(tabId, setTabId)}</AuthLayout>
     </SEO>
   );

@@ -69,14 +69,37 @@ const index = ({ products }: { products: ProductsApiResponse }) => {
   );
 };
 
+const FORWARDED_QUERY = [
+  "page",
+  "region_id",
+  "price_min",
+  "price_max",
+  "weight_min",
+  "weight_max",
+  "negotiable",
+];
+
 export async function getServerSideProps({
   params,
   locale,
+  query,
 }: {
   params: { product: string };
   locale: string;
+  query: Record<string, string | string[] | undefined>;
 }) {
-  const products = await request(`/marketplace/${params.product}`, "GET", null, { locale });
+  const qs = new URLSearchParams();
+  FORWARDED_QUERY.forEach((k) => {
+    const v = query[k];
+    const value = Array.isArray(v) ? v[0] : v;
+    if (value) qs.set(k, value);
+  });
+  const products = await request(
+    `/marketplace/${encodeURIComponent(params.product)}${qs.toString() ? `?${qs}` : ""}`,
+    "GET",
+    null,
+    { locale }
+  );
 
   if (products.response.status !== 404) {
     return {

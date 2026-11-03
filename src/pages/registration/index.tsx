@@ -10,7 +10,7 @@ const RegisterModal = dynamic(() => import("@/components/auth/Register/Register"
 const index = () => {
   const { t } = useTranslation("common");
   return (
-    <SEO metaTitle={`${t("auth.signup")}`}>
+    <SEO metaTitle={`${t("auth.signup")}`} noindex>
       <AuthLayout>
         <RegisterModal />
       </AuthLayout>

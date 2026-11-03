@@ -10,7 +10,7 @@ import Script from "next/script";
 import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.scss";
 import "nprogress/nprogress.css";
-import Image from "next/image";
+import Head from "next/head";
 
 // Show the NProgress bar on page load
 NProgress.configure({ showSpinner: false, speed: 500 });
@@ -25,6 +25,15 @@ Router.events.on("routeChangeError", () => NProgress.done());
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <MainContextProvider>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
+        <meta name="yandex-verification" content="02886f372b8fcd60" />
+        <meta name="theme-color" content="#2e7d32" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Layout>
         <Script id="gtm-script" strategy="afterInteractive">
           {`
@@ -46,7 +55,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-        <Script strategy="afterInteractive">
+        <Script id="fb-pixel" strategy="afterInteractive">
           {`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

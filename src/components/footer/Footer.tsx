@@ -100,8 +100,12 @@ const Footer = () => {
           <div className={styles.footer_section}>
             <p className={styles.text}>{t("main.footer.contact")}</p>
             <div className={styles.contact}>
-              <p className={styles.text}>info@agrosoft.uz</p>
-              <p className={styles.text}>+998 99 675 55 76</p>
+              <a className={styles.text} href="mailto:info@agrosoft.uz">
+                info@agrosoft.uz
+              </a>
+              <a className={styles.text} href="tel:+998996755576">
+                +998 99 675 55 76
+              </a>
             </div>
           </div>
         </div>
@@ -112,6 +116,17 @@ const Footer = () => {
 
             <p className={styles.footer_info}>
               AgroSoft © {new Date().getFullYear()}. {t("main.footer.reserved")}
+            </p>
+            <p className={styles.footer_credit}>
+              {t("footer.developed_by")}{" "}
+              <a
+                href="https://datafox.uz"
+                target="_blank"
+                rel="noopener"
+                className={styles.credit_link}
+              >
+                DataFox
+              </a>
             </p>
           </div>
           <div className={styles.footer_links_wrapper}>
@@ -130,7 +145,7 @@ const Footer = () => {
               <Link href="/community" className={styles.link}>
                 {t("main_topics.community")}
               </Link>
-              <Link href="deceases" className={styles.link}>
+              <Link href="/deceases" className={styles.link}>
                 {t("main_topics.diseases")}
               </Link>
               <Link href="/blogs" className={styles.link}>

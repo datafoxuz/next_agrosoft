@@ -1,7 +1,9 @@
 import { card, meta } from "@/data/interfaces";
-import Card from "./components/card/Card";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import Card, { cardTitle } from "./components/card/Card";
+import React, { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
+import PaginationItem from "@mui/material/PaginationItem";
+import Link from "next/link";
 import CommunityCard from "./components/communityCard/CommunityCard";
 import { useRouter } from "next/router";
 
@@ -34,10 +36,6 @@ const CardsCollection = ({
     setCurrentPage(currentPageValue);
   }, [router.query.page]);
 
-  const handleChange = (event: ChangeEvent<unknown>, value: number) => {
-    router.push(`?page=${value}`);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
 
 
@@ -49,7 +47,7 @@ const CardsCollection = ({
       data-similar={similar}
     >
       <div className={styles.cards_grid}>
-        {data.map((item: card, index: number) =>
+        {data.filter((item: card) => cardTitle(item)).map((item: card, index: number) =>
           community ? (
             <CommunityCard data={item} key={index} />
           ) : (
@@ -66,8 +64,14 @@ const CardsCollection = ({
           count={meta.pageCount}
           page={meta.currentPage}
           className={styles.pagination}
-          onChange={handleChange}
-        />
+          renderItem={(item) => (
+            <PaginationItem
+              component={Link}
+              href={item.page && item.page > 1 ? `${router.pathname.includes("[") ? router.asPath.split("?")[0] : router.pathname}?page=${item.page}` : (router.pathname.includes("[") ? router.asPath.split("?")[0] : router.pathname)}
+              {...item}
+            />
+          )}
+          />
       )}
     </div>
   );

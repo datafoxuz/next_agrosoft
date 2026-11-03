@@ -1,28 +1,37 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
+import { baseUrl } from "@/data";
 import { useTranslation } from "next-i18next";
 import SEO from "@/layouts/seo/seo";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { request } from "@/lib/request";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 
 const SNavbar = dynamic(() => import("@/components/secondNavbar/SecondNavbar"))
-const FilterSelect = dynamic(() => import("@/components/filterSelect/FilterSelect"))
 
 import styles from "./add.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 
-const AddProduct = () => {
+type Option = { id: number; name: string };
+
+const AddProduct = ({
+  categories,
+  units,
+  countries,
+}: {
+  categories: Option[];
+  units: Option[];
+  countries: Option[];
+}) => {
   const { t } = useTranslation("common");
   const router = useRouter();
 
   ///states=================================================
-  const [item, setItem] = useState<string>("bir");
-  const [category, setCategory] = useState<number>(1);
+  const [typeId, setTypeId] = useState<number>(1); // 1 = sell, 2 = buy
+  const [categoryId, setCategoryId] = useState<string>("");
+  const [unitId, setUnitId] = useState<string>(units[0] ? String(units[0].id) : "1");
   const [name, setName] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
-  const [price, setPrice] = useState<string>("");
   const [lowPrice, setLowPrice] = useState<string>("");
   const [highPrice, setHighPrice] = useState<string>("");
   const [lowWeight, setLowWeight] = useState<string>("");
@@ -30,11 +39,19 @@ const AddProduct = () => {
   const [isNegotiable, setIsNegotiable] = useState<boolean>(false);
   const [image, setImage] = useState<File | null | undefined>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [countryId, setCountryId] = useState<number>(1)
-  const [regionId, setRegion] = useState<number>(1)
+  const [countryId, setCountryId] = useState<string>(countries[0] ? String(countries[0].id) : "");
+  const [regions, setRegions] = useState<Option[]>([]);
+  const [regionId, setRegionId] = useState<string>("");
 
-
-  const dataSc: string[] = ["bir", "ikki", "uch"];
+  // Load regions of the selected country.
+  useEffect(() => {
+    if (!countryId) return;
+    setRegionId("");
+    fetch(`${baseUrl}/data/${countryId}/regions`, { headers: { "Accept-Language": router.locale || "uz" } })
+      .then((r) => r.json())
+      .then((j) => setRegions(j?.data?.regions ?? []))
+      .catch(() => setRegions([]));
+  }, [countryId, router.locale]);
 
   const siteWay = [
     {
@@ -52,50 +69,63 @@ const AddProduct = () => {
   ];
 
   const addProduct = async (image: File) => {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", desc);
-    formData.append("price", price);
-    formData.append("low_price", lowPrice);
-    formData.append("high_price", highPrice);
-    formData.append("low_amount", lowWeight);
-    formData.append("high_amount", highWeight);
-    formData.append("is_negotiable", String(isNegotiable));
-    formData.append("amount_type_id", "1");
-    formData.append("category_id", String(category));
-    formData.append("country_id", String(countryId));
-    formData.append("region_id", String(regionId));
-    formData.append("type_id", "1");
-    formData.append("main_image", image);
-
     const userToken = localStorage.getItem("userToken");
+    if (!userToken) {
+      router.push("/login");
+      return;
+    }
+    const auth = { Authorization: `Bearer ${userToken}`, Accept: "application/json" };
 
     try {
-      const response = await fetch(`/api/marketplace/create-product`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-        body: formData,
-      });
+      // 1) upload the main image
+      const fileData = new FormData();
+      fileData.append("file", image);
+      const up = await fetch(`${baseUrl}/file/upload`, { method: "POST", headers: auth, body: fileData });
+      const upJson = await up.json().catch(() => null);
+      const imageId = upJson?.data?.file?.id;
+      if (!up.ok || !imageId) throw new Error(upJson?.error?.message || `Upload error ${up.status}`);
 
-      if (response.ok) {
-        handleClearInputs();
-        toast.success("Mahsulot qo'shildi!");
-      } else {
-        setIsLoading(false);
-        toast.error(`Error status: ${response.status}`);
-      }
+      // 2) create the product (goes to moderation)
+      const body = {
+        name,
+        description: desc,
+        low_price: isNegotiable ? null : Number(lowPrice),
+        high_price: isNegotiable ? null : Number(highPrice || lowPrice),
+        low_amount: Number(lowWeight),
+        high_amount: Number(highWeight || lowWeight),
+        is_negotiable: isNegotiable ? 1 : 0,
+        amount_type_id: unitId,
+        category_id: Number(categoryId),
+        country_id: Number(countryId),
+        region_id: Number(regionId),
+        type_id: typeId,
+        main_image_id: imageId,
+        image_list: [imageId],
+      };
+      const res = await fetch(`${baseUrl}/marketplace/create-product`, {
+        method: "POST",
+        headers: { ...auth, "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const json = await res.json().catch(() => null);
+      if (!res.ok || json?.success === false) throw new Error(json?.error?.message || `Error ${res.status}`);
+
+      handleClearInputs();
+      toast.success(typeof json?.data === "string" ? json.data : t("add_product.title"));
     } catch (error) {
       setIsLoading(false);
-      toast.error("Failed to add product");
-      console.error("Error:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to add product");
     }
   };
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (image && name && desc && price && lowPrice && highPrice && lowWeight && highWeight && isNegotiable && category && countryId && regionId) {
+    const pricesOk = isNegotiable || (lowPrice && highPrice);
+    if (!image) {
+      toast.error(t("buttons.set_main_img"));
+      return;
+    }
+    if (name && desc && pricesOk && lowWeight && highWeight && categoryId && countryId && regionId) {
       setIsLoading(true);
       await addProduct(image);
     }
@@ -110,17 +140,14 @@ const AddProduct = () => {
 
   const handleSetImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      setImage(file);
+      setImage(event.target.files[0]);
     }
-
   };
 
   function handleClearInputs() {
     setName("");
     setDesc("");
     setImage(null);
-    setPrice("");
     setLowPrice("");
     setHighPrice("");
     setLowWeight("");
@@ -130,23 +157,23 @@ const AddProduct = () => {
   }
 
   return (
-    <SEO metaTitle={`${t("buttons.add_product")} - AgroSoft`}>
+    <SEO metaTitle={`${t("buttons.add_product")} - AgroSoft`} noindex>
       <SNavbar siteWay={siteWay} title={`${t("main_topics.market")}`} />
       <div className={styles.add_product}>
         <h3 className={styles.main_title}>{t("add_product.title")}</h3>
         <div className={styles.checkbox_wrapper}>
           <div
             className={styles.checkbox}
-            data-check={category == 1}
-            onClick={() => setCategory(1)}
+            data-check={typeId == 1}
+            onClick={() => setTypeId(1)}
           >
             <span className={styles.circle}></span>
             <p className={styles.text}>{t("add_product.sell")}</p>
           </div>
           <div
             className={styles.checkbox}
-            data-check={category == 2}
-            onClick={() => setCategory(2)}
+            data-check={typeId == 2}
+            onClick={() => setTypeId(2)}
           >
             <span className={styles.circle}></span>
             <p className={styles.text}>{t("add_product.buy")}</p>
@@ -174,18 +201,6 @@ const AddProduct = () => {
               onChange={(e) => setDesc(e.target.value)}
             />
 
-            <div className={styles.input_wrapper}>
-              <input
-                type="number"
-                placeholder={`${t("second_navbar.filter.price")}`}
-                name="price"
-                className={styles.price}
-                required
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-              <FilterSelect item={item} setItem={setItem} strData={dataSc} />
-            </div>
 
             {image ? (
               <div className={styles.label}>
@@ -219,7 +234,21 @@ const AddProduct = () => {
             <h3 className={styles.title}>
               {t("second_navbar.filter.category")}
             </h3>
-            <FilterSelect item={item} setItem={setItem} strData={[""]} mb />
+            <select
+              className={styles.input}
+              required
+              value={categoryId}
+              onChange={(e) => setCategoryId(e.target.value)}
+            >
+              <option value="" disabled>
+                {t("second_navbar.filter.category")}
+              </option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className={styles.price}>
@@ -228,16 +257,18 @@ const AddProduct = () => {
               <input
                 type="number"
                 placeholder={`${t("second_navbar.filter.min_price")}`}
-                name="price"
-                required
+                name="low_price"
+                required={!isNegotiable}
+                disabled={isNegotiable}
                 value={lowPrice}
                 onChange={(e) => setLowPrice(e.target.value)}
               />
               <input
                 type="number"
                 placeholder={`${t("second_navbar.filter.max_price")}`}
-                name="price"
-                required
+                name="high_price"
+                required={!isNegotiable}
+                disabled={isNegotiable}
                 value={highPrice}
                 onChange={(e) => setHighPrice(e.target.value)}
               />
@@ -258,7 +289,7 @@ const AddProduct = () => {
 
           <div className={styles.weight}>
             <h3 className={styles.title}>
-              {t("second_navbar.filter.weight")} (KG)
+              {t("second_navbar.filter.weight")}
             </h3>
             <div className={styles.input_wrapper}>
               <input
@@ -271,12 +302,24 @@ const AddProduct = () => {
               />
               <input
                 type="number"
-                placeholder={`${`${t("second_navbar.filter.max_price")}`}`}
+                placeholder={`${t("second_navbar.filter.max_weight")}`}
                 name="weight"
                 required
                 value={highWeight}
                 onChange={(e) => setHighWeight(e.target.value)}
               />
+              <select
+                className={styles.input}
+                value={unitId}
+                onChange={(e) => setUnitId(e.target.value)}
+                aria-label={`${t("second_navbar.filter.weight")}`}
+              >
+                {units.map((u) => (
+                  <option key={u.id} value={u.id}>
+                    {u.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -286,8 +329,33 @@ const AddProduct = () => {
             )}`}</h3>
 
             <div className={styles.input_wrapper}>
-              <FilterSelect item={item} setItem={setItem} strData={[""]} />
-              <FilterSelect item={item} setItem={setItem} strData={[""]} />
+              <select
+                className={styles.input}
+                required
+                value={countryId}
+                onChange={(e) => setCountryId(e.target.value)}
+              >
+                {countries.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+              <select
+                className={styles.input}
+                required
+                value={regionId}
+                onChange={(e) => setRegionId(e.target.value)}
+              >
+                <option value="" disabled>
+                  {t("second_navbar.filter.location")}
+                </option>
+                {regions.map((r) => (
+                  <option key={r.id} value={r.id}>
+                    {r.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -326,8 +394,23 @@ const AddProduct = () => {
 };
 
 export async function getServerSideProps({ locale }: { locale: string }) {
+  const headers = { "Accept-Language": locale, Accept: "application/json" };
+  const get = (url: string) =>
+    fetch(url, { headers }).then((r) => r.json()).catch(() => null);
+
+  const [cats, countriesRes, unitsRes] = await Promise.all([
+    get(`${baseUrl}/marketplace/categories?perPage=100`),
+    get(`${baseUrl}/data/countries`),
+    get("https://api.agrosoft.uz/units.json"),
+  ]);
+
   return {
     props: {
+      categories: (cats?.data?.categories ?? []).map(
+        (c: { id: number; title?: string; name?: string }) => ({ id: c.id, name: c.title ?? c.name ?? "" })
+      ),
+      countries: countriesRes?.data?.countries ?? [],
+      units: Array.isArray(unitsRes) ? unitsRes : [{ id: 1, name: "kg" }],
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };

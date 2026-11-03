@@ -136,7 +136,7 @@ const create = ({ status }: { status: number }) => {
   //JSX=============================================
 
   return status === 200 ? (
-    <SEO metaTitle={`${t("buttons.write_question")} - AgroSoft`}>
+    <SEO metaTitle={`${t("buttons.write_question")} - AgroSoft`} noindex>
       <SNavbar
         siteWay={siteWay}
         title={`${t("community.create.title")}`}

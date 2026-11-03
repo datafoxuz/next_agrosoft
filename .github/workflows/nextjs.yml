@@ -1,31 +1,30 @@
-name: Node.js CI
-on: [push]
-defaults:
-  run:
-    working-directory: /var/www/test.agrosoft.uz
+name: Deploy agrosoft.uz
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-agrosoft
+  cancel-in-progress: false
+
 jobs:
-  build:
-
-    runs-on: self-hosted
-    strategy:
-      matrix:
-        node-version: [16.x]
-
+  deploy:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-        
-    - name: Install packages
-      working-directory: "/var/www/test.agrosoft.uz"
-      run: npm install
-
-    - name: build project
-      working-directory: "/var/www/test.agrosoft.uz"
-      run: npm run build --if-present
-      
-    - run: pm2 reload your-app-name
-      env:
-        CI: true
+      - name: Deploy over SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          eval "$(ssh-agent -s)"
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+          ssh -p 22999 -o StrictHostKeyChecking=accept-new "$SSH_USER@$SSH_HOST" '
+            set -e
+            export PATH=/root/.nvm/versions/node/v20.15.0/bin:$PATH
+            cd /var/www/agrosoft.uz/front
+            git pull --ff-only
+            npm ci
+            npm run build
+            pm2 reload agrosoft.uz --update-env
+          '

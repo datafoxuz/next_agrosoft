@@ -35,7 +35,7 @@ const index = ({ blogs }: { blogs: BlogsApiResponse }) => {
   );
 
   return (
-    <SEO metaTitle={`${blogs.data.seo.title}`} metaDescription={`${blogs.data.seo.description}`} metaKeywords={`${blogs.data.seo.keyword}`}>
+    <SEO metaTitle={t("seo.blogs.title")} metaDescription={t("seo.blogs.description")}>
       <div className={styles.articles}>
         <SNavbar
           siteWay={siteWay}

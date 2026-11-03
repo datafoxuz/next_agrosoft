@@ -13,7 +13,6 @@
     "question_created": "Savol muvofaqqiyatli yaratildi",
     "answer_created": "Javob muvofaqqiyatli yaratildi"
   },
-
   "buttons": {
     "read_all": "Barchasini o'qish",
     "view_deceases": "Barcha kasalliklarni ko'rish",
@@ -36,51 +35,41 @@
     "change": "O’zgartirish",
     "exit": "Chiqish"
   },
-
   "main": {
     "menu": "Menyu",
-
     "hero": {
       "title": "Sizning agro yordamchingiz!",
       "small_title": "Barcha agro-ma’lumotlar bir yerda!",
       "download": "Yuklab oling"
     },
-
     "weather": {
       "humidity": "Namlik:",
       "wind": "Shamol:",
       "full_info": "To’liq ma’lumot"
     },
-
     "about": {
       "title": "LOYIHA HAQIDA",
       "desc": "Bu veb-portali qishloq xo‘jaligi sohasidagi muhim yangiliklar va foydali maqolalar yoritib borish uchun tashkil etilgan. Saytga tashrif buyuruvchilarni sifatli va foydali maʼlumotlar bilan taʼminlash – bizning oldimizga qo‘ygan asosiy maqsadimiz."
     },
-
     "blogs": {
       "title": "SO’NGGI MAQOLALAR"
     },
-
     "community": {
       "title": "AGRO JAMIYAT",
       "small_text": "Qizg’in muhokamalar, savol-javoblar"
     },
-
     "diseases": {
       "title": "AGROKASALLIKLAR",
       "small_text": "123 dan ortiq kasalliklar tashxislari bilan"
     },
-
     "market": {
       "title": "AGROMARKET",
       "small_text": "500+ xil mahsulotlardan iborat katta marketpleys",
       "main_title": "YIRIK ULGURJI SOTUVCHILAR"
     },
-
     "news": {
       "title": "So'nggi yangiliklar"
     },
-
     "footer": {
       "title": "So’nggi yangiliklardan habardor bo’lib turing",
       "contact": "Bog’lanish:",
@@ -90,7 +79,6 @@
       "reserved": "Barcha huquqlar himoyalangan"
     }
   },
-
   "auth": {
     "login": "Tizimga kirish",
     "signup": "Ro'yxatdan o'tish",
@@ -105,7 +93,6 @@
     "restore_pass": "Parolni tiklash",
     "logout_title": "Shaxsiy sahifangizdan chiqmoqchi ekanligingizga aminmisiz?"
   },
-
   "second_navbar": {
     "big_inp_placeholder": "Kalit so'zni yozing",
     "small_inp_placeholder": "Qidirish",
@@ -118,7 +105,6 @@
     "sort_modal_2": {
       "title": "Sotib olish"
     },
-
     "filter": {
       "title": "Filter",
       "category": "Kategoriya",
@@ -133,14 +119,12 @@
       "clear": "Filterni tozalash"
     }
   },
-
   "community": {
     "create": {
       "title": "Savolingizni yozing",
       "write_question_inp": "Sarlavha"
     }
   },
-
   "inner_page": {
     "question": "Savol",
     "answers": "Javoblar",
@@ -153,11 +137,9 @@
     "price": "Narx",
     "similar_articles": "O'xshash maqolalar"
   },
-
   "card": {
     "per_kg": "kg uchun"
   },
-
   "account": {
     "personal_info": {
       "firstname": "Ism",
@@ -166,36 +148,30 @@
       "phone": "Telefon",
       "email": "Elektron pochta"
     },
-
     "other_info": {
       "title": "Boshqa maʼlumotlar",
       "profession": "Kasbi",
       "farms_territory": "Fermer xo‘jaliklari hududi (gektarlarda)"
     },
-
     "saved": {
       "title": "Saqlanganlar",
       "blog": "Maqolalar",
       "new": "Yangilik",
       "products": "Mahsulotlar"
     },
-
     "my_products": {
       "title": "Mahsulotlarim"
     }
   },
-
   "weather": {
     "title": "Ob havo",
     "by_hour": "Soat bo’yicha",
     "by_day": "Boshqa kunlar"
   },
-
   "error": {
     "page_not_found": "Sahifa topilmadi",
     "server_error": "Serverda xatolik yuz berdi"
   },
-
   "add_product": {
     "title": "Mahsulot qo'shish",
     "buy": "Sotib olish",
@@ -203,5 +179,46 @@
     "about_product": "Mahsulot haqida",
     "product_name": "Mahsulot nomi",
     "confirm_text": "Tasdiqlash orqali men shartlarga roziman"
+  },
+  "seo": {
+    "default": {
+      "title": "AgroSoft — fermer va dehqonlar uchun agro yordamchi",
+      "description": "AgroSoft: o‘simlik kasalliklarini aniqlash, agro maqolalar, fermerlar forumi, ob-havo va agromarket — barcha agro ma’lumotlar bir joyda."
+    },
+    "home": {
+      "title": "AgroSoft — sizning agro yordamchingiz",
+      "description": "O‘simlik kasalliklari va zararkunandalarni sun’iy intellekt yordamida aniqlang, mutaxassislardan maslahat oling, ob-havo va agro maqolalarni kuzating."
+    },
+    "blogs": {
+      "title": "Agro maqolalar — dehqonchilik bo‘yicha foydali maqolalar",
+      "description": "Issiqxona, sabzavot, bog‘dorchilik va o‘simliklarni himoya qilish bo‘yicha amaliy maqolalar va maslahatlar."
+    },
+    "news": {
+      "title": "Qishloq xo‘jaligi yangiliklari",
+      "description": "O‘zbekiston va dunyo qishloq xo‘jaligidagi so‘nggi yangiliklar, subsidiyalar va agro texnologiyalar."
+    },
+    "community": {
+      "title": "Agro jamiyat — fermerlar savol-javob forumi",
+      "description": "Ekinlar, kasalliklar va zararkunandalar bo‘yicha savol bering va tajribali fermerlar hamda agronomlardan javob oling."
+    },
+    "deceases": {
+      "title": "O‘simlik kasalliklari — belgilari va davolash usullari",
+      "description": "Pomidor, bodring, qalampir va boshqa ekinlarning kasalliklari: belgilari, sabablari va ularga qarshi kurash choralari."
+    },
+    "market": {
+      "title": "Agromarket — qishloq xo‘jaligi mahsulotlari bozori",
+      "description": "Agro mahsulotlar, urug‘lar, o‘g‘itlar, pestitsidlar va qishloq xo‘jaligi texnikasini soting va xarid qiling."
+    },
+    "weather": {
+      "title": "Ob-havo — fermerlar uchun ob-havo prognozi",
+      "description": "O‘zbekiston viloyatlari bo‘yicha soatlik va kunlik ob-havo: harorat, namlik va shamol tezligi."
+    },
+    "about": {
+      "title": "Biz haqimizda — AgroSoft",
+      "description": "AgroSoft — fermerlarga o‘simlik kasalliklari va zararkunandalarni erta aniqlash va davolashda yordam beruvchi sun’iy intellektga asoslangan platforma."
+    }
+  },
+  "footer": {
+    "developed_by": "Ishlab chiqaruvchi:"
   }
 }

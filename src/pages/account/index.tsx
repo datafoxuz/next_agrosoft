@@ -73,7 +73,7 @@ const index = ({
   ];
 
   return status === 200 ? (
-    <SEO metaTitle={`${t("main_topics.acc_info")}`}>
+    <SEO metaTitle={`${t("main_topics.acc_info")}`} noindex>
       <div className={styles.profile}>
         <SNavbar
           siteWay={siteWay}

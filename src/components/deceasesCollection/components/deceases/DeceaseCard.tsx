@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 import notfound from "@/assets/images/not_found.png"
@@ -8,7 +8,6 @@ import { deceaseItem } from "@/data/interfaces";
 import DeceaseActions from "./deceaseActions/DeceaseActions";
 
 const DeceaseCard = ({ data }: { data: deceaseItem }) => {
-  const router = useRouter();
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
@@ -16,13 +15,14 @@ const DeceaseCard = ({ data }: { data: deceaseItem }) => {
   };
   const imageSrc = data.image || notfound;
   return (
-    <div
+    <Link
+      href={`/deceases/${data.slug}`}
       className={styles.card}
-      onClick={() => router.push(`${router.pathname}/${data.slug}`)}
+      style={{ color: "inherit", textDecoration: "none" }}
     >
       <Image
         src={imageError ? notfound : imageSrc}
-        alt={`image about ${data.name}`}
+        alt={data.name}
         className={styles.image}
         width={220}
         height={137}
@@ -32,7 +32,7 @@ const DeceaseCard = ({ data }: { data: deceaseItem }) => {
         <h3 className={styles.description}>{data.name}</h3>
         <DeceaseActions data={data} inCallection />
       </div>
-    </div>
+    </Link>
   );
 };
 
