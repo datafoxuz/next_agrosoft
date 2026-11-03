@@ -122,45 +122,34 @@ export async function getServerSideProps({
   query: ParsedUrlQuery;
 }) {
   const cookies = parseCookies({ req });
+  const loginRedirect = {
+    redirect: { destination: `/${locale}/login`, permanent: false },
+  };
+  if (!cookies.userToken) return loginRedirect;
 
-  const userData = await request(
-    `/users/about-me`,
-    "GET",
-    null,
-    {
-      locale,
-      headers: {
-        Authorization: `Bearer ${cookies.userToken}`,
-      },
-    }
-  );
+  const auth = { Authorization: `Bearer ${cookies.userToken}` };
+  try {
+    const moduleName =
+      query.type == "news" ? "articles" : query.type ? query.type : "blogs";
+    const [userData, mySaved] = await Promise.all([
+      request(`/users/about-me`, "GET", null, { locale, headers: auth }),
+      request(`/saved-modules/getByModule?module_name=${moduleName}`, "GET", null, {
+        locale,
+        headers: auth,
+      }).catch(() => null),
+    ]);
 
-  const mySaved = await request(
-    `/saved-modules/getByModule?module_name=${query.type == "news" ? "articles" : query.type ? query.type : "blogs"
-    }`,
-    "GET",
-    null,
-    {
-      locale,
-      headers: {
-        Authorization: `Bearer ${cookies.userToken}`,
-      },
-    }
-  );
-
-  if (userData?.response.status !== 401) {
     return {
       props: {
         user: userData.data,
         status: userData?.response.status,
         ...(await serverSideTranslations(locale, ["common"])),
-        saved: mySaved.data,
+        saved: mySaved?.data ?? { success: true, data: {} },
       },
     };
-  } else {
-    return {
-      notFound: true,
-    };
+  } catch {
+    // expired/invalid token -> log in again
+    return loginRedirect;
   }
 }
 
