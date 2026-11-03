@@ -1,7 +1,7 @@
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
-import { request } from "@/lib/request";
+import { fetchMe, updateMe, uploadFile } from "@/lib/userApi";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useMyContext } from "@/hooks/useMyContext";
@@ -33,44 +33,27 @@ const PersonalInfo = () => {
   }, [user]);
 
   async function updateInfo() {
-    const formData = new FormData();
-    formData.append("firstname", fname || "");
-    formData.append("lastname", lname || "");
-    formData.append("phone", phone || "");
-    if (image) {
-      formData.append("photo", image);
-    }
-
-    const userToken = localStorage.getItem("userToken");
-
     try {
-      const response = await fetch(`/api/users/update`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-        body: formData,
-      });
-
-      setIsLoading(false);
-
-      if (response.ok) {
-        setImage(null);
-        toast.success("Foydalanuvchi ma'lumotlari yangilandi.");
-      } else {
-        toast.error(`Error status: ${response.status}`);
-      }
+      const body: Record<string, string | number | null> = {
+        firstname: fname || "",
+        lastname: lname || "",
+      };
+      if (image) body.photo_file_id = await uploadFile(image);
+      const res = await updateMe(body, router.locale);
+      setUser(await fetchMe(router.locale));
+      setImage(null);
+      toast.success(typeof res?.data === "string" ? res.data : t("buttons.save_changes"));
     } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to update profile");
+    } finally {
       setIsLoading(false);
-      toast.error("Failed to update profile");
-      console.error("Error:", error);
     }
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
-    updateInfo();
+    await updateInfo();
   }
 
   //helper functions==============================================================
@@ -115,7 +98,7 @@ const PersonalInfo = () => {
             value={fname}
             onChange={(e) => setFName(e.target.value)}
             type="text"
-            placeholder="Shoxrux"
+            autoComplete="given-name"
           />
         </div>
         <div className={styles.input_label}>
@@ -125,7 +108,7 @@ const PersonalInfo = () => {
             value={lname}
             onChange={(e) => setLName(e.target.value)}
             type="text"
-            placeholder="Raxmatov"
+            autoComplete="family-name"
           />
         </div>
         <div className={styles.input_label}>
@@ -133,9 +116,8 @@ const PersonalInfo = () => {
           <input
             name="phone"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            type="phone"
-            placeholder="+99890 000 00 00"
+            type="tel"
+            disabled
           />
         </div>
         <div className={styles.input_label}>
@@ -144,7 +126,6 @@ const PersonalInfo = () => {
             name="email"
             value={email}
             type="email"
-            placeholder="mygmail@gmail.com"
             disabled
           />
         </div>
@@ -165,7 +146,15 @@ const PersonalInfo = () => {
           <div className={styles.button_wrapper}>
             <div className={styles.two_buttons}>
               <button type="submit">{t("buttons.save_changes")}</button>
-              <button type="button" className={styles.cancel_button}>
+              <button
+                type="button"
+                className={styles.cancel_button}
+                onClick={() => {
+                  setFName(user?.data.user.firstname || "");
+                  setLName(user?.data.user.lastname || "");
+                  setImage(null);
+                }}
+              >
                 {t("buttons.cancel")}
               </button>
             </div>

@@ -162,8 +162,15 @@
             color: #2f3330;
           }
 
-          input {
+          input,
+          select {
             @extend %add-form-input;
+          }
+
+          select {
+            flex: 1 1 200px;
+            background-color: #fff;
+            cursor: pointer;
           }
 
           &:nth-of-type(3) {
