@@ -52,6 +52,15 @@ const ArticleInternalPage = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
+  // Images inside the article (news only), without repeating the main image.
+  const innerImages = useMemo(
+    () =>
+      ("images" in data && Array.isArray(data.images) ? data.images : []).filter(
+        (src): src is string => typeof src === "string" && src.length > 0 && src !== data.image,
+      ),
+    [data],
+  );
+
   const content = useMemo(() => {
     if ("body" in data && typeof data.body === "string") {
       // The page already has an <h1> (title); demote headings inside the body.
@@ -195,6 +204,22 @@ const ArticleInternalPage = ({
               __html: content,
             }}
           />
+
+          {innerImages.length > 0 && (
+            <div className={styles.inner_images}>
+              {innerImages.map((src, i) => (
+                <Image
+                  key={src}
+                  src={src}
+                  alt={`${stripHtml(data.title)} — ${i + 2}`}
+                  className={styles.inner_image}
+                  width={680}
+                  height={382}
+                  loading="lazy"
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {similar.length > 0 && (

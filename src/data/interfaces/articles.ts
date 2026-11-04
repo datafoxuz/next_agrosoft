@@ -7,6 +7,7 @@ export interface article {
     seo: seo;
     slug: string;
     image: string;
+    images?: string[];
     created_at: string;
     is_published: boolean;
     is_featured: boolean;
