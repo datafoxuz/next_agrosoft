@@ -127,6 +127,40 @@
     line-height: 150%;
     text-align: left;
     margin-bottom: 150px;
+
+    // Rich articles (diseases, guides): headings, lists and photos inside the text.
+    :global(h2),
+    :global(h3) {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0d7d4f;
+      margin: 28px 0 10px;
+      line-height: 130%;
+    }
+    :global(p) {
+      margin: 0 0 12px;
+    }
+    :global(ul),
+    :global(ol) {
+      padding-left: 22px;
+      margin: 0 0 14px;
+    }
+    :global(ul) {
+      list-style: disc;
+    }
+    :global(ol) {
+      list-style: decimal;
+    }
+    :global(li) {
+      margin-bottom: 6px;
+    }
+    :global(img) {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      margin: 14px 0;
+    }
   }
 
   .question {
