@@ -1,6 +1,6 @@
 import { SingleBlogsApiResponse, sitewayProps } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
+import { requestPage } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -46,7 +46,9 @@ export async function getServerSideProps({
   params: { blog: string };
   locale: string;
 }) {
-  const { data, response } = await request(`/blogs/${params.blog}`, "GET", null, { locale });
+  const res = await requestPage(`/blogs/${params.blog}`, "GET", null, { locale });
+  if (!res) return { notFound: true };
+  const { data, response } = res;
 
   if (response.status !== 404) {
     return {

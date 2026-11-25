@@ -1,7 +1,7 @@
 import { data, questionTypes } from "@/data/interfaces";
 import { ProductsApiResponse } from "@/data/interfaces/products";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
+import { requestPage } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
@@ -94,12 +94,13 @@ export async function getServerSideProps({
     const value = Array.isArray(v) ? v[0] : v;
     if (value) qs.set(k, value);
   });
-  const products = await request(
+  const products = await requestPage(
     `/marketplace/${encodeURIComponent(params.product)}${qs.toString() ? `?${qs}` : ""}`,
     "GET",
     null,
     { locale }
   );
+  if (!products) return { notFound: true };
 
   if (products.response.status !== 404) {
     return {

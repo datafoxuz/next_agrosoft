@@ -1,6 +1,6 @@
 import { DeceaseApiResponse } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
+import { requestPage } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
@@ -49,7 +49,9 @@ export async function getServerSideProps({
   params: { page: string };
   locale: string;
 }) {
-  const { data, response } = await request(`/deceases/${params.page}`, "GET", null, { locale });
+  const res = await requestPage(`/deceases/${params.page}`, "GET", null, { locale });
+  if (!res) return { notFound: true };
+  const { data, response } = res;
 
   if (response.status !== 404) {
     return {

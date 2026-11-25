@@ -1,6 +1,6 @@
 import { card } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
+import { requestPage } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
@@ -50,9 +50,11 @@ export async function getServerSideProps({
   params: { card: string };
   locale: string;
 }) {
-  const { data, response } = await request(
+  const res = await requestPage(
     `/marketplace/product/${params.card}`, "GET", null, { locale }
   );
+  if (!res) return { notFound: true };
+  const { data, response } = res;
 
   if (response.status !== 404) {
     return {

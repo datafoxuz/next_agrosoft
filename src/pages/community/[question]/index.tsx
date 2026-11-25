@@ -1,6 +1,6 @@
 import { CommunityApiResponse, CommunityDetailApiResponse, communityProblemDetail, communityProblemInfo } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
+import { requestPage } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -49,7 +49,9 @@ export async function getServerSideProps({
   locale: string;
 }) {
 
-  const { data, response } = await request(`/community/${params.question}`, "GET", null, { locale });
+  const res = await requestPage(`/community/${params.question}`, "GET", null, { locale });
+  if (!res) return { notFound: true };
+  const { data, response } = res;
 
   if (response.status !== 404) {
     return {

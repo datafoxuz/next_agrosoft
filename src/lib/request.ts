@@ -192,3 +192,16 @@ async function request<T = any>(
 }
 
 export { request };
+
+/**
+ * For getServerSideProps of detail pages: null when the API says the item does not
+ * exist or the slug is invalid (any 4xx), so the page answers 404 instead of 500.
+ */
+export async function requestPage(...args: Parameters<typeof request>) {
+  try {
+    return await request(...args);
+  } catch (error) {
+    if (error instanceof ApiError && error.status >= 400 && error.status < 500) return null;
+    throw error;
+  }
+}
