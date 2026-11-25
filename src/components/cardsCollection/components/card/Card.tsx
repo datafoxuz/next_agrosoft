@@ -2,9 +2,9 @@ import { card } from "@/data/interfaces";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Image from "next/image";
+import { DEFAULT_COVER, imageOr } from "@/lib/image";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
-import notfound from "@/assets/images/not_found.png";
 
 import styles from "./card.module.scss";
 
@@ -41,7 +41,7 @@ const Card = ({
   return (
     <Link href={href} className={styles.card}>
       <Image
-        src={!imageError && item.image ? item.image : notfound}
+        src={imageError ? DEFAULT_COVER : imageOr(item.image)}
         alt={title}
         className={styles.image}
         width={305}

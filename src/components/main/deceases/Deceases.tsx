@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { hasImage, imageOr } from "@/lib/image";
 
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -33,7 +34,7 @@ const Deceases = ({ data }: { data: DeceasesApiResponse }) => {
               onClick={() => handleNavigate(`/deceases/${item.slug}`)}
             >
               <Image
-                src={item.image ? item.image : deceases.src}
+                src={imageOr(item.image)}
                 alt="diseasess image"
                 className={styles.image}
                 width={300}

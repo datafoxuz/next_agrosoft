@@ -1,13 +1,13 @@
 import React from "react";
 import { Collections } from "@/components";
 import Image from "next/image";
+import { hasImage, imageOr } from "@/lib/image";
 import { useTranslation } from "next-i18next";
 import { deceaseItem } from "@/data/interfaces";
 import SEO, { toPlainText } from "@/layouts/seo/seo";
 import { useRouter } from "next/router";
 
 import styles from "./internalPage.module.scss";
-import defaultImage from "@/assets/images/default_image.png";
 
 
 const DeceaseInternalPage = ({
@@ -32,7 +32,7 @@ const DeceaseInternalPage = ({
                     metaTitle={d?.seo?.title || decease.name}
                     metaDescription={description || t("seo.deceases.description")}
                     author={d?.seo?.author}
-                    image={image || undefined}
+                    image={hasImage(image) ? image : undefined}
                     type="article"
                     jsonLd={{
                         "@context": "https://schema.org",
@@ -40,13 +40,13 @@ const DeceaseInternalPage = ({
                         name: decease.name,
                         about: { "@type": "MedicalCondition", name: decease.name },
                         description: description.slice(0, 300),
-                        image: image ? [image] : undefined,
+                        image: hasImage(image) ? [image] : undefined,
                         inLanguage: router.locale || "uz",
                     }}
                 >
                     <div className={`${styles.image_wrapper} ${styles.section}`}>
                         <Image
-                            src={image || defaultImage.src}
+                            src={imageOr(image)}
                             alt={decease.name}
                             className={styles.image}
                             width={680}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
-import notfound from "@/assets/images/not_found.png"
+import { DEFAULT_COVER, imageOr } from "@/lib/image";
 import styles from "./deceasecard.module.scss";
 
 import { deceaseItem } from "@/data/interfaces";
@@ -13,7 +13,7 @@ const DeceaseCard = ({ data }: { data: deceaseItem }) => {
   const handleImageError = () => {
     setImageError(true);
   };
-  const imageSrc = data.image || notfound;
+  const imageSrc = imageOr(data.image);
   return (
     <Link
       href={`/deceases/${data.slug}`}
@@ -21,7 +21,7 @@ const DeceaseCard = ({ data }: { data: deceaseItem }) => {
       style={{ color: "inherit", textDecoration: "none" }}
     >
       <Image
-        src={imageError ? notfound : imageSrc}
+        src={imageError ? DEFAULT_COVER : imageSrc}
         alt={data.name}
         className={styles.image}
         width={220}

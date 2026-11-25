@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
+import { hasImage, imageOr } from "@/lib/image";
 import { RWebShare } from "react-web-share";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
@@ -13,7 +14,6 @@ import { useMyContext } from "@/hooks/useMyContext";
 import { blog } from "@/data/interfaces/blogs";
 import { article } from "@/data/interfaces/articles";
 
-import defaultImage from "@/assets/images/default_image.png";
 
 import styles from "./internalPage.module.scss";
 
@@ -143,14 +143,14 @@ const ArticleInternalPage = ({
         metaTitle={metaTitle}
         metaDescription={metaDescription}
         author={data.seo?.author}
-        image={data.image || undefined}
+        image={hasImage(data.image) ? data.image : undefined}
         type="article"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": type === "blogs" ? "BlogPosting" : "NewsArticle",
           headline: metaTitle.slice(0, 110),
           description: metaDescription,
-          image: data.image ? [data.image] : undefined,
+          image: hasImage(data.image) ? [data.image] : undefined,
           inLanguage: router.locale || "uz",
           mainEntityOfPage: `https://agrosoft.uz/${router.locale || "uz"}${router.asPath.split("?")[0]}`,
           publisher: { "@type": "Organization", name: "AgroSoft", url: "https://agrosoft.uz" },
@@ -158,7 +158,7 @@ const ArticleInternalPage = ({
       >
         <div className={`${styles.image_wrapper} ${styles.section}`}>
           <Image
-            src={data.image || defaultImage.src}
+            src={imageOr(data.image)}
             alt={stripHtml(data.title) || "Maqola rasmi"}
             className={styles.image}
             width={680}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import CardActions from "./cardActions/CardActions";
 import Image from "next/image";
-import notfound from "@/assets/images/not_found.png"
+import { DEFAULT_COVER, imageOr } from "@/lib/image";
 import styles from "./communitycard.module.scss";
 
 const CommunityCard = ({ data }: { data: card }) => {
@@ -12,7 +12,7 @@ const CommunityCard = ({ data }: { data: card }) => {
   const handleImageError = () => {
     setImageError(true);
   };
-  const imageSrc = data.image || notfound;
+  const imageSrc = imageOr(data.image);
   return (
     <Link
       href={`/community/${data.slug}`}
@@ -20,7 +20,7 @@ const CommunityCard = ({ data }: { data: card }) => {
       style={{ color: "inherit", textDecoration: "none" }}
     >
       <Image
-        src={imageError ? notfound : imageSrc}
+        src={imageError ? DEFAULT_COVER : imageSrc}
         alt={data.title}
         className={styles.image}
         width={220}

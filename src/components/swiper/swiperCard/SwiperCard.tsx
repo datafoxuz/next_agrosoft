@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image, { StaticImageData } from "next/image";
-import notfound from "@/assets/images/not_found.png";
+import { DEFAULT_COVER, imageOr } from "@/lib/image";
 
 import styles from "./swipercard.module.scss";
 
@@ -28,7 +28,7 @@ const SwiperCard = ({
   return (
     <Link href={href} className={styles.card} style={{ color: "inherit", textDecoration: "none" }}>
       <Image
-        src={data?.image ? data.image : notfound}
+        src={imageOr(data?.image)}
         alt={title}
         className={styles.card_image}
         width={388}

@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import { hasImage, imageOr } from "@/lib/image";
 import SEO from "@/layouts/seo/seo";
 import { useTranslation } from "next-i18next";
 import { card } from "@/data/interfaces";
-import defaultImage from "@/assets/images/default_image.png";
 
 import styles from "./internalPage.module.scss";
 
@@ -29,7 +29,7 @@ const ProductInternalPage = ({ data }: { data: card }) => {
       >
         <div className={`${styles.image_wrapper} ${styles.section}`}>
           <Image
-            src={data.image ? data.image : defaultImage.src}
+            src={imageOr(data.image)}
             alt={title}
             className={styles.image}
             width={680}
