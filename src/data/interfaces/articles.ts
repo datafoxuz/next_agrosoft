@@ -20,6 +20,8 @@ export interface articleData {
   paginator: pagination;
 }
 export interface singleArticleData {
+  /** URL slug per language that has a translation */
+  slugs?: Partial<Record<string, string>>;
   article: article;
   similar: article[];
   seo: seo;

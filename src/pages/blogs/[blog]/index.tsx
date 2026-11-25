@@ -1,5 +1,6 @@
 import { SingleBlogsApiResponse, sitewayProps } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
+import { LocaleSlugsContext, slugRedirect } from "@/layouts/seo/localeSlugs";
 import { requestPage } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
@@ -28,6 +29,7 @@ const index = ({ blog }: { blog: SingleBlogsApiResponse }) => {
   ];
   if(!blog.success) return (<ErrorPage />);
   return (
+    <LocaleSlugsContext.Provider value={blog?.data?.slugs ?? null}>
     <SEO
       metaTitle={blog.data.blog.seo?.title}
       metaDescription={blog.data.blog.seo?.description}
@@ -36,6 +38,7 @@ const index = ({ blog }: { blog: SingleBlogsApiResponse }) => {
       <SNavbar siteWay={siteWay} innerPage />
     <ArticleInternalPage data={blog.data.blog} similar={blog.data.similar} type="blogs" />
     </SEO>
+    </LocaleSlugsContext.Provider>
   );
 };
 
@@ -49,6 +52,8 @@ export async function getServerSideProps({
   const res = await requestPage(`/blogs/${params.blog}`, "GET", null, { locale });
   if (!res) return { notFound: true };
   const { data, response } = res;
+  const redirect = slugRedirect("blogs", locale, params.blog, data?.data?.slugs);
+  if (redirect) return redirect;
 
   if (response.status !== 404) {
     return {

@@ -1,5 +1,6 @@
 import { SingleArticlesApiResponse } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
+import { LocaleSlugsContext, slugRedirect } from "@/layouts/seo/localeSlugs";
 import { requestPage } from "@/lib/request";
 import ErrorPage from "@/pages/_error";
 import { useTranslation } from "next-i18next";
@@ -33,6 +34,7 @@ const index = ({ article }: { article: SingleArticlesApiResponse }) => {
   );
 
   return (
+    <LocaleSlugsContext.Provider value={article?.data?.slugs ?? null}>
     <SEO
       metaTitle={article.data.article.seo?.title}
       metaDescription={article.data.article.seo?.description}
@@ -42,6 +44,7 @@ const index = ({ article }: { article: SingleArticlesApiResponse }) => {
       <ArticleInternalPage data={article.data.article} similar={article.data.similar} type="articles" />
 
     </SEO>
+    </LocaleSlugsContext.Provider>
   );
 };
 
@@ -55,6 +58,8 @@ export async function getServerSideProps({
   const res = await requestPage(`/articles/${params.new}/show`, "GET", null, { locale });
   if (!res) return { notFound: true };
   const { data, response } = res;
+  const redirect = slugRedirect("news", locale, params.new, data?.data?.slugs);
+  if (redirect) return redirect;
 
   if (response.status !== 404) {
     return {

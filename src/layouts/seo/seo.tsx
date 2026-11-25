@@ -4,6 +4,8 @@ import { useTranslation } from "next-i18next";
 
 import { siteConfig } from "@/config/site.config";
 import { SeoProps } from "./seo.props";
+import { useContext } from "react";
+import { LocaleSlugsContext } from "./localeSlugs";
 
 export const SITE_URL = "https://agrosoft.uz";
 const DEFAULT_LOCALE = "uz";
@@ -15,7 +17,7 @@ const OG_LOCALES: Record<string, string> = {
 };
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`;
 /** Detail pages whose content exists only in Uzbek (see canonical below). */
-const UZ_ONLY_CONTENT = /^\/(community|blogs|news|deceases)\/[^/]+$|^\/market\/[^/]+\/[^/]+$/;
+const UZ_ONLY_CONTENT = /^\/community\/[^/]+$|^\/market\/[^/]+\/[^/]+$/;
 
 /** Plain text from HTML, collapsed whitespace. */
 export function toPlainText(value?: string | null): string {
@@ -71,14 +73,24 @@ const SEO = ({
   const page = Number(router.query.page);
   const pageSuffix = page > 1 ? `?page=${page}` : "";
 
+  // News, blogs and diseases have their own slug per language (from the API):
+  // link each language version with its slug; untranslated ones point to Uzbek.
+  const slugs = useContext(LocaleSlugsContext);
+  const pathFor = (locale: string) => {
+    if (!slugs) return currentPath;
+    const slug = slugs[locale] ?? slugs[DEFAULT_LOCALE];
+    return slug ? currentPath.replace(/[^/]+$/, encodeURIComponent(slug)) : currentPath;
+  };
   const makeLocalizedUrl = (locale: string) =>
-    `${SITE_URL}/${locale}${currentPath}${pageSuffix}`;
-  // Articles, diseases, community questions and market listings are written in Uzbek
-  // only (the API returns the same text for ru/en): their ru/en pages point to the
-  // Uzbek one instead of competing with it as duplicates.
+    `${SITE_URL}/${locale}${pathFor(locale)}${pageSuffix}`;
+  // Community questions and market listings are written in Uzbek only (the API returns
+  // the same text for ru/en): their ru/en pages point to the Uzbek one.
   const uzOnly = UZ_ONLY_CONTENT.test(currentPath);
-  const canonicalUrl = makeLocalizedUrl(uzOnly ? DEFAULT_LOCALE : currentLocale);
-  const altLocales = uzOnly ? [DEFAULT_LOCALE] : SUPPORTED_LOCALES;
+  const translated = (locale: string) => (slugs ? Boolean(slugs[locale]) : !uzOnly);
+  const canonicalUrl = makeLocalizedUrl(
+    currentLocale === DEFAULT_LOCALE || translated(currentLocale) ? currentLocale : DEFAULT_LOCALE
+  );
+  const altLocales = SUPPORTED_LOCALES.filter((l) => l === DEFAULT_LOCALE || translated(l));
 
   const defaultTitle = t("seo.default.title", { defaultValue: siteConfig.metaTitle });
   const defaultDescription = t("seo.default.description", {

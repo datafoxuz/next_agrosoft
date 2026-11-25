@@ -16,6 +16,8 @@ export interface blogsData {
   paginator: pagination;
 }
 export interface singleBlogData {
+  /** URL slug per language that has a translation */
+  slugs?: Partial<Record<string, string>>;
   blog: blog;
   similar: blog[];
   seo: seo;
