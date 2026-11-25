@@ -8,6 +8,8 @@ type Locale = (typeof LOCALES)[number];
 type Entry = {
   /** path without locale, e.g. "/blogs/my-post" */
   paths: Partial<Record<Locale, string>>;
+  /** item titles per locale, used to drop untranslated copies */
+  titles?: Partial<Record<Locale, string>>;
   changefreq: "daily" | "weekly" | "monthly";
   priority: number;
 };
@@ -71,8 +73,9 @@ async function loadDynamic(): Promise<Entry[]> {
             if (!slug || !title) continue; // skip empty/garbage records
             const id = String(it.id ?? slug);
             const entry =
-              byId.get(id) ?? { paths: {}, changefreq: d.changefreq, priority: d.priority };
+              byId.get(id) ?? { paths: {}, titles: {}, changefreq: d.changefreq, priority: d.priority };
             entry.paths[locale] = `${d.prefix}/${slug}`;
+            entry.titles![locale] = title;
             byId.set(id, entry);
           }
         } catch {
@@ -80,7 +83,18 @@ async function loadDynamic(): Promise<Entry[]> {
         }
       })
     );
-    entries.push(...Array.from(byId.values()));
+    // Content is written in Uzbek; the API returns the same text for ru/en. Listing those
+    // copies made Google skip them as duplicates ("Discovered – currently not indexed"),
+    // so a ru/en URL is listed only when its title is actually translated.
+    for (const e of Array.from(byId.values())) {
+      if (e.paths.uz) {
+        for (const l of ["ru", "en"] as Locale[]) {
+          if (e.titles?.[l] === e.titles?.uz) delete e.paths[l];
+        }
+      }
+      delete e.titles;
+      entries.push(e);
+    }
   }
   return entries;
 }

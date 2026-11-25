@@ -1,6 +1,6 @@
 import React from "react";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
+import { isEmptyExtraPage, request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import ErrorPage from "../_error";
 import dynamic from "next/dynamic";
@@ -79,6 +79,8 @@ export async function getServerSideProps({
       `/blogs/blogs-with-pagination?page=${page}&per_page=10`, "GET", null, { locale }
     );
   }
+
+  if (isEmptyExtraPage(query.page, blogsData.data, "blogs")) return { notFound: true };
 
   return {
     props: {

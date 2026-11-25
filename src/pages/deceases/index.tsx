@@ -1,7 +1,7 @@
 
 import { DeceasesApiResponse } from "@/data/interfaces/deceases";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
+import { isEmptyExtraPage, request } from "@/lib/request";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
@@ -73,6 +73,8 @@ export async function getServerSideProps({
       `/deceases/get-deceases?page=${page}&per_page=12`, "GET", null, { locale }
     );
   }
+
+  if (isEmptyExtraPage(query.page, deceasesData.data, "deceases")) return { notFound: true };
 
   return {
     props: {

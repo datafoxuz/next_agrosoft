@@ -1,6 +1,6 @@
 import { ArticlesApiResponse, data } from "@/data/interfaces";
 import SEO from "@/layouts/seo/seo";
-import { request } from "@/lib/request";
+import { isEmptyExtraPage, request } from "@/lib/request";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
@@ -64,6 +64,8 @@ export async function getServerSideProps({
       `/articles/articles-with-pagination?page=${page}&per_page=10`, "GET", null, { locale }
     );
   }
+
+  if (isEmptyExtraPage(query.page, articlesData.data, "articles")) return { notFound: true };
 
   return {
     props: {

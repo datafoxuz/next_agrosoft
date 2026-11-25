@@ -205,3 +205,13 @@ export async function requestPage(...args: Parameters<typeof request>) {
     throw error;
   }
 }
+
+/**
+ * List pages: ?page=N past the last page returns an empty list with 200, which Google
+ * reports as a soft 404. True when such a page should answer 404 instead.
+ */
+export function isEmptyExtraPage(page: unknown, body: any, key: string): boolean {
+  const n = Number(Array.isArray(page) ? page[0] : page);
+  const items = body?.data?.[key];
+  return n > 1 && Array.isArray(items) && items.length === 0;
+}
