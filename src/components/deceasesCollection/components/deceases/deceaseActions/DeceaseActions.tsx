@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 import Image from "next/image";
 
@@ -16,6 +17,7 @@ const DeceaseActions = ({
   data: deceaseItem;
   inCallection?: boolean;
 }) => {
+  const { t } = useTranslation("common");
   return (
     <div className={styles.card_actions} data-type={inCallection}>
       <div className={styles.info}>
@@ -51,7 +53,7 @@ const DeceaseActions = ({
           height={13}
         />
         <h5>{data.answers_count 
-          ? `Answered` : `Not answered`}</h5>
+          ? t("community.answered") : t("community.not_answered")}</h5>
       </div>
     </div>
   );

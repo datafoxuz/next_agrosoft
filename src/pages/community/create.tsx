@@ -84,7 +84,7 @@ const create = ({ status }: { status: number }) => {
       }
     } catch (error) {
       setIsLoading(false);
-      toast.error("Failed to create question");
+      toast.error(t("messages.question_failed"));
       console.error("Error:", error);
     }
   };

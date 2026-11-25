@@ -47,7 +47,7 @@ const Register = () => {
       );
 
       if (response && response.status === 200) {
-        toast.success("Registration successful!");
+        toast.success(t("messages.registration_success"));
         router.push("/");
       }
     } catch (error) {
@@ -75,7 +75,7 @@ const Register = () => {
       } else if (error instanceof Error) {
         toast.error(error.message);
       } else {
-        toast.error("An unexpected error occurred");
+        toast.error(t("messages.unexpected_error"));
       }
     } finally {
       setIsLoading(false);

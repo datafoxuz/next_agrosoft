@@ -30,11 +30,11 @@ const Footer = () => {
       );
 
       if (response.status == 200) {
-        toast.success("Emailingiz qabul qilindi!");
+        toast.success(t("messages.email_subscribed"));
         setEmail("");
         setIsLoading(false);
       } else {
-        toast.warning("Bu email avval qabul qilingan!");
+        toast.warning(t("messages.email_exists"));
         setIsLoading(false);
       }
     } else {

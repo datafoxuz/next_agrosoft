@@ -65,14 +65,14 @@ const Write = ({
           active: false,
         });
         setIsLoading(false);
-        toast.success("Javob yaratildi");
+        toast.success(t("messages.answer_created"));
       } else {
         setIsLoading(false);
         toast.error(`Error status: ${response.status}`);
       }
     } catch (error) {
       setIsLoading(false);
-      toast.error("Failed to create answer");
+      toast.error(t("messages.answer_failed"));
       console.error("Error:", error);
     }
   }
@@ -100,7 +100,7 @@ const Write = ({
   return (
     <div className={styles.write} data-type={quiz}>
 
-      <textarea className={styles.textarea} placeholder="Javobingizni yozing" data-err={isEmpty.desc} required value={state.desc} onChange={(e) => {
+      <textarea className={styles.textarea} placeholder={t("community.answer_placeholder") ?? ""} data-err={isEmpty.desc} required value={state.desc} onChange={(e) => {
         setState({
           ...state,
           desc: e.target.value

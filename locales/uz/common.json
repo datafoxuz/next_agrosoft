@@ -49,7 +49,34 @@
     },
     "about": {
       "title": "LOYIHA HAQIDA",
-      "desc": "Bu veb-portali qishloq xo‘jaligi sohasidagi muhim yangiliklar va foydali maqolalar yoritib borish uchun tashkil etilgan. Saytga tashrif buyuruvchilarni sifatli va foydali maʼlumotlar bilan taʼminlash – bizning oldimizga qo‘ygan asosiy maqsadimiz."
+      "desc": "AgroSoft — O‘zbekiston dehqon va fermerlari uchun yaratilgan raqamli yordamchi. Ekinni ekishdan tortib hosilni sotishgacha bo‘lgan yo‘lda kerak bo‘ladigan bilim, maslahat va vositalarni bir joyga jamladik: mobil ilova va agrosoft.uz sayti.",
+      "desc2": "Maqsadimiz — har bir dehqon agronom maslahatini o‘z vaqtida olishi, ekin kasalligini erta aniqlashi va mahsulotini o‘z narxida sota olishi. Platforma o‘zbek, rus va ingliz tillarida ishlaydi.",
+      "points": [
+        {
+          "title": "Sun’iy intellekt shifokor",
+          "text": "Barg yoki meva rasmini yuboring — kasallikni aniqlab, davolash bo‘yicha tavsiya beradi."
+        },
+        {
+          "title": "Kasalliklar ensiklopediyasi",
+          "text": "Ekin kasalliklarining belgilari, oldini olish va davolash usullari rasmlari bilan."
+        },
+        {
+          "title": "Fermerlar jamiyati",
+          "text": "4 000 dan ortiq savol-javob: savolingizni bering, agronom va tajribali dehqonlar javob beradi."
+        },
+        {
+          "title": "Agro bozor va do‘kon",
+          "text": "Hosil, urug‘, o‘g‘it va texnikani soting yoki xarid qiling, kerakli mahsulotni ilovadan buyurtma qiling."
+        },
+        {
+          "title": "Aqlli issiqxona",
+          "text": "Harorat va namlikni telefondan kuzating, isitgich va nasosni masofadan boshqaring."
+        },
+        {
+          "title": "Ob-havo, maqola va yangiliklar",
+          "text": "Viloyatingiz ob-havosi, dehqonchilik bo‘yicha amaliy maqolalar va soha yangiliklari."
+        }
+      ]
     },
     "blogs": {
       "title": "SO’NGGI MAQOLALAR"
@@ -60,7 +87,7 @@
     },
     "diseases": {
       "title": "AGROKASALLIKLAR",
-      "small_text": "123 dan ortiq kasalliklar tashxislari bilan"
+      "small_text": "Belgilari, oldini olish va davolash usullari"
     },
     "market": {
       "title": "AGROMARKET",
@@ -106,7 +133,7 @@
       "title": "Sotib olish"
     },
     "filter": {
-      "title": "Filter",
+      "title": "Filtr",
       "category": "Kategoriya",
       "location": "Manzil",
       "price": "Narx",
@@ -123,7 +150,10 @@
     "create": {
       "title": "Savolingizni yozing",
       "write_question_inp": "Sarlavha"
-    }
+    },
+    "answered": "Javob berilgan",
+    "not_answered": "Javob kutilmoqda",
+    "answer_placeholder": "Javobingizni yozing"
   },
   "inner_page": {
     "question": "Savol",
@@ -220,5 +250,18 @@
   },
   "footer": {
     "developed_by": "Ishlab chiqaruvchi:"
+  },
+  "messages": {
+    "unexpected_error": "Kutilmagan xatolik yuz berdi. Qayta urinib ko‘ring.",
+    "registration_success": "Ro‘yxatdan muvaffaqiyatli o‘tdingiz!",
+    "email_subscribed": "Emailingiz qabul qilindi!",
+    "email_exists": "Bu email avval qabul qilingan!",
+    "saved": "Muvaffaqiyatli saqlandi",
+    "already_saved": "Bu maqola avval saqlangan!",
+    "save_error": "Maqolani saqlashda xatolik yuz berdi",
+    "answer_created": "Javobingiz qo‘shildi",
+    "answer_failed": "Javobni yuborib bo‘lmadi",
+    "question_failed": "Savolni yuborib bo‘lmadi",
+    "nothing_found": "Ma’lumot topilmadi"
   }
 }

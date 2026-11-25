@@ -10,8 +10,8 @@
     #f2dbc9 -5.16%,
     rgba(251, 214, 185, 0.67) 106.96%
   );
-  border-radius: 144px;
-  padding: 80px 180px;
+  border-radius: 48px;
+  padding: 72px 96px;
   text-align: center;
   margin-bottom: 240px;
 
@@ -21,7 +21,8 @@
   }
 
   @media screen and (max-width: 400px) {
-    border-radius: 120px;
+    border-radius: 28px;
+    padding: 32px 20px;
   }
 
   .about_title {
@@ -47,5 +48,45 @@
     @extend %main-text-16;
     line-height: 150%;
     font-weight: 400;
+    max-width: 860px;
+    margin: 0 auto 12px;
+  }
+
+  .points {
+    list-style: none;
+    margin: 36px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    text-align: left;
+
+    @media screen and (max-width: variables.$high_res_tablet_width) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media screen and (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .point {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 20px 22px;
+
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #232624;
+      margin: 0 0 6px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 145%;
+      color: #4a504c;
+    }
   }
 }

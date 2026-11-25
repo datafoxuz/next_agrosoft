@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 import styles from "./notfound.module.scss";
@@ -5,6 +6,7 @@ import styles from "./notfound.module.scss";
 import notfound from "@/assets/images/notfound.png";
 
 const NotFound = () => {
+  const { t } = useTranslation("common");
   return (
     <div className={styles.notfound}>
       <div className={styles.content_wrapper}>
@@ -13,7 +15,7 @@ const NotFound = () => {
           alt="not found image"
           className={styles.image}
         />
-        <h3 className={styles.title}>Ma’lumot topilmadi</h3>
+        <h3 className={styles.title}>{t("messages.nothing_found")}</h3>
       </div>
     </div>
   );

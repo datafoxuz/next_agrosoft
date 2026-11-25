@@ -11,7 +11,8 @@
     "default_name": "Full name",
     "acc_info": "Personal account",
     "question_created": "Question created successfully",
-    "answer_created": "Answer created successfully"
+    "answer_created": "Answer created successfully",
+    "diseases": "Diseases"
   },
   "buttons": {
     "read_all": "Read All",
@@ -49,7 +50,34 @@
     },
     "about": {
       "title": "ABOUT THE PROJECT",
-      "desc": "This web portal is created to cover important news and useful articles in the field of agriculture. Providing the visitors of the site with quality and useful information is our main goal."
+      "desc": "AgroSoft is a digital assistant for farmers in Uzbekistan. We brought together the knowledge, advice and tools a farmer needs on the way from sowing to selling the harvest — in a mobile app and on agrosoft.uz.",
+      "desc2": "Our goal is that every farmer gets an agronomist's advice in time, spots crop diseases early and sells their produce at a fair price. The platform works in Uzbek, Russian and English.",
+      "points": [
+        {
+          "title": "AI plant doctor",
+          "text": "Send a photo of a leaf or fruit — the AI identifies the disease and suggests a treatment."
+        },
+        {
+          "title": "Disease encyclopedia",
+          "text": "Symptoms, prevention and treatment of crop diseases, with photos."
+        },
+        {
+          "title": "Farmers' community",
+          "text": "Over 4,000 questions and answers: ask yours and agronomists and experienced farmers reply."
+        },
+        {
+          "title": "Agro market and store",
+          "text": "Sell and buy produce, seeds, fertilizers and machinery, and order supplies right in the app."
+        },
+        {
+          "title": "Smart greenhouse",
+          "text": "Watch temperature and humidity from your phone and control the heater and pump remotely."
+        },
+        {
+          "title": "Weather, articles and news",
+          "text": "Weather for your region, practical farming articles and industry news."
+        }
+      ]
     },
     "blogs": {
       "title": "Latest blogs"
@@ -77,6 +105,10 @@
       "why_agrosoft": "Why Agrosoft?",
       "desc": "AgroSoft - AI-based solution that enables farmers to detect and treat plant deceases and pests early",
       "reserved": "All rights reserved"
+    },
+    "diseases": {
+      "title": "PLANT DISEASES",
+      "small_text": "Symptoms, prevention and treatment"
     }
   },
   "auth": {
@@ -123,7 +155,10 @@
     "create": {
       "title": "Type your question",
       "write_question_inp": "Title"
-    }
+    },
+    "answered": "Answered",
+    "not_answered": "Awaiting answer",
+    "answer_placeholder": "Write your answer"
   },
   "inner_page": {
     "question": "Question",
@@ -220,5 +255,18 @@
   },
   "footer": {
     "developed_by": "Developed by"
+  },
+  "messages": {
+    "unexpected_error": "An unexpected error occurred. Please try again.",
+    "registration_success": "Registration successful!",
+    "email_subscribed": "Your email has been subscribed!",
+    "email_exists": "This email is already subscribed!",
+    "saved": "Saved successfully",
+    "already_saved": "This article is already saved!",
+    "save_error": "Could not save the article",
+    "answer_created": "Your answer has been added",
+    "answer_failed": "Failed to send the answer",
+    "question_failed": "Failed to send the question",
+    "nothing_found": "Nothing found"
   }
 }

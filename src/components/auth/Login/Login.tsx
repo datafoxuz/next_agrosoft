@@ -96,7 +96,7 @@ const Login = ({ tabId, setTabId }: authProps) => {
           } else if (error instanceof Error) {
             toast.error(error.message);
           } else {
-            toast.error("An unexpected error occurred");
+            toast.error(t("messages.unexpected_error"));
           }
         } finally {
           setIsLoading(false);

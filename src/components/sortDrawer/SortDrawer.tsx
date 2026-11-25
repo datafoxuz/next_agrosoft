@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { SwipeableDrawer } from "@mui/material";
 import React, { useState } from "react";
 
@@ -7,6 +8,7 @@ import styles from "./sortdrawer.module.scss";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 const SortDrawer = () => {
+  const { t } = useTranslation("common");
   const [tabId, setTabId] = useState(1);
 
   //navigate
@@ -66,7 +68,7 @@ const SortDrawer = () => {
           onOpen={toggleDrawer("bottom", true)}
         >
           <div className={styles.sort_drawer}>
-            <h3 className={styles.title}>Saralash</h3>
+            <h3 className={styles.title}>{t("second_navbar.sort_modal.title")}</h3>
 
             <div className={styles.sort_items}>
               {tabItems.map((item, index) => (

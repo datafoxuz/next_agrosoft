@@ -119,19 +119,19 @@ const ArticleInternalPage = ({
       );
 
       if (response.status === 200 || response.status === 201) {
-        toast.success("Muvaffaqiyatli saqlandi");
+        toast.success(t("messages.saved"));
       } else if (
         response.status === 409 ||
         response.status === 422 ||
         response.status === 500
       ) {
-        toast.warning("Bu maqola avval saqlangan!");
+        toast.warning(t("messages.already_saved"));
       } else {
         toast.error(`Xatolik. Status: ${response.status}`);
       }
     } catch (error) {
       console.error(error);
-      toast.error("Maqolani saqlashda xatolik yuz berdi");
+      toast.error(t("messages.save_error"));
     } finally {
       setIsLoading(false);
     }
