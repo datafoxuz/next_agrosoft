@@ -8,6 +8,39 @@ import Image from "next/image";
 
 import styles from "./internalPage.module.scss";
 
+const isoDate = (value?: string) => {
+  const d = value ? new Date(value.replace(" ", "T")) : null;
+  return d && !isNaN(d.getTime()) ? d.toISOString() : undefined;
+};
+
+/**
+ * Google QAPage markup. Google requires at least one answer (acceptedAnswer or
+ * suggestedAnswer), so questions without answers get no QAPage markup at all.
+ */
+const qaJsonLd = (problem: communityProblemInfo) => {
+  const answers = (problem?.answers ?? []).filter((a) => a?.text?.trim());
+  if (!answers.length) return undefined;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "QAPage",
+    mainEntity: {
+      "@type": "Question",
+      name: problem.title,
+      text: problem.body || problem.title,
+      answerCount: answers.length,
+      datePublished: isoDate(problem.created_at),
+      author: { "@type": "Person", name: problem.author_name || "AgroSoft" },
+      suggestedAnswer: answers.map((a) => ({
+        "@type": "Answer",
+        text: a.text,
+        datePublished: isoDate(a.created_at),
+        author: { "@type": "Person", name: a.author_name || "AgroSoft" },
+      })),
+    },
+  };
+};
+
 const CommunityInternalPage = ({ problem }: { problem: communityProblemInfo }) => {
   const { t } = useTranslation("common");
   const [isWriteAns, setIsWriteAns] = useState<questionTypes>({
@@ -25,17 +58,7 @@ const CommunityInternalPage = ({ problem }: { problem: communityProblemInfo }) =
         author={problem?.author_name}
         image={problem?.image || undefined}
         type="article"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "QAPage",
-          mainEntity: {
-            "@type": "Question",
-            name: problem?.title,
-            text: problem?.body || problem?.title,
-            answerCount: Number(problem?.answers_count ?? 0),
-            author: { "@type": "Person", name: problem?.author_name || "AgroSoft" },
-          },
-        }}
+        jsonLd={qaJsonLd(problem)}
       >
         {problem.image ? (
           <div className={`${styles.image_wrapper} ${styles.section}`}>
