@@ -123,7 +123,11 @@
     "enter_pass": "Enter your password",
     "enter_pass_again": "Re-enter password",
     "restore_pass": "Restore Password",
-    "logout_title": "Are you sure you want to log out of your personal page?"
+    "logout_title": "Are you sure you want to log out of your personal page?",
+    "google_text": "Sign in with your Google account in one click — no password or registration needed.",
+    "google_wait": "Signing in…",
+    "google_unavailable": "Sign-in with Google is being set up. Please try again a little later.",
+    "google_terms": "By signing in you agree to the AgroSoft terms of use and privacy policy."
   },
   "second_navbar": {
     "big_inp_placeholder": "Type keyword",

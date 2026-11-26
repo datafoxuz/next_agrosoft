@@ -88,4 +88,31 @@
       @extend %load-button;
     }
   }
+
+  .google_text {
+    @extend %main-text-16;
+    color: #4a504c;
+    line-height: 150%;
+    margin: -8px 0 28px;
+  }
+
+  .google_button {
+    display: flex;
+    justify-content: center;
+    min-height: 44px;
+    margin-bottom: 20px;
+
+    &[aria-busy="true"] {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  .google_note {
+    font-size: 13px;
+    line-height: 150%;
+    color: #707973;
+    text-align: center;
+    margin-top: 8px;
+  }
 }

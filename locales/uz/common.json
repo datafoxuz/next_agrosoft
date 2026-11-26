@@ -118,7 +118,11 @@
     "enter_pass": "Parolni kiriting",
     "enter_pass_again": "Parolni qaytadan kiriting",
     "restore_pass": "Parolni tiklash",
-    "logout_title": "Shaxsiy sahifangizdan chiqmoqchi ekanligingizga aminmisiz?"
+    "logout_title": "Shaxsiy sahifangizdan chiqmoqchi ekanligingizga aminmisiz?",
+    "google_text": "Google hisobingiz bilan bir bosishda kiring — parol va ro‘yxatdan o‘tish kerak emas.",
+    "google_wait": "Kirilmoqda…",
+    "google_unavailable": "Google orqali kirish hozircha sozlanmoqda. Birozdan keyin qayta urinib ko‘ring.",
+    "google_terms": "Kirish orqali AgroSoft foydalanish shartlari va maxfiylik siyosatiga rozilik bildirasiz."
   },
   "second_navbar": {
     "big_inp_placeholder": "Kalit so'zni yozing",
