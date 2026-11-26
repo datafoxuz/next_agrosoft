@@ -7,4 +7,5 @@ export interface answerType {
   author_name: string;
   author_id: number;
   created_at: string;
+  is_ai?: boolean;
 }

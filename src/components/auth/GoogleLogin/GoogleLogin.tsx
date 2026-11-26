@@ -22,7 +22,7 @@ declare global {
   }
 }
 
-/** The only way to sign in on the site: "Sign in with Google". */
+/** Sign in on the site: Google or Telegram (through the AgroSoft bot). */
 const GoogleLogin = () => {
   const { t } = useTranslation("common");
   const router = useRouter();
@@ -31,23 +31,72 @@ const GoogleLogin = () => {
   const [scriptReady, setScriptReady] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [tgWaiting, setTgWaiting] = useState(false);
+  const tgTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // data: the API envelope {success, data: {token, user}}
+  const finish = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (data: any) => {
+      setUser(data);
+      localStorage.setItem("userToken", data.data.token);
+      localStorage.setItem("userData", JSON.stringify(data));
+      setCookie(null, "userToken", data.data.token, { maxAge: 30 * 24 * 60 * 60, path: "/" });
+      const back = typeof router.query.back === "string" && router.query.back.startsWith("/") ? router.query.back : "/";
+      router.push(back);
+    },
+    [router, setUser]
+  );
+
+  useEffect(() => () => {
+    if (tgTimer.current) clearInterval(tgTimer.current);
+  }, []);
+
+  // Telegram: one-time bot link (t.me/<bot>?start=auth_...), then poll until the user presses Start.
+  const onTelegram = async () => {
+    const tab = window.open("about:blank", "_blank");
+    try {
+      const { data } = await request(`/auth/telegram/start`, "POST", JSON.stringify({}), {});
+      const { token, url, expires_in } = data.data as { token: string; url: string; expires_in: number };
+      if (tab) tab.location.href = url;
+      else window.location.href = url;
+      setTgWaiting(true);
+      const until = Date.now() + expires_in * 1000;
+      if (tgTimer.current) clearInterval(tgTimer.current);
+      tgTimer.current = setInterval(async () => {
+        try {
+          const res = await request(`/auth/telegram/check`, "POST", JSON.stringify({ token }), {});
+          const status = res.data?.data?.status;
+          if (status === "ok") {
+            clearInterval(tgTimer.current!);
+            finish(res.data);
+          } else if (status === "expired" || Date.now() > until) {
+            clearInterval(tgTimer.current!);
+            setTgWaiting(false);
+            toast.error(t("auth.telegram_expired"));
+          }
+        } catch {
+          // network hiccup: keep polling
+        }
+      }, 2500);
+    } catch (error) {
+      tab?.close();
+      toast.error(error instanceof ApiError || error instanceof Error ? error.message : t("messages.unexpected_error"));
+    }
+  };
+
   const onCredential = useCallback(
     async ({ credential }: { credential: string }) => {
       setLoading(true);
       try {
         const { data } = await request(`/auth/google`, "POST", JSON.stringify({ credential }), {});
-        setUser(data);
-        localStorage.setItem("userToken", data.data.token);
-        localStorage.setItem("userData", JSON.stringify(data));
-        setCookie(null, "userToken", data.data.token, { maxAge: 30 * 24 * 60 * 60, path: "/" });
-        const back = typeof router.query.back === "string" && router.query.back.startsWith("/") ? router.query.back : "/";
-        router.push(back);
+        finish(data);
       } catch (error) {
         toast.error(error instanceof ApiError || error instanceof Error ? error.message : t("messages.unexpected_error"));
         setLoading(false);
       }
     },
-    [router, setUser, t]
+    [finish, t]
   );
 
   useEffect(() => {
@@ -80,6 +129,17 @@ const GoogleLogin = () => {
       ) : (
         <p className={styles.google_note}>{t("auth.google_unavailable")}</p>
       )}
+
+      <div className={styles.or}>
+        <span>{t("auth.or")}</span>
+      </div>
+      <button type="button" className={styles.telegram_button} onClick={onTelegram} aria-busy={tgWaiting}>
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M9.04 15.47 8.9 19.4c.41 0 .59-.18.8-.39l1.93-1.84 4 2.93c.73.4 1.25.19 1.45-.68l2.63-12.33c.24-1.08-.39-1.5-1.1-1.24L3.17 9.6c-1.05.41-1.03 1-.18 1.26l3.95 1.23 9.17-5.78c.43-.28.83-.13.5.16z" />
+        </svg>
+        {t("auth.telegram_btn")}
+      </button>
+      {tgWaiting ? <p className={styles.google_note}>{t("auth.telegram_wait")}</p> : null}
 
       <p className={styles.google_note}>{t("auth.google_terms")}</p>
     </div>

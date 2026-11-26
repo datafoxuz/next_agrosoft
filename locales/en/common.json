@@ -127,7 +127,11 @@
     "google_text": "Sign in with your Google account in one click — no password or registration needed.",
     "google_wait": "Signing in…",
     "google_unavailable": "Sign-in with Google is being set up. Please try again a little later.",
-    "google_terms": "By signing in you agree to the AgroSoft terms of use and privacy policy."
+    "google_terms": "By signing in you agree to the AgroSoft terms of use and privacy policy.",
+    "or": "or",
+    "telegram_btn": "Sign in with Telegram",
+    "telegram_wait": "Open the bot in Telegram and press “Start”. You will be signed in automatically.",
+    "telegram_expired": "Time is up. Please try again."
   },
   "second_navbar": {
     "big_inp_placeholder": "Type keyword",
@@ -162,7 +166,9 @@
     },
     "answered": "Answered",
     "not_answered": "Awaiting answer",
-    "answer_placeholder": "Write your answer"
+    "answer_placeholder": "Write your answer",
+    "ai_badge": "AI answer",
+    "ai_note": "This answer was written by AgroSoft AI. Consult an agronomist before making important decisions."
   },
   "inner_page": {
     "question": "Question",

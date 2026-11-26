@@ -71,3 +71,33 @@
     }
   }
 }
+
+.ai {
+  border-left: 3px solid #2e9e5b;
+  background: linear-gradient(90deg, rgba(46, 158, 91, 0.06), transparent 60%);
+}
+
+.ai_badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1f7a45;
+  background: #e3f4ea;
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+
+.ai_note {
+  font-size: 12px;
+  line-height: 150%;
+  color: #707973;
+  margin-top: 10px;
+}
+
+.ai_name {
+  font-weight: 600;
+  color: #1f7a45;
+}

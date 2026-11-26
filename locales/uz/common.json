@@ -122,7 +122,11 @@
     "google_text": "Google hisobingiz bilan bir bosishda kiring — parol va ro‘yxatdan o‘tish kerak emas.",
     "google_wait": "Kirilmoqda…",
     "google_unavailable": "Google orqali kirish hozircha sozlanmoqda. Birozdan keyin qayta urinib ko‘ring.",
-    "google_terms": "Kirish orqali AgroSoft foydalanish shartlari va maxfiylik siyosatiga rozilik bildirasiz."
+    "google_terms": "Kirish orqali AgroSoft foydalanish shartlari va maxfiylik siyosatiga rozilik bildirasiz.",
+    "or": "yoki",
+    "telegram_btn": "Telegram orqali kirish",
+    "telegram_wait": "Telegram'da botni oching va «Start» tugmasini bosing. Kirish avtomatik bo'ladi.",
+    "telegram_expired": "Vaqt tugadi. Qaytadan urinib ko'ring."
   },
   "second_navbar": {
     "big_inp_placeholder": "Kalit so'zni yozing",
@@ -157,7 +161,9 @@
     },
     "answered": "Javob berilgan",
     "not_answered": "Javob kutilmoqda",
-    "answer_placeholder": "Javobingizni yozing"
+    "answer_placeholder": "Javobingizni yozing",
+    "ai_badge": "AI javobi",
+    "ai_note": "Bu javobni AgroSoft AI yozdi. Muhim qaror qabul qilishdan oldin agronom bilan maslahatlashing."
   },
   "inner_page": {
     "question": "Savol",
